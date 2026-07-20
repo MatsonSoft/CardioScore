@@ -105,7 +105,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 @media print {
             @page {
                 size: letter portrait;
-                margin: 0; 
+                margin: 6mm 7mm; 
             }
             
             body, html {
@@ -116,9 +116,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 color: #0f172a !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
-                height: 100vh !important;
-                width: 100vw !important;
-                overflow: hidden !important; 
+                height: 100% !important;
+                width: 100% !important;
             }
 
             .no-print { display: none !important; }
@@ -130,10 +129,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 /* SIN justify-content: space-between: con contenido > 1 hoja, flexbox
                    reparte espacio NEGATIVO y las secciones se solapan. El pie se ancla
                    abajo con margin-top:auto en su contenedor (ver firma/footer). */
-                width: 100vw !important;
-                height: 100vh !important;
+                width: 100% !important;
+                height: 100% !important;
                 box-sizing: border-box !important;
-                padding: 6mm 10mm !important;
                 font-family: 'Inter', sans-serif;
                 background-color: white;
             }
