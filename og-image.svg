@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3a8a"/>
+      <stop offset="0.55" stop-color="#3730a3"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="calc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#60a5fa" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="930" cy="130" r="360" fill="url(#glow)"/>
+
+  <!-- Calculadora -->
+  <g>
+    <rect x="158" y="170" width="340" height="300" rx="24" fill="#0f172a" opacity="0.35"/>
+    <rect x="150" y="160" width="340" height="300" rx="24" fill="url(#calc)"/>
+    <rect x="178" y="188" width="284" height="64" rx="10" fill="#0f172a"/>
+    <text x="196" y="214" font-family="'Segoe UI','Inter',sans-serif" font-size="20" font-weight="700" fill="#22c55e">SCORE2</text>
+    <text x="446" y="214" text-anchor="end" font-family="'Segoe UI','Inter',sans-serif" font-size="20" font-weight="700" fill="#f8fafc">14.2%</text>
+    <g fill="#cbd5e1">
+      <rect x="178" y="272" width="60" height="34" rx="8"/>
+      <rect x="250" y="272" width="60" height="34" rx="8"/>
+      <rect x="322" y="272" width="60" height="34" rx="8"/>
+      <rect x="394" y="272" width="60" height="34" rx="8"/>
+      <rect x="178" y="318" width="60" height="34" rx="8"/>
+      <rect x="250" y="318" width="60" height="34" rx="8"/>
+      <rect x="322" y="318" width="60" height="34" rx="8"/>
+      <rect x="394" y="318" width="60" height="34" rx="8"/>
+      <rect x="178" y="364" width="60" height="34" rx="8"/>
+      <rect x="250" y="364" width="60" height="34" rx="8"/>
+      <rect x="322" y="364" width="60" height="34" rx="8"/>
+      <rect x="394" y="364" width="60" height="34" rx="8"/>
+    </g>
+    <g fill="#3b82f6">
+      <rect x="178" y="410" width="60" height="34" rx="8"/>
+      <rect x="250" y="410" width="60" height="34" rx="8"/>
+      <rect x="322" y="410" width="132" height="34" rx="8"/>
+    </g>
+  </g>
+
+  <!-- Corazón -->
+  <g transform="translate(352,96) scale(4.4)">
+    <path d="M16,28.5C16,28.5,1,19,1,9.5C1,5,4.5,1.5,8.5,1.5C11.5,1.5,14,3.5,16,6C18,3.5,20.5,1.5,23.5,1.5C27.5,1.5,31,5,31,9.5C31,19,16,28.5,16,28.5Z" fill="#ef4444" stroke="#ffffff" stroke-width="1.2"/>
+  </g>
+
+  <!-- Textos -->
+  <text x="560" y="252" font-family="'Segoe UI','Inter',sans-serif" font-size="58" font-weight="800" fill="#ffffff">Calculadora de Riesgo</text>
+  <text x="560" y="318" font-family="'Segoe UI','Inter',sans-serif" font-size="58" font-weight="800" fill="#ffffff">Cardiovascular</text>
+  <text x="562" y="372" font-family="'Segoe UI','Inter',sans-serif" font-size="24" font-weight="500" fill="#c7d2fe">SCORE2 · Perfil lipídico · Lp(a) · eGFR</text>
+  <text x="562" y="560" font-family="'Segoe UI','Inter',sans-serif" font-size="20" font-weight="600" fill="#94a3b8">Hospital Ruiz y Páez</text>
+</svg>
