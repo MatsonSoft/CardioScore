@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Riesgo Cardiovascular</title>
-    <meta name="description" content="Calculadora clínica de riesgo cardiovascular (SCORE2) con perfil lipídico, Lp(a), eGFR y comorbilidades. Gratuita y de uso libre para cardiólogos de Venezuela.">
+    <meta name="description" content="Calculadora clínica de riesgo cardiovascular basada en SCORE2 / PCE 2013 (guías ESC 2021), con perfil lipídico, Lp(a), eGFR y comorbilidades. Gratuita para cardiólogos de Venezuela.">
     <meta name="keywords" content="riesgo cardiovascular, SCORE2, colesterol, LDL, HDL, Lp(a), eGFR, cardiología, prevención, dislipidemia">
     <meta name="author" content="MatsonSoft · Postgrado de Cardiología, Hospital Ruiz y Páez">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#1e3a8a">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="canonical" href="https://www.tu-dominio.com/calculadora-riesgo.html">
+    <link rel="canonical" href="https://riesgo.matsonsoft.com/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_VE">
     <meta property="og:site_name" content="Calculadora de Riesgo Cardiovascular">
     <meta property="og:title" content="Calculadora de Riesgo Cardiovascular">
-    <meta property="og:description" content="Calculadora de riesgo cardiovascular SCORE2, gratuita y de uso libre para cardiólogos de Venezuela.">
-    <meta property="og:url" content="https://www.tu-dominio.com/calculadora-riesgo.html">
-    <meta property="og:image" content="https://www.tu-dominio.com/og-image.png">
+    <meta property="og:description" content="Calculadora de riesgo cardiovascular basada en SCORE2 / PCE 2013, gratuita para cardiólogos de Venezuela.">
+    <meta property="og:url" content="https://riesgo.matsonsoft.com/">
+    <meta property="og:image" content="https://riesgo.matsonsoft.com/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/png">
@@ -27,8 +27,8 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Calculadora de Riesgo Cardiovascular">
-    <meta name="twitter:description" content="Calculadora de riesgo cardiovascular SCORE2, gratuita y de uso libre para cardiólogos de Venezuela.">
-    <meta name="twitter:image" content="https://www.tu-dominio.com/og-image.png">
+    <meta name="twitter:description" content="Calculadora de riesgo cardiovascular basada en SCORE2 / PCE 2013, gratuita para cardiólogos de Venezuela.">
+    <meta name="twitter:image" content="https://riesgo.matsonsoft.com/og-image.png">
 
     <!-- Datos estructurados -->
     <script type="application/ld+json">
@@ -38,17 +38,34 @@
       "name": "Calculadora de Riesgo Cardiovascular",
       "applicationCategory": "HealthApplication",
       "operatingSystem": "Web",
-      "description": "Calculadora clínica de riesgo cardiovascular (SCORE2) con perfil lipídico, Lp(a), eGFR y comorbilidades.",
+      "description": "Calculadora clínica de riesgo cardiovascular basada en SCORE2 / PCE 2013 (guías ESC 2021), con perfil lipídico, Lp(a), eGFR y comorbilidades.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "publisher": { "@type": "Organization", "name": "Hospital Ruiz y Páez" }
     }
     </script>
 
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js (versión pineada + defer: solo se usa al calcular) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente Inter: preconnect + link (evita @import bloqueante dentro de <style>) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+
+    <!-- PostHog analytics (privacidad primero: sin autocapture, sin session replay,
+         persistence 'memory' -> NO usa localStorage ni cookies; solo eventos explícitos) -->
+    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups getSessionId getSessionReplayUrl alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceMetrics captureTraceEvent".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_DmjHF4fQ8Rkfu3Jz2fUQgXWMbTrbFwRAkpoLiAmpJjSb', {
+            api_host: 'https://us.i.posthog.com',
+            autocapture: false,
+            capture_pageview: true,
+            persistence: 'memory',
+            disable_session_recording: true,
+            respect_dnt: true
+        });
+    </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif; }
 .form-input, .form-select { width:100%; padding:8px 10px; border:1px solid #cbd5e1; border-radius:8px; background:#fff; font-size:14px; color:#0f172a; }
 .form-input:focus, .form-select:focus { outline:2px solid #2563eb; outline-offset:1px; border-color:#2563eb; }
@@ -61,16 +78,26 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 @media (max-width:640px){ label:has(.tip){ font-size:11px; } }
 .comorb-badge { display:inline-block; margin-left:8px; padding:1px 8px; border-radius:9999px; background:#2563eb; color:#fff; font-size:11px; font-weight:700; }
 #tipToast { position:fixed; left:50%; bottom:90px; transform:translateX(-50%); max-width:90vw; background:#0f172a; color:#fff; font-size:13px; line-height:1.4; padding:10px 14px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,.3); z-index:60; display:none; }
+.tip-bubble { position:fixed; z-index:70; max-width:230px; background:#0f172a; color:#fff; font-size:11px; line-height:1.35; padding:8px 10px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,.25); }
 .chip-group { display:flex; gap:6px; }
 .chip { position:relative; flex:1; display:flex; align-items:center; justify-content:center; padding:7px 8px; border:1px solid #cbd5e1; border-radius:8px; font-size:12px; font-weight:600; color:#475569; background:#fff; cursor:pointer; user-select:none; transition:all .15s; }
 .chip input { position:absolute; opacity:0; width:0; height:0; }
 .chip:has(input:checked) { background:#2563eb; color:#fff; border-color:#2563eb; }
 .chip:focus-within { outline:2px solid #2563eb; outline-offset:1px; }
+@media (prefers-reduced-motion:reduce){ *{transition:none !important; scroll-behavior:auto !important} }
+@media (min-width:768px){
+  /* Action bar siempre visible al hacer scroll por el formulario largo */
+  #actionBar{position:sticky;bottom:12px;background:#fff;padding:10px 12px;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 4px 14px rgba(15,23,42,.10);z-index:40}
+}
 @media (max-width:767px){
   html,body{overflow-x:hidden}
-  #actionBar{position:fixed;left:0;right:0;bottom:0;margin:0;justify-content:stretch;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e2e8f0;box-shadow:0 -4px 12px rgba(15,23,42,.10);z-index:50}
-  #actionBar button{flex:1}
-  body{padding-bottom:76px}
+  /* 16px evita el zoom automático de iOS al enfocar inputs */
+  .form-input,.form-select{font-size:16px}
+  /* Target táctil mínimo 44px (WCAG 2.5.5) */
+  .chip{min-height:44px}
+  details>summary{min-height:44px;display:flex;align-items:center;flex-wrap:wrap}
+  #actionBar{flex-wrap:wrap;gap:8px}
+  #actionBar button{min-height:48px;border-radius:10px;white-space:nowrap}
   .tip{width:20px;height:20px;font-size:12px;margin-left:4px}
   .chip{font-size:11px;padding:6px 6px}
   #tipToast{top:12px;bottom:auto;left:12px;right:12px;transform:none;max-width:none}
@@ -100,38 +127,24 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             .print-page {
                 display: flex !important;
                 flex-direction: column;
-                justify-content: space-between;
+                /* SIN justify-content: space-between: con contenido > 1 hoja, flexbox
+                   reparte espacio NEGATIVO y las secciones se solapan. El pie se ancla
+                   abajo con margin-top:auto en su contenedor (ver firma/footer). */
                 width: 100vw !important;
                 height: 100vh !important;
                 box-sizing: border-box !important;
-                padding: 10mm 15mm !important;
+                padding: 6mm 10mm !important;
                 font-family: 'Inter', sans-serif;
                 background-color: white;
             }
-            
-            /* Tipografía y Cajas */
-            .print-header {
-                background-color: #0f172a !important;
-                color: white !important;
-                padding: 12px 18px;
-                border-radius: 8px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 12px;
-            }
-            .print-header h1 {
-                font-size: 13pt; margin: 0 0 4px 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: white !important;
-            }
-            .print-header p { margin: 0; font-size: 8pt; color: #cbd5e1 !important; }
-            
-            .print-section { margin-bottom: 8px; }
+
+            .print-section { margin-bottom: 5px; }
             .print-section-title {
-                font-size: 9pt; font-weight: 800; color: #1e293b; 
-                border-bottom: 2px solid #e2e8f0; margin-bottom: 6px; padding-bottom: 2px; text-transform: uppercase;
+                font-size: 9pt; font-weight: 800; color: #1e293b;
+                border-bottom: 2px solid #e2e8f0; margin-bottom: 4px; padding-bottom: 1px; text-transform: uppercase;
             }
             
-            .print-box { background: #f8fafc !important; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; }
+            .print-box { background: #f8fafc !important; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 8px; }
             .print-box-highlight { background: #eff6ff !important; border: 1px solid #bfdbfe; }
             .print-box-red { background: #fef2f2 !important; border: 1px solid #fecaca; }
             
@@ -151,8 +164,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             .print-text-sm { font-size: 8pt; line-height: 1.3; }
             
             .print-table { width: 100%; border-collapse: collapse; font-size: 8pt; }
-            .print-table th { background: #f1f5f9 !important; padding: 5px; text-align: left; font-weight: 700; border-bottom: 1px solid #cbd5e1; }
-            .print-table td { padding: 5px; border-bottom: 1px solid #e2e8f0; }
+            .print-table th { background: #f1f5f9 !important; padding: 3px 4px; text-align: left; font-weight: 700; border-bottom: 1px solid #cbd5e1; }
+            .print-table td { padding: 3px 4px; border-bottom: 1px solid #e2e8f0; }
         }
 </style>
 
@@ -160,31 +173,36 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 <body class="text-slate-800 antialiased">
 
     <!-- HEADER WEB -->
-    <header class="bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-900 text-white py-4 px-6 shadow-md no-print border-b border-blue-800">
+    <header class="bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-900 text-white py-5 px-6 shadow-md no-print border-b border-blue-800">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-4">
-                <div>
-                    <h1 class="text-lg md:text-xl font-bold tracking-tight uppercase">Calculadora de Riesgo Cardiovascular</h1>
-                    <p class="text-xs text-blue-200 font-medium">Postgrado de Cardiología. Hospital Universitario Ruiz y Páez.</p>
-                    <p class="text-[10px] text-slate-400">Ciudad Bolívar, Estado Bolívar. Venezuela.</p>
+                <img src="favicon.svg" alt="" width="48" height="48" class="w-12 h-12 flex-shrink-0 drop-shadow-lg">
+                <div class="text-center md:text-left">
+                    <h1 class="text-lg md:text-xl font-bold tracking-tight uppercase leading-tight">Calculadora de Riesgo Cardiovascular</h1>
+                    <p class="text-[13px] text-blue-100 font-semibold mt-0.5">Herramienta gratuita para cardiólogos de Venezuela</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">Postgrado de Cardiología · Hospital Ruiz y Páez · Ciudad Bolívar, Venezuela</p>
                 </div>
-            </div>
-            <div class="text-right">
-                <span class="bg-blue-900/80 text-blue-200 px-3 py-1 rounded border border-blue-700/50 text-xs font-mono">Consensual ESC/AHA</span>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto p-4 space-y-4 no-print">
+    <main class="max-w-7xl mx-auto p-4 flex flex-col gap-4 xl:grid xl:grid-cols-5 xl:gap-5 xl:items-start no-print">
         <!-- FORMULARIO WEB -->
+        <div class="xl:col-span-2">
         <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
             <h2 class="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-2 uppercase tracking-wide">
                 <span class="w-2.5 h-4 bg-blue-600 rounded-sm"></span>Datos del Paciente
             </h2>
 
+            <!-- Identificación (opcional, solo para el PDF): antes de los datos clínicos -->
+            <div class="mb-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="patient_name">Nombre del Paciente</label><input type="text" id="patient_name" class="form-input" placeholder="Opcional — solo para el PDF" autocomplete="off"></div>
+                <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="doctor_name">Médico Tratante</label><input type="text" id="doctor_name" class="form-input" placeholder="Opcional — solo para el PDF" autocomplete="off"></div>
+            </div>
+
             <details open class="mb-3 border border-slate-200 rounded-lg overflow-hidden">
                 <summary class="cursor-pointer select-none bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 uppercase tracking-wide">1. Datos Clínicos</summary>
-                <div class="p-4 grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="p-4 grid grid-cols-2 md:grid-cols-3 gap-4">
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Edad (Años)</label><input type="number" id="age" value="58" class="form-input"></div>
                     <div class="flex gap-3 col-span-full order-first md:contents">
 <div style="flex:1;min-width:0"><label class="block text-xs font-semibold text-slate-600 mb-1">Sexo Biológico</label><div class="chip-group" role="radiogroup" aria-label="Sexo Biológico"><label class="chip"><input type="radio" name="sex" value="male" checked> M</label><label class="chip"><input type="radio" name="sex" value="female"> F</label></div></div>
@@ -198,7 +216,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
             <details open class="mb-3 border border-slate-200 rounded-lg overflow-hidden">
                 <summary class="cursor-pointer select-none bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 uppercase tracking-wide">2. Perfil de Laboratorio</summary>
-                <div class="p-4 grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="p-4 grid grid-cols-2 md:grid-cols-3 gap-4">
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol Total (mg/dL)</label><input type="number" id="tc" value="230" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol HDL (mg/dL)</label><input type="number" id="hdl" value="42" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol LDL (mg/dL)</label><input type="number" id="ldl" value="148" class="form-input"></div>
@@ -215,7 +233,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
             <details open class="mb-3 border border-slate-200 rounded-lg overflow-hidden">
                 <summary class="cursor-pointer select-none bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 uppercase tracking-wide">3. Comorbilidades y Factores de Riesgo</summary>
-                <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                     <label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Síndrome Coronario Agudo</label>
                     <select id="sca_status" class="form-select text-[11px] h-10">
@@ -283,24 +301,39 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 </div>
             </details>
 
-            <div id="error_box" class="hidden mt-4 p-3 bg-red-50 border border-red-300 text-red-700 text-sm rounded-md"></div>
+            <div id="error_box" role="alert" class="hidden mt-4 p-3 bg-red-50 border border-red-300 text-red-700 text-sm rounded-md"></div>
             <div id="alert_box" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-800 text-sm rounded-md no-print"></div>
 
             <div id="actionBar" class="mt-5 flex justify-end gap-3 no-print">
-                <button type="button" onclick="limpiar()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-6 rounded-md shadow text-sm uppercase tracking-wider transition">
+                <button type="button" onclick="limpiar()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-6 rounded-md shadow text-sm uppercase tracking-wider transition max-md:flex-1 max-md:order-2">
                     Limpiar
                 </button>
-                <button type="button" onclick="ejecutarCalculos()" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-md shadow text-sm uppercase tracking-wider transition">
-                    Generar Cálculo
-                </button>
-                <button id="btn_pdf" type="button" onclick="exportarPDF()" disabled class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-md shadow text-sm uppercase tracking-wider transition disabled:opacity-40 disabled:cursor-not-allowed">
-                    Exportar PDF
+                <button type="button" onclick="ejecutarCalculos(true)" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-md shadow text-sm uppercase tracking-wider transition max-md:w-full max-md:order-1">
+                    Calcular Riesgo
                 </button>
             </div>
         </section>
+        </div>
+
+        <div class="xl:col-span-3 flex flex-col gap-5">
+        <!-- ESTADO VACÍO (antes del primer cálculo) -->
+        <div id="introCard" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
+            <div class="max-w-lg mx-auto">
+                <h2 class="text-lg font-bold text-slate-800">Estime el riesgo cardiovascular de su paciente</h2>
+                <p class="text-sm text-slate-500 mt-2">Complete los datos del formulario y presione <span class="font-semibold text-blue-700">Calcular Riesgo</span>. Obtendrá el riesgo cardiovascular a 10 años, la meta de LDL y un plan de acción.</p>
+                <ol class="text-left text-sm text-slate-600 mt-5 space-y-1 max-w-xs mx-auto list-decimal list-inside">
+                    <li>Ingrese los datos clínicos y de laboratorio</li>
+                    <li>Marque las comorbilidades y factores de riesgo</li>
+                    <li>Presione Calcular Riesgo para ver el informe</li>
+                </ol>
+            </div>
+        </div>
 
         <!-- PANELES DE RESULTADO WEB -->
         <div id="panel_resultados" class="hidden space-y-5" aria-live="polite">
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+                <p id="w_narrativa" class="text-[15px] text-slate-800 leading-relaxed font-medium">-</p>
+            </div>
             <div id="scorePanel" class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-xl shadow-md p-6 text-center border border-blue-800">
                 <h2 class="text-xl font-black uppercase tracking-widest text-blue-200 mb-4 border-b border-blue-700/50 pb-2 inline-block">Cálculo de SCORE PREVENT</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -311,12 +344,30 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 </div>
                 <div class="mt-4">
                     <div class="flex justify-between text-[11px] uppercase text-blue-300 mb-1"><span>Categoría de Riesgo</span><span id="w_band" class="font-bold text-white">-</span></div>
-                    <div class="h-3 rounded-full bg-white/15 overflow-hidden"><div id="w_gauge" class="h-full transition-all" style="width:0%"></div></div>
+                    <div class="h-3 rounded-full bg-white/15 overflow-hidden relative" role="progressbar" aria-label="Riesgo cardiovascular total a 10 años (umbrales: 5, 10 y 20%)" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                        <div id="w_gauge" class="h-full transition-all" style="width:0%"></div>
+                        <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:5%"></span>
+                        <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:10%"></span>
+                        <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:20%"></span>
+                    </div>
+                    <div class="relative h-3 text-[9px] text-blue-300/70 mt-1" aria-hidden="true">
+                        <span class="absolute" style="left:0">0</span>
+                        <span class="absolute -translate-x-1/2" style="left:5%">5</span>
+                        <span class="absolute -translate-x-1/2" style="left:10%">10</span>
+                        <span class="absolute -translate-x-1/2" style="left:20%">20</span>
+                        <span class="absolute" style="right:0">100%</span>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-x-3 gap-y-0.5 text-[10px] mt-1.5">
+                        <span class="text-emerald-400 font-semibold">● Bajo &lt;5%</span>
+                        <span class="text-yellow-400 font-semibold">● Moderado 5–10%</span>
+                        <span class="text-orange-400 font-semibold">● Alto 10–20%</span>
+                        <span class="text-red-400 font-semibold">● Muy alto ≥20%</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                <div class="lg:col-span-2 space-y-5">
+            <div class="grid grid-cols-1 2xl:grid-cols-3 gap-5">
+                <div class="2xl:col-span-2 space-y-5">
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
                         <h3 class="text-sm font-bold uppercase border-b pb-2 mb-3 text-slate-800">Desglose de Scores Predictivos a 10 Años / PREVENT</h3>
                         <table class="w-full text-left text-sm mb-5">
@@ -325,8 +376,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         </table>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t pt-5">
                             <div>
-                                <h4 class="text-xs font-bold text-slate-600 uppercase mb-2">Impacto Lp(a) en Infarto</h4>
-                                <div class="max-h-[180px]"><canvas id="chartLpa"></canvas></div>
+                                <h4 class="text-xs font-bold text-slate-600 uppercase mb-2">Impacto de la Lp(a) en el riesgo de infarto</h4>
+                                <div class="h-[180px]"><canvas id="chartLpa"></canvas></div>
                             </div>
                             <div class="text-sm space-y-3 flex flex-col justify-center">
                                 <div class="p-3 bg-indigo-50 border border-indigo-100 rounded-lg flex justify-between items-center">
@@ -348,7 +399,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         <h3 class="text-sm font-bold uppercase border-b pb-2 mb-4 text-slate-800">Estrategias y Metas</h3>
                         <div class="space-y-3 text-sm">
                             <div class="flex justify-between p-3 bg-slate-50 border border-slate-100 rounded-lg"><span class="font-semibold text-slate-600 uppercase">TFG (CKD-EPI)</span><span id="w_tfg" class="font-black text-slate-800">-</span></div>
-                            <div class="flex justify-between p-3 bg-blue-50 text-blue-900 rounded-lg border border-blue-200"><span class="font-bold">Meta LDL Estipulada</span><span id="w_meta" class="font-black text-lg">-</span></div>
+                            <div class="flex justify-between p-3 bg-blue-50 text-blue-900 rounded-lg border border-blue-200"><span class="font-bold">Meta LDL</span><span id="w_meta" class="font-black text-lg">-</span></div>
                             <div class="flex justify-between p-3 bg-indigo-50 text-indigo-900 rounded-lg border border-indigo-200"><span class="font-bold">Reducción LDL Necesaria</span><span id="w_strat_pct" class="font-black text-lg">-</span></div>
                             <div class="p-3 bg-emerald-50 text-emerald-900 rounded-lg border border-emerald-200">
                                 <span class="block font-bold mb-1 text-xs uppercase">Beneficio Clínico Esperado:</span>
@@ -357,13 +408,16 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         </div>
                     </div>
                     <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition no-print">Copiar Resumen</button>
+                    <button id="btn_pdf_bottom" type="button" onclick="exportarPDF()" disabled class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition disabled:opacity-40 disabled:cursor-not-allowed no-print">Exportar PDF</button>
                 </div>
             </div>
+            <p class="text-center text-[11px] text-slate-500">Estimación orientativa · no sustituye el juicio clínico ni las guías vigentes.</p>
         </div>
-        <footer class="no-print mt-6 pt-4 border-t border-slate-200 text-center">
-            <p class="text-[11px] text-slate-400 mt-1">Modelo de riesgo basado en SCORE2 / PCE 2013 (guías ESC 2021) · Versión 1.0 · 2026</p>
-            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed max-w-2xl mx-auto">Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.</p>
-            <button type="button" onclick="abrirAcerca()" class="mt-3 text-[12px] font-semibold text-blue-600 hover:underline">Más información</button>
+        </div>
+        <footer class="no-print mt-6 pt-4 border-t border-slate-200 text-center xl:col-span-5">
+            <p class="text-[11px] text-slate-500 leading-relaxed">Modelo de riesgo basado en SCORE2 / PCE 2013 (guías ESC 2021)<br class="md:hidden"> · Versión 1.0 · 2026</p>
+            <p class="text-[11px] text-slate-500 mt-2 leading-relaxed max-w-2xl mx-auto">Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.</p>
+            <button type="button" onclick="abrirAcerca()" class="mt-4 inline-flex items-center justify-center min-h-[44px] px-6 py-2 text-[13px] font-semibold text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition">Más información</button>
         </footer>
     </main>
 
@@ -372,151 +426,193 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
     <!-- ========================================================================= -->
     <div class="hidden print-page">
         
-        <!-- HEADER -->
-        <div class="print-header">
-            <div>
-                <h1>INFORME DE RIESGO CARDIOVASCULAR</h1>
+        <!-- HEADER (diseñado para impresión B/N: sin fondos oscuros, estructura por bordes) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; margin-bottom: 6px;">
+            <div style="display: flex; align-items: center; gap: 9px;">
+                <img src="favicon.svg" alt="" width="28" height="28">
+                <div>
+                    <h1 style="font-size: 12.5pt; margin: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #0f172a;">Informe de Riesgo Cardiovascular</h1>
+                    <p style="margin: 1px 0 0; font-size: 7pt; color: #475569;">Referencia: ESC 2021 / AHA · Estimación orientativa, no sustituye el juicio clínico</p>
+                </div>
             </div>
-            <div style="text-align: right;">
-                <p style="color: #cbd5e1 !important; margin-bottom: 2px;">Consensual ESC/AHA</p>
-                <p style="color: #94a3b8 !important; font-size: 7.5pt;">Fecha: <script>document.write(new Date().toLocaleDateString('es-ES'))</script></p>
+            <p style="margin: 0; font-size: 8pt; font-weight: 700; color: #0f172a;">Fecha: <span id="p_fecha">-</span></p>
+        </div>
+
+        <!-- PACIENTE + LABORATORIO (misma fila, 2:3) -->
+        <div class="print-section print-grid-2" style="grid-template-columns: 2fr 3fr;">
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">Datos del Paciente</div>
+                <div class="print-box" style="flex: 1;">
+                    <div style="font-size: 8pt; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-bottom: 5px;">
+                        Paciente: <span id="p_paciente" class="font-bold">______________________________</span>
+                    </div>
+                    <div class="print-grid-2">
+                        <div><div class="print-label">Edad / Sexo</div><div class="print-value" id="p_age_sex">-</div></div>
+                        <div><div class="print-label">Tabaquismo</div><div class="print-value" id="p_smoker">-</div></div>
+                        <div><div class="print-label">Peso / Talla</div><div class="print-value" id="p_antrop">-</div></div>
+                        <div><div class="print-label">IMC</div><div class="print-value" id="p_imc">-</div></div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">Perfil de Laboratorio y Biometría</div>
+                <div class="print-box" style="flex: 1;">
+                    <div class="print-grid-5" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-bottom: 4px;">
+                        <div><div class="print-label">Col. Total</div><div class="print-value" id="p_tc">-</div></div>
+                        <div><div class="print-label">LDL-C</div><div class="print-value" id="p_ldl">-</div></div>
+                        <div><div class="print-label">HDL-C</div><div class="print-value" id="p_hdl">-</div></div>
+                        <div><div class="print-label">No-HDL</div><div class="print-value" id="p_nohdl">-</div></div>
+                        <div><div class="print-label">Triglicéridos</div><div class="print-value" id="p_tg">-</div></div>
+                    </div>
+                    <div class="print-grid-5">
+                        <div><div class="print-label">Glicemia</div><div class="print-value" id="p_gl">-</div></div>
+                        <div><div class="print-label">HbA1c</div><div class="print-value" id="p_hba1c">-</div></div>
+                        <div><div class="print-label">Creatinina</div><div class="print-value" id="p_cr">-</div></div>
+                        <div><div class="print-label">ACR</div><div class="print-value" id="p_acr">-</div></div>
+                        <div><div class="print-label">Lp(a)</div><div class="print-value font-bold" id="p_lpa">-</div></div>
+                    </div>
+                    <p style="font-size: 6.5pt; color: #64748b; margin: 4px 0 0;">Lípidos, glicemia y Lp(a) en mg/dL · HbA1c en % · Creatinina en mg/dL · ACR en mg/g · "—" = dato no reportado.</p>
+                </div>
             </div>
         </div>
 
-        <!-- PACIENTE & ANTROPOMETRÍA -->
-        <div class="print-section">
-            <div class="print-grid-4 print-box">
-                <div><div class="print-label">Edad / Sexo</div><div class="print-value" id="p_age_sex">-</div></div>
-                <div><div class="print-label">Tabaquismo</div><div class="print-value" id="p_smoker">-</div></div>
-                <div><div class="print-label">Peso / Talla</div><div class="print-value" id="p_antrop">-</div></div>
-                <div><div class="print-label">IMC</div><div class="print-value text-blue-700" id="p_imc">-</div></div>
-            </div>
-        </div>
-
-        <!-- LABORATORIOS -->
-        <div class="print-section">
-            <div class="print-section-title">Perfil de Laboratorio y Biometría</div>
-            <div class="print-box">
-                <div class="print-grid-5" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 6px;">
-                    <div><div class="print-label">Col. Total</div><div class="print-value" id="p_tc">-</div></div>
-                    <div><div class="print-label">LDL-C</div><div class="print-value" id="p_ldl">-</div></div>
-                    <div><div class="print-label">HDL-C</div><div class="print-value" id="p_hdl">-</div></div>
-                    <div><div class="print-label">No-HDL</div><div class="print-value" id="p_nohdl">-</div></div>
-                    <div><div class="print-label">Triglicéridos</div><div class="print-value" id="p_tg">-</div></div>
-                </div>
-                <div class="print-grid-5">
-                    <div><div class="print-label">Glicemia</div><div class="print-value" id="p_gl">-</div></div>
-                    <div><div class="print-label">HbA1c</div><div class="print-value" id="p_hba1c">-</div></div>
-                    <div><div class="print-label">Creatinina</div><div class="print-value" id="p_cr">-</div></div>
-                    <div><div class="print-label">ACR</div><div class="print-value" id="p_acr">-</div></div>
-                    <div><div class="print-label text-red-600">Lp(a)</div><div class="print-value text-red-600" id="p_lpa">-</div></div>
-                </div>
-            </div>
-        </div>
+        <!-- ALERTAS CRÍTICAS (solo si las hay) -->
+        <div id="p_crit" style="display: none; margin-bottom: 4px; padding: 5px 8px; border: 1.5px solid #0f172a; border-radius: 6px; font-size: 8pt; font-weight: 700; color: #0f172a;"></div>
 
         <!-- ESTRATIFICACIÓN Y SCORE -->
         <div class="print-section print-grid-2">
-            <div>
+            <div style="display: flex; flex-direction: column;">
                 <div class="print-section-title">I. Estratificación y Metas</div>
-                <div class="print-box" style="height: 100%;">
-                    <div style="margin-bottom: 8px;">
+                <div class="print-box" style="flex: 1;">
+                    <div style="margin-bottom: 5px;">
                         <span class="print-label">Criterio Clínico:</span> <span class="print-text-sm font-bold" id="p_comorb">-</span>
                     </div>
-                    <div style="margin-bottom: 8px;">
+                    <div style="margin-bottom: 5px;">
+                        <span class="print-label">Condiciones:</span> <span class="print-text-sm" id="p_condiciones">-</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
                         <span class="print-label">TFG (CKD-EPI):</span> <span class="print-text-sm font-bold" id="p_tfg">-</span>
                     </div>
                     <div class="print-grid-2">
-                        <div class="print-box-highlight" style="padding: 6px; text-align: center; border-radius: 6px;">
-                            <div class="print-label" style="color: #1e3a8a;">Meta LDL Óptima</div>
-                            <div class="print-value-lg text-blue-700" id="p_meta_ldl">-</div>
+                        <div style="padding: 5px; text-align: center; border: 1px solid #0f172a; border-radius: 6px;">
+                            <div class="print-label">Meta LDL</div>
+                            <div class="print-value-lg" id="p_meta_ldl">-</div>
                         </div>
-                        <div class="print-box-highlight" style="padding: 6px; text-align: center; border-radius: 6px;">
-                            <div class="print-label" style="color: #1e3a8a;">Reducción Req.</div>
-                            <div class="print-value-lg text-blue-700" id="p_pct_ldl">-</div>
+                        <div style="padding: 5px; text-align: center; border: 1px solid #0f172a; border-radius: 6px;">
+                            <div class="print-label">Reducción Req.</div>
+                            <div class="print-value-lg" id="p_pct_ldl">-</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="print-section-title">SCORE PREVENT (Calculado)</div>
-                <div class="print-box print-box-highlight" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
-                    <div style="text-align:center; margin-bottom:6px;">
-                        <span class="print-label">Categoría:</span> <span class="font-black" id="p_band">-</span>
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">II. Score PREVENT (Calculado)</div>
+                <div class="print-box" style="flex: 1;">
+                    <div style="text-align:center; margin-bottom:5px;">
+                        <span class="print-label">Categoría:</span> <span class="font-black" id="p_band" style="background: #0f172a; color: #fff; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.5px;">-</span>
                     </div>
-                    <div class="print-grid-2" style="text-align: center;">
-                        <div style="border-right: 1px solid #bfdbfe; padding-right: 10px;">
-                            <div class="print-label" style="color: #1e3a8a;">Riesgo ECV Total (10a)</div>
-                            <div class="print-value-lg text-blue-700" id="p_prev_total" style="margin: 4px 0;">-</div>
-                            <div class="print-label" style="color: #059669;">Óptimo: <span id="p_prev_tot_opt">-</span></div>
+                    <!-- Mini-gauge B/N: relleno negro = riesgo; marcas grises en umbrales 5/10/20 -->
+                    <div style="position: relative; height: 11px; border: 1px solid #0f172a; border-radius: 5px; background: #fff; overflow: hidden; margin-bottom: 2px;">
+                        <div id="p_gauge" style="height: 100%; background: #0f172a; width: 0%;"></div>
+                        <span style="position: absolute; top: 0; bottom: 0; left: 5%; width: 1px; background: #94a3b8;"></span>
+                        <span style="position: absolute; top: 0; bottom: 0; left: 10%; width: 1px; background: #94a3b8;"></span>
+                        <span style="position: absolute; top: 0; bottom: 0; left: 20%; width: 1px; background: #94a3b8;"></span>
+                    </div>
+                    <div style="position: relative; height: 9px; font-size: 6pt; color: #475569; margin-bottom: 6px;" aria-hidden="true">
+                        <span style="position: absolute; left: 0;">0</span>
+                        <span style="position: absolute; left: 5%; transform: translateX(-50%);">5</span>
+                        <span style="position: absolute; left: 10%; transform: translateX(-50%);">10</span>
+                        <span style="position: absolute; left: 20%; transform: translateX(-50%);">20</span>
+                        <span style="position: absolute; right: 0;">100%</span>
+                    </div>
+                    <div class="print-grid-2" style="text-align: center; gap: 6px;">
+                        <div style="border: 1px solid #0f172a; border-radius: 6px; padding: 5px;">
+                            <div class="print-label">Riesgo ECV Total (10a)</div>
+                            <div class="print-value-lg" id="p_prev_total" style="margin: 3px 0; font-size: 15pt;">-</div>
+                            <div class="print-label">Óptimo: <span id="p_prev_tot_opt">-</span></div>
                         </div>
-                        <div style="padding-left: 10px;">
-                            <div class="print-label" style="color: #1e3a8a;">Hosp. Insuf. Cardíaca</div>
-                            <div class="print-value-lg text-blue-700" id="p_prev_ic" style="margin: 4px 0;">-</div>
-                            <div class="print-label" style="color: #059669;">Óptimo: <span id="p_prev_ic_opt">-</span></div>
+                        <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px;">
+                            <div class="print-label">Hosp. Insuf. Cardíaca</div>
+                            <div class="print-value-lg" id="p_prev_ic" style="margin: 3px 0;">-</div>
+                            <div class="print-label">Óptimo: <span id="p_prev_ic_opt">-</span></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- TABLA SCORES -->
+        <!-- RESUMEN CLÍNICO (compacto: sin título de sección para ahorrar espacio) -->
         <div class="print-section">
-            <div class="print-section-title">II. Desglose de Scores Predictivos a 10 Años / PREVENT</div>
-            <table class="print-table">
-                <thead>
-                    <tr>
-                        <th style="width: 60%;">Compuesto Clínico Analizado</th>
-                        <th style="text-align: center;">Riesgo Actual</th>
-                        <th style="text-align: center; color: #059669;">Riesgo Óptimo</th>
-                    </tr>
-                </thead>
-                <tbody id="p_table_body"></tbody>
-            </table>
+            <div class="print-box print-text-sm" style="padding: 5px 8px;"><span class="print-label" style="margin-right: 4px;">Resumen Clínico:</span><span id="p_narrativa">-</span></div>
         </div>
 
-        <!-- MODULACIÓN & CONTRIBUCIÓN -->
-        <div class="print-section print-grid-2">
-             <div>
-                <div class="print-section-title">Modulación por Lp(a)</div>
-                <div class="print-box print-box-red">
-                    <div class="print-label text-red-800" style="margin-bottom: 6px;">Riesgo de Infarto Miocárdico Aislado</div>
-                    <div class="print-grid-2" style="text-align: center;">
-                        <div>
+        <!-- III TABLA + IV MODULACIÓN (misma fila, 3:2) -->
+        <div class="print-section print-grid-2" style="grid-template-columns: 3fr 2fr;">
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">III. Desglose de Scores Predictivos a 10 Años / PREVENT</div>
+                <div style="border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; flex: 1;">
+                <table class="print-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 60%;">Compuesto Clínico Analizado</th>
+                            <th style="text-align: center;">Riesgo Actual</th>
+                            <th style="text-align: center;">Riesgo Óptimo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="p_table_body"></tbody>
+                </table>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">IV. Modulación por Lp(a)</div>
+                <div class="print-box" style="border: 1.5px solid #0f172a; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <div class="print-label" style="margin-bottom: 6px; color: #0f172a; text-align: center;">Riesgo de Infarto Miocárdico Aislado</div>
+                    <div class="print-grid-2" style="text-align: center; gap: 6px;">
+                        <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px;">
                             <div class="print-label">Sin Lp(a)</div>
                             <div class="print-value" id="p_inf_sin">-</div>
                         </div>
-                        <div>
-                            <div class="print-label text-red-600">Con Lp(a)</div>
-                            <div class="print-value-lg text-red-600" id="p_inf_con">-</div>
+                        <div style="border: 1px solid #0f172a; border-radius: 6px; padding: 5px;">
+                            <div class="print-label">Con Lp(a)</div>
+                            <div class="print-value-lg" id="p_inf_con">-</div>
                         </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 6px; border-top: 1px dashed #cbd5e1; padding-top: 4px;">
+                        <span class="print-label">Incremento por Lp(a):</span> <span class="font-bold" id="p_inf_delta">-</span>
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="print-section-title">III. Contribución Factores ASCVD</div>
-                <div class="print-box print-grid-2" id="p_contrib_factors" style="font-size: 7.5pt; gap: 4px 8px; align-items: center;">
+        </div>
+
+        <!-- V CONTRIBUCIÓN + VI RECOMENDACIONES (misma fila, 2:3) -->
+        <div class="print-section print-grid-2" style="grid-template-columns: 2fr 3fr; margin-bottom: 0;">
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">V. Contribución de Factores ASCVD</div>
+                <div class="print-box" id="p_contrib_factors" style="font-size: 7.5pt; flex: 1;">
                     <!-- JS fills this -->
                 </div>
             </div>
-        </div>
-        
-        <!-- RECOMENDACIONES -->
-        <div class="print-section" style="margin-bottom: 0;">
-            <div class="print-section-title">Recomendaciones Clínicas y Estrategia</div>
-            <div class="print-grid-2 print-text-sm">
-                <div>
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">VI. Recomendaciones Clínicas y Estrategia</div>
+                <div class="print-text-sm" style="flex: 1;">
                     <div style="margin-bottom: 4px;"><span class="font-bold">Estrategia Hipolipemiante:</span> <span id="p_risk_red">-</span></div>
                     <div style="margin-bottom: 4px;"><span class="font-bold">Dieta:</span> Patrón Mediterráneo. Priorizar grasas monoinsaturadas, vegetales verdes. Restricción estricta de azúcares libres y grasas trans.</div>
-                </div>
-                <div>
                     <div style="margin-bottom: 4px;"><span class="font-bold">Ejercicio Físico:</span> 150-300 min/sem de actividad aeróbica moderada o 75-150 min/sem vigorosa. Incorporar rutinas de fuerza 2-3 días/sem.</div>
-                    <div><span class="font-bold">Seguimiento:</span> Iniciar o ajustar terapia hipolipemiante intensiva. Reevaluación de perfil lipídico y tolerabilidad en 4 a 8 semanas.</div>
+                    <div><span class="font-bold">Seguimiento:</span> Reevaluación de perfil lipídico y tolerabilidad en 4 a 8 semanas, según juicio clínico.</div>
                 </div>
             </div>
         </div>
-        <p style="margin-top:10px;padding-top:6px;border-top:1px solid #cbd5e1;font-size:7pt;color:#64748b;text-align:center;">
-            Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.
-        </p>
+        <!-- Firma + pie anclados al fondo con margin-top:auto (nunca se solapan) -->
+        <div style="margin-top: auto;">
+            <div style="margin-top: 12px; display: flex; justify-content: space-between; font-size: 8pt; color: #334155;">
+                <span>Médico tratante: <span id="p_medico">______________________________</span></span>
+                <span>Firma y sello: ______________________________</span>
+            </div>
+            <p style="margin-top: 5px; padding-top: 4px; border-top: 1px solid #cbd5e1; font-size: 7pt; color: #64748b; text-align: center;">
+                MatsonSoft × Postgrado de Cardiología · Hospital Ruiz y Páez · riesgo.matsonsoft.com<br>
+                Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.
+            </p>
+        </div>
     </div>
 
     <!-- SCRIPT DE LÓGICA CLÍNICA -->
@@ -534,6 +630,22 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
         let instanceChart = null;
 
+        // PostHog: helper + contexto (una vez por carga).
+        // PRIVACIDAD: NUNCA se envían valores clínicos ni nombres; solo banda de riesgo y conteos.
+        function track(evt, props) { try { if (window.posthog && posthog.capture) posthog.capture(evt, props); } catch (e) {} }
+        if (window.posthog) {
+            const utm = new URLSearchParams(location.search);
+            posthog.register_once({
+                app: 'calculadora-riesgo-cv',
+                environment: location.hostname === 'riesgo.matsonsoft.com' ? 'production' : 'local',
+                referrer: document.referrer || '(directo)',
+                utm_source: utm.get('utm_source'), utm_medium: utm.get('utm_medium'), utm_campaign: utm.get('utm_campaign'),
+                locale: document.documentElement.lang,
+                device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+            }, 'init_context');
+        }
+        let lastBanda = null;
+
         document.getElementById('tc').addEventListener('input', updateDerivedMetrics);
         document.getElementById('hdl').addEventListener('input', updateDerivedMetrics);
         document.getElementById('weight').addEventListener('input', updateDerivedMetrics);
@@ -546,7 +658,12 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             document.getElementById('nohdl').value = Math.max(0, tc - hdl);
             const weight = parseFloat(document.getElementById('weight').value) || 0;
             const height = parseFloat(document.getElementById('height').value) || 1;
-            document.getElementById('imc_disp').value = (weight / (height * height)).toFixed(1);
+            const imc = weight / (height * height);
+            const imcEl = document.getElementById('imc_disp');
+            imcEl.value = imc.toFixed(1);
+            // Color por categoría OMS: bajo peso / normal / sobrepeso / obesidad
+            imcEl.style.fontWeight = '700';
+            imcEl.style.color = imc < 18.5 ? '#2563eb' : imc < 25 ? '#059669' : imc < 30 ? '#d97706' : '#dc2626';
         }
         updateDerivedMetrics();
 
@@ -556,6 +673,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             tc:[80,600], hdl:[15,120], ldl:[10,400], tg:[20,2000],
             glucose:[40,600], hba1c:[3,20], lpa:[0,300], creatinine:[0.2,15], acr:[0,3000]
         };
+        // Campos opcionales: vacío = OK; si se llenan, deben estar en rango.
+        // (TG y ACR son solo de visualización; Glicemia/HbA1c solo alimentan alertas críticas.)
+        const OPTIONAL = ['tg', 'glucose', 'hba1c', 'acr'];
         // Aplica min/max HTML a cada input según RANGES.
         function aplicarLimites() {
             for (const id in RANGES) {
@@ -569,7 +689,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             if (!el || !RANGES[id]) return;
             const v = parseFloat(el.value);
             const [mn, mx] = RANGES[id];
-            if (el.value === '' || isNaN(v)) { el.classList.add('input-invalid'); el.title = 'Campo obligatorio'; return; }
+            if (el.value === '' || isNaN(v)) { if (OPTIONAL.includes(id)) { el.classList.remove('input-invalid'); el.removeAttribute('title'); return; } el.classList.add('input-invalid'); el.title = 'Campo obligatorio'; return; }
             if (v < mn || v > mx) { el.classList.add('input-invalid'); el.title = 'Fuera de rango (' + mn + '–' + mx + ')'; }
             else { el.classList.remove('input-invalid'); el.removeAttribute('title'); }
         }
@@ -582,9 +702,11 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 const name = el.dataset.label || id;
                 const v = parseFloat(el.value);
                 const [mn, mx] = RANGES[id];
-                if (el.value === '' || isNaN(v)) { errs.push(name); el.classList.add('input-invalid'); continue; }
+                if (el.value === '' || isNaN(v)) { if (OPTIONAL.includes(id)) continue; errs.push(name); el.classList.add('input-invalid'); continue; }
                 if (v < mn || v > mx) { errs.push(name + ' (rango ' + mn + '–' + mx + ')'); el.classList.add('input-invalid'); }
             }
+            if (!valRadio('sex')) errs.push('Sexo Biológico (seleccione una opción)');
+            if (!valRadio('smoker')) errs.push('Tabaquismo (seleccione una opción)');
             const tc = parseFloat(document.getElementById('tc').value);
             const hdl = parseFloat(document.getElementById('hdl').value);
             const ldlV = parseFloat(document.getElementById('ldl').value);
@@ -623,6 +745,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 age: parseInt(document.getElementById('age').value),
                 sex: valRadio('sex'),
                 smoker: valRadio('smoker'),
+                patientName: document.getElementById('patient_name').value.trim(),
+                doctorName: document.getElementById('doctor_name').value.trim(),
                 sbp: num('sbp'), tc: num('tc'), hdl: num('hdl'), ldl: num('ldl'),
                 tg: num('tg'), glucose: num('glucose'), hba1c: num('hba1c'),
                 lpa: num('lpa'), cr: num('creatinine'), weight: num('weight'),
@@ -700,8 +824,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             const pctRed = Math.max(0, ((i.ldl - metaLdl) / i.ldl) * 100);
             const strRed = pctRed > 0 ? pctRed.toFixed(0) + "% ↓" : "En Meta";
             const mejora = pctRed > 0
-                ? `Reduciendo el LDL hacia la meta de ${metaLdl} mg/dL, se proyecta una disminución del riesgo del ${(pctRed * M.pctRedToRisk).toFixed(0)}%. Instaurar terapia intensiva.`
-                : "Paciente en metas lipídicas óptimas. El riesgo aterotrombótico está mitigado. Continuar medidas actuales.";
+                ? `Reduciendo el LDL hacia la meta de ${metaLdl} mg/dL, se proyecta una disminución del riesgo del ${(pctRed * M.pctRedToRisk).toFixed(0)}%. Considerar terapia hipolipemiante intensiva según juicio clínico.`
+                : "Paciente en metas lipídicas óptimas. El riesgo aterotrombótico se encuentra reducido. Continuar medidas actuales.";
 
             return { i, imc, tfgStr, metaLdl, criterio, baseR, optPCE, chdR, strokeR,
                      prevTotal, prevIC, optPrevTotal, optPrevIC, infartoSin, infartoCon,
@@ -718,6 +842,18 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             document.getElementById('w_meta').innerText = "< " + metaLdl + " mg/dL";
             document.getElementById('p_meta_ldl').innerText = "< " + metaLdl;
             document.getElementById('p_comorb').innerText = criterio;
+            // Detalle de condiciones marcadas (etiquetas cortas para el PDF).
+            const COND = {
+                sca: { ua: 'Angina inestable', nstemi: 'IMSEST', stemi: 'IMCEST' },
+                eva: { two_episodes: 'EVA ≥2 episodios', one_risk: 'EVA 1 episodio + FR' },
+                dm: { mild: 'DM leve', mod: 'DM moderada', severe_fg: 'DM grave (FG <45)', severe_acr: 'DM grave (FG 45–59 + ACR)', severe_prot: 'DM grave (proteinuria)', severe_multi: 'DM grave (polimicrovascular)' },
+                erc: { g3_a1: 'ERC G3a-A1', g3a_a2: 'ERC G3a-A2', g1_a2: 'ERC G1-A2', g4: 'ERC G4', g3b_a2: 'ERC G3b-A2' },
+                hf: { hf_isolated: 'HF', hf_3factors: 'HF + 3 factores', hf_eva: 'HF + evento vascular' },
+                subclinic: { mod: 'Afectación subclínica moderada', sev: 'Afectación subclínica severa' },
+                fragile: { yes: 'Paciente frágil' }
+            };
+            const conds = ['sca', 'eva', 'dm', 'erc', 'hf', 'subclinic', 'fragile'].map(k => COND[k][i[k]]).filter(Boolean);
+            document.getElementById('p_condiciones').innerText = conds.length ? conds.join(' · ') : 'Sin comorbilidades reportadas';
 
             document.getElementById('w_prev_total').innerText = prevTotal.toFixed(1) + "%";
             document.getElementById('w_prev_ic').innerText = prevIC.toFixed(1) + "%";
@@ -734,13 +870,17 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             const g = document.getElementById('w_gauge');
             g.style.width = Math.min(100, prevTotal) + '%';
             g.style.background = b.c;
+            g.parentElement.setAttribute('aria-valuenow', prevTotal.toFixed(1));
             document.getElementById('scorePanel').style.borderLeft = '10px solid ' + b.c;
-            document.getElementById('p_band').textContent = b.t;
-            document.getElementById('p_band').style.color = b.c;
+            document.getElementById('p_band').textContent = b.t; // sin color: el PDF se imprime mayormente en B/N
+            document.getElementById('p_gauge').style.width = Math.min(100, prevTotal) + '%';
 
             const ab = document.getElementById('alert_box');
             if (crit.length) { ab.innerHTML = '⚠ Valores críticos: ' + crit.join('  •  '); ab.classList.remove('hidden'); }
             else ab.classList.add('hidden');
+            const pc = document.getElementById('p_crit');
+            if (crit.length) { pc.textContent = '⚠ Valores críticos: ' + crit.join(' • '); pc.style.display = 'block'; }
+            else pc.style.display = 'none';
 
             let htmlT = "", htmlTP = "";
             dataFila.forEach(row => {
@@ -757,6 +897,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             document.getElementById('w_inf_con').innerText = infartoCon.toFixed(1) + "%";
             document.getElementById('p_inf_sin').innerText = infartoSin.toFixed(1) + "%";
             document.getElementById('p_inf_con').innerText = infartoCon.toFixed(1) + "%";
+            document.getElementById('p_inf_delta').innerText = infartoSin > 0 ? '+' + (((infartoCon / infartoSin) - 1) * 100).toFixed(0) + '%' : '—';
 
             let cHtml = "", cpHtml = "";
             contribuciones.forEach(c => {
@@ -776,6 +917,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             document.getElementById('p_risk_red').innerText = mejora;
 
             document.getElementById('p_age_sex').innerText = `${i.age} Años / ${i.sex === 'male' ? 'Masc.' : 'Fem.'}`;
+            // Nombre/médico: si se llenaron en el formulario van impresos; si no, línea para escribir a mano.
+            document.getElementById('p_paciente').innerText = i.patientName || '______________________________';
+            document.getElementById('p_medico').innerText = i.doctorName || '______________________________';
             document.getElementById('p_smoker').innerText = i.smoker === 'yes' ? 'Fumador Activo' : 'No Fumador';
             document.getElementById('p_antrop').innerText = `${i.weight} kg / ${i.height} m`;
             document.getElementById('p_imc').innerText = imc.toFixed(1);
@@ -783,21 +927,37 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             document.getElementById('p_ldl').innerText = i.ldl;
             document.getElementById('p_hdl').innerText = i.hdl;
             document.getElementById('p_nohdl').innerText = (i.tc - i.hdl);
-            document.getElementById('p_tg').innerText = i.tg;
-            document.getElementById('p_gl').innerText = i.glucose;
-            document.getElementById('p_hba1c').innerText = i.hba1c + "%";
+            document.getElementById('p_tg').innerText = isNaN(i.tg) ? '—' : i.tg;
+            document.getElementById('p_gl').innerText = isNaN(i.glucose) ? '—' : i.glucose;
+            document.getElementById('p_hba1c').innerText = isNaN(i.hba1c) ? '—' : i.hba1c + "%";
             document.getElementById('p_cr').innerText = i.cr;
-            document.getElementById('p_acr').innerText = i.acr;
+            document.getElementById('p_acr').innerText = isNaN(i.acr) ? '—' : i.acr;
             document.getElementById('p_lpa').innerText = i.lpa + " mg/dL";
+
+            const sexo = i.sex === 'male' ? 'Varón' : 'Mujer';
+            const narrativa = sexo + ' de ' + i.age + ' años. Riesgo cardiovascular ' + b.t + ' a 10 años: ' + prevTotal.toFixed(1) + '%. ' +
+                'Con tratamiento óptimo podría reducirse a ~' + optPrevTotal.toFixed(1) + '%. ' +
+                'Meta LDL sugerida: < ' + metaLdl + ' mg/dL (' + criterio + ').';
+            const wNarr = document.getElementById('w_narrativa');
+            wNarr.textContent = narrativa;
+            wNarr.parentElement.style.borderLeft = '6px solid ' + b.c;
+            document.getElementById('p_narrativa').innerText = narrativa;
         }
 
         // Orquesta el flujo: valida -> lee -> calcula -> renderiza -> grafica. Punto de entrada del botón.
-        function ejecutarCalculos() {
+        // scroll=true solo desde acción explícita del usuario (botón/Enter), no desde recalcLive.
+        function ejecutarCalculos(scroll) {
             const errs = validar();
             const box = document.getElementById('error_box');
             if (errs.length) {
-                box.innerHTML = '⚠ Revisa los campos en rojo (' + errs.length + '): ' + errs.join(', ') + '.';
+                box.innerHTML = '⚠ Revise los campos en rojo (' + errs.length + '): ' + errs.join(', ') + '.';
                 box.classList.remove('hidden');
+                track('validation_failed', { errores: errs.length });
+                const firstInvalid = document.querySelector('.input-invalid');
+                if (firstInvalid) {
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstInvalid.focus({ preventScroll: true });
+                }
                 return;
             }
             box.classList.add('hidden');
@@ -805,8 +965,13 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             const i = leerEntradas();
             const r = calcularRiesgo(i);
             renderResultados(r);
+            lastBanda = r.b.t;
+            const nComorb = ['sca','eva','dm','erc','hf','subclinic'].filter(k => i[k] !== 'none').length + (i.fragile === 'yes' ? 1 : 0);
+            track('calculation_completed', { banda: r.b.t, comorbilidades: nComorb });
 
             document.getElementById('panel_resultados').classList.remove('hidden');
+            document.getElementById('introCard').classList.add('hidden');
+            if (scroll) document.getElementById('panel_resultados').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             const ctx = document.getElementById('chartLpa').getContext('2d');
             if (instanceChart) instanceChart.destroy();
@@ -815,7 +980,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 data: { labels: ['Sin Lp(a)', 'Con Lp(a)'], datasets: [{ data: [r.infartoSin, r.infartoCon], backgroundColor: ['#4f46e5', '#e11d48'], borderRadius: 4 }] },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
-            document.getElementById('btn_pdf').disabled = false;
+            document.getElementById('btn_pdf_bottom').disabled = false;
         }
 
         // Accesibilidad: asociar <label> a cada <input>/<select> (lectores de pantalla)
@@ -828,29 +993,32 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         // Resetea el formulario, oculta resultados y limpia el gráfico Lp(a).
         function limpiar() {
             Object.keys(RANGES).forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-            ['nohdl','imc_disp'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            ['nohdl','imc_disp','patient_name','doctor_name'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
             document.querySelectorAll('main select').forEach(s => s.selectedIndex = 0);
-            document.querySelector('input[name="sex"][value="male"]').checked = true;
-            document.querySelector('input[name="smoker"][value="no"]').checked = true;
-            document.querySelectorAll('main input, main select').forEach(el => el.classList.remove('input-invalid'));
+            document.querySelectorAll('input[name="sex"], input[name="smoker"]').forEach(r => r.checked = false);
+            document.querySelectorAll('main input, main select').forEach(el => { el.classList.remove('input-invalid'); el.removeAttribute('title'); });
+            document.getElementById('alert_box').classList.add('hidden');
             document.getElementById('error_box').classList.add('hidden');
             document.getElementById('panel_resultados').classList.add('hidden');
-            document.getElementById('btn_pdf').disabled = true;
+            document.getElementById('introCard').classList.remove('hidden');
+            badgeUpdaters.forEach(f => f()); // limpiar() no dispara eventos input: refrescar badges manualmente
+            track('form_cleared');
+            document.getElementById('btn_pdf_bottom').disabled = true;
             if (instanceChart) { instanceChart.destroy(); instanceChart = null; }
         }
         document.querySelectorAll('main input[type=number]').forEach(el => {
             el.setAttribute('inputmode', 'decimal');
             if (!el.hasAttribute('step')) el.step = 'any';
             const r = RANGES[el.id];
-            if (r) el.placeholder = r[0] + '–' + r[1];
-            el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ejecutarCalculos(); } });
+            if (r) el.placeholder = OPTIONAL.includes(el.id) ? 'Opcional (' + r[0] + '–' + r[1] + ')' : r[0] + '–' + r[1];
+            el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ejecutarCalculos(true); } });
             el.addEventListener('blur', () => validarCampo(el.id));
             el.addEventListener('input', () => { el.classList.remove('input-invalid'); el.removeAttribute('title'); });
         });
 
         // Tooltips explicativos por parámetro
         const TIPS = {
-            age:'Edad del paciente en años. Rango típico 1–120.',
+            age:'Edad del paciente en años. Rango válido: 18–100.',
             sbp:'Presión arterial sistólica en mmHg. Óptimo <120, hipertensión ≥140.',
             weight:'Peso corporal en kg.',
             height:'Estatura en metros (ej. 1.72).',
@@ -862,7 +1030,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             hba1c:'Hemoglobina glicosilada (%). Refleja control glucémico a 3 meses.',
             lpa:'Lipoproteína (a) en mg/dL. Riesgo independiente; objetivo <30.',
             creatinine:'Creatinina sérica en mg/dL. Para calcular TFG (CKD-EPI).',
-            acr:'Albuminuria/Creatininuria (mg/g). Marcador de daño renal.'
+            acr:'Relación albúmina/creatinina en orina (mg/g). Marcador de daño renal.'
         };
         let _tipTimer;
         // Muestra un toast con la ayuda del parámetro (al pulsar el "?").
@@ -879,11 +1047,45 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             if (!lbl || lbl.tagName !== 'LABEL') return;
             el.dataset.label = lbl.textContent.trim();
             lbl.setAttribute('title', TIPS[id]);
-            const req = document.createElement('span'); req.className = 'req'; req.textContent = '*'; lbl.appendChild(req);
-            const tip = document.createElement('button'); tip.type = 'button'; tip.className = 'tip'; tip.setAttribute('aria-label', 'Ayuda'); tip.textContent = '?';
-            tip.addEventListener('click', e => { e.preventDefault(); showTip(TIPS[id]); });
+            const req = document.createElement('span');
+            if (OPTIONAL.includes(id)) { req.className = 'text-slate-400 font-normal text-[10px] ml-1 normal-case'; req.textContent = '(opcional)'; }
+            else { req.className = 'req'; req.textContent = '*'; }
+            lbl.appendChild(req);
+            const tip = document.createElement('button'); tip.type = 'button'; tip.className = 'tip'; tip.setAttribute('aria-label', 'Ayuda: ' + el.dataset.label); tip.textContent = '?';
+            tip.setAttribute('aria-expanded', 'false');
+            tip.addEventListener('click', e => {
+                e.preventDefault(); e.stopPropagation();
+                const wasOpen = tip.getAttribute('aria-expanded') === 'true';
+                cerrarBurbujas();
+                if (wasOpen) return; // toggle: si ya estaba abierto, solo cerrar
+                track('tooltip_opened', { campo: id });
+                // Burbuja en <body> con position:fixed -> no la recorta el overflow-hidden
+                // del <details> ni la tapan las filas del grid; se voltea arriba si no cabe abajo.
+                const bubble = document.createElement('span');
+                bubble.className = 'tip-bubble';
+                bubble.textContent = TIPS[id];
+                document.body.appendChild(bubble);
+                const r = tip.getBoundingClientRect();
+                const bw = bubble.offsetWidth, bh = bubble.offsetHeight;
+                let left = Math.max(8, Math.min(r.left, window.innerWidth - bw - 8));
+                let top = r.bottom + 6;
+                if (top + bh > window.innerHeight - 8) top = Math.max(8, r.top - bh - 6);
+                bubble.style.left = left + 'px';
+                bubble.style.top = top + 'px';
+                tip.setAttribute('aria-expanded', 'true');
+            });
             lbl.appendChild(tip);
         });
+        // Cierra todas las burbujas de ayuda y resetea su estado aria.
+        function cerrarBurbujas() {
+            document.querySelectorAll('.tip-bubble').forEach(b => b.remove());
+            document.querySelectorAll('.tip[aria-expanded="true"]').forEach(t => t.setAttribute('aria-expanded', 'false'));
+        }
+        // Cerrar al hacer clic fuera, Escape, scroll o resize (la burbuja es fixed y no sigue al campo).
+        document.addEventListener('click', e => { if (!e.target.closest('.tip-bubble') && !e.target.closest('.tip')) cerrarBurbujas(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarBurbujas(); });
+        window.addEventListener('scroll', cerrarBurbujas, true);
+        window.addEventListener('resize', cerrarBurbujas);
 
         // Copiar resumen al portapapeles (HIS/EMR)
         // Copia un informe textual al portapapeles (para pegar en HIS/EMR).
@@ -899,10 +1101,25 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 'Riesgo 10a ECV Total: ' + g('p_prev_total') + ' | Óptimo: ' + g('p_prev_tot_opt'),
                 'Lp(a): ' + g('p_lpa')
             ].join('\n');
-            navigator.clipboard.writeText(txt).then(() => {
+            const ok = () => {
                 const btn = document.getElementById('btn_copiar');
                 const t = btn.innerText; btn.innerText = '¡Copiado!'; setTimeout(() => btn.innerText = t, 1500);
-            });
+                track('summary_copied', { banda: lastBanda });
+            };
+            // Fallback para file:// o navegadores sin clipboard API (equipo compartido, doble clic).
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(txt).then(ok).catch(() => copiarFallback(txt, ok));
+            } else {
+                copiarFallback(txt, ok);
+            }
+        }
+        function copiarFallback(txt, ok) {
+            const ta = document.createElement('textarea');
+            ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); ok(); }
+            catch (e) { showTip('No se pudo copiar. Seleccione y copie manualmente.'); }
+            document.body.removeChild(ta);
         }
 
         // Exportar PDF con nombre de archivo sugerido (fecha)
@@ -911,25 +1128,63 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             const errs = validar();
             const box = document.getElementById('error_box');
             if (errs.length) {
-                box.innerHTML = '⚠ Revisa los campos en rojo (' + errs.length + '): ' + errs.join(', ') + '.';
+                box.innerHTML = '⚠ Revise los campos en rojo (' + errs.length + '): ' + errs.join(', ') + '.';
                 box.classList.remove('hidden');
-                document.getElementById('btn_pdf').disabled = true;
+                document.getElementById('btn_pdf_bottom').disabled = true;
                 return;
             }
+            track('pdf_exported', { banda: lastBanda });
+            document.getElementById('p_fecha').textContent = new Date().toLocaleDateString('es-ES');
+            const prevTitle = document.title;
             document.title = 'Informe_Riesgo_CV_' + new Date().toISOString().slice(0, 10);
+            window.onafterprint = () => { document.title = prevTitle; window.onafterprint = null; };
             window.print();
         }
 
         // Recálculo en vivo (debounce 300ms)
         let _timer;
-        // Recalcula en vivo tras cada cálculo, para mantener resultados actualizados al editar.
+        // Recalcula en vivo SOLO si ya hay resultados visibles; si no, no hace nada
+        // (evita ocultar introCard y mostrar errores mientras el usuario aún llena el formulario).
         function recalcLive() {
+            if (document.getElementById('panel_resultados').classList.contains('hidden')) return;
             clearTimeout(_timer);
-            _timer = setTimeout(ejecutarCalculos, 300);
+            _timer = setTimeout(() => ejecutarCalculos(false), 300);
         }
         document.querySelectorAll('main input, main select').forEach(el => {
             el.addEventListener('input', recalcLive);
             el.addEventListener('change', recalcLive);
+        });
+
+        // Acordeón exclusivo: al abrir una sección se cierran las demás
+        document.querySelectorAll('main details').forEach(d => {
+            d.addEventListener('toggle', () => {
+                if (d.open) document.querySelectorAll('main details[open]').forEach(o => { if (o !== d) o.open = false; });
+            });
+        });
+
+        // En móvil: colapsar secciones 2 y 3 al cargar (menos scroll inicial; sección 1 queda abierta)
+        if (window.matchMedia('(max-width:767px)').matches) {
+            document.querySelectorAll('main details[open]').forEach((d, idx) => { if (idx > 0) d.removeAttribute('open'); });
+        }
+
+        // Badges de completitud "n/total" en los summaries de las secciones 1 y 2.
+        // Cuenta campos numéricos (no readonly) + cada grupo de radio como 1 campo
+        // (Sexo y Tabaquismo cuentan; por eso antes "no cuadraba" con lo visible).
+        const badgeUpdaters = [];
+        document.querySelectorAll('main details').forEach(det => {
+            const sum = det.querySelector('summary');
+            if (!sum || sum.textContent.includes('Comorbilidades')) return; // la 3 tiene su propio badge
+            const b = document.createElement('span'); b.className = 'comorb-badge'; sum.appendChild(b);
+            const nums = [...det.querySelectorAll('input[type=number]')].filter(el => !el.readOnly && !OPTIONAL.includes(el.id));
+            const groups = [...new Set([...det.querySelectorAll('input[type=radio]')].map(r => r.name))];
+            const upd = () => {
+                const n = nums.filter(el => el.value !== '').length
+                        + groups.filter(g => det.querySelector('input[name="' + g + '"]:checked')).length;
+                b.textContent = n + '/' + (nums.length + groups.length);
+            };
+            det.querySelectorAll('input').forEach(el => { el.addEventListener('input', upd); el.addEventListener('change', upd); });
+            badgeUpdaters.push(upd);
+            upd();
         });
 
         // Badge de comorbilidades seleccionadas en el tercer acordeón
@@ -937,38 +1192,59 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         if (comorbSummary) {
             const b = document.createElement('span'); b.id = 'comorb_badge'; b.className = 'comorb-badge'; comorbSummary.appendChild(b);
             const det = comorbSummary.parentElement;
-            const updComorb = () => { let n = 0; det.querySelectorAll('select').forEach(s => { if (s.value && s.value !== 'none') n++; }); b.textContent = n ? '(' + n + ')' : ''; };
+            // fragile_status usa valores no/yes (no "none"): solo cuenta cuando es "yes".
+            const updComorb = () => { let n = 0; det.querySelectorAll('select').forEach(s => { if (s.id === 'fragile_status') { if (s.value === 'yes') n++; } else if (s.value && s.value !== 'none') n++; }); b.textContent = n ? '(' + n + ')' : ''; };
             det.querySelectorAll('select').forEach(s => s.addEventListener('change', updComorb));
+            badgeUpdaters.push(updComorb);
             updComorb();
         }
 
-        // Cálculo inicial al cargar la página
+        // Al cargar: foco en el primer campo y tarjeta de bienvenida (sin cálculo automático).
         document.getElementById('age').focus({ preventScroll: true });
-        ejecutarCalculos();
+        document.getElementById('introCard').classList.remove('hidden');
     </script>
 
     <!-- Modal "Acerca de" -->
-    <div id="acercaModal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 p-4" onclick="if(event.target===this)cerrarAcerca()" role="dialog" aria-modal="true" aria-labelledby="acercaTitulo">
+    <div id="acercaModal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 p-4 no-print" onclick="if(event.target===this)cerrarAcerca()" role="dialog" aria-modal="true" aria-labelledby="acercaTitulo">
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center relative">
             <button type="button" onclick="cerrarAcerca()" aria-label="Cerrar" class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700 text-xl leading-none">&times;</button>
-            <h3 id="acercaTitulo" class="text-base font-bold uppercase tracking-wide text-slate-800 mb-4">Acerca de</h3>
-            <p class="text-[13px] text-slate-700 leading-relaxed">Alianza académica · <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-blue-600 font-semibold hover:underline">MatsonSoft</a> × Postgrado de Cardiología, Hospital Ruiz y Páez</p>
-            <p class="text-[13px] text-slate-600 mt-3">Gratuita y de uso libre para cardiólogos de Venezuela.</p>
-            <p class="text-[13px] text-slate-600 mt-4">Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" class="text-blue-600 font-semibold hover:underline">CC BY-NC-SA 4.0</a> · <a href="https://github.com/MatsonSoft/calculadora-riesgo-cv" target="_blank" rel="noopener" class="text-blue-600 font-semibold hover:underline">Código abierto</a></p>
+            <h3 id="acercaTitulo" class="text-base font-bold uppercase tracking-wide text-slate-800 mb-5">Acerca de</h3>
+
+            <div class="mb-5">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Alianza académica</p>
+                <p class="text-[15px] text-slate-800 font-semibold leading-snug"><a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-blue-600 hover:underline">MatsonSoft</a> × Postgrado de Cardiología</p>
+                <p class="text-[12px] text-slate-500 mt-0.5">Hospital Ruiz y Páez · Venezuela</p>
+            </div>
+
+            <div class="mb-5 rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3">
+                <p class="text-[13px] text-emerald-800 font-medium">Gratuita y de uso libre para cardiólogos de Venezuela.</p>
+            </div>
+            <div class="mb-5 rounded-xl bg-blue-50 border border-blue-200 px-4 py-3">
+                <p class="text-[12px] text-blue-900 leading-snug">Modelo de riesgo basado en <strong>SCORE2 / PCE 2013</strong> (guías ESC 2021) y <strong>PREVENT</strong> (AHA). No es la ecuación oficial SCORE2; los resultados son estimaciones orientativas.</p>
+            </div>
+            <div class="border-t border-slate-100 pt-4">
+                <p class="text-[12px] text-slate-600">Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" class="text-blue-600 font-semibold hover:underline">CC BY-NC-SA 4.0</a></p>
+                <p class="text-[12px] text-slate-600 mt-1"><a href="https://github.com/MatsonSoft/calculadora-riesgo-cv" target="_blank" rel="noopener" class="text-blue-600 font-semibold hover:underline">Código abierto en GitHub</a></p>
+            </div>
             <button type="button" onclick="cerrarAcerca()" class="mt-6 w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-md shadow text-sm uppercase tracking-wider transition">Cerrar</button>
         </div>
     </div>
 
     <script>
+        let _focoPrevio = null;
         function abrirAcerca() {
             const m = document.getElementById('acercaModal');
+            _focoPrevio = document.activeElement;
             m.classList.remove('hidden');
             m.style.display = 'flex';
+            m.querySelector('button[aria-label="Cerrar"]').focus();
+            track('about_opened');
         }
         function cerrarAcerca() {
             const m = document.getElementById('acercaModal');
             m.classList.add('hidden');
             m.style.display = '';
+            if (_focoPrevio) _focoPrevio.focus();
         }
         document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarAcerca(); });
     </script>
