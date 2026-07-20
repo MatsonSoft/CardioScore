@@ -521,6 +521,17 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
     <!-- SCRIPT DE LÓGICA CLÍNICA -->
     <script>
+        /* =========================================================================
+           CALCULADORA DE RIESGO CARDIOVASCULAR — lógica de la app
+           Estructura del código (de arriba abajo):
+             1. updateDerivedMetrics / RANGES / validación  -> entrada y control
+             2. MODEL + leerEntradas / calcularRiesgo        -> modelo (sin DOM)
+             3. renderResultados / ejecutarCalculos          -> salida y orquestación
+             4. limpiar / showTip / copiarResumen / exportarPDF / recalcLive -> UX
+           El HTML lleva valores de ejemplo (value="...") para que el cálculo corra al
+           cargar; un contribuyente puede borrarlos para dejar el formulario en blanco.
+           ========================================================================= */
+
         let instanceChart = null;
 
         document.getElementById('tc').addEventListener('input', updateDerivedMetrics);
@@ -528,6 +539,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         document.getElementById('weight').addEventListener('input', updateDerivedMetrics);
         document.getElementById('height').addEventListener('input', updateDerivedMetrics);
 
+        // Calcula en vivo No-HDL (TC-HDL) e IMC a partir de los inputs.
         function updateDerivedMetrics() {
             const tc = parseFloat(document.getElementById('tc').value) || 0;
             const hdl = parseFloat(document.getElementById('hdl').value) || 0;
@@ -538,17 +550,20 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         }
         updateDerivedMetrics();
 
+        // Rangos válidos de entrada [min, max]; usados en validación y límites HTML.
         const RANGES = {
             age:[18,100], sbp:[70,300], weight:[20,400], height:[0.5,2.3],
             tc:[80,600], hdl:[15,120], ldl:[10,400], tg:[20,2000],
             glucose:[40,600], hba1c:[3,20], lpa:[0,300], creatinine:[0.2,15], acr:[0,3000]
         };
+        // Aplica min/max HTML a cada input según RANGES.
         function aplicarLimites() {
             for (const id in RANGES) {
                 const el = document.getElementById(id);
                 if (el) { el.min = RANGES[id][0]; el.max = RANGES[id][1]; }
             }
         }
+        // Valida un campo en evento blur: marca input-invalid y tooltip de error.
         function validarCampo(id) {
             const el = document.getElementById(id);
             if (!el || !RANGES[id]) return;
@@ -558,6 +573,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             if (v < mn || v > mx) { el.classList.add('input-invalid'); el.title = 'Fuera de rango (' + mn + '–' + mx + ')'; }
             else { el.classList.remove('input-invalid'); el.removeAttribute('title'); }
         }
+        // Validación cruzada del formulario. Devuelve [] si OK o lista de errores legibles.
         function validar() {
             const errs = [];
             for (const id in RANGES) {
@@ -576,6 +592,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             if (!isNaN(hdl) && !isNaN(tc) && hdl > tc) errs.push('HDL > Col. Total (inconsistente)');
             return errs;
         }
+        // Clasifica el riesgo en bandas (ESC 2021): <5 Bajo, <10 Moderado, <20 Alto, >=20 Muy Alto.
         function bandaRiesgo(r) {
             if (r < 5)  return { t:'BAJO',     c:'#22c55e' };
             if (r < 10) return { t:'MODERADO', c:'#eab308' };
@@ -583,6 +600,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             return         { t:'MUY ALTO', c:'#dc2626' };
         }
         aplicarLimites();
+        // Lee el valor seleccionado de un grupo de radio buttons (sexo, tabaquismo).
         function valRadio(name) { const el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
 
         // MODELO Y COEFICIENTES (documentados)
@@ -597,6 +615,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             pctRedToRisk: 0.5
         };
 
+        // Reúne todos los inputs (numéricos y selects) en un objeto plano.
         function leerEntradas() {
             const num = id => parseFloat(document.getElementById(id).value);
             const sel = id => document.getElementById(id).value;
@@ -614,6 +633,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             };
         }
 
+        // Cálculo puro del riesgo (sin DOM). Devuelve todos los resultados en un objeto.
+        // Metas LDL según ESC 2021: Muy Alto=55, Alto=70, Moderado=100 mg/dL (ver MODEL).
         function calcularRiesgo(i) {
             const M = MODEL;
             const imc = i.weight / (i.height * i.height);
@@ -641,6 +662,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
             let prevTotal = baseR * M.prev.total + (i.erc !== 'none' ? M.prev.erc : 0) + (imc > 30 ? M.prev.imc : 0);
             let prevIC = (i.age * M.prev.icAge) + ((i.sbp - 120) * M.prev.icSbp) + (imc > 28 ? M.prev.icImc : 1.0) + (i.dm !== 'none' ? M.prev.icDm : 0) + (i.cr > 1.2 ? M.prev.icCr : 0);
+            // Riesgo residual estimado con tratamiento óptimo (heurística: ~30% ECV, ~35% IC). No es valor de guía.
             let optPrevTotal = prevTotal * 0.30;
             let optPrevIC = prevIC * 0.35;
 
@@ -686,6 +708,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                      b, crit, dataFila, contribuciones, strRed, mejora };
         }
 
+        // Vuelca todos los resultados del cálculo en la interfaz (vista web + vista impresión).
         function renderResultados(r) {
             const { i, imc, tfgStr, metaLdl, criterio, prevTotal, prevIC, optPrevTotal, optPrevIC,
                     infartoSin, infartoCon, b, crit, dataFila, contribuciones, strRed, mejora } = r;
@@ -768,6 +791,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             document.getElementById('p_lpa').innerText = i.lpa + " mg/dL";
         }
 
+        // Orquesta el flujo: valida -> lee -> calcula -> renderiza -> grafica. Punto de entrada del botón.
         function ejecutarCalculos() {
             const errs = validar();
             const box = document.getElementById('error_box');
@@ -801,6 +825,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         });
 
         // Mejoras UX: teclado numérico, placeholder con rango, Enter calcula, Limpiar
+        // Resetea el formulario, oculta resultados y limpia el gráfico Lp(a).
         function limpiar() {
             Object.keys(RANGES).forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
             ['nohdl','imc_disp'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
@@ -840,6 +865,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             acr:'Albuminuria/Creatininuria (mg/g). Marcador de daño renal.'
         };
         let _tipTimer;
+        // Muestra un toast con la ayuda del parámetro (al pulsar el "?").
         function showTip(txt) {
             let t = document.getElementById('tipToast');
             if (!t) { t = document.createElement('div'); t.id = 'tipToast'; document.body.appendChild(t); }
@@ -860,6 +886,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         });
 
         // Copiar resumen al portapapeles (HIS/EMR)
+        // Copia un informe textual al portapapeles (para pegar en HIS/EMR).
         function copiarResumen() {
             const g = id => (document.getElementById(id).innerText || '').trim();
             const txt = [
@@ -879,6 +906,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         }
 
         // Exportar PDF con nombre de archivo sugerido (fecha)
+        // Valida el formulario y abre el diálogo de impresión/guardar PDF (usa @media print).
         function exportarPDF() {
             const errs = validar();
             const box = document.getElementById('error_box');
@@ -894,6 +922,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
         // Recálculo en vivo (debounce 300ms)
         let _timer;
+        // Recalcula en vivo tras cada cálculo, para mantener resultados actualizados al editar.
         function recalcLive() {
             clearTimeout(_timer);
             _timer = setTimeout(ejecutarCalculos, 300);
