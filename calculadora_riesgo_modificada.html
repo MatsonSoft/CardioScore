@@ -218,11 +218,11 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol Total (mg/dL)</label><input type="number" id="tc" value="230" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol HDL (mg/dL)</label><input type="number" id="hdl" value="42" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol LDL (mg/dL)</label><input type="number" id="ldl" value="148" class="form-input"></div>
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Creatinina (mg/dL)</label><input type="number" id="creatinine" value="1.25" step="0.01" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Triglicéridos (mg/dL)</label><input type="number" id="tg" value="210" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Glicemia Ayunas (mg/dL)</label><input type="number" id="glucose" value="112" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">HbA1c (%)</label><input type="number" id="hba1c" value="6.6" step="0.1" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Lp(a) (mg/dL)</label><input type="number" id="lpa" value="75" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Creatinina (mg/dL)</label><input type="number" id="creatinine" value="1.25" step="0.01" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">ACR (mg/g)</label><input type="number" id="acr" value="55" class="form-input"></div>
                     <div class="md:col-span-1"><label class="block text-xs font-semibold text-slate-500 mb-1">No-HDL (Calc)</label><input type="number" id="nohdl" class="form-input bg-slate-50" readonly></div>
                     <div class="md:col-span-1"><label class="block text-xs font-semibold text-slate-500 mb-1">IMC (Calc)</label><input type="number" id="imc_disp" class="form-input bg-slate-50" readonly></div>
@@ -673,7 +673,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         };
         // Campos opcionales: vacío = OK; si se llenan, deben estar en rango.
         // (TG y ACR son solo de visualización; Glicemia/HbA1c solo alimentan alertas críticas.)
-        const OPTIONAL = ['tg', 'glucose', 'hba1c', 'acr'];
+        const OPTIONAL = ['tg', 'glucose', 'hba1c', 'lpa', 'acr'];
         // Aplica min/max HTML a cada input según RANGES.
         function aplicarLimites() {
             for (const id in RANGES) {
@@ -747,7 +747,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 doctorName: document.getElementById('doctor_name').value.trim(),
                 sbp: num('sbp'), tc: num('tc'), hdl: num('hdl'), ldl: num('ldl'),
                 tg: num('tg'), glucose: num('glucose'), hba1c: num('hba1c'),
-                lpa: num('lpa'), cr: num('creatinine'), weight: num('weight'),
+                lpa: num('lpa') || 0, cr: num('creatinine'), weight: num('weight'),
                 height: num('height'), acr: num('acr'),
                 sca: sel('sca_status'), eva: sel('eva_status'), dm: sel('dm_status'),
                 erc: sel('erc_status'), hf: sel('hf_status'),
@@ -930,7 +930,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             document.getElementById('p_hba1c').innerText = isNaN(i.hba1c) ? '—' : i.hba1c + "%";
             document.getElementById('p_cr').innerText = i.cr;
             document.getElementById('p_acr').innerText = isNaN(i.acr) ? '—' : i.acr;
-            document.getElementById('p_lpa').innerText = i.lpa + " mg/dL";
+            document.getElementById('p_lpa').innerText = i.lpa ? i.lpa + " mg/dL" : '—';
 
             const sexo = i.sex === 'male' ? 'Varón' : 'Mujer';
             const narrativa = sexo + ' de ' + i.age + ' años. Riesgo cardiovascular ' + b.t + ' a 10 años: ' + prevTotal.toFixed(1) + '%. ' +
