@@ -166,11 +166,6 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             .print-table th { background: #f1f5f9 !important; padding: 3px 4px; text-align: left; font-weight: 700; border-bottom: 1px solid #cbd5e1; }
             .print-table td { padding: 3px 4px; border-bottom: 1px solid #e2e8f0; }
 
-            /* En móvil 100vh es el alto de pantalla, no del papel — dejamos fluir */
-            @media (max-width:767px) {
-                .print-page { height: auto !important; min-height: 100vh !important; }
-                body, html { overflow: visible !important; }
-            }
         }
 </style>
 
