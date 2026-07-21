@@ -3,54 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Riesgo Cardiovascular</title>
-    <meta name="description" content="Calculadora clínica de riesgo cardiovascular basada en SCORE2 / PCE 2013 (guías ESC 2021), con perfil lipídico, Lp(a), eGFR y comorbilidades. Gratuita para cardiólogos de Venezuela.">
-    <meta name="keywords" content="riesgo cardiovascular, SCORE2, colesterol, LDL, HDL, Lp(a), eGFR, cardiología, prevención, dislipidemia">
+    <title>CardioScore — Calculadora de Riesgo Cardiovascular</title>
+    <meta name="description" content="CardioScore: calculadora clínica de riesgo cardiovascular con modelo calibrado basado en factores de SCORE2 y PCE 2013 (guías ESC 2021), perfil lipídico, Lp(a), eGFR y comorbilidades. Gratuita para cardiólogos de Venezuela.">
+    <meta name="keywords" content="cardioscore, riesgo cardiovascular, SCORE2, colesterol, LDL, HDL, Lp(a), eGFR, cardiología, prevención, dislipidemia">
     <meta name="author" content="MatsonSoft · Postgrado de Cardiología, Hospital Ruiz y Páez">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#1e3a8a">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="canonical" href="https://riesgo.matsonsoft.com/">
+    <link rel="canonical" href="https://cardioscore.matsonsoft.com/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_VE">
-    <meta property="og:site_name" content="Calculadora de Riesgo Cardiovascular">
-    <meta property="og:title" content="Calculadora de Riesgo Cardiovascular">
-    <meta property="og:description" content="Calculadora de riesgo cardiovascular basada en SCORE2 / PCE 2013, gratuita para cardiólogos de Venezuela.">
-    <meta property="og:url" content="https://riesgo.matsonsoft.com/">
-    <meta property="og:image" content="https://riesgo.matsonsoft.com/og-image.png">
+    <meta property="og:site_name" content="CardioScore">
+    <meta property="og:title" content="CardioScore - MatsonSoft">
+    <meta property="og:description" content="CardioScore: modelo calibrado de riesgo cardiovascular basado en factores de SCORE2 y PCE 2013, gratuito para cardiólogos de Venezuela.">
+    <meta property="og:url" content="https://cardioscore.matsonsoft.com/">
+    <meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Calculadora de Riesgo Cardiovascular">
-    <meta name="twitter:description" content="Calculadora de riesgo cardiovascular basada en SCORE2 / PCE 2013, gratuita para cardiólogos de Venezuela.">
-    <meta name="twitter:image" content="https://riesgo.matsonsoft.com/og-image.png">
+    <meta name="twitter:title" content="CardioScore - MatsonSoft">
+    <meta name="twitter:description" content="CardioScore: modelo calibrado de riesgo cardiovascular basado en factores de SCORE2 y PCE 2013, gratuito para cardiólogos de Venezuela.">
+    <meta name="twitter:image" content="https://cardioscore.matsonsoft.com/og-image.png">
 
     <!-- Datos estructurados -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Calculadora de Riesgo Cardiovascular",
+      "name": "CardioScore",
       "applicationCategory": "HealthApplication",
       "operatingSystem": "Web",
-      "description": "Calculadora clínica de riesgo cardiovascular basada en SCORE2 / PCE 2013 (guías ESC 2021), con perfil lipídico, Lp(a), eGFR y comorbilidades.",
+      "description": "CardioScore: calculadora clínica de riesgo cardiovascular con modelo calibrado basado en factores de SCORE2 y PCE 2013 (guías ESC 2021), perfil lipídico, Lp(a), eGFR y comorbilidades.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "publisher": { "@type": "Organization", "name": "Hospital Ruiz y Páez" }
+      "publisher": { "@type": "Organization", "name": "MatsonSoft" }
     }
     </script>
 
     <!-- Chart.js (versión pineada + defer: solo se usa al calcular) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuente Inter: preconnect + link (evita @import bloqueante dentro de <style>) -->
+    <!-- Fuente Montserrat: preconnect + link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
 
     <!-- PostHog analytics (privacidad primero: sin autocapture, sin session replay,
          persistence 'memory' -> NO usa localStorage ni cookies; solo eventos explícitos) -->
@@ -66,7 +66,7 @@
         });
     </script>
 <style>
-body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif; }
+body { font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif; }
 .form-input, .form-select { width:100%; padding:8px 10px; border:1px solid #cbd5e1; border-radius:8px; background:#fff; font-size:14px; color:#0f172a; }
 .form-input:focus, .form-select:focus { outline:2px solid #2563eb; outline-offset:1px; border-color:#2563eb; }
 .input-invalid { border-color:#dc2626 !important; box-shadow:0 0 0 1px #dc2626; }
@@ -105,7 +105,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 @media print {
             @page {
                 size: letter portrait;
-                margin: 6mm 7mm; 
+                margin: 0; 
             }
             
             body, html {
@@ -130,9 +130,10 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                    reparte espacio NEGATIVO y las secciones se solapan. El pie se ancla
                    abajo con margin-top:auto en su contenedor (ver firma/footer). */
                 width: 100% !important;
-                height: 100% !important;
+                height: 100vh !important;
                 box-sizing: border-box !important;
-                font-family: 'Inter', sans-serif;
+                padding: 6mm 10mm !important;
+                font-family: 'Montserrat', sans-serif;
                 background-color: white;
             }
 
@@ -164,6 +165,12 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             .print-table { width: 100%; border-collapse: collapse; font-size: 8pt; }
             .print-table th { background: #f1f5f9 !important; padding: 3px 4px; text-align: left; font-weight: 700; border-bottom: 1px solid #cbd5e1; }
             .print-table td { padding: 3px 4px; border-bottom: 1px solid #e2e8f0; }
+
+            /* En móvil 100vh es el alto de pantalla, no del papel — dejamos fluir */
+            @media (max-width:767px) {
+                .print-page { height: auto !important; min-height: 100vh !important; }
+                body, html { overflow: visible !important; }
+            }
         }
 </style>
 
@@ -171,14 +178,14 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 <body class="text-slate-800 antialiased">
 
     <!-- HEADER WEB -->
-    <header class="bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-900 text-white py-5 px-6 shadow-md no-print border-b border-blue-800">
+    <header class="bg-gradient-to-r from-blue-950 via-blue-900/80 to-slate-900 text-white py-5 px-6 shadow-md no-print border-b border-blue-800">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-4">
                 <img src="favicon.svg" alt="" width="48" height="48" class="w-12 h-12 flex-shrink-0 drop-shadow-lg">
                 <div class="text-center md:text-left">
-                    <h1 class="text-lg md:text-xl font-bold tracking-tight uppercase leading-tight">Calculadora de Riesgo Cardiovascular</h1>
+                    <h1 class="text-lg md:text-xl font-bold tracking-tight uppercase leading-tight">CardioScore</h1>
                     <p class="text-[13px] text-blue-100 font-semibold mt-0.5">Herramienta gratuita para cardiólogos de Venezuela</p>
-                    <p class="text-[10px] text-slate-400 mt-0.5">Postgrado de Cardiología · Hospital Ruiz y Páez · Ciudad Bolívar, Venezuela</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5"><a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition">MatsonSoft</a> · Postgrado de Cardiología, Hospital Ruiz y Páez · Ciudad Bolívar, Venezuela</p>
                 </div>
             </div>
         </div>
@@ -208,7 +215,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 </div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">PAS (mmHg)</label><input type="number" id="sbp" value="145" class="form-input"></div>
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Peso (kg)</label><input type="number" id="weight" value="88" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Estatura (m)</label><input type="number" id="height" value="1.72" step="0.01" class="form-input"></div>
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Estatura (cm)</label><input type="number" id="height" value="172" class="form-input"></div>
                 </div>
             </details>
 
@@ -317,7 +324,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         <!-- ESTADO VACÍO (antes del primer cálculo) -->
         <div id="introCard" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
             <div class="max-w-lg mx-auto">
-                <h2 class="text-lg font-bold text-slate-800">Estime el riesgo cardiovascular de su paciente</h2>
+                <h2 class="text-lg font-bold text-slate-800">CardioScore — Estime el riesgo cardiovascular de su paciente</h2>
                 <p class="text-sm text-slate-500 mt-2">Complete los datos del formulario y presione <span class="font-semibold text-blue-700">Calcular Riesgo</span>. Obtendrá el riesgo cardiovascular a 10 años, la meta de LDL y un plan de acción.</p>
                 <ol class="text-left text-sm text-slate-600 mt-5 space-y-1 max-w-xs mx-auto list-decimal list-inside">
                     <li>Ingrese los datos clínicos y de laboratorio</li>
@@ -332,7 +339,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
                 <p id="w_narrativa" class="text-[15px] text-slate-800 leading-relaxed font-medium">-</p>
             </div>
-            <div id="scorePanel" class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-xl shadow-md p-6 text-center border border-blue-800">
+            <div id="scorePanel" class="bg-gradient-to-r from-blue-900 to-blue-950 text-white rounded-xl shadow-md p-6 text-center border border-blue-800">
                 <h2 class="text-xl font-black uppercase tracking-widest text-blue-200 mb-4 border-b border-blue-700/50 pb-2 inline-block">Cálculo de SCORE PREVENT</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="bg-white/10 p-3 rounded-lg"><span class="block text-[11px] uppercase text-blue-300 mb-1">Riesgo ECV Total (10a)</span><span id="w_prev_total" class="text-3xl font-bold">-</span></div>
@@ -378,11 +385,11 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                                 <div class="h-[180px]"><canvas id="chartLpa"></canvas></div>
                             </div>
                             <div class="text-sm space-y-3 flex flex-col justify-center">
-                                <div class="p-3 bg-indigo-50 border border-indigo-100 rounded-lg flex justify-between items-center">
-                                    <span class="font-semibold text-indigo-900">Infarto Sin Lp(a):</span> <span id="w_inf_sin" class="font-bold text-indigo-700 text-lg">-</span>
+                                <div class="p-3 bg-slate-100 border border-slate-200 rounded-lg flex justify-between items-center">
+                                    <span class="font-semibold text-slate-800">Infarto Sin Lp(a):</span> <span id="w_inf_sin" class="font-bold text-slate-700 text-lg">-</span>
                                 </div>
-                                <div class="p-3 bg-rose-50 border border-rose-100 rounded-lg flex justify-between items-center">
-                                    <span class="font-semibold text-rose-900">Infarto Con Lp(a):</span> <span id="w_inf_con" class="font-bold text-rose-700 text-lg">-</span>
+                                <div class="p-3 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
+                                    <span class="font-semibold text-red-800">Infarto Con Lp(a):</span> <span id="w_inf_con" class="font-bold text-red-700 text-lg">-</span>
                                 </div>
                             </div>
                         </div>
@@ -398,7 +405,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         <div class="space-y-3 text-sm">
                             <div class="flex justify-between p-3 bg-slate-50 border border-slate-100 rounded-lg"><span class="font-semibold text-slate-600 uppercase">TFG (CKD-EPI)</span><span id="w_tfg" class="font-black text-slate-800">-</span></div>
                             <div class="flex justify-between p-3 bg-blue-50 text-blue-900 rounded-lg border border-blue-200"><span class="font-bold">Meta LDL</span><span id="w_meta" class="font-black text-lg">-</span></div>
-                            <div class="flex justify-between p-3 bg-indigo-50 text-indigo-900 rounded-lg border border-indigo-200"><span class="font-bold">Reducción LDL Necesaria</span><span id="w_strat_pct" class="font-black text-lg">-</span></div>
+                            <div class="flex justify-between p-3 bg-slate-100 text-slate-800 rounded-lg border border-slate-200"><span class="font-bold">Reducción LDL Necesaria</span><span id="w_strat_pct" class="font-black text-lg">-</span></div>
                             <div class="p-3 bg-emerald-50 text-emerald-900 rounded-lg border border-emerald-200">
                                 <span class="block font-bold mb-1 text-xs uppercase">Beneficio Clínico Esperado:</span>
                                 <span id="w_strat_improv" class="font-medium">-</span>
@@ -413,7 +420,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         </div>
         </div>
         <footer class="no-print mt-6 pt-4 border-t border-slate-200 text-center xl:col-span-5">
-            <p class="text-[11px] text-slate-500 leading-relaxed">Modelo de riesgo basado en SCORE2 / PCE 2013 (guías ESC 2021)<br class="md:hidden"> · Versión 1.0 · 2026</p>
+            <p class="text-[11px] text-slate-500 leading-relaxed">CardioScore · Modelo de riesgo basado en SCORE2 / PCE 2013 (guías ESC 2021)<br class="md:hidden"> · Versión 1.0 · 2026</p>
             <p class="text-[11px] text-slate-500 mt-2 leading-relaxed max-w-2xl mx-auto">Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.</p>
             <button type="button" onclick="abrirAcerca()" class="mt-4 inline-flex items-center justify-center min-h-[44px] px-6 py-2 text-[13px] font-semibold text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition">Más información</button>
         </footer>
@@ -429,7 +436,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div style="display: flex; align-items: center; gap: 9px;">
                 <img src="favicon.svg" alt="" width="28" height="28">
                 <div>
-                    <h1 style="font-size: 12.5pt; margin: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #0f172a;">Informe de Riesgo Cardiovascular</h1>
+                    <h1 style="font-size: 12.5pt; margin: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #0f172a;">CardioScore — Informe de Riesgo Cardiovascular</h1>
                     <p style="margin: 1px 0 0; font-size: 7pt; color: #475569;">Referencia: ESC 2021 / AHA · Estimación orientativa, no sustituye el juicio clínico</p>
                 </div>
             </div>
@@ -607,7 +614,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <span>Firma y sello: ______________________________</span>
             </div>
             <p style="margin-top: 5px; padding-top: 4px; border-top: 1px solid #cbd5e1; font-size: 7pt; color: #64748b; text-align: center;">
-                MatsonSoft × Postgrado de Cardiología · Hospital Ruiz y Páez · riesgo.matsonsoft.com<br>
+                CardioScore · Creada por MatsonSoft en colaboración con el Postgrado de Cardiología, Hospital Ruiz y Páez · cardioscore.matsonsoft.com<br>
                 Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.
             </p>
         </div>
@@ -634,8 +641,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         if (window.posthog) {
             const utm = new URLSearchParams(location.search);
             posthog.register_once({
-                app: 'calculadora-riesgo-cv',
-                environment: location.hostname === 'riesgo.matsonsoft.com' ? 'production' : 'local',
+                app: 'CardioScore',
+                environment: location.hostname === 'cardioscore.matsonsoft.com' ? 'production' : 'local',
                 referrer: document.referrer || '(directo)',
                 utm_source: utm.get('utm_source'), utm_medium: utm.get('utm_medium'), utm_campaign: utm.get('utm_campaign'),
                 locale: document.documentElement.lang,
@@ -655,7 +662,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             const hdl = parseFloat(document.getElementById('hdl').value) || 0;
             document.getElementById('nohdl').value = Math.max(0, tc - hdl);
             const weight = parseFloat(document.getElementById('weight').value) || 0;
-            const height = parseFloat(document.getElementById('height').value) || 1;
+            const height = (parseFloat(document.getElementById('height').value) || 100) / 100;
             const imc = weight / (height * height);
             const imcEl = document.getElementById('imc_disp');
             imcEl.value = imc.toFixed(1);
@@ -667,7 +674,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
         // Rangos válidos de entrada [min, max]; usados en validación y límites HTML.
         const RANGES = {
-            age:[18,100], sbp:[70,300], weight:[20,400], height:[0.5,2.3],
+            age:[18,100], sbp:[70,300], weight:[20,400], height:[50,250],
             tc:[80,600], hdl:[15,120], ldl:[10,400], tg:[20,2000],
             glucose:[40,600], hba1c:[3,20], lpa:[0,300], creatinine:[0.2,15], acr:[0,3000]
         };
@@ -748,7 +755,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 sbp: num('sbp'), tc: num('tc'), hdl: num('hdl'), ldl: num('ldl'),
                 tg: num('tg'), glucose: num('glucose'), hba1c: num('hba1c'),
                 lpa: num('lpa') || 0, cr: num('creatinine'), weight: num('weight'),
-                height: num('height'), acr: num('acr'),
+                height: num('height') / 100, acr: num('acr'),
                 sca: sel('sca_status'), eva: sel('eva_status'), dm: sel('dm_status'),
                 erc: sel('erc_status'), hf: sel('hf_status'),
                 subclinic: sel('subclinic_status'), fragile: sel('fragile_status')
@@ -899,7 +906,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
             let cHtml = "", cpHtml = "";
             contribuciones.forEach(c => {
-                let colorWeb = c.p || c.v <= 0 ? "text-emerald-600" : "text-rose-600";
+                let colorWeb = c.p || c.v <= 0 ? "text-emerald-600" : "text-red-600";
                 let sign = c.p || c.v <= 0 ? "-" : "+";
                 let val = Math.abs(c.v).toFixed(1);
                 cHtml += `<div class="flex justify-between items-center bg-slate-50 p-2 border border-slate-100 rounded"><span>${c.f}:</span> <strong class="${colorWeb} text-sm">${sign}${val}%</strong></div>`;
@@ -919,7 +926,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             document.getElementById('p_paciente').innerText = i.patientName || '______________________________';
             document.getElementById('p_medico').innerText = i.doctorName || '______________________________';
             document.getElementById('p_smoker').innerText = i.smoker === 'yes' ? 'Fumador Activo' : 'No Fumador';
-            document.getElementById('p_antrop').innerText = `${i.weight} kg / ${i.height} m`;
+            document.getElementById('p_antrop').innerText = `${i.weight} kg / ${i.height * 100} cm`;
             document.getElementById('p_imc').innerText = imc.toFixed(1);
             document.getElementById('p_tc').innerText = i.tc;
             document.getElementById('p_ldl').innerText = i.ldl;
@@ -1019,7 +1026,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             age:'Edad del paciente en años. Rango válido: 18–100.',
             sbp:'Presión arterial sistólica en mmHg. Óptimo <120, hipertensión ≥140.',
             weight:'Peso corporal en kg.',
-            height:'Estatura en metros (ej. 1.72).',
+            height:'Estatura en centímetros (ej. 170).',
             tc:'Colesterol total en mg/dL. Óptimo <190.',
             hdl:'Colesterol HDL ("bueno") en mg/dL. Cuanto mayor, mejor.',
             ldl:'Colesterol LDL ("malo") en mg/dL. Objetivo según riesgo.',
@@ -1197,8 +1204,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             updComorb();
         }
 
-        // Al cargar: foco en el primer campo y tarjeta de bienvenida (sin cálculo automático).
-        document.getElementById('age').focus({ preventScroll: true });
+        // Al cargar: foco en el primer campo (solo desktop, evita teclado en móvil) y tarjeta de bienvenida.
+        if (!window.matchMedia('(max-width:767px)').matches) document.getElementById('age').focus({ preventScroll: true });
         document.getElementById('introCard').classList.remove('hidden');
     </script>
 
@@ -1209,9 +1216,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <h3 id="acercaTitulo" class="text-base font-bold uppercase tracking-wide text-slate-800 mb-5">Acerca de</h3>
 
             <div class="mb-5">
-                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Alianza académica</p>
-                <p class="text-[15px] text-slate-800 font-semibold leading-snug"><a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-blue-600 hover:underline">MatsonSoft</a> × Postgrado de Cardiología</p>
-                <p class="text-[12px] text-slate-500 mt-0.5">Hospital Ruiz y Páez · Venezuela</p>
+                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Creada por</p>
+                <p class="text-[15px] text-slate-800 font-semibold leading-snug"><a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-blue-600 hover:underline">MatsonSoft</a></p>
+                <p class="text-[12px] text-slate-500 mt-0.5">En colaboración con el Postgrado de Cardiología · Hospital Ruiz y Páez · Venezuela</p>
             </div>
 
             <div class="mb-5 rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3">
@@ -1222,7 +1229,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             </div>
             <div class="border-t border-slate-100 pt-4">
                 <p class="text-[12px] text-slate-600">Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" class="text-blue-600 font-semibold hover:underline">CC BY-NC-SA 4.0</a></p>
-                <p class="text-[12px] text-slate-600 mt-1"><a href="https://github.com/MatsonSoft/calculadora-riesgo-cv" target="_blank" rel="noopener" class="text-blue-600 font-semibold hover:underline">Código abierto en GitHub</a></p>
+                <p class="text-[12px] text-slate-600 mt-1"><a href="https://github.com/MatsonSoft/CardioScore" target="_blank" rel="noopener" class="text-blue-600 font-semibold hover:underline">Código abierto en GitHub</a></p>
             </div>
             <button type="button" onclick="cerrarAcerca()" class="mt-6 w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-md shadow text-sm uppercase tracking-wider transition">Cerrar</button>
         </div>

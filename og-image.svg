@@ -52,8 +52,8 @@
   </g>
 
   <!-- Textos -->
-  <text x="560" y="252" font-family="'Segoe UI','Inter',sans-serif" font-size="58" font-weight="800" fill="#ffffff">Calculadora de Riesgo</text>
-  <text x="560" y="318" font-family="'Segoe UI','Inter',sans-serif" font-size="58" font-weight="800" fill="#ffffff">Cardiovascular</text>
-  <text x="562" y="372" font-family="'Segoe UI','Inter',sans-serif" font-size="24" font-weight="500" fill="#c7d2fe">SCORE2 · Perfil lipídico · Lp(a) · eGFR</text>
-  <text x="562" y="560" font-family="'Segoe UI','Inter',sans-serif" font-size="20" font-weight="600" fill="#94a3b8">Hospital Ruiz y Páez</text>
+  <text x="560" y="268" font-family="'Segoe UI','Inter',sans-serif" font-size="64" font-weight="800" fill="#ffffff">CardioScore</text>
+  <text x="562" y="328" font-family="'Segoe UI','Inter',sans-serif" font-size="26" font-weight="500" fill="#c7d2fe">Calculadora de Riesgo Cardiovascular</text>
+  <text x="562" y="372" font-family="'Segoe UI','Inter',sans-serif" font-size="22" font-weight="500" fill="#a5b4fc">SCORE2 · Perfil lipídico · Lp(a) · eGFR</text>
+  <text x="562" y="560" font-family="'Segoe UI','Inter',sans-serif" font-size="20" font-weight="600" fill="#94a3b8">MatsonSoft × Hospital Ruiz y Páez</text>
 </svg>
