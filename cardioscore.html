@@ -122,34 +122,29 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
             .no-print { display: none !important; }
             
-            /* Contenedor principal que forza 1 página */
+            /* Contenedor principal: flujo natural, sin vh (en móvil 100vh = pantalla, no página) */
             .print-page {
-                display: flex !important;
-                flex-direction: column;
-                /* SIN justify-content: space-between: con contenido > 1 hoja, flexbox
-                   reparte espacio NEGATIVO y las secciones se solapan. El pie se ancla
-                   abajo con margin-top:auto en su contenedor (ver firma/footer). */
+                display: block !important;
                 width: 100% !important;
-                height: 100vh !important;
                 box-sizing: border-box !important;
                 padding: 6mm 10mm !important;
                 font-family: 'Montserrat', sans-serif;
                 background-color: white;
             }
 
-            .print-section { margin-bottom: 5px; }
+            .print-section { margin-bottom: 4px; }
             .print-section-title {
-                font-size: 9pt; font-weight: 800; color: #1e293b;
-                border-bottom: 2px solid #e2e8f0; margin-bottom: 4px; padding-bottom: 1px; text-transform: uppercase;
+                font-size: 8.5pt; font-weight: 800; color: #1e293b;
+                border-bottom: 2px solid #e2e8f0; margin-bottom: 3px; padding-bottom: 1px; text-transform: uppercase;
             }
             
-            .print-box { background: #f8fafc !important; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 8px; }
+            .print-box { background: #f8fafc !important; border: 1px solid #e2e8f0; border-radius: 5px; padding: 4px 6px; }
             .print-box-highlight { background: #eff6ff !important; border: 1px solid #bfdbfe; }
             .print-box-red { background: #fef2f2 !important; border: 1px solid #fecaca; }
             
-            .print-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-            .print-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-            .print-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+            .print-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+            .print-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+            .print-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
             
             .print-label { font-size: 7pt; color: #64748b; font-weight: 700; text-transform: uppercase; }
             .print-value { font-size: 9pt; color: #0f172a; font-weight: 700; margin-top: 2px; }
@@ -427,12 +422,12 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
     <div class="hidden print-page">
         
         <!-- HEADER (diseñado para impresión B/N: sin fondos oscuros, estructura por bordes) -->
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; margin-bottom: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid #0f172a; padding-bottom: 3px; margin-bottom: 4px;">
             <div style="display: flex; align-items: center; gap: 9px;">
                 <img src="favicon.svg" alt="" width="28" height="28">
                 <div>
-                    <h1 style="font-size: 12.5pt; margin: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #0f172a;">CardioScore — Informe de Riesgo Cardiovascular</h1>
-                    <p style="margin: 1px 0 0; font-size: 7pt; color: #475569;">Referencia: ESC 2021 / AHA · Estimación orientativa, no sustituye el juicio clínico</p>
+                    <h1 style="font-size: 11pt; margin: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #0f172a;">CardioScore — Informe de Riesgo Cardiovascular</h1>
+                    <p style="margin: 1px 0 0; font-size: 6.5pt; color: #475569;">Referencia: ESC 2021 / AHA · Estimación orientativa, no sustituye el juicio clínico</p>
                 </div>
             </div>
             <p style="margin: 0; font-size: 8pt; font-weight: 700; color: #0f172a;">Fecha: <span id="p_fecha">-</span></p>
@@ -443,7 +438,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div style="display: flex; flex-direction: column;">
                 <div class="print-section-title">Datos del Paciente</div>
                 <div class="print-box" style="flex: 1;">
-                    <div style="font-size: 8pt; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-bottom: 5px;">
+                    <div style="font-size: 8pt; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 3px; margin-bottom: 3px;">
                         Paciente: <span id="p_paciente" class="font-bold">______________________________</span>
                     </div>
                     <div class="print-grid-2">
@@ -484,13 +479,13 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div style="display: flex; flex-direction: column;">
                 <div class="print-section-title">I. Estratificación y Metas</div>
                 <div class="print-box" style="flex: 1;">
-                    <div style="margin-bottom: 5px;">
+                    <div style="margin-bottom: 3px;">
                         <span class="print-label">Criterio Clínico:</span> <span class="print-text-sm font-bold" id="p_comorb">-</span>
                     </div>
-                    <div style="margin-bottom: 5px;">
+                    <div style="margin-bottom: 3px;">
                         <span class="print-label">Condiciones:</span> <span class="print-text-sm" id="p_condiciones">-</span>
                     </div>
-                    <div style="margin-bottom: 6px;">
+                    <div style="margin-bottom: 4px;">
                         <span class="print-label">TFG (CKD-EPI):</span> <span class="print-text-sm font-bold" id="p_tfg">-</span>
                     </div>
                     <div class="print-grid-2">
@@ -508,17 +503,17 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div style="display: flex; flex-direction: column;">
                 <div class="print-section-title">II. Score PREVENT (Calculado)</div>
                 <div class="print-box" style="flex: 1;">
-                    <div style="text-align:center; margin-bottom:5px;">
+                    <div style="text-align:center; margin-bottom:3px;">
                         <span class="print-label">Categoría:</span> <span class="font-black" id="p_band" style="background: #0f172a; color: #fff; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.5px;">-</span>
                     </div>
                     <!-- Mini-gauge B/N: relleno negro = riesgo; marcas grises en umbrales 5/10/20 -->
-                    <div style="position: relative; height: 11px; border: 1px solid #0f172a; border-radius: 5px; background: #fff; overflow: hidden; margin-bottom: 2px;">
+                    <div style="position: relative; height: 9px; border: 1px solid #0f172a; border-radius: 5px; background: #fff; overflow: hidden; margin-bottom: 1px;">
                         <div id="p_gauge" style="height: 100%; background: #0f172a; width: 0%;"></div>
                         <span style="position: absolute; top: 0; bottom: 0; left: 5%; width: 1px; background: #94a3b8;"></span>
                         <span style="position: absolute; top: 0; bottom: 0; left: 10%; width: 1px; background: #94a3b8;"></span>
                         <span style="position: absolute; top: 0; bottom: 0; left: 20%; width: 1px; background: #94a3b8;"></span>
                     </div>
-                    <div style="position: relative; height: 9px; font-size: 6pt; color: #475569; margin-bottom: 6px;" aria-hidden="true">
+                    <div style="position: relative; height: 7px; font-size: 5.5pt; color: #475569; margin-bottom: 4px;" aria-hidden="true">
                         <span style="position: absolute; left: 0;">0</span>
                         <span style="position: absolute; left: 5%; transform: translateX(-50%);">5</span>
                         <span style="position: absolute; left: 10%; transform: translateX(-50%);">10</span>
@@ -566,7 +561,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div style="display: flex; flex-direction: column;">
                 <div class="print-section-title">IV. Modulación por Lp(a)</div>
                 <div class="print-box" style="border: 1.5px solid #0f172a; flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                    <div class="print-label" style="margin-bottom: 6px; color: #0f172a; text-align: center;">Riesgo de Infarto Miocárdico Aislado</div>
+                    <div class="print-label" style="margin-bottom: 4px; color: #0f172a; text-align: center;">Riesgo de Infarto Miocárdico Aislado</div>
                     <div class="print-grid-2" style="text-align: center; gap: 6px;">
                         <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px;">
                             <div class="print-label">Sin Lp(a)</div>
@@ -577,7 +572,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                             <div class="print-value-lg" id="p_inf_con">-</div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 6px; border-top: 1px dashed #cbd5e1; padding-top: 4px;">
+                    <div style="text-align: center; margin-top: 4px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
                         <span class="print-label">Incremento por Lp(a):</span> <span class="font-bold" id="p_inf_delta">-</span>
                     </div>
                 </div>
@@ -602,13 +597,13 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 </div>
             </div>
         </div>
-        <!-- Firma + pie anclados al fondo con margin-top:auto (nunca se solapan) -->
-        <div style="margin-top: auto;">
-            <div style="margin-top: 12px; display: flex; justify-content: space-between; font-size: 8pt; color: #334155;">
+        <!-- Firma + pie -->
+        <div style="margin-top: 10px;">
+            <div style="margin-top: 8px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #334155;">
                 <span>Médico tratante: <span id="p_medico">______________________________</span></span>
                 <span>Firma y sello: ______________________________</span>
             </div>
-            <p style="margin-top: 5px; padding-top: 4px; border-top: 1px solid #cbd5e1; font-size: 7pt; color: #64748b; text-align: center;">
+            <p style="margin-top: 3px; padding-top: 3px; border-top: 1px solid #cbd5e1; font-size: 6.5pt; color: #64748b; text-align: center;">
                 CardioScore · Creada por MatsonSoft en colaboración con el Postgrado de Cardiología, Hospital Ruiz y Páez · cardioscore.matsonsoft.com<br>
                 Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.
             </p>
