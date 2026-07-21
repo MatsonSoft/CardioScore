@@ -19,16 +19,16 @@
     <meta property="og:title" content="CardioScore - MatsonSoft">
     <meta property="og:description" content="CardioScore: modelo calibrado de riesgo cardiovascular basado en factores de SCORE2 y PCE 2013, gratuito para cardiólogos de Venezuela.">
     <meta property="og:url" content="https://cardioscore.matsonsoft.com/">
-    <meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+    <meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:type" content="image/svg+xml">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CardioScore - MatsonSoft">
     <meta name="twitter:description" content="CardioScore: modelo calibrado de riesgo cardiovascular basado en factores de SCORE2 y PCE 2013, gratuito para cardiólogos de Venezuela.">
-    <meta name="twitter:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+    <meta name="twitter:image" content="https://cardioscore.matsonsoft.com/og-image.svg">
 
     <!-- Datos estructurados -->
     <script type="application/ld+json">
@@ -183,238 +183,244 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto p-4 flex flex-col gap-4 xl:grid xl:grid-cols-5 xl:gap-5 xl:items-start no-print">
-        <!-- FORMULARIO WEB -->
-        <div class="xl:col-span-2">
-        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
-            <h2 class="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-2 uppercase tracking-wide">
-                <span class="w-2.5 h-4 bg-blue-600 rounded-sm"></span>Datos del Paciente
-            </h2>
+    <main class="max-w-7xl mx-auto p-4 space-y-6 no-print">
 
-            <!-- Identificación (opcional, solo para el PDF): antes de los datos clínicos -->
-            <div class="mb-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- BANNER INFORMATIVO: qué es CardioScore -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-lg font-bold text-slate-900">CardioScore — Calculadora Clínica de Riesgo Cardiovascular</h2>
+                <p class="text-sm text-slate-600 mt-2 max-w-2xl mx-auto">
+                    Herramienta gratuita para cardiólogos de Venezuela, creada por <strong class="text-slate-800">MatsonSoft</strong> en colaboración con el <strong class="text-slate-800">Postgrado de Cardiología, Hospital Ruiz y Páez</strong>. Estima el riesgo CV a 10 años, metas de LDL y estrategia hipolipemiante basado en factores de SCORE2 y PCE 2013.
+                </p>
+            </div>
+        </div>
+
+        <!-- DISCLAIMER (arriba, no en footer ni modal) -->
+        <div class="bg-amber-50 border border-amber-200 rounded-lg px-5 py-3">
+            <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>CardioScore</strong> · Modelo de riesgo basado en SCORE2 / PCE 2013 (guías ESC 2021) y PREVENT (AHA) · Versión 1.0 · 2026.
+                No es la ecuación oficial SCORE2; los resultados son estimaciones orientativas.
+                Herramienta de apoyo clínico. No sustituye el juicio profesional ni las guías vigentes.
+            </p>
+        </div>
+
+        <!-- FORMULARIO DE DATOS -->
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2 uppercase tracking-wide">
+                    <span class="w-2.5 h-4 bg-blue-600 rounded-sm inline-block"></span>Datos del Paciente
+                </h2>
+                <button type="button" onclick="limpiar()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-4 rounded-md shadow text-xs uppercase tracking-wider transition">Reiniciar</button>
+            </div>
+
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="patient_name">Nombre del Paciente</label><input type="text" id="patient_name" class="form-input" placeholder="Opcional — solo para el PDF" autocomplete="off"></div>
                 <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="doctor_name">Médico Tratante</label><input type="text" id="doctor_name" class="form-input" placeholder="Opcional — solo para el PDF" autocomplete="off"></div>
             </div>
 
-            <details open class="mb-3 border border-slate-200 rounded-lg overflow-hidden">
-                <summary class="cursor-pointer select-none bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 uppercase tracking-wide">1. Datos Clínicos</summary>
-                <div class="p-4 grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Edad (Años)</label><input type="number" id="age" value="58" class="form-input"></div>
-                    <div class="flex gap-3 col-span-full order-first md:contents">
-<div style="flex:1;min-width:0"><label class="block text-xs font-semibold text-slate-600 mb-1">Sexo Biológico</label><div class="chip-group" role="radiogroup" aria-label="Sexo Biológico"><label class="chip"><input type="radio" name="sex" value="male" checked> M</label><label class="chip"><input type="radio" name="sex" value="female"> F</label></div></div>
-<div style="flex:1;min-width:0"><label class="block text-xs font-semibold text-slate-600 mb-1">Tabaquismo</label><div class="chip-group" role="radiogroup" aria-label="Tabaquismo"><label class="chip"><input type="radio" name="smoker" value="no" checked> No</label><label class="chip"><input type="radio" name="smoker" value="yes"> Sí</label></div></div>
-</div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">PAS (mmHg)</label><input type="number" id="sbp" value="145" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Peso (kg)</label><input type="number" id="weight" value="88" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Estatura (cm)</label><input type="number" id="height" value="172" class="form-input"></div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- COLUMNA 1: Datos Clínicos -->
+                <div>
+                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">1. Datos Clínicos</h3>
+                    <div class="space-y-3">
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Edad (Años)</label><input type="number" id="age" value="58" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Sexo Biológico</label><div class="chip-group" role="radiogroup" aria-label="Sexo Biológico"><label class="chip"><input type="radio" name="sex" value="male" checked> M</label><label class="chip"><input type="radio" name="sex" value="female"> F</label></div></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Tabaquismo</label><div class="chip-group" role="radiogroup" aria-label="Tabaquismo"><label class="chip"><input type="radio" name="smoker" value="no" checked> No</label><label class="chip"><input type="radio" name="smoker" value="yes"> Sí</label></div></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">PAS (mmHg)</label><input type="number" id="sbp" value="145" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Peso (kg)</label><input type="number" id="weight" value="88" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Estatura (cm)</label><input type="number" id="height" value="172" class="form-input"></div>
+                    </div>
                 </div>
-            </details>
 
-            <details open class="mb-3 border border-slate-200 rounded-lg overflow-hidden">
-                <summary class="cursor-pointer select-none bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 uppercase tracking-wide">2. Perfil de Laboratorio</summary>
-                <div class="p-4 grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol Total (mg/dL)</label><input type="number" id="tc" value="230" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol HDL (mg/dL)</label><input type="number" id="hdl" value="42" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol LDL (mg/dL)</label><input type="number" id="ldl" value="148" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Creatinina (mg/dL)</label><input type="number" id="creatinine" value="1.25" step="0.01" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Triglicéridos (mg/dL)</label><input type="number" id="tg" value="210" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Glicemia Ayunas (mg/dL)</label><input type="number" id="glucose" value="112" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">HbA1c (%)</label><input type="number" id="hba1c" value="6.6" step="0.1" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Lp(a) (mg/dL)</label><input type="number" id="lpa" value="75" class="form-input"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">ACR (mg/g)</label><input type="number" id="acr" value="55" class="form-input"></div>
-                    <div class="md:col-span-1"><label class="block text-xs font-semibold text-slate-500 mb-1">No-HDL (Calc)</label><input type="number" id="nohdl" class="form-input bg-slate-50" readonly></div>
-                    <div class="md:col-span-1"><label class="block text-xs font-semibold text-slate-500 mb-1">IMC (Calc)</label><input type="number" id="imc_disp" class="form-input bg-slate-50" readonly></div>
+                <!-- COLUMNA 2: Perfil de Laboratorio -->
+                <div>
+                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">2. Perfil de Laboratorio</h3>
+                    <div class="space-y-3">
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol Total (mg/dL)</label><input type="number" id="tc" value="230" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol HDL (mg/dL)</label><input type="number" id="hdl" value="42" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol LDL (mg/dL)</label><input type="number" id="ldl" value="148" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Creatinina (mg/dL)</label><input type="number" id="creatinine" value="1.25" step="0.01" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Triglicéridos (mg/dL)</label><input type="number" id="tg" value="210" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Glicemia Ayunas (mg/dL)</label><input type="number" id="glucose" value="112" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">HbA1c (%)</label><input type="number" id="hba1c" value="6.6" step="0.1" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Lp(a) (mg/dL)</label><input type="number" id="lpa" value="75" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">ACR (mg/g)</label><input type="number" id="acr" value="55" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-500 mb-1">No-HDL (Calc)</label><input type="number" id="nohdl" class="form-input bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-semibold text-slate-500 mb-1">IMC (Calc)</label><input type="number" id="imc_disp" class="form-input bg-slate-50" readonly></div>
+                    </div>
                 </div>
-            </details>
 
-            <details open class="mb-3 border border-slate-200 rounded-lg overflow-hidden">
-                <summary class="cursor-pointer select-none bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 uppercase tracking-wide">3. Comorbilidades y Factores de Riesgo</summary>
-                <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- COLUMNA 3: Comorbilidades -->
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Síndrome Coronario Agudo</label>
-                    <select id="sca_status" class="form-select text-[11px] h-10">
-                        <option value="none">Sin antecedente de síndrome coronario agudo</option>
-                        <option value="ua">Angina inestable</option>
-                        <option value="nstemi">IMSEST</option>
-                        <option value="stemi">IMCEST</option>
-                    </select>
+                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">3. Comorbilidades y Factores de Riesgo</h3>
+                    <div class="space-y-3">
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Síndrome Coronario Agudo</label>
+                            <select id="sca_status" class="form-select text-[11px] h-10 w-full">
+                                <option value="none">Sin antecedente</option>
+                                <option value="ua">Angina inestable</option>
+                                <option value="nstemi">IMSEST</option>
+                                <option value="stemi">IMCEST</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Enfermedad Ateroesclerótica (EVA)</label>
+                            <select id="eva_status" class="form-select text-[11px] h-10 w-full">
+                                <option value="none">Sin EVA clínica</option>
+                                <option value="two_episodes">≥2 episodios de EVA</option>
+                                <option value="one_risk">1er episodio + factores de riesgo</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Diabetes Mellitus</label>
+                            <select id="dm_status" class="form-select text-[11px] h-10 w-full">
+                                <option value="none">Sin DM</option>
+                                <option value="mild">DM bien controlada, sin LOD</option>
+                                <option value="mod">DM sin EVA o LOD grave</option>
+                                <option value="severe_fg">DM + EVA/LOD: FG &lt;45</option>
+                                <option value="severe_acr">DM + EVA/LOD: FG 45-59, ACR 30-300</option>
+                                <option value="severe_prot">DM + EVA/LOD: proteinuria</option>
+                                <option value="severe_multi">DM + EVA/LOD: polimicrovascular</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Enfermedad Renal Crónica</label>
+                            <select id="erc_status" class="form-select text-[11px] h-10 w-full">
+                                <option value="none">Sin ERC</option>
+                                <option value="g3_a1">FG 30-40, ACR &lt;30</option>
+                                <option value="g3a_a2">FG 45-59, ACR 30-300</option>
+                                <option value="g1_a2">FG ≥60, ACR &lt;300</option>
+                                <option value="g4">FG &lt;30</option>
+                                <option value="g3b_a2">FG 30-34, ACR &gt;30</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Hipercolesterolemia Familiar</label>
+                            <select id="hf_status" class="form-select text-[11px] h-10 w-full">
+                                <option value="none">Sin HF</option>
+                                <option value="hf_isolated">HF aislada</option>
+                                <option value="hf_3factors">HF + 3 factores</option>
+                                <option value="hf_eva">HF + evento vascular agudo</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Afectación Subclínica</label>
+                            <select id="subclinic_status" class="form-select text-[11px] h-10 w-full">
+                                <option value="none">Sin afectación</option>
+                                <option value="mod">Calcio-Score 100-300 / estenosis &lt;50%</option>
+                                <option value="sev">Calcio-Score ≥300 / estenosis &gt;50%</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Fragilidad</label>
+                            <select id="fragile_status" class="form-select text-[11px] h-10 w-full">
+                                <option value="no">Paciente robusto</option>
+                                <option value="yes">Frágil / anciano</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Enfermedad Ateroesclerótica (EVA)</label>
-                    <select id="eva_status" class="form-select text-[11px] h-10">
-                        <option value="none">Sin enfermedad ateroesclerótica clínica</option>
-                        <option value="two_episodes">¿Dos o más episodios de EVA?</option>
-                        <option value="one_risk">¿Primer episodio de EVA con factores de riesgo?</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Diabetes Mellitus (DM)</label>
-                    <select id="dm_status" class="form-select text-[11px] h-10">
-                        <option value="none">Sin Diabetes Mellitus</option>
-                        <option value="mild">DM &lt; 10 años, bien controlada, sin LOD ni factores de EVA</option>
-                        <option value="mod">DM sin EVA o LOD grave, que no cumplen criterios de riesgo moderado</option>
-                        <option value="severe_fg">DM con EVA o LOD grave: FG &lt; 45 mL/min/1.73 m²</option>
-                        <option value="severe_acr">DM con EVA o LOD grave: FG 45-59 mL/min/1.73 m² y ACR 30-300 mg/g</option>
-                        <option value="severe_prot">DM con EVA o LOD grave: Proteinuria (ACR > 200 mg/g)</option>
-                        <option value="severe_multi">DM con EVA o LOD grave: Enfermedad polimicrovascular &ge; 3 localizaciones</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Enfermedad Renal Crónica (ERC)</label>
-                    <select id="erc_status" class="form-select text-[11px] h-10">
-                        <option value="none">Sin enfermedad renal crónica</option>
-                        <option value="g3_a1">FG 30-40 mL/min/1.73 m² y ACR &lt; 30mg/g</option>
-                        <option value="g3a_a2">FG 45-59 mL/min/1.73 m² y ACR 30-300 mg/g</option>
-                        <option value="g1_a2">FG &ge; 60 mL/min/1.73 m² y ACR &lt; 300 mg/g</option>
-                        <option value="g4">FG &lt; 30 mL/min/1.73 m²</option>
-                        <option value="g3b_a2">FG 30-34 mL/min/1.73 m² y ACR > 30 mg/g</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Hipercolesterolemia Familiar</label>
-                    <select id="hf_status" class="form-select text-[11px] h-10">
-                        <option value="none">Sin hipercolesterolemia familiar</option>
-                        <option value="hf_isolated">Hipercolesterolemia familiar</option>
-                        <option value="hf_3factors">Hipercolesterolemia familiar + 3 factores asociados</option>
-                        <option value="hf_eva">Hipercolesterolemia familiar + Evento vascular agudo</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Afectación Subclínica</label>
-                    <select id="subclinic_status" class="form-select text-[11px] h-10">
-                        <option value="none">Sin afectación subclínica</option>
-                        <option value="mod">Calcio-Score 100-300 UA / Estenosis vascular &lt; 50%</option>
-                        <option value="sev">Calcio-Score &ge; 300 UA / Estenosis vascular > 50% (3-4 placas)</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Expectativa de Vida / Fragilidad</label>
-                    <select id="fragile_status" class="form-select text-[11px] h-10">
-                        <option value="no">Paciente robusto</option>
-                        <option value="yes">Expectativa de vida limitada / paciente frágil / anciano</option>
-                    </select>
-                </div>
-                </div>
-            </details>
+            </div>
 
             <div id="error_box" role="alert" class="hidden mt-4 p-3 bg-red-50 border border-red-300 text-red-700 text-sm rounded-md"></div>
             <div id="alert_box" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-800 text-sm rounded-md no-print"></div>
 
-            <div id="actionBar" class="mt-5 flex justify-end gap-3 no-print">
-                <button type="button" onclick="limpiar()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-6 rounded-md shadow text-sm uppercase tracking-wider transition max-md:flex-1 max-md:order-2">
-                    Limpiar
-                </button>
-                <button type="button" onclick="ejecutarCalculos(true)" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-md shadow text-sm uppercase tracking-wider transition max-md:w-full max-md:order-1">
-                    Calcular Riesgo
-                </button>
+            <div class="mt-6 text-center">
+                <button type="button" onclick="ejecutarCalculos(true)" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-12 rounded-md shadow text-sm uppercase tracking-wider transition">Calcular Riesgo</button>
             </div>
         </section>
-        </div>
 
-        <div class="xl:col-span-3 flex flex-col gap-5">
-        <!-- ESTADO VACÍO (antes del primer cálculo) -->
-        <div id="introCard" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
-            <div class="max-w-lg mx-auto">
-                <h2 class="text-lg font-bold text-slate-800">CardioScore — Estime el riesgo cardiovascular de su paciente</h2>
-                <p class="text-sm text-slate-500 mt-2">Complete los datos del formulario y presione <span class="font-semibold text-blue-700">Calcular Riesgo</span>. Obtendrá el riesgo cardiovascular a 10 años, la meta de LDL y un plan de acción.</p>
-                <ol class="text-left text-sm text-slate-600 mt-5 space-y-1 max-w-xs mx-auto list-decimal list-inside">
-                    <li>Ingrese los datos clínicos y de laboratorio</li>
-                    <li>Marque las comorbilidades y factores de riesgo</li>
-                    <li>Presione Calcular Riesgo para ver el informe</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- PANELES DE RESULTADO WEB -->
-        <div id="panel_resultados" class="hidden space-y-5" aria-live="polite">
-            <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
-                <p id="w_narrativa" class="text-[15px] text-slate-800 leading-relaxed font-medium">-</p>
-            </div>
-            <div id="scorePanel" class="bg-gradient-to-r from-blue-900 to-blue-950 text-white rounded-xl shadow-md p-6 text-center border border-blue-800">
-                <h2 class="text-xl font-black uppercase tracking-widest text-blue-200 mb-4 border-b border-blue-700/50 pb-2 inline-block">Cálculo de SCORE PREVENT</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-white/10 p-3 rounded-lg"><span class="block text-[11px] uppercase text-blue-300 mb-1">Riesgo ECV Total (10a)</span><span id="w_prev_total" class="text-3xl font-bold">-</span></div>
-                    <div class="bg-white/10 p-3 rounded-lg"><span class="block text-[11px] uppercase text-blue-300 mb-1">Hosp. Insuf. Cardíaca (10a)</span><span id="w_prev_ic" class="text-3xl font-bold">-</span></div>
-                    <div class="bg-black/20 p-3 rounded-lg"><span class="block text-[11px] uppercase text-emerald-400 mb-1">Óptimo ECV Total</span><span id="w_prev_tot_opt" class="text-3xl font-bold text-emerald-400">-</span></div>
-                    <div class="bg-black/20 p-3 rounded-lg"><span class="block text-[11px] uppercase text-emerald-400 mb-1">Óptimo Hosp. IC</span><span id="w_prev_ic_opt" class="text-3xl font-bold text-emerald-400">-</span></div>
-                </div>
-                <div class="mt-4">
-                    <div class="flex justify-between text-[11px] uppercase text-blue-300 mb-1"><span>Categoría de Riesgo</span><span id="w_band" class="font-bold text-white">-</span></div>
-                    <div class="h-3 rounded-full bg-white/15 overflow-hidden relative" role="progressbar" aria-label="Riesgo cardiovascular total a 10 años (umbrales: 5, 10 y 20%)" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                        <div id="w_gauge" class="h-full transition-all" style="width:0%"></div>
-                        <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:5%"></span>
-                        <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:10%"></span>
-                        <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:20%"></span>
-                    </div>
-                    <div class="relative h-3 text-[9px] text-blue-300/70 mt-1" aria-hidden="true">
-                        <span class="absolute" style="left:0">0</span>
-                        <span class="absolute -translate-x-1/2" style="left:5%">5</span>
-                        <span class="absolute -translate-x-1/2" style="left:10%">10</span>
-                        <span class="absolute -translate-x-1/2" style="left:20%">20</span>
-                        <span class="absolute" style="right:0">100%</span>
-                    </div>
-                    <div class="flex flex-wrap justify-center gap-x-3 gap-y-0.5 text-[10px] mt-1.5">
-                        <span class="text-emerald-400 font-semibold">● Bajo &lt;5%</span>
-                        <span class="text-yellow-400 font-semibold">● Moderado 5–10%</span>
-                        <span class="text-orange-400 font-semibold">● Alto 10–20%</span>
-                        <span class="text-red-400 font-semibold">● Muy alto ≥20%</span>
-                    </div>
+        <!-- SECCIÓN DE RESULTADOS -->
+        <div class="flex flex-col gap-5">
+            <!-- ESTADO VACÍO (antes del primer cálculo) -->
+            <div id="introCard" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
+                <div class="max-w-lg mx-auto">
+                    <h2 class="text-lg font-bold text-slate-800">Complete los datos del formulario</h2>
+                    <p class="text-sm text-slate-500 mt-2">Complete los datos clínicos, de laboratorio y comorbilidades arriba, luego presione <span class="font-semibold text-blue-700">Calcular Riesgo</span>.</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 2xl:grid-cols-3 gap-5">
-                <div class="2xl:col-span-2 space-y-5">
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
-                        <h3 class="text-sm font-bold uppercase border-b pb-2 mb-3 text-slate-800">Desglose de Scores Predictivos a 10 Años / PREVENT</h3>
-                        <table class="w-full text-left text-sm mb-5">
-                            <thead><tr class="bg-slate-50 text-slate-600"><th class="p-3 border-b">Compuesto Clínico</th><th class="p-3 border-b text-center">Riesgo Actual</th><th class="p-3 border-b text-center text-emerald-600">Riesgo Óptimo</th></tr></thead>
-                            <tbody id="w_table_body" class="divide-y divide-slate-100"></tbody>
-                        </table>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t pt-5">
-                            <div>
-                                <h4 class="text-xs font-bold text-slate-600 uppercase mb-2">Impacto de la Lp(a) en el riesgo de infarto</h4>
-                                <div class="h-[180px]"><canvas id="chartLpa"></canvas></div>
-                            </div>
-                            <div class="text-sm space-y-3 flex flex-col justify-center">
-                                <div class="p-3 bg-slate-100 border border-slate-200 rounded-lg flex justify-between items-center">
-                                    <span class="font-semibold text-slate-800">Infarto Sin Lp(a):</span> <span id="w_inf_sin" class="font-bold text-slate-700 text-lg">-</span>
+            <!-- PANELES DE RESULTADO WEB -->
+            <div id="panel_resultados" class="hidden space-y-5" aria-live="polite">
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+                    <p id="w_narrativa" class="text-[15px] text-slate-800 leading-relaxed font-medium">-</p>
+                </div>
+                <div id="scorePanel" class="bg-gradient-to-r from-blue-900 to-blue-950 text-white rounded-xl shadow-md p-6 text-center border border-blue-800">
+                    <h2 class="text-xl font-black uppercase tracking-widest text-blue-200 mb-4 border-b border-blue-700/50 pb-2 inline-block">Cálculo de SCORE PREVENT</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white/10 p-3 rounded-lg"><span class="block text-[11px] uppercase text-blue-300 mb-1">Riesgo ECV Total (10a)</span><span id="w_prev_total" class="text-3xl font-bold">-</span></div>
+                        <div class="bg-white/10 p-3 rounded-lg"><span class="block text-[11px] uppercase text-blue-300 mb-1">Hosp. Insuf. Cardíaca (10a)</span><span id="w_prev_ic" class="text-3xl font-bold">-</span></div>
+                        <div class="bg-black/20 p-3 rounded-lg"><span class="block text-[11px] uppercase text-emerald-400 mb-1">Óptimo ECV Total</span><span id="w_prev_tot_opt" class="text-3xl font-bold text-emerald-400">-</span></div>
+                        <div class="bg-black/20 p-3 rounded-lg"><span class="block text-[11px] uppercase text-emerald-400 mb-1">Óptimo Hosp. IC</span><span id="w_prev_ic_opt" class="text-3xl font-bold text-emerald-400">-</span></div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-[11px] uppercase text-blue-300 mb-1"><span>Categoría de Riesgo</span><span id="w_band" class="font-bold text-white">-</span></div>
+                        <div class="h-3 rounded-full bg-white/15 overflow-hidden relative" role="progressbar" aria-label="Riesgo cardiovascular total a 10 años (umbrales: 5, 10 y 20%)" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div id="w_gauge" class="h-full transition-all" style="width:0%"></div>
+                            <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:5%"></span>
+                            <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:10%"></span>
+                            <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:20%"></span>
+                        </div>
+                        <div class="relative h-3 text-[9px] text-blue-300/70 mt-1" aria-hidden="true">
+                            <span class="absolute" style="left:0">0</span>
+                            <span class="absolute -translate-x-1/2" style="left:5%">5</span>
+                            <span class="absolute -translate-x-1/2" style="left:10%">10</span>
+                            <span class="absolute -translate-x-1/2" style="left:20%">20</span>
+                            <span class="absolute" style="right:0">100%</span>
+                        </div>
+                        <div class="flex flex-wrap justify-center gap-x-3 gap-y-0.5 text-[10px] mt-1.5">
+                            <span class="text-emerald-400 font-semibold">● Bajo &lt;5%</span>
+                            <span class="text-yellow-400 font-semibold">● Moderado 5–10%</span>
+                            <span class="text-orange-400 font-semibold">● Alto 10–20%</span>
+                            <span class="text-red-400 font-semibold">● Muy alto ≥20%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 2xl:grid-cols-3 gap-5">
+                    <div class="2xl:col-span-2 space-y-5">
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                            <h3 class="text-sm font-bold uppercase border-b pb-2 mb-3 text-slate-800">Desglose de Scores Predictivos a 10 Años / PREVENT</h3>
+                            <table class="w-full text-left text-sm mb-5">
+                                <thead><tr class="bg-slate-50 text-slate-600"><th class="p-3 border-b">Compuesto Clínico</th><th class="p-3 border-b text-center">Riesgo Actual</th><th class="p-3 border-b text-center text-emerald-600">Riesgo Óptimo</th></tr></thead>
+                                <tbody id="w_table_body" class="divide-y divide-slate-100"></tbody>
+                            </table>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t pt-5">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-600 uppercase mb-2">Impacto de la Lp(a) en el riesgo de infarto</h4>
+                                    <div class="h-[180px]"><canvas id="chartLpa"></canvas></div>
                                 </div>
-                                <div class="p-3 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
-                                    <span class="font-semibold text-red-800">Infarto Con Lp(a):</span> <span id="w_inf_con" class="font-bold text-red-700 text-lg">-</span>
+                                <div class="text-sm space-y-3 flex flex-col justify-center">
+                                    <div class="p-3 bg-slate-100 border border-slate-200 rounded-lg flex justify-between items-center">
+                                        <span class="font-semibold text-slate-800">Infarto Sin Lp(a):</span> <span id="w_inf_sin" class="font-bold text-slate-700 text-lg">-</span>
+                                    </div>
+                                    <div class="p-3 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
+                                        <span class="font-semibold text-red-800">Infarto Con Lp(a):</span> <span id="w_inf_con" class="font-bold text-red-700 text-lg">-</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
-                        <h3 class="text-sm font-bold uppercase border-b pb-2 mb-4 text-slate-800">Contribución de Cada Factor de Riesgo (ASCVD)</h3>
-                        <div id="w_contrib_factors" class="grid grid-cols-2 gap-3 text-xs"></div>
-                    </div>
-                </div>
-                <div class="space-y-5">
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
-                        <h3 class="text-sm font-bold uppercase border-b pb-2 mb-4 text-slate-800">Estrategias y Metas</h3>
-                        <div class="space-y-3 text-sm">
-                            <div class="flex justify-between p-3 bg-slate-50 border border-slate-100 rounded-lg"><span class="font-semibold text-slate-600 uppercase">TFG (CKD-EPI)</span><span id="w_tfg" class="font-black text-slate-800">-</span></div>
-                            <div class="flex justify-between p-3 bg-blue-50 text-blue-900 rounded-lg border border-blue-200"><span class="font-bold">Meta LDL</span><span id="w_meta" class="font-black text-lg">-</span></div>
-                            <div class="flex justify-between p-3 bg-slate-100 text-slate-800 rounded-lg border border-slate-200"><span class="font-bold">Reducción LDL Necesaria</span><span id="w_strat_pct" class="font-black text-lg">-</span></div>
-                            <div class="p-3 bg-emerald-50 text-emerald-900 rounded-lg border border-emerald-200">
-                                <span class="block font-bold mb-1 text-xs uppercase">Beneficio Clínico Esperado:</span>
-                                <span id="w_strat_improv" class="font-medium">-</span>
-                            </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                            <h3 class="text-sm font-bold uppercase border-b pb-2 mb-4 text-slate-800">Contribución de Cada Factor de Riesgo (ASCVD)</h3>
+                            <div id="w_contrib_factors" class="grid grid-cols-2 gap-3 text-xs"></div>
                         </div>
                     </div>
-                    <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition no-print">Copiar Resumen</button>
-                    <button id="btn_pdf_bottom" type="button" onclick="exportarPDF()" disabled class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition disabled:opacity-40 disabled:cursor-not-allowed no-print">Exportar PDF</button>
+                    <div class="space-y-5">
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                            <h3 class="text-sm font-bold uppercase border-b pb-2 mb-4 text-slate-800">Estrategias y Metas</h3>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between p-3 bg-slate-50 border border-slate-100 rounded-lg"><span class="font-semibold text-slate-600 uppercase">TFG (CKD-EPI)</span><span id="w_tfg" class="font-black text-slate-800">-</span></div>
+                                <div class="flex justify-between p-3 bg-blue-50 text-blue-900 rounded-lg border border-blue-200"><span class="font-bold">Meta LDL</span><span id="w_meta" class="font-black text-lg">-</span></div>
+                                <div class="flex justify-between p-3 bg-slate-100 text-slate-800 rounded-lg border border-slate-200"><span class="font-bold">Reducción LDL Necesaria</span><span id="w_strat_pct" class="font-black text-lg">-</span></div>
+                                <div class="p-3 bg-emerald-50 text-emerald-900 rounded-lg border border-emerald-200">
+                                    <span class="block font-bold mb-1 text-xs uppercase">Beneficio Clínico Esperado:</span>
+                                    <span id="w_strat_improv" class="font-medium">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition no-print">Copiar Resumen</button>
+                        <button id="btn_pdf_bottom" type="button" onclick="exportarPDF()" disabled class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition disabled:opacity-40 disabled:cursor-not-allowed no-print">Exportar PDF</button>
+                    </div>
                 </div>
+                <p class="text-center text-[11px] text-slate-500">Estimación orientativa · no sustituye el juicio clínico ni las guías vigentes.</p>
             </div>
-            <p class="text-center text-[11px] text-slate-500">Estimación orientativa · no sustituye el juicio clínico ni las guías vigentes.</p>
         </div>
-        </div>
-        <footer class="no-print mt-6 pt-4 border-t border-slate-200 text-center xl:col-span-5">
-            <p class="text-[11px] text-slate-500 leading-relaxed">CardioScore · Modelo de riesgo basado en SCORE2 / PCE 2013 (guías ESC 2021)<br class="md:hidden"> · Versión 1.0 · 2026</p>
-            <p class="text-[11px] text-slate-500 mt-2 leading-relaxed max-w-2xl mx-auto">Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.</p>
-            <button type="button" onclick="abrirAcerca()" class="mt-4 inline-flex items-center justify-center min-h-[44px] px-6 py-2 text-[13px] font-semibold text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition">Más información</button>
+
+        <footer class="text-center pt-4 border-t border-slate-200">
+            <button type="button" onclick="abrirAcerca()" class="inline-flex items-center justify-center min-h-[44px] px-6 py-2 text-[13px] font-semibold text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition">Más información</button>
         </footer>
     </main>
 
