@@ -222,9 +222,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <!-- COLUMNA 1: Datos Clínicos -->
                 <div>
                     <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">1. Datos Clínicos</h3>
-                    <div class="space-y-3">
+                    <div class="grid grid-cols-2 gap-x-3 gap-y-3">
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">Edad (Años)</label><input type="number" id="age" value="58" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Sexo Biológico</label><div class="chip-group" role="radiogroup" aria-label="Sexo Biológico"><label class="chip"><input type="radio" name="sex" value="male" checked> M</label><label class="chip"><input type="radio" name="sex" value="female"> F</label></div></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Sexo</label><div class="chip-group" role="radiogroup" aria-label="Sexo Biológico"><label class="chip"><input type="radio" name="sex" value="male" checked> M</label><label class="chip"><input type="radio" name="sex" value="female"> F</label></div></div>
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">Tabaquismo</label><div class="chip-group" role="radiogroup" aria-label="Tabaquismo"><label class="chip"><input type="radio" name="smoker" value="no" checked> No</label><label class="chip"><input type="radio" name="smoker" value="yes"> Sí</label></div></div>
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">PAS (mmHg)</label><input type="number" id="sbp" value="145" class="form-input"></div>
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">Peso (kg)</label><input type="number" id="weight" value="88" class="form-input"></div>
@@ -235,10 +235,10 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <!-- COLUMNA 2: Perfil de Laboratorio -->
                 <div>
                     <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">2. Perfil de Laboratorio</h3>
-                    <div class="space-y-3">
+                    <div class="grid grid-cols-2 gap-x-3 gap-y-3">
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol Total (mg/dL)</label><input type="number" id="tc" value="230" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol HDL (mg/dL)</label><input type="number" id="hdl" value="42" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol LDL (mg/dL)</label><input type="number" id="ldl" value="148" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">HDL (mg/dL)</label><input type="number" id="hdl" value="42" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">LDL (mg/dL)</label><input type="number" id="ldl" value="148" class="form-input"></div>
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">Creatinina (mg/dL)</label><input type="number" id="creatinine" value="1.25" step="0.01" class="form-input"></div>
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">Triglicéridos (mg/dL)</label><input type="number" id="tg" value="210" class="form-input"></div>
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">Glicemia Ayunas (mg/dL)</label><input type="number" id="glucose" value="112" class="form-input"></div>
@@ -246,15 +246,15 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">Lp(a) (mg/dL)</label><input type="number" id="lpa" value="75" class="form-input"></div>
                         <div><label class="block text-xs font-semibold text-slate-600 mb-1">ACR (mg/g)</label><input type="number" id="acr" value="55" class="form-input"></div>
                         <div><label class="block text-xs font-semibold text-slate-500 mb-1">No-HDL (Calc)</label><input type="number" id="nohdl" class="form-input bg-slate-50" readonly></div>
-                        <div><label class="block text-xs font-semibold text-slate-500 mb-1">IMC (Calc)</label><input type="number" id="imc_disp" class="form-input bg-slate-50" readonly></div>
+                        <div class="col-span-2"><label class="block text-xs font-semibold text-slate-500 mb-1">IMC (Calc)</label><input type="number" id="imc_disp" class="form-input bg-slate-50" readonly></div>
                     </div>
                 </div>
 
                 <!-- COLUMNA 3: Comorbilidades -->
                 <div>
-                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">3. Comorbilidades y Factores de Riesgo</h3>
-                    <div class="space-y-3">
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Síndrome Coronario Agudo</label>
+                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">3. Comorbilidades</h3>
+                    <div class="grid grid-cols-2 gap-x-3 gap-y-3">
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">SCA</label>
                             <select id="sca_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin antecedente</option>
                                 <option value="ua">Angina inestable</option>
@@ -262,25 +262,25 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                                 <option value="stemi">IMCEST</option>
                             </select>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Enfermedad Ateroesclerótica (EVA)</label>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">EVA</label>
                             <select id="eva_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin EVA clínica</option>
-                                <option value="two_episodes">≥2 episodios de EVA</option>
-                                <option value="one_risk">1er episodio + factores de riesgo</option>
+                                <option value="two_episodes">≥2 episodios</option>
+                                <option value="one_risk">1er episodio + FR</option>
                             </select>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Diabetes Mellitus</label>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">DM</label>
                             <select id="dm_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin DM</option>
-                                <option value="mild">DM bien controlada, sin LOD</option>
-                                <option value="mod">DM sin EVA o LOD grave</option>
-                                <option value="severe_fg">DM + EVA/LOD: FG &lt;45</option>
-                                <option value="severe_acr">DM + EVA/LOD: FG 45-59, ACR 30-300</option>
-                                <option value="severe_prot">DM + EVA/LOD: proteinuria</option>
-                                <option value="severe_multi">DM + EVA/LOD: polimicrovascular</option>
+                                <option value="mild">Controlada, sin LOD</option>
+                                <option value="mod">Sin EVA/LOD grave</option>
+                                <option value="severe_fg">FG &lt;45</option>
+                                <option value="severe_acr">FG 45-59, ACR 30-300</option>
+                                <option value="severe_prot">Proteinuria</option>
+                                <option value="severe_multi">Polimicrovascular</option>
                             </select>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Enfermedad Renal Crónica</label>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">ERC</label>
                             <select id="erc_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin ERC</option>
                                 <option value="g3_a1">FG 30-40, ACR &lt;30</option>
@@ -290,22 +290,22 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                                 <option value="g3b_a2">FG 30-34, ACR &gt;30</option>
                             </select>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Hipercolesterolemia Familiar</label>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">HF</label>
                             <select id="hf_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin HF</option>
-                                <option value="hf_isolated">HF aislada</option>
-                                <option value="hf_3factors">HF + 3 factores</option>
-                                <option value="hf_eva">HF + evento vascular agudo</option>
+                                <option value="hf_isolated">Aislada</option>
+                                <option value="hf_3factors">+3 factores</option>
+                                <option value="hf_eva">+ evento vascular</option>
                             </select>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Afectación Subclínica</label>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Afect. Subclínica</label>
                             <select id="subclinic_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin afectación</option>
-                                <option value="mod">Calcio-Score 100-300 / estenosis &lt;50%</option>
-                                <option value="sev">Calcio-Score ≥300 / estenosis &gt;50%</option>
+                                <option value="mod">CaSc 100-300</option>
+                                <option value="sev">CaSc ≥300</option>
                             </select>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Fragilidad</label>
+                        <div class="col-span-2"><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Fragilidad</label>
                             <select id="fragile_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="no">Paciente robusto</option>
                                 <option value="yes">Frágil / anciano</option>
