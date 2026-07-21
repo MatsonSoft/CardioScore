@@ -122,12 +122,14 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
             .no-print { display: none !important; }
             
-            /* Contenedor principal: flujo natural, sin vh (en móvil 100vh = pantalla, no página) */
+            /* Contenedor principal: alto fijo en pt (unidad física, funciona igual en todo browser) */
             .print-page {
-                display: block !important;
+                display: flex !important;
+                flex-direction: column;
                 width: 100% !important;
+                height: 748pt !important; /* letter 11in = 792pt - 22pt top - 22pt bottom */
                 box-sizing: border-box !important;
-                padding: 6mm 10mm !important;
+                padding: 22pt 28pt !important; /* ~8mm 10mm */
                 font-family: 'Montserrat', sans-serif;
                 background-color: white;
             }
@@ -597,8 +599,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 </div>
             </div>
         </div>
-        <!-- Firma + pie -->
-        <div style="margin-top: 10px;">
+        <!-- Firma + pie anclados al fondo con margin-top:auto -->
+        <div style="margin-top: auto;">
             <div style="margin-top: 8px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #334155;">
                 <span>Médico tratante: <span id="p_medico">______________________________</span></span>
                 <span>Firma y sello: ______________________________</span>
