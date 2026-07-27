@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -70,6 +70,12 @@ body { font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-
 .form-input, .form-select { width:100%; padding:8px 10px; border:1px solid #cbd5e1; border-radius:8px; background:#fff; font-size:14px; color:#0f172a; }
 .form-input:focus, .form-select:focus { outline:2px solid #2563eb; outline-offset:1px; border-color:#2563eb; }
 .input-invalid { border-color:#dc2626 !important; box-shadow:0 0 0 1px #dc2626; }
+.input-valid { border-color:#22c55e !important; box-shadow:0 0 0 1px #22c55e; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn-loading { pointer-events: none; opacity: 0.7; }
+.btn-loading::after { content: ''; display: inline-block; width: 14px; height: 14px; border: 2px solid transparent; border-top-color: currentColor; border-radius: 50%; animation: spin .6s linear infinite; margin-left: 6px; vertical-align: middle; }
+#panel_resultados { animation: fadeSlideIn 0.35s ease; }
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 button:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
 .req { color:#dc2626; margin-left:2px; font-weight:700; }
 .tip { display:inline-flex; align-items:center; justify-content:center; width:15px; height:15px; margin-left:4px; border-radius:9999px; background:#cbd5e1; color:#fff; font-size:10px; font-weight:700; border:none; cursor:help; vertical-align:middle; padding:0; line-height:1; flex-shrink:0; }
@@ -127,16 +133,17 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 display: flex !important;
                 flex-direction: column;
                 width: 100% !important;
-                height: 748pt !important; /* letter 11in = 792pt - 22pt top - 22pt bottom */
+                height: 748pt !important;
                 box-sizing: border-box !important;
-                padding: 22pt 28pt !important; /* ~8mm 10mm */
+                padding: 44pt 28pt 6pt !important;
                 font-family: 'Montserrat', sans-serif;
+                font-size: 7.5pt;
                 background-color: white;
             }
 
             .print-section { margin-bottom: 4px; }
             .print-section-title {
-                font-size: 8.5pt; font-weight: 800; color: #1e293b;
+                font-size: 8pt; font-weight: 800; color: #1e293b;
                 border-bottom: 2px solid #e2e8f0; margin-bottom: 3px; padding-bottom: 1px; text-transform: uppercase;
             }
             
@@ -148,18 +155,19 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             .print-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
             .print-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
             
-            .print-label { font-size: 7pt; color: #64748b; font-weight: 700; text-transform: uppercase; }
-            .print-value { font-size: 9pt; color: #0f172a; font-weight: 700; margin-top: 2px; }
-            .print-value-lg { font-size: 12pt; font-weight: 800; margin-top: 2px; }
+            .print-label { font-size: 6.5pt; color: #64748b; font-weight: 700; text-transform: uppercase; }
+            .print-value { font-size: 8pt; color: #0f172a; font-weight: 700; }
+            .print-value-lg { font-size: 10pt; font-weight: 800; }
             
             .font-bold { font-weight: 700; }
             .text-blue-700 { color: #1d4ed8 !important; }
             .text-red-600 { color: #dc2626 !important; }
             .text-red-800 { color: #991b1b !important; }
             .text-emerald-600 { color: #059669 !important; }
-            .print-text-sm { font-size: 8pt; line-height: 1.3; }
+            .print-text-sm { font-size: 7pt; line-height: 1.3; }
+            .print-tiny { font-size: 5.5pt; }
             
-            .print-table { width: 100%; border-collapse: collapse; font-size: 8pt; }
+            .print-table { width: 100%; border-collapse: collapse; font-size: 7.5pt; }
             .print-table th { background: #f1f5f9 !important; padding: 3px 4px; text-align: left; font-weight: 700; border-bottom: 1px solid #cbd5e1; }
             .print-table td { padding: 3px 4px; border-bottom: 1px solid #e2e8f0; }
 
@@ -185,22 +193,31 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
     <main class="max-w-7xl mx-auto p-4 space-y-6 no-print">
 
-        <!-- BANNER INFORMATIVO: qué es CardioScore -->
+        <!-- BANNER INFORMATIVO -->
         <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-lg font-bold text-slate-900">CardioScore — Calculadora Clínica de Riesgo Cardiovascular</h2>
+                <h2 class="text-lg font-bold text-slate-900">CardioScore — Estimación de Riesgo Cardiovascular</h2>
                 <p class="text-sm text-slate-600 mt-2 max-w-2xl mx-auto">
-                    Herramienta gratuita para cardiólogos de Venezuela, creada por <strong class="text-slate-800">MatsonSoft</strong> en colaboración con el <strong class="text-slate-800">Postgrado de Cardiología, Hospital Ruiz y Páez</strong>. Estima el riesgo CV a 10 años, metas de LDL y estrategia hipolipemiante basado en factores de SCORE2 y PCE 2013.
+                    Estimación rápida de riesgo cardiovascular a 10 años, cálculo de eGFR y metas personalizadas de C-LDL basadas en ESC 2021 / AHA. Creada por <strong class="text-slate-800">MatsonSoft</strong> en colaboración con el <strong class="text-slate-800">Postgrado de Cardiología, Hospital Ruiz y Páez</strong>.
                 </p>
             </div>
         </div>
 
-        <!-- DISCLAIMER (arriba, no en footer ni modal) -->
+        <!-- DISCLAIMER -->
         <div class="bg-amber-50 border border-amber-200 rounded-lg px-5 py-3">
             <p class="text-xs text-slate-600 leading-relaxed">
-                <strong>CardioScore</strong> · Modelo de riesgo basado en SCORE2 / PCE 2013 (guías ESC 2021) y PREVENT (AHA) · Versión 1.0 · 2026.
-                No es la ecuación oficial SCORE2; los resultados son estimaciones orientativas.
+                <strong>CardioScore</strong> · Modelos <strong>SCORE2</strong> (ESC 2021) y <strong>PREVENT</strong> (AHA 2024) · Versión 2.0 · 2026.
                 Herramienta de apoyo clínico. No sustituye el juicio profesional ni las guías vigentes.
+            </p>
+        </div>
+
+        <!-- BANNER SCORE2-LAC -->
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg px-5 py-3 no-print">
+            <p class="text-xs text-indigo-700 leading-relaxed">
+                <span class="font-bold">? Próximamente:</span> Se espera la recalibración regional
+                <strong>SCORE2-LAC</strong> (SIAC/ESC) para agosto 2026 en el <strong>ESC Congress 2026</strong>
+                (Múnich), con datos de 32 países LATAM (~2.6M individuos). Cuando esté disponible,
+                actualizaremos la calculadora automáticamente.
             </p>
         </div>
 
@@ -210,49 +227,66 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2 uppercase tracking-wide">
                     <span class="w-2.5 h-4 bg-blue-600 rounded-sm inline-block"></span>Datos del Paciente
                 </h2>
-                <button type="button" onclick="limpiar()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-4 rounded-md shadow text-xs uppercase tracking-wider transition">Reiniciar</button>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="cargarEjemplo()" class="bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-2 px-3 rounded-md shadow text-xs uppercase tracking-wider transition flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        Cargar Paciente Tipo
+                    </button>
+                    <button type="button" onclick="limpiar()" class="bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold py-2 px-3 rounded-md shadow text-xs uppercase tracking-wider transition flex items-center gap-1.5" title="Reiniciar">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h13a4 4 0 010 8H7"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 10l3-3m-3 3l3 3"/></svg>
+                        <span class="sr-only">Reiniciar</span>
+                    </button>
+                </div>
             </div>
 
             <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="patient_name">Nombre del Paciente</label><input type="text" id="patient_name" class="form-input" placeholder="Opcional — solo para el PDF" autocomplete="off"></div>
-                <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="doctor_name">Médico Tratante</label><input type="text" id="doctor_name" class="form-input" placeholder="Opcional — solo para el PDF" autocomplete="off"></div>
+                <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="patient_name">Nombre del Paciente</label><input type="text" id="patient_name" class="form-input" placeholder="Opcional "” solo para el PDF" autocomplete="off"></div>
+                <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="doctor_name">Médico Tratante</label><input type="text" id="doctor_name" class="form-input" placeholder="Opcional "” solo para el PDF" autocomplete="off"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <!-- COLUMNA 1: Datos Clínicos -->
-                <div>
-                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">1. Datos Clínicos</h3>
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">1. Biometría y Signos Vitales</h3>
                     <div class="grid grid-cols-2 gap-x-3 gap-y-3">
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Edad (Años)</label><input type="number" id="age" value="58" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Sexo</label><div class="chip-group" role="radiogroup" aria-label="Sexo Biológico"><label class="chip"><input type="radio" name="sex" value="male" checked> M</label><label class="chip"><input type="radio" name="sex" value="female"> F</label></div></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Tabaquismo</label><div class="chip-group" role="radiogroup" aria-label="Tabaquismo"><label class="chip"><input type="radio" name="smoker" value="no" checked> No</label><label class="chip"><input type="radio" name="smoker" value="yes"> Sí</label></div></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">PAS (mmHg)</label><input type="number" id="sbp" value="145" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Peso (kg)</label><input type="number" id="weight" value="88" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Estatura (cm)</label><input type="number" id="height" value="172" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Edad (Años)</label><input type="number" id="age" class="form-input" required></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">PAS (mmHg)</label><input type="number" id="sbp" class="form-input" required></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Sexo Biológico <span class="text-red-500">*</span></label><div class="chip-group" role="radiogroup" aria-label="Sexo Biológico"><label class="chip"><input type="radio" name="sex" value="male"> M</label><label class="chip"><input type="radio" name="sex" value="female"> F</label></div></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Tabaquismo <span class="text-red-500">*</span></label><div class="chip-group" role="radiogroup" aria-label="Tabaquismo"><label class="chip"><input type="radio" name="smoker" value="no"> No</label><label class="chip"><input type="radio" name="smoker" value="yes"> Sí</label></div></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Peso (kg)</label><input type="number" id="weight" class="form-input" required></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Estatura (cm)</label><input type="number" id="height" class="form-input" required></div>
+                        <div class="col-span-2">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Región de Riesgo para SCORE2</label>
+                            <select id="risk_region" class="form-select text-xs">
+                                <option value="low">Bajo</option>
+                                <option value="moderate">Moderado</option>
+                                <option value="high" selected>Alto</option>
+                                <option value="very_high">Muy Alto</option>
+                            </select>
+                            <p class="text-[10px] text-slate-400 mt-1">Venezuela → región <strong>Alta</strong> (seleccionada por defecto). Ajustar según perfil epidemiológico. <a href="#score2-explain" class="text-blue-600 underline">¿Qué región es mi país?</a></p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- COLUMNA 2: Perfil de Laboratorio -->
-                <div>
-                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">2. Perfil de Laboratorio</h3>
-                    <div class="grid grid-cols-2 gap-x-3 gap-y-3">
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol Total (mg/dL)</label><input type="number" id="tc" value="230" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">HDL (mg/dL)</label><input type="number" id="hdl" value="42" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">LDL (mg/dL)</label><input type="number" id="ldl" value="148" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Creatinina (mg/dL)</label><input type="number" id="creatinine" value="1.25" step="0.01" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Triglicéridos (mg/dL)</label><input type="number" id="tg" value="210" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Glicemia Ayunas (mg/dL)</label><input type="number" id="glucose" value="112" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">HbA1c (%)</label><input type="number" id="hba1c" value="6.6" step="0.1" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Lp(a) (mg/dL)</label><input type="number" id="lpa" value="75" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">ACR (mg/g)</label><input type="number" id="acr" value="55" class="form-input"></div>
-                        <div><label class="block text-xs font-semibold text-slate-500 mb-1">No-HDL (Calc)</label><input type="number" id="nohdl" class="form-input bg-slate-50" readonly></div>
-                        <div class="col-span-2"><label class="block text-xs font-semibold text-slate-500 mb-1">IMC (Calc)</label><input type="number" id="imc_disp" class="form-input bg-slate-50" readonly></div>
+                <div class="lg:col-span-6">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">2. Perfil Bioquímico e Inflamatorio</h3>
+                    <div class="grid grid-cols-3 gap-x-3 gap-y-3">
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Colesterol Total (mg/dL)</label><input type="number" id="tc" class="form-input" required></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">HDL (mg/dL)</label><input type="number" id="hdl" class="form-input" required></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">LDL (mg/dL)</label><input type="number" id="ldl" class="form-input" required></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Creatinina (mg/dL)</label><input type="number" id="creatinine" step="0.01" class="form-input" required></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Triglicéridos (mg/dL)</label><input type="number" id="tg" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Glicemia Ayunas (mg/dL)</label><input type="number" id="glucose" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">HbA1c (%)</label><input type="number" id="hba1c" step="0.1" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">Lp(a) (mg/dL)</label><input type="number" id="lpa" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1">ACR (mg/g)</label><input type="number" id="acr" class="form-input"></div>
                     </div>
                 </div>
 
                 <!-- COLUMNA 3: Comorbilidades -->
-                <div>
-                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">3. Comorbilidades</h3>
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase mb-3 border-b border-slate-200 pb-1">3. Antecedentes y Daño de Órgano Blanco</h3>
                     <div class="grid grid-cols-2 gap-x-3 gap-y-3">
                         <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">SCA</label>
                             <select id="sca_status" class="form-select text-[11px] h-10 w-full">
@@ -264,16 +298,16 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         </div>
                         <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">EVA</label>
                             <select id="eva_status" class="form-select text-[11px] h-10 w-full">
-                                <option value="none">Sin EVA clínica</option>
-                                <option value="two_episodes">≥2 episodios</option>
-                                <option value="one_risk">1er episodio + FR</option>
+                                <option value="none">Sin evento vascular aterosclerótico</option>
+                                <option value="two_episodes">2 o más episodios</option>
+                                <option value="one_risk">1er evento + Factores de Riesgo</option>
                             </select>
                         </div>
                         <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">DM</label>
                             <select id="dm_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin DM</option>
-                                <option value="mild">Controlada, sin LOD</option>
-                                <option value="mod">Sin EVA/LOD grave</option>
+                                <option value="mild">Controlada, sin daño de órgano blanco</option>
+                                <option value="mod">Sin EVA / daño de órgano grave</option>
                                 <option value="severe_fg">FG &lt;45</option>
                                 <option value="severe_acr">FG 45-59, ACR 30-300</option>
                                 <option value="severe_prot">Proteinuria</option>
@@ -283,26 +317,26 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">ERC</label>
                             <select id="erc_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin ERC</option>
-                                <option value="g3_a1">FG 30-40, ACR &lt;30</option>
-                                <option value="g3a_a2">FG 45-59, ACR 30-300</option>
-                                <option value="g1_a2">FG ≥60, ACR &lt;300</option>
-                                <option value="g4">FG &lt;30</option>
-                                <option value="g3b_a2">FG 30-34, ACR &gt;30</option>
+                                <option value="g3_a1">TFG &lt;40 mL/min (G3b)</option>
+                                <option value="g3a_a2">TFG 45-59, ACR 30-300</option>
+                                <option value="g1_a2">TFG =60, ACR &lt;300</option>
+                                <option value="g4">TFG &lt;30</option>
+                                <option value="g3b_a2">TFG 30-34, ACR &gt;30</option>
                             </select>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">HF</label>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">IC</label>
                             <select id="hf_status" class="form-select text-[11px] h-10 w-full">
-                                <option value="none">Sin HF</option>
+                                <option value="none">Sin Insuficiencia Cardíaca</option>
                                 <option value="hf_isolated">Aislada</option>
-                                <option value="hf_3factors">+3 factores</option>
+                                <option value="hf_3factors">+3 factores de riesgo</option>
                                 <option value="hf_eva">+ evento vascular</option>
                             </select>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Afect. Subclínica</label>
+                        <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Aterosclerosis Subclínica</label>
                             <select id="subclinic_status" class="form-select text-[11px] h-10 w-full">
                                 <option value="none">Sin afectación</option>
-                                <option value="mod">CaSc 100-300</option>
-                                <option value="sev">CaSc ≥300</option>
+                                <option value="mod">Calcio Coronario (CaSc) 100-300</option>
+                                <option value="sev">Calcio Coronario (CaSc) =300</option>
                             </select>
                         </div>
                         <div class="col-span-2"><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Fragilidad</label>
@@ -319,7 +353,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div id="alert_box" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-800 text-sm rounded-md no-print"></div>
 
             <div class="mt-6 text-center">
-                <button type="button" onclick="ejecutarCalculos(true)" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-12 rounded-md shadow text-sm uppercase tracking-wider transition">Calcular Riesgo</button>
+                <button type="button" id="btn_calcular" onclick="ejecutarCalculos(true)" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-12 rounded-md shadow text-sm uppercase tracking-wider transition">Estratificar Paciente y Obtener Metas</button>
             </div>
         </section>
 
@@ -329,25 +363,67 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div id="introCard" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
                 <div class="max-w-lg mx-auto">
                     <h2 class="text-lg font-bold text-slate-800">Complete los datos del formulario</h2>
-                    <p class="text-sm text-slate-500 mt-2">Complete los datos clínicos, de laboratorio y comorbilidades arriba, luego presione <span class="font-semibold text-blue-700">Calcular Riesgo</span>.</p>
+                    <p class="text-sm text-slate-500 mt-2">Complete los datos clínicos, de laboratorio y comorbilidades arriba, luego presione <span class="font-semibold text-blue-700">Estratificar Paciente y Obtener Metas</span>.</p>
                 </div>
             </div>
 
             <!-- PANELES DE RESULTADO WEB -->
             <div id="panel_resultados" class="hidden space-y-5" aria-live="polite">
-                <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+                <div id="score2-explain" class="bg-amber-50 border border-amber-200 rounded-xl p-5">
                     <p id="w_narrativa" class="text-[15px] text-slate-800 leading-relaxed font-medium">-</p>
                 </div>
+                <div class="bg-sky-50 border border-sky-200 rounded-xl p-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600">
+                        <div>
+                            <strong class="text-sky-800 block mb-1">? SCORE2 (ESC 2021)</strong>
+                            Modelo Weibull con riesgo competitivo de la Sociedad Europea de Cardiología.
+                            Predice riesgo de IAM + ACV fatales/no fatales a 10 años en personas 40-69a
+                            (y SCORE2-OP ≥70a). Variables: edad, sexo, tabaco, PAS, colesterol no-HDL.
+                            Calibrado a 4 regiones de riesgo europeas. No validado formalmente en LATAM
+                            —próximamente SCORE2-LAC (ESC 2026).
+                        </div>
+                        <div>
+                            <strong class="text-purple-800 block mb-1">? PREVENT (AHA 2024)</strong>
+                            Modelo de la American Heart Association. Predice ECV total (IAM + ACV + IC)
+                            a 10 años. Variables: las de SCORE2 + IMC, eGFR, ACR, HbA1c, uso de estatinas.
+                            Incluye ajuste por enfermedad renal. Más preciso en pacientes con enfermedad
+                            renal crónica y obesidad.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPLICACIÓN AL PACIENTE -->
+                <details id="patient_explain" class="bg-white border border-sky-200 rounded-xl overflow-hidden hidden">
+                    <summary class="flex items-center justify-between px-5 py-3 cursor-pointer hover:bg-sky-50 transition text-sm font-bold text-sky-800 uppercase tracking-wider">
+                        <span>Cómo explicar al paciente</span>
+                        <svg class="w-4 h-4 transition-transform" style="transform: rotate(0deg);"><polyline points="6 4 14 12 6 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    </summary>
+                    <div class="px-5 pb-5 pt-2 text-sm text-slate-700 leading-relaxed space-y-3">
+                        <p id="w_patient_risk" class="font-medium text-slate-800">-</p>
+                        <p id="w_patient_lifestyle">Esto se puede mejorar significativamente con cambios en el estilo de vida: alimentación saludable, actividad física regular y control del peso.</p>
+                        <p id="w_patient_treatment">Además, existen medicamentos que ayudan a controlar el colesterol y la presión arterial, reduciendo drásticamente su riesgo de sufrir un infarto o un derrame cerebral.</p>
+                        <p class="text-sky-700 text-xs border-t border-sky-100 pt-3">El tratamiento se ajusta a sus metas personalizadas y será supervisado por su médico tratante.</p>
+                    </div>
+                </details>
                 <div id="scorePanel" class="bg-gradient-to-r from-blue-900 to-blue-950 text-white rounded-xl shadow-md p-6 text-center border border-blue-800">
-                    <h2 class="text-xl font-black uppercase tracking-widest text-blue-200 mb-4 border-b border-blue-700/50 pb-2 inline-block">Cálculo de SCORE PREVENT</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="bg-white/10 p-3 rounded-lg"><span class="block text-[11px] uppercase text-blue-300 mb-1">Riesgo ECV Total (10a)</span><span id="w_prev_total" class="text-3xl font-bold">-</span></div>
-                        <div class="bg-white/10 p-3 rounded-lg"><span class="block text-[11px] uppercase text-blue-300 mb-1">Hosp. Insuf. Cardíaca (10a)</span><span id="w_prev_ic" class="text-3xl font-bold">-</span></div>
-                        <div class="bg-black/20 p-3 rounded-lg"><span class="block text-[11px] uppercase text-emerald-400 mb-1">Óptimo ECV Total</span><span id="w_prev_tot_opt" class="text-3xl font-bold text-emerald-400">-</span></div>
-                        <div class="bg-black/20 p-3 rounded-lg"><span class="block text-[11px] uppercase text-emerald-400 mb-1">Óptimo Hosp. IC</span><span id="w_prev_ic_opt" class="text-3xl font-bold text-emerald-400">-</span></div>
+                    <h2 class="text-xl font-black uppercase tracking-widest text-blue-200 mb-4 border-b border-blue-700/50 pb-2 inline-block">Estimación de Riesgo a 10 Años</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white/10 p-3 rounded-lg border border-blue-700/30">
+                            <span class="block text-[11px] uppercase text-blue-300 mb-1">SCORE2 (ESC 2021)</span>
+                            <span class="block text-[10px] text-blue-400/70 mb-1">ECV Total (IAM + ACV)</span>
+                            <span id="w_score2_total" class="text-3xl font-bold">-</span>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg border border-blue-700/30">
+                            <span class="block text-[11px] uppercase text-blue-300 mb-1">PREVENT (AHA 2024)</span>
+                            <span class="block text-[10px] text-blue-400/70 mb-1">ECV Total + IC</span>
+                            <span id="w_prevent_total" class="text-3xl font-bold">-</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-[11px] bg-blue-950/50 rounded-lg p-2 text-blue-300">
+                        <span class="font-semibold text-white">Categoría de Riesgo:</span> <span id="w_band" class="font-bold">-</span>
                     </div>
                     <div class="mt-4">
-                        <div class="flex justify-between text-[11px] uppercase text-blue-300 mb-1"><span>Categoría de Riesgo</span><span id="w_band" class="font-bold text-white">-</span></div>
+                        <div class="flex justify-between text-[11px] uppercase text-blue-300 mb-1"><span>Riesgo Combinado</span><span id="w_band_label" class="font-bold text-white">-</span></div>
                         <div class="h-3 rounded-full bg-white/15 overflow-hidden relative" role="progressbar" aria-label="Riesgo cardiovascular total a 10 años (umbrales: 5, 10 y 20%)" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                             <div id="w_gauge" class="h-full transition-all" style="width:0%"></div>
                             <span aria-hidden="true" class="absolute inset-y-0 w-px bg-white/50" style="left:5%"></span>
@@ -362,10 +438,10 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                             <span class="absolute" style="right:0">100%</span>
                         </div>
                         <div class="flex flex-wrap justify-center gap-x-3 gap-y-0.5 text-[10px] mt-1.5">
-                            <span class="text-emerald-400 font-semibold">● Bajo &lt;5%</span>
-                            <span class="text-yellow-400 font-semibold">● Moderado 5–10%</span>
-                            <span class="text-orange-400 font-semibold">● Alto 10–20%</span>
-                            <span class="text-red-400 font-semibold">● Muy alto ≥20%</span>
+                            <span class="text-emerald-400 font-semibold">? Bajo &lt;5%</span>
+                            <span class="text-yellow-400 font-semibold">? Moderado 5-10%</span>
+                            <span class="text-orange-400 font-semibold">? Alto 10-20%</span>
+                            <span class="text-red-400 font-semibold">? Muy alto =20%</span>
                         </div>
                     </div>
                 </div>
@@ -411,7 +487,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                                 </div>
                             </div>
                         </div>
-                        <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition no-print">Copiar Resumen</button>
+                        <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition no-print">Copiar Informe para Historia Clínica</button>
                         <button id="btn_pdf_bottom" type="button" onclick="exportarPDF()" disabled class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow text-sm uppercase tracking-widest transition disabled:opacity-40 disabled:cursor-not-allowed no-print">Exportar PDF</button>
                     </div>
                 </div>
@@ -423,205 +499,215 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <button type="button" onclick="abrirAcerca()" class="inline-flex items-center justify-center min-h-[44px] px-6 py-2 text-[13px] font-semibold text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition">Más información</button>
         </footer>
     </main>
-
-    <!-- ========================================================================= -->
-    <!-- PDF EXPORTADO: PLANTILLA DISEÑADA PARA 1 PÁGINA (ESTÉTICA Y COMPRENSIÓN)  -->
+    <!-- PDF NUEVO: PLANTILLA REDISEÑADA (1 PÁGINA, COMPARATIVA)                -->
     <!-- ========================================================================= -->
     <div class="hidden print-page">
-        
-        <!-- HEADER (diseñado para impresión B/N: sin fondos oscuros, estructura por bordes) -->
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid #0f172a; padding-bottom: 3px; margin-bottom: 4px;">
-            <div style="display: flex; align-items: center; gap: 9px;">
-                <img src="favicon.svg" alt="" width="28" height="28">
-                <div>
-                    <h1 style="font-size: 11pt; margin: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #0f172a;">CardioScore — Informe de Riesgo Cardiovascular</h1>
-                    <p style="margin: 1px 0 0; font-size: 6.5pt; color: #475569;">Referencia: ESC 2021 / AHA · Estimación orientativa, no sustituye el juicio clínico</p>
-                </div>
-            </div>
-            <p style="margin: 0; font-size: 8pt; font-weight: 700; color: #0f172a;">Fecha: <span id="p_fecha">-</span></p>
-        </div>
 
-        <!-- PACIENTE + LABORATORIO (misma fila, 2:3) -->
-        <div class="print-section print-grid-2" style="grid-template-columns: 2fr 3fr;">
-            <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title">Datos del Paciente</div>
-                <div class="print-box" style="flex: 1;">
-                    <div style="font-size: 8pt; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 3px; margin-bottom: 3px;">
-                        Paciente: <span id="p_paciente" class="font-bold">______________________________</span>
-                    </div>
-                    <div class="print-grid-2">
-                        <div><div class="print-label">Edad / Sexo</div><div class="print-value" id="p_age_sex">-</div></div>
-                        <div><div class="print-label">Tabaquismo</div><div class="print-value" id="p_smoker">-</div></div>
-                        <div><div class="print-label">Peso / Talla</div><div class="print-value" id="p_antrop">-</div></div>
-                        <div><div class="print-label">IMC</div><div class="print-value" id="p_imc">-</div></div>
-                    </div>
-                </div>
+        <header style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 3px; margin-bottom: 5px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <img src="favicon.svg" alt="CardioScore Logo" width="22" height="22" style="object-fit: contain;">
+                <h1 style="margin: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3px; color: #0f172a; line-height: 1.2;">
+                    CardioScore · Informe de Estratificación Cardiovascular
+                </h1>
             </div>
-            <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title">Perfil de Laboratorio y Biometría</div>
-                <div class="print-box" style="flex: 1;">
-                    <div class="print-grid-5" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-bottom: 4px;">
-                        <div><div class="print-label">Col. Total</div><div class="print-value" id="p_tc">-</div></div>
-                        <div><div class="print-label">LDL-C</div><div class="print-value" id="p_ldl">-</div></div>
-                        <div><div class="print-label">HDL-C</div><div class="print-value" id="p_hdl">-</div></div>
-                        <div><div class="print-label">No-HDL</div><div class="print-value" id="p_nohdl">-</div></div>
-                        <div><div class="print-label">Triglicéridos</div><div class="print-value" id="p_tg">-</div></div>
-                    </div>
-                    <div class="print-grid-5">
-                        <div><div class="print-label">Glicemia</div><div class="print-value" id="p_gl">-</div></div>
-                        <div><div class="print-label">HbA1c</div><div class="print-value" id="p_hba1c">-</div></div>
-                        <div><div class="print-label">Creatinina</div><div class="print-value" id="p_cr">-</div></div>
-                        <div><div class="print-label">ACR</div><div class="print-value" id="p_acr">-</div></div>
-                        <div><div class="print-label">Lp(a)</div><div class="print-value font-bold" id="p_lpa">-</div></div>
-                    </div>
-                    <p style="font-size: 6.5pt; color: #64748b; margin: 4px 0 0;">Lípidos, glicemia y Lp(a) en mg/dL · HbA1c en % · Creatinina en mg/dL · ACR en mg/g · "—" = dato no reportado.</p>
-                </div>
+            <div style="text-align: right; color: #334155; line-height: 1.3;">
+                <div><strong>Fecha:</strong> <span id="p2_fecha">-</span></div>
+                <div><strong>Folio:</strong> CS-<span id="p2_folio">001</span></div>
             </div>
-        </div>
+        </header>
 
-        <!-- ALERTAS CRÍTICAS (solo si las hay) -->
-        <div id="p_crit" style="display: none; margin-bottom: 4px; padding: 5px 8px; border: 1.5px solid #0f172a; border-radius: 6px; font-size: 8pt; font-weight: 700; color: #0f172a;"></div>
-
-        <!-- ESTRATIFICACIÓN Y SCORE -->
-        <div class="print-section print-grid-2">
+        <section class="print-grid-2" style="gap: 6px; margin-bottom: 6px;">
             <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title">I. Estratificación y Metas</div>
-                <div class="print-box" style="flex: 1;">
-                    <div style="margin-bottom: 3px;">
-                        <span class="print-label">Criterio Clínico:</span> <span class="print-text-sm font-bold" id="p_comorb">-</span>
-                    </div>
-                    <div style="margin-bottom: 3px;">
-                        <span class="print-label">Condiciones:</span> <span class="print-text-sm" id="p_condiciones">-</span>
-                    </div>
-                    <div style="margin-bottom: 4px;">
-                        <span class="print-label">TFG (CKD-EPI):</span> <span class="print-text-sm font-bold" id="p_tfg">-</span>
-                    </div>
-                    <div class="print-grid-2">
-                        <div style="padding: 5px; text-align: center; border: 1px solid #0f172a; border-radius: 6px;">
-                            <div class="print-label">Meta LDL</div>
-                            <div class="print-value-lg" id="p_meta_ldl">-</div>
+                <div class="print-section-title">1. Filiación y Perfil del Paciente</div>
+                <div class="print-box" style="flex: 1; padding: 5px 6px;">
+                    <div style="margin-bottom: 3px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 3px;">
+                        <div style="margin-bottom: 1px;">
+                            <span class="print-label">Paciente:</span> <strong id="p2_paciente">______________________________</strong>
                         </div>
-                        <div style="padding: 5px; text-align: center; border: 1px solid #0f172a; border-radius: 6px;">
-                            <div class="print-label">Reducción Req.</div>
-                            <div class="print-value-lg" id="p_pct_ldl">-</div>
+                        <div>
+                            <span class="print-label">Médico Tratante:</span> <span id="p2_medico">______________________________</span>
                         </div>
                     </div>
+                    <div class="print-grid-2" style="gap: 4px;">
+                        <div><span class="print-label">Edad / Sexo:</span> <div class="print-value" id="p2_age_sex">-</div></div>
+                        <div><span class="print-label">Tabaquismo:</span> <div class="print-value" id="p2_smoker">-</div></div>
+                        <div><span class="print-label">Peso / Estatura:</span> <div class="print-value" id="p2_antrop">-</div></div>
+                        <div><span class="print-label">Índice Masa Corporal:</span> <div class="print-value" id="p2_imc">-</div></div>
+                    </div>
                 </div>
             </div>
             <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title">II. Score PREVENT (Calculado)</div>
-                <div class="print-box" style="flex: 1;">
-                    <div style="text-align:center; margin-bottom:3px;">
-                        <span class="print-label">Categoría:</span> <span class="font-black" id="p_band" style="background: #0f172a; color: #fff; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.5px;">-</span>
+                <div class="print-section-title">2. Perfil Bioquímico e Inflamatorio</div>
+                <div class="print-box" style="flex: 1; padding: 4px 5px; display: flex; flex-direction: column;">
+                    <div style="display: flex; flex: 1; align-items: center; gap: 2px;">
+                        <div style="flex:1; text-align:center;"><div class="print-label">Col. Total</div><div class="print-value" id="p2_tc">- mg/dL</div><div class="print-tiny" style="color:#94a3b8;">&lt;190</div></div>
+                        <div style="flex:1; text-align:center;"><div class="print-label">Col. LDL</div><div class="print-value" id="p2_ldl">- mg/dL</div><div class="print-tiny" style="color:#94a3b8;">&lt;116</div></div>
+                        <div style="flex:1; text-align:center;"><div class="print-label">Col. HDL</div><div class="print-value" id="p2_hdl">- mg/dL</div><div class="print-tiny" style="color:#94a3b8;">40-80</div></div>
+                        <div style="flex:1; text-align:center;"><div class="print-label">Col. No-HDL</div><div class="print-value" id="p2_nohdl">- mg/dL</div><div class="print-tiny" style="color:#94a3b8;">&lt;130</div></div>
+                        <div style="flex:1; text-align:center;"><div class="print-label">Triglicéridos</div><div class="print-value" id="p2_tg">- mg/dL</div><div class="print-tiny" style="color:#94a3b8;">&lt;150</div></div>
                     </div>
-                    <!-- Mini-gauge B/N: relleno negro = riesgo; marcas grises en umbrales 5/10/20 -->
-                    <div style="position: relative; height: 9px; border: 1px solid #0f172a; border-radius: 5px; background: #fff; overflow: hidden; margin-bottom: 1px;">
-                        <div id="p_gauge" style="height: 100%; background: #0f172a; width: 0%;"></div>
-                        <span style="position: absolute; top: 0; bottom: 0; left: 5%; width: 1px; background: #94a3b8;"></span>
-                        <span style="position: absolute; top: 0; bottom: 0; left: 10%; width: 1px; background: #94a3b8;"></span>
-                        <span style="position: absolute; top: 0; bottom: 0; left: 20%; width: 1px; background: #94a3b8;"></span>
+                    <div style="border-bottom: 1px solid #e2e8f0;"></div>
+                    <div style="display: flex; flex: 1; align-items: center; gap: 2px;">
+                        <div style="flex:1; text-align:center;"><div class="print-label">Glicemia</div><div class="print-value" id="p2_gl">- mg/dL</div><div class="print-tiny" style="color:#94a3b8;">70-99</div></div>
+                        <div style="flex:1; text-align:center;"><div class="print-label">HbA1c</div><div class="print-value" id="p2_hba1c">-%</div><div class="print-tiny" style="color:#94a3b8;">&lt;5.7%</div></div>
+                        <div style="flex:1; text-align:center;"><div class="print-label">Creatinina</div><div class="print-value" id="p2_cr">- mg/dL</div><div class="print-tiny" style="color:#94a3b8;">0.7-1.2</div></div>
+                        <div style="flex:1; text-align:center;"><div class="print-label">ACR</div><div class="print-value" id="p2_acr">- mg/g</div><div class="print-tiny" style="color:#94a3b8;">&lt;30</div></div>
+                        <div style="flex:1; text-align:center;"><div class="print-label">Lp(a)</div><div class="print-value" id="p2_lpa">- mg/dL</div><div class="print-tiny" style="color:#94a3b8;">&lt;30</div></div>
                     </div>
-                    <div style="position: relative; height: 7px; font-size: 5.5pt; color: #475569; margin-bottom: 4px;" aria-hidden="true">
-                        <span style="position: absolute; left: 0;">0</span>
-                        <span style="position: absolute; left: 5%; transform: translateX(-50%);">5</span>
-                        <span style="position: absolute; left: 10%; transform: translateX(-50%);">10</span>
-                        <span style="position: absolute; left: 20%; transform: translateX(-50%);">20</span>
-                        <span style="position: absolute; right: 0;">100%</span>
+                </div>
+            </div>
+        </section>
+
+        <div id="p2_crit" style="display: none; margin-bottom: 6px; padding: 4px 8px; border: 1.5px solid #dc2626; background-color: #fef2f2; border-radius: 4px; font-weight: 700; color: #991b1b;"></div>
+
+        <section class="print-grid-2" style="margin-bottom: 6px; gap: 8px;">
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">3. Estratificación Clínica y Metas</div>
+                <div class="print-box" style="flex: 1; padding: 6px 8px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="print-grid-2" style="gap: 8px; margin-bottom: 3px;">
+                            <div>
+                                <span class="print-label">Criterio Diagnóstico:</span>
+                                <div class="print-text-sm font-bold" id="p2_comorb" style="color: #0f172a; margin-top: 1px;">-</div>
+                            </div>
+                            <div>
+                                <span class="print-label">Condiciones / Comorbilidades:</span>
+                                <div class="print-text-sm" id="p2_condiciones" style="color: #334155;">-</div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 4px;">
+                            <span class="print-label">Función Renal (eGFR CKD-EPI):</span>
+                            <span class="print-text-sm font-bold" id="p2_tfg">-</span>
+                        </div>
                     </div>
-                    <div class="print-grid-2" style="text-align: center; gap: 6px;">
-                        <div style="border: 1px solid #0f172a; border-radius: 6px; padding: 5px;">
+                    <div class="print-grid-2" style="gap: 6px; margin-top: 4px;">
+                        <div style="padding: 4px; text-align: center; border: 1.5px solid #0f172a; border-radius: 4px; background: #f8fafc;">
+                            <div class="print-label">Meta C-LDL Objetivo</div>
+                            <div class="print-value-lg" id="p2_meta_ldl" style="color: #0f172a;">-</div>
+                        </div>
+                        <div style="padding: 4px; text-align: center; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff;">
+                            <div class="print-label">Reducción Necesaria</div>
+                            <div class="print-value-lg" id="p2_pct_ldl" style="color: #dc2626;">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <div class="print-section-title">4. Pronóstico a 10 Años (SCORE / PREVENT)</div>
+                <div class="print-box" style="flex: 1; padding: 6px 8px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="text-align: center; margin-bottom: 2px;">
+                        <span class="print-label">Categoría de Riesgo Cardiovascular:</span>
+                        <div id="p2_band" style="display: inline-block; background: #0f172a; color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px; margin-left: 4px;">-</div>
+                    </div>
+                    <div>
+                        <div id="p2_gauge_wrap" style="position: relative; height: 8px; border: 1px solid #0f172a; border-radius: 4px; background: #fff; overflow: hidden;">
+                            <div id="p2_gauge" style="height: 100%; background: #0f172a; width: 0%;"></div>
+                        </div>
+                        <div id="p2_marks" style="position: relative; height: 12px; margin-top: 2px;" aria-hidden="true">
+                            <span class="print-tiny" style="position: absolute; left: 0;">0%</span>
+                            <span class="print-tiny" style="position: absolute; right: 0;">100%</span>
+                        </div>
+                    </div>
+                    <div class="print-grid-2" style="text-align: center; gap: 6px; margin-top: 2px;">
+                        <div style="border: 1px solid #0f172a; border-radius: 4px; padding: 4px; background: #f8fafc;">
                             <div class="print-label">Riesgo ECV Total (10a)</div>
-                            <div class="print-value-lg" id="p_prev_total" style="margin: 3px 0; font-size: 15pt;">-</div>
-                            <div class="print-label">Óptimo: <span id="p_prev_tot_opt">-</span></div>
+                            <div class="print-value-lg" id="p2_prev_total" style="margin: 1px 0;">-</div>
+                            <div class="print-label">Riesgo Óptimo: <strong id="p2_prev_tot_opt">-</strong></div>
                         </div>
-                        <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px;">
+                        <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px;">
                             <div class="print-label">Hosp. Insuf. Cardíaca</div>
-                            <div class="print-value-lg" id="p_prev_ic" style="margin: 3px 0;">-</div>
-                            <div class="print-label">Óptimo: <span id="p_prev_ic_opt">-</span></div>
+                            <div class="print-value-lg" id="p2_prev_ic" style="margin: 1px 0;">-</div>
+                            <div class="print-label">Riesgo Óptimo: <strong id="p2_prev_ic_opt">-</strong></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- RESUMEN CLÍNICO (compacto: sin título de sección para ahorrar espacio) -->
-        <div class="print-section">
-            <div class="print-box print-text-sm" style="padding: 5px 8px;"><span class="print-label" style="margin-right: 4px;">Resumen Clínico:</span><span id="p_narrativa">-</span></div>
-        </div>
+        <section style="margin-bottom: 6px;">
+            <div class="print-box print-text-sm" style="padding: 5px 8px; background-color: #f8fafc; border-left: 3px solid #0f172a;">
+                <strong class="print-label" style="color: #0f172a; margin-right: 4px;">SÍNTESIS DIAGNÓSTICA:</strong>
+                <span id="p2_narrativa" style="color: #1e293b;">-</span>
+            </div>
+        </section>
 
-        <!-- III TABLA + IV MODULACIÓN (misma fila, 3:2) -->
-        <div class="print-section print-grid-2" style="grid-template-columns: 3fr 2fr;">
+        <section class="print-grid-2" style="grid-template-columns: 3fr 2fr; margin-bottom: 0; gap: 8px;">
             <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title">III. Desglose de Scores Predictivos a 10 Años / PREVENT</div>
-                <div style="border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; flex: 1;">
-                <table class="print-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 60%;">Compuesto Clínico Analizado</th>
-                            <th style="text-align: center;">Riesgo Actual</th>
-                            <th style="text-align: center;">Riesgo Óptimo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="p_table_body"></tbody>
-                </table>
+                <div class="print-section-title">5. Desglose de Riesgo Específico (10 Años)</div>
+                <div style="border: 1px solid #cbd5e1; border-radius: 4px; overflow: hidden; flex: 1;">
+                    <table class="print-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60%;">Compuesto Clínico Evaluado</th>
+                                <th style="text-align: center;">Riesgo Actual</th>
+                                <th style="text-align: center;">Tratado Óptimo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="p2_table_body"></tbody>
+                    </table>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title">IV. Modulación por Lp(a)</div>
-                <div class="print-box" style="border: 1.5px solid #0f172a; flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                    <div class="print-label" style="margin-bottom: 4px; color: #0f172a; text-align: center;">Riesgo de Infarto Miocárdico Aislado</div>
-                    <div class="print-grid-2" style="text-align: center; gap: 6px;">
-                        <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px;">
-                            <div class="print-label">Sin Lp(a)</div>
-                            <div class="print-value" id="p_inf_sin">-</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+                <div style="display: flex; flex-direction: column; flex: 1;">
+                    <div class="print-section-title">6. Modulación por Lipoproteína (a)</div>
+                    <div class="print-box" style="border: 1.5px solid #0f172a; flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 4px 6px;">
+                        <div class="print-label" style="margin-bottom: 2px; color: #0f172a; text-align: center;">Riesgo de Infarto Miocárdico Aislado</div>
+                        <div class="print-grid-2" style="text-align: center; gap: 4px;">
+                            <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 3px;">
+                                <div class="print-label">Sin Lp(a)</div>
+                                <div class="print-value" id="p2_inf_sin">-</div>
+                            </div>
+                            <div style="border: 1px solid #0f172a; border-radius: 4px; padding: 3px; background: #f8fafc;">
+                                <div class="print-label">Con Lp(a)</div>
+                                <div class="print-value-lg" id="p2_inf_con">-</div>
+                            </div>
                         </div>
-                        <div style="border: 1px solid #0f172a; border-radius: 6px; padding: 5px;">
-                            <div class="print-label">Con Lp(a)</div>
-                            <div class="print-value-lg" id="p_inf_con">-</div>
+                        <div style="text-align: center; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 2px;">
+                            <span class="print-label">Amplificación de Riesgo por Lp(a):</span> <strong id="p2_inf_delta">-</strong>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 4px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
-                        <span class="print-label">Incremento por Lp(a):</span> <span class="font-bold" id="p_inf_delta">-</span>
-                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; flex: 1;">
+                    <div class="print-section-title">7. Contribución de Factores de Riesgo</div>
+                    <div class="print-box" id="p2_contrib_factors" style="flex: 1; padding: 8px 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px 14px; align-content: start;"></div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- V CONTRIBUCIÓN + VI RECOMENDACIONES (misma fila, 2:3) -->
-        <div class="print-section print-grid-2" style="grid-template-columns: 2fr 3fr; margin-bottom: 0;">
-            <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title">V. Contribución de Factores ASCVD</div>
-                <div class="print-box" id="p_contrib_factors" style="font-size: 7.5pt; flex: 1;">
-                    <!-- JS fills this -->
+        <section style="margin-bottom: 0;">
+            <div class="print-section-title">8. Recomendaciones y Plan Terapéutico</div>
+            <div class="print-box" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 6px 8px; line-height: 1.3;">
+                <div>
+                    <strong>Estrategia Hipolipemiante:</strong>
+                    <div style="margin-top: 2px;" id="p2_risk_red">-</div>
+                </div>
+                <div>
+                    <strong>Estilo de Vida:</strong>
+                    <div style="margin-top: 2px;">Dieta de patrón mediterráneo (restricción de grasas saturadas y trans). Ejercicio aeróbico 150-300 min/semana.</div>
+                </div>
+                <div>
+                    <strong>Seguimiento Clínico:</strong>
+                    <div style="margin-top: 2px;">Control de perfil lipídico y tolerabilidad en 4 a 8 semanas según criterio médico.</div>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title">VI. Recomendaciones Clínicas y Estrategia</div>
-                <div class="print-text-sm" style="flex: 1;">
-                    <div style="margin-bottom: 4px;"><span class="font-bold">Estrategia Hipolipemiante:</span> <span id="p_risk_red">-</span></div>
-                    <div style="margin-bottom: 4px;"><span class="font-bold">Dieta:</span> Patrón Mediterráneo. Priorizar grasas monoinsaturadas, vegetales verdes. Restricción estricta de azúcares libres y grasas trans.</div>
-                    <div style="margin-bottom: 4px;"><span class="font-bold">Ejercicio Físico:</span> 150-300 min/sem de actividad aeróbica moderada o 75-150 min/sem vigorosa. Incorporar rutinas de fuerza 2-3 días/sem.</div>
-                    <div><span class="font-bold">Seguimiento:</span> Reevaluación de perfil lipídico y tolerabilidad en 4 a 8 semanas, según juicio clínico.</div>
-                </div>
+        </section>
+
+        <footer style="margin-top: auto; padding-top: 10px; display: flex; flex-direction: column; flex: 1;">
+            <div style="display: flex; justify-content: space-between; font-size: 7.5pt; color: #334155; border-top: 1px solid #cbd5e1; padding-top: 14px;">
+                <div>Médico Tratante: <strong><span id="p2_medico_sub">______________________________</span></strong></div>
+                <div>Firma y Sello: ______________________________</div>
             </div>
-        </div>
-        <!-- Firma + pie anclados al fondo con margin-top:auto -->
-        <div style="margin-top: auto;">
-            <div style="margin-top: 8px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #334155;">
-                <span>Médico tratante: <span id="p_medico">______________________________</span></span>
-                <span>Firma y sello: ______________________________</span>
-            </div>
-            <p style="margin-top: 3px; padding-top: 3px; border-top: 1px solid #cbd5e1; font-size: 6.5pt; color: #64748b; text-align: center;">
-                CardioScore · Creada por MatsonSoft en colaboración con el Postgrado de Cardiología, Hospital Ruiz y Páez · cardioscore.matsonsoft.com<br>
-                Herramienta de apoyo clínico. Los resultados son estimaciones y no sustituyen el juicio profesional ni las guías vigentes.
+            <p style="margin-top: auto; font-size: 6pt; color: #64748b; text-align: center; line-height: 1.2; padding-top: 10px;">
+                CardioScore · Desarrollado por MatsonSoft en colaboración con el Postgrado de Cardiología del Hospital Ruiz y Páez · cardioscore.matsonsoft.com<br>
+                Herramienta de soporte diagnóstico. Los resultados son estimaciones probabilísticas y no sustituyen el juicio del profesional de la salud.
             </p>
-        </div>
+        </footer>
     </div>
 
     <!-- SCRIPT DE LÓGICA CLÍNICA -->
     <script>
         /* =========================================================================
-           CALCULADORA DE RIESGO CARDIOVASCULAR — lógica de la app
+           CALCULADORA DE RIESGO CARDIOVASCULAR "” lógica de la app
            Estructura del código (de arriba abajo):
              1. updateDerivedMetrics / RANGES / validación  -> entrada y control
              2. MODEL + leerEntradas / calcularRiesgo        -> modelo (sin DOM)
@@ -658,15 +744,17 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         function updateDerivedMetrics() {
             const tc = parseFloat(document.getElementById('tc').value) || 0;
             const hdl = parseFloat(document.getElementById('hdl').value) || 0;
-            document.getElementById('nohdl').value = Math.max(0, tc - hdl);
+            const nohdlEl = document.getElementById('nohdl');
+            if (nohdlEl) nohdlEl.value = Math.max(0, tc - hdl);
             const weight = parseFloat(document.getElementById('weight').value) || 0;
             const height = (parseFloat(document.getElementById('height').value) || 100) / 100;
             const imc = weight / (height * height);
             const imcEl = document.getElementById('imc_disp');
-            imcEl.value = imc.toFixed(1);
-            // Color por categoría OMS: bajo peso / normal / sobrepeso / obesidad
-            imcEl.style.fontWeight = '700';
-            imcEl.style.color = imc < 18.5 ? '#2563eb' : imc < 25 ? '#059669' : imc < 30 ? '#d97706' : '#dc2626';
+            if (imcEl) {
+                imcEl.value = imc.toFixed(1);
+                imcEl.style.fontWeight = '700';
+                imcEl.style.color = imc < 18.5 ? '#2563eb' : imc < 25 ? '#059669' : imc < 30 ? '#d97706' : '#dc2626';
+            }
         }
         updateDerivedMetrics();
 
@@ -679,6 +767,54 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         // Campos opcionales: vacío = OK; si se llenan, deben estar en rango.
         // (TG y ACR son solo de visualización; Glicemia/HbA1c solo alimentan alertas críticas.)
         const OPTIONAL = ['tg', 'glucose', 'hba1c', 'lpa', 'acr'];
+
+        const UMBRALES = {
+            tc: { warning: 190, critical: 240, severe: 310 },
+            ldl: { warning: 116, critical: 190 },
+            nohdl: { warning: 130, critical: 160 },
+            tg: { warning: 150, critical: 500 },
+            glucose: { low_critical: 54, low_warning: 70, warning: 100, critical: 126, severe: 300 },
+            hba1c: { warning: 5.7, critical: 6.5, severe: 9.0 },
+            acr: { warning: 30, critical: 300 },
+            lpa: { warning: 30, critical: 50 },
+            hdl: { male: { low_warning: 40, low_critical: 30, high_critical: 90 }, female: { low_warning: 50, low_critical: 30, high_critical: 90 } },
+            creatinine: { male: { warning: 1.3, critical: 2.0 }, female: { warning: 1.1, critical: 2.0 } }
+        };
+        function colorAlerta(lab, val, sex, banda) {
+            const t = UMBRALES[lab];
+            if (!t || isNaN(val)) return '#0f172a';
+            if (lab === 'hdl') {
+                const s = sex === 'male' ? t.male : t.female;
+                if (val > s.high_critical || val < s.low_critical) return '#dc2626';
+                if (val < s.low_warning) return '#eab308';
+                return '#22c55e';
+            }
+            if (lab === 'creatinine') {
+                const s = sex === 'male' ? t.male : t.female;
+                if (val >= s.critical) return '#dc2626';
+                if (val >= s.warning) return '#eab308';
+                return '#22c55e';
+            }
+            if (lab === 'ldl' && banda) {
+                const b = banda.toLowerCase();
+                if (b.includes('muy alto')) { if (val >= 190) return '#dc2626'; if (val >= 55) return '#eab308'; return '#22c55e'; }
+                if (b.includes('alto')) { if (val >= 190) return '#dc2626'; if (val >= 70) return '#eab308'; return '#22c55e'; }
+                if (b.includes('moderad')) { if (val >= 190) return '#dc2626'; if (val >= 100) return '#eab308'; return '#22c55e'; }
+            }
+            if (lab === 'glucose') {
+                if (val < t.low_critical || val >= t.critical || (t.severe && val >= t.severe)) return '#dc2626';
+                if (val < t.low_warning || val >= t.warning) return '#eab308';
+                return '#22c55e';
+            }
+            if (lab === 'hba1c') {
+                if (val >= t.critical) return '#dc2626';
+                if (val >= t.warning) return '#eab308';
+                return '#22c55e';
+            }
+            if (val >= (t.severe || t.critical)) return '#dc2626';
+            if (val >= t.warning) return '#eab308';
+            return '#22c55e'; // normal
+        }
         // Aplica min/max HTML a cada input según RANGES.
         function aplicarLimites() {
             for (const id in RANGES) {
@@ -690,30 +826,32 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         function validarCampo(id) {
             const el = document.getElementById(id);
             if (!el || !RANGES[id]) return;
+            el.classList.remove('input-invalid', 'input-valid');
             const v = parseFloat(el.value);
             const [mn, mx] = RANGES[id];
-            if (el.value === '' || isNaN(v)) { if (OPTIONAL.includes(id)) { el.classList.remove('input-invalid'); el.removeAttribute('title'); return; } el.classList.add('input-invalid'); el.title = 'Campo obligatorio'; return; }
-            if (v < mn || v > mx) { el.classList.add('input-invalid'); el.title = 'Fuera de rango (' + mn + '–' + mx + ')'; }
-            else { el.classList.remove('input-invalid'); el.removeAttribute('title'); }
+            if (el.value === '' || isNaN(v)) { if (OPTIONAL.includes(id)) { return; } el.classList.add('input-invalid'); el.title = 'Campo obligatorio'; return; }
+            if (v < mn || v > mx) { el.classList.add('input-invalid'); el.title = 'Fuera de rango (' + mn + '"-' + mx + ')'; }
+            else { el.classList.add('input-valid'); el.removeAttribute('title'); }
         }
         // Validación cruzada del formulario. Devuelve [] si OK o lista de errores legibles.
         function validar() {
             const errs = [];
             for (const id in RANGES) {
                 const el = document.getElementById(id);
-                el.classList.remove('input-invalid');
+                el.classList.remove('input-invalid', 'input-valid');
                 const name = el.dataset.label || id;
                 const v = parseFloat(el.value);
                 const [mn, mx] = RANGES[id];
                 if (el.value === '' || isNaN(v)) { if (OPTIONAL.includes(id)) continue; errs.push(name); el.classList.add('input-invalid'); continue; }
-                if (v < mn || v > mx) { errs.push(name + ' (rango ' + mn + '–' + mx + ')'); el.classList.add('input-invalid'); }
+                if (v < mn || v > mx) { errs.push(name + ' (rango ' + mn + '"-' + mx + ')'); el.classList.add('input-invalid'); }
+                else el.classList.add('input-valid');
             }
             if (!valRadio('sex')) errs.push('Sexo Biológico (seleccione una opción)');
             if (!valRadio('smoker')) errs.push('Tabaquismo (seleccione una opción)');
             const tc = parseFloat(document.getElementById('tc').value);
             const hdl = parseFloat(document.getElementById('hdl').value);
             const ldlV = parseFloat(document.getElementById('ldl').value);
-            if (!isNaN(hdl) && !isNaN(ldlV) && hdl > ldlV) errs.push('HDL > LDL (inconsistente)');
+            if (!isNaN(hdl) && !isNaN(ldlV) && hdl > ldlV) crit.push('HDL > LDL: clínicamente posible, verifique si corresponde.');
             if (!isNaN(hdl) && !isNaN(tc) && hdl > tc) errs.push('HDL > Col. Total (inconsistente)');
             return errs;
         }
@@ -728,17 +866,149 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         // Lee el valor seleccionado de un grupo de radio buttons (sexo, tabaquismo).
         function valRadio(name) { const el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
 
-        // MODELO Y COEFICIENTES (documentados)
-        // Base lineal de riesgo adaptada de los factores del PCE 2013 / SCORE2 (ESC 2021),
-        // calibrada para población local. NO es la ecuación oficial SCORE2.
-        // TFG: ecuación CKD-EPI 2021 (Ann Intern Med. 2021;76:340-350).
-        const MODEL = {
-            base:    { age: 0.18, smoker: 4.5, sbp: 0.12, tc: 0.04, hdl: 0.05, dm: 3.0 },
-            pce:     { opt: 0.25, chd: 0.58, stroke: 0.42 },
-            prev:    { total: 1.15, erc: 3, imc: 2, icAge: 0.09, icSbp: 0.14, icImc: 3.5, icDm: 2.5, icCr: 2.0 },
-            lpaThreshold: 30, lpaFactor: 0.009,
-            pctRedToRisk: 0.5
+        // =========================================================================
+        // MODELOS DE RIESGO: SCORE2 (ESC 2021) y PREVENT (AHA 2024)
+        // Convertir mg/dL a mmol/L
+        const MGDL_TO_MMOL = 38.67;
+
+        // Parámetros Weibull de recalibración SCORE2 por región/sexo/edad
+        // scale1 = gamma (location), scale2 = delta (shape)
+        const S2_PARAMS = {
+            male: {
+                under70: { low: [-0.5699,0.7476], moderate:[-0.1565,0.8009], high:[0.3207,0.9360], very_high:[0.5836,0.8294] },
+                over70:  { low: [-0.34,1.19],     moderate:[0.01,1.25],      high:[0.08,1.15],    very_high:[0.05,0.7] }
+            },
+            female: {
+                under70: { low: [-0.7380,0.7019], moderate:[-0.3143,0.7701], high:[0.5710,0.9369], very_high:[0.9412,0.8329] },
+                over70:  { low: [-0.52,1.01],     moderate:[-0.1,1.1],       high:[0.38,1.09],     very_high:[0.38,0.69] }
+            }
         };
+
+        // Coeficientes de regresión SCORE2 (<70 años)
+        const S2_COEF = {
+            male:   [0.3742,0.6012,0.2777,0.6457,0.1458,-0.2698, -0.0755,-0.0255,-0.0281,0.0426,-0.0983],
+            female: [0.4648,0.7744,0.3131,0.8096,0.1002,-0.2606, -0.1088,-0.0277,-0.0226,0.0613,-0.1272]
+        };
+        // SCORE2-OP (≥70 años)
+        const S2_OP_COEF = {
+            male:   [0.0634,0.4245,0.3524,0.0094,0.0850,-0.3564, -0.0174,-0.0247,-0.0005,0.0073,0.0091],
+            female: [0.0789,0.6010,0.4921,0.0102,0.0605,-0.3040, -0.0107,-0.0255,-0.0004,-0.0009,0.0154]
+        };
+        // Baseline survival S₀(10) para SCORE2 y SCORE2-OP
+        const S2_S0 = { male: 0.9605, female: 0.9776 };
+        const S2_OP_S0 = { male: 0.7576, female: 0.8082 };
+        const S2_OP_OFFSET = { male: 0.0929, female: 0.229 };
+
+        // Coeficientes SCORE2-Diabetes (extiende SCORE2)
+        const S2_DM_COEF = {
+            male:   [0.5368,0.4774,0.1322,0.6457,0.1102,-0.1087, -0.0672,-0.0268,-0.0983,-0.0181,0.0095, -0.0998,0.0955,-0.0591,0.0058,-0.0134,0.0115],
+            female: [0.6624,0.6139,0.1421,0.8096,0.1127,-0.1568, -0.1122,-0.0167,-0.1272,-0.0200,0.0186, -0.1180,0.1173,-0.0640,0.0062,-0.0196,0.0169]
+        };
+        // S₀ para DM es el mismo que SCORE2 base
+        const S2_DM_OFFSET_LP = { male: 0, female: 0 };
+
+        // PREVENT (AHA 2024) — coeficientes de regresión Cox
+        // Khan et al. Circulation 2024;149:430–449
+        const PREV_COEF = {
+            // lnHR para predictores base: [age10, female, sbp20, tc40, hdl5, dm, smoker, bmi5, htnTx, dm×age, smoker×age]
+            baseCVD: { male:   [0.4305,-0.1234,0.1322,0.0514,-0.0496,0.3222,0.3864,0.0769,0.1445,-0.0523,-0.0492],
+                      female: [0.5169,0,      0.1659,0.0799,-0.0890,0.3988,0.4815,0.0828,0.1634,-0.0698,-0.0587] },
+            // lnHR adicionales: [eGFR15, logACR, hba1c, statin, aspirin]
+            optCVD: { male:   [0.1233,0.1055,0.0511,-0.0748,-0.0456],
+                     female: [0.1088,0.1122,0.0622,-0.0689,-0.0439] },
+            // Baseline survival S₀(10)
+            S0_cvd: { male: 0.9471, female: 0.9667 }
+        };
+
+        // Calcula SCORE2 y SCORE2-OP
+        function calcScore2(age, sex, smoker, sbp, tc, hdl, region, useDm, dmAge, hba1c, egfr) {
+            const tcM = tc / MGDL_TO_MMOL, hdlM = hdl / MGDL_TO_MMOL;
+            const smk = smoker === 'yes' ? 1 : 0;
+            const dm = useDm ? 1 : 0;
+            const isMale = sex === 'male';
+            const sexK = isMale ? 'male' : 'female';
+
+            let lp, s0, offset;
+            if (age >= 70) {
+                // SCORE2-OP
+                const R = S2_OP_COEF[sexK];
+                const a73 = (age - 73);
+                lp = R[0]*a73 + R[1]*dm + R[2]*smk + R[3]*(sbp-150) + R[4]*(tcM-6) + R[5]*(hdlM-1.4) +
+                     R[6]*a73*dm + R[7]*a73*smk + R[8]*a73*(sbp-150) + R[9]*a73*(tcM-6) + R[10]*a73*(hdlM-1.4);
+                s0 = S2_OP_S0[sexK];
+                offset = S2_OP_OFFSET[sexK];
+            } else {
+                // SCORE2 base (con o sin DM)
+                if (useDm && hba1c > 0 && egfr > 0) {
+                    // SCORE2-Diabetes
+                    const R = S2_DM_COEF[sexK];
+                    const a5 = (age - 60)/5;
+                    const sbp20 = (sbp - 120)/20;
+                    const tc1 = (tcM - 6)/1;
+                    const hdl05 = (hdlM - 1.3)/0.5;
+                    const da5 = dmAge > 0 ? (dmAge - 50)/5 : 0;
+                    const hba1cStd = (hba1c - 31)/9.34;
+                    const egfrLog = (Math.log(egfr) - 4.5)/0.15;
+                    lp = R[0]*a5 + R[1]*smk + R[2]*sbp20 + R[3]*dm + R[4]*tc1 + R[5]*hdl05 +
+                         R[6]*a5*smk + R[7]*a5*sbp20 + R[8]*a5*dm + R[9]*a5*tc1 + R[10]*a5*hdl05 +
+                         R[11]*dm*da5 + R[12]*hba1cStd + R[13]*egfrLog + R[14]*egfrLog*egfrLog +
+                         R[15]*hba1cStd*a5 + R[16]*egfrLog*a5;
+                    s0 = S2_S0[sexK];
+                    offset = 0;
+                } else {
+                    const R = S2_COEF[sexK];
+                    const a5 = (age - 60)/5;
+                    const sbp20 = (sbp - 120)/20;
+                    const tc1 = (tcM - 6)/1;
+                    const hdl05 = (hdlM - 1.3)/0.5;
+                    lp = R[0]*a5 + R[1]*smk + R[2]*sbp20 + R[3]*dm + R[4]*tc1 + R[5]*hdl05 +
+                         R[6]*a5*smk + R[7]*a5*sbp20 + R[8]*a5*tc1 + R[9]*a5*hdl05 + R[10]*a5*dm;
+                    s0 = S2_S0[sexK];
+                    offset = 0;
+                }
+            }
+            const uncal = 1 - Math.pow(s0, Math.exp(lp - offset));
+            // Recalibración Weibull por región
+            const ageGroup = age >= 70 ? 'over70' : 'under70';
+            const [s1, s2] = S2_PARAMS[sexK][ageGroup][region] || [0, 1];
+            const risk = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - Math.max(0.001, Math.min(0.999, uncal))))));
+            return Math.min(99.9, Math.max(0.1, risk * 100));
+        }
+
+        // Calcula PREVENT (AHA 2024) — riesgo ECV total a 10 años
+        function calcPrevent(age, sex, smoker, sbp, tc, hdl, dm, bmi, egfr, acr, hba1c, lpa) {
+            const isMale = sex === 'male';
+            const sexK = isMale ? 'male' : 'female';
+            const smk = smoker === 'yes' ? 1 : 0;
+            const dmBin = dm !== 'none' ? 1 : 0;
+            const tcM = tc / MGDL_TO_MMOL;
+            const hdlM = hdl / MGDL_TO_MMOL;
+            const egfrV = egfr || 90;
+            const acrV = acr || 10;
+            const hba1cV = hba1c || 5.5;
+            const logA1c = Math.log(hba1cV);
+
+            // Base CVD (incluye IAM, ACV, IC)
+            const B = PREV_COEF.baseCVD[sexK];
+            const age10 = (age - 55)/10;
+            const sbp20 = (sbp - 120)/20;
+            const tc40 = (tcM - 5)/1;
+            const hdl5 = (hdlM - 1.3)/0.5;
+            const bmi5 = (bmi - 28)/5;
+            const lpBase = B[0]*age10 + B[1]*(isMale?0:1) + B[2]*sbp20 + B[3]*tc40 + B[4]*hdl5 +
+                           B[5]*dmBin + B[6]*smk + B[7]*bmi5 + B[8]*1 +
+                           B[9]*dmBin*age10 + B[10]*smk*age10;
+
+            // CKD add-on (si eGFR <60)
+            const O = PREV_COEF.optCVD[sexK];
+            const egfr15 = egfrV < 60 ? (egfrV - 45)/15 : 0;
+            const logAcr = Math.log(Math.max(acrV, 5));
+            const lpAdd = O[0]*egfr15 + O[1]*(logAcr - 3.5)/1.2;
+
+            const s0 = PREV_COEF.S0_cvd[sexK];
+            const risk = 1 - Math.pow(s0, Math.exp(Math.min(5, Math.max(-3, lpBase + lpAdd))));
+            return Math.min(99.9, Math.max(0.1, risk * 100));
+        }
 
         // Reúne todos los inputs (numéricos y selects) en un objeto plano.
         function leerEntradas() {
@@ -756,14 +1026,13 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 height: num('height') / 100, acr: num('acr'),
                 sca: sel('sca_status'), eva: sel('eva_status'), dm: sel('dm_status'),
                 erc: sel('erc_status'), hf: sel('hf_status'),
-                subclinic: sel('subclinic_status'), fragile: sel('fragile_status')
+                subclinic: sel('subclinic_status'), fragile: sel('fragile_status'),
+                riskRegion: sel('risk_region')
             };
         }
 
         // Cálculo puro del riesgo (sin DOM). Devuelve todos los resultados en un objeto.
-        // Metas LDL según ESC 2021: Muy Alto=55, Alto=70, Moderado=100 mg/dL (ver MODEL).
         function calcularRiesgo(i) {
-            const M = MODEL;
             const imc = i.weight / (i.height * i.height);
 
             const k = (i.sex === 'female') ? 0.7 : 0.9;
@@ -772,32 +1041,42 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             if (i.sex === 'female') tfg *= 1.012;
             const tfgStr = Math.round(tfg) + " mL/min/1.73m²";
 
-            let metaLdl = 100, criterio = "Prevención Primaria";
-            if (i.sca !== 'none') { metaLdl = 55; criterio = "Antecedente de Síndrome Coronario Agudo (SCA)"; }
-            else if (i.eva === 'two_episodes') { metaLdl = 40; criterio = "Múltiples eventos vasculares agudos clínicos"; }
+            // Asignar región de riesgo (Venezuela ≈ High, salvo selección explícita)
+            const region = i.riskRegion || 'high';
+
+            // --- SCORE2 (ESC 2021) ---
+            const tieneDm = i.dm !== 'none';
+            const tieneDm2 = i.dm !== 'none' && (i.dm === 'mild' || i.dm === 'mod');
+            const score2 = calcScore2(i.age, i.sex, i.smoker, i.sbp, i.tc, i.hdl, region,
+                                       tieneDm, i.age, i.hba1c || 5.5, tfg);
+
+            // --- PREVENT (AHA 2024) ---
+            const prevent = calcPrevent(i.age, i.sex, i.smoker, i.sbp, i.tc, i.hdl, i.dm, imc, tfg, i.acr, i.hba1c, i.lpa);
+
+            // Metas LDL según ESC 2021/2023
+            let metaLdl = 100, criterio = "Prevención Primaria — Riesgo Bajo";
+            if (i.eva === 'two_episodes') { metaLdl = 40; criterio = "Múltiples eventos vasculares agudos clínicos"; }
+            else if (i.sca !== 'none') { metaLdl = 55; criterio = "Antecedente de Síndrome Coronario Agudo (SCA)"; }
             else if (i.eva === 'one_risk' || i.dm.includes('severe') || i.erc === 'g4' || i.hf === 'hf_eva') { metaLdl = 55; criterio = "Riesgo Muy Alto Clínico"; }
             else if (i.dm === 'mod' || i.hf !== 'none' || i.erc.includes('g3') || i.subclinic === 'sev') { metaLdl = 70; criterio = "Riesgo Alto"; }
             else if (i.dm === 'mild' || i.subclinic === 'mod' || i.sbp >= 160 || i.ldl >= 190) { metaLdl = 100; criterio = "Riesgo Moderado"; }
             if (i.fragile === 'yes') { metaLdl += 20; criterio += " (Ajuste por paciente frágil/anciano)"; }
 
-            let baseR = (i.age * M.base.age) + (i.smoker === 'yes' ? M.base.smoker : 0) + ((i.sbp - 110) * M.base.sbp) + ((i.tc - 150) * M.base.tc) - (i.hdl * M.base.hdl) + (i.dm !== 'none' ? M.base.dm : 0);
-            baseR = Math.max(1.0, Math.min(baseR, 60.0));
+            // Bandas SCORE2 ajustadas por edad
+            function bandaScore2(r, age) {
+                if (age < 50) { if (r < 2.5) return 'BAJO'; if (r < 7.5) return 'MODERADO'; return 'ALTO'; }
+                if (age < 70) { if (r < 5) return 'BAJO'; if (r < 10) return 'MODERADO'; if (r < 20) return 'ALTO'; return 'MUY ALTO'; }
+                { if (r < 7.5) return 'BAJO'; if (r < 15) return 'MODERADO'; if (r < 20) return 'ALTO'; return 'MUY ALTO'; }
+            }
+            function bandaPrevent(r) {
+                if (r < 5) return 'BAJO'; if (r < 10) return 'MODERADO'; if (r < 20) return 'ALTO'; return 'MUY ALTO';
+            }
 
-            const optPCE = Math.max(0.8, baseR * M.pce.opt);
-            const chdR = baseR * M.pce.chd;
-            const strokeR = baseR * M.pce.stroke;
+            const b2 = { t: bandaScore2(score2, i.age), c: bandaRiesgo(score2).c };
+            const bP = { t: bandaPrevent(prevent), c: bandaRiesgo(prevent).c };
 
-            let prevTotal = baseR * M.prev.total + (i.erc !== 'none' ? M.prev.erc : 0) + (imc > 30 ? M.prev.imc : 0);
-            let prevIC = (i.age * M.prev.icAge) + ((i.sbp - 120) * M.prev.icSbp) + (imc > 28 ? M.prev.icImc : 1.0) + (i.dm !== 'none' ? M.prev.icDm : 0) + (i.cr > 1.2 ? M.prev.icCr : 0);
-            // Riesgo residual estimado con tratamiento óptimo (heurística: ~30% ECV, ~35% IC). No es valor de guía.
-            let optPrevTotal = prevTotal * 0.30;
-            let optPrevIC = prevIC * 0.35;
-
-            const factorLpa = 1 + (Math.max(0, i.lpa - M.lpaThreshold) * M.lpaFactor);
-            const infartoSin = chdR;
-            const infartoCon = chdR * factorLpa;
-
-            const b = bandaRiesgo(prevTotal);
+            // Lp(a) modulation
+            const factorLpa = i.lpa > 30 ? 1 + (i.lpa - 30) * 0.005 : 1;
 
             const crit = [];
             if (i.sbp > 180) crit.push('PAS > 180 mmHg (urgencia/crisis hipertensiva)');
@@ -808,99 +1087,81 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             if (i.age > 80) crit.push('Edad > 80 años (valorar fragilidad/beneficio)');
 
             const dataFila = [
-                { n: "Riesgo de ASCVD compuesto con ecuaciones PCE 2013", a: baseR, o: optPCE },
-                { n: "Riesgo aislado de Enfermedad Coronaria (Infarto Miocárdico)", a: chdR, o: optPCE * M.pce.chd },
-                { n: "Riesgo aislado de Accidente Cerebrovascular (Isquémico/Hemorrágico)", a: strokeR, o: optPCE * M.pce.stroke },
-                { n: "Riesgo a 10 años Enf. Cardiovascular Total (ECVA o IC)", a: prevTotal, o: optPrevTotal },
-                { n: "SCORE PREVENT: Riesgo de Hospitalización por Insuficiencia Cardíaca", a: prevIC, o: optPrevIC }
+                { n: "SCORE2 — Riesgo ECV total (IAM+ACV) a 10a (ESC 2021)", a: score2, o: score2 * 0.4 },
+                { n: "PREVENT — Riesgo ECV total + IC a 10a (AHA 2024)", a: prevent, o: prevent * 0.4 }
             ];
 
+            // Contribución de factores (aproximación lineal para visual, no puntuación exacta)
             const contribuciones = [
-                { f: "Edad " + i.age + "a", v: (i.age - 40) * M.base.age },
-                { f: "PAS " + i.sbp, v: (i.sbp - 120) * M.base.sbp },
-                { f: "Tabaquismo", v: i.smoker === 'yes' ? M.base.smoker : -1.0, p: i.smoker === 'no' },
-                { f: "Col Total " + i.tc, v: (i.tc - 150) * M.base.tc },
-                { f: "HDL " + i.hdl, v: (50 - i.hdl) * M.base.hdl, p: i.hdl >= 50 },
-                { f: "Diabetes", v: i.dm !== 'none' ? M.base.dm : -0.5, p: i.dm === 'none' }
+                { f: "Edad " + i.age + "a", v: Math.min(15, (i.age - 40) * 0.4) },
+                { f: "PAS " + i.sbp, v: Math.min(10, (i.sbp - 120) * 0.15) },
+                { f: "Tabaquismo", v: i.smoker === 'yes' ? 5 : -1, p: i.smoker === 'no' },
+                { f: "Col Total " + i.tc, v: Math.min(5, (i.tc - 150) * 0.03) },
+                { f: "HDL " + i.hdl, v: Math.min(5, (50 - i.hdl) * 0.1), p: i.hdl >= 50 },
+                { f: "Diabetes", v: i.dm !== 'none' ? 4 : -0.5, p: i.dm === 'none' }
             ];
 
             const pctRed = Math.max(0, ((i.ldl - metaLdl) / i.ldl) * 100);
-            const strRed = pctRed > 0 ? pctRed.toFixed(0) + "% ↓" : "En Meta";
+            const strRed = pctRed > 0 ? pctRed.toFixed(0) + '%' : 'En Meta';
+            const pctRedToRisk = 0.5;
             const mejora = pctRed > 0
-                ? `Reduciendo el LDL hacia la meta de ${metaLdl} mg/dL, se proyecta una disminución del riesgo del ${(pctRed * M.pctRedToRisk).toFixed(0)}%. Considerar terapia hipolipemiante intensiva según juicio clínico.`
+                ? `Reduciendo el LDL hacia la meta de ${metaLdl} mg/dL, se proyecta una disminución del riesgo del ${(pctRed * pctRedToRisk).toFixed(0)}%. Considerar terapia hipolipemiante intensiva según juicio clínico.`
                 : "Paciente en metas lipídicas óptimas. El riesgo aterotrombótico se encuentra reducido. Continuar medidas actuales.";
 
-            return { i, imc, tfgStr, metaLdl, criterio, baseR, optPCE, chdR, strokeR,
-                     prevTotal, prevIC, optPrevTotal, optPrevIC, infartoSin, infartoCon,
-                     b, crit, dataFila, contribuciones, strRed, mejora };
+            return { i, imc, tfgStr, metaLdl, criterio, score2, prevent, b2, bP,
+                     crit, dataFila, contribuciones, strRed, mejora, factorLpa,
+                     region, bandaECV: b2.t };
         }
 
         // Vuelca todos los resultados del cálculo en la interfaz (vista web + vista impresión).
         function renderResultados(r) {
-            const { i, imc, tfgStr, metaLdl, criterio, prevTotal, prevIC, optPrevTotal, optPrevIC,
-                    infartoSin, infartoCon, b, crit, dataFila, contribuciones, strRed, mejora } = r;
+            const { i, imc, tfgStr, metaLdl, criterio, score2, prevent, b2, bP,
+                    crit, dataFila, contribuciones, strRed, mejora, factorLpa } = r;
 
             document.getElementById('w_tfg').innerText = tfgStr;
-            document.getElementById('p_tfg').innerText = tfgStr;
             document.getElementById('w_meta').innerText = "< " + metaLdl + " mg/dL";
-            document.getElementById('p_meta_ldl').innerText = "< " + metaLdl;
-            document.getElementById('p_comorb').innerText = criterio;
-            // Detalle de condiciones marcadas (etiquetas cortas para el PDF).
             const COND = {
                 sca: { ua: 'Angina inestable', nstemi: 'IMSEST', stemi: 'IMCEST' },
-                eva: { two_episodes: 'EVA ≥2 episodios', one_risk: 'EVA 1 episodio + FR' },
-                dm: { mild: 'DM leve', mod: 'DM moderada', severe_fg: 'DM grave (FG <45)', severe_acr: 'DM grave (FG 45–59 + ACR)', severe_prot: 'DM grave (proteinuria)', severe_multi: 'DM grave (polimicrovascular)' },
+                eva: { two_episodes: 'EVA =2 episodios', one_risk: 'EVA 1 episodio + FR' },
+                dm: { mild: 'DM leve', mod: 'DM moderada', severe_fg: 'DM grave (FG <45)', severe_acr: 'DM grave (FG 45"-59 + ACR)', severe_prot: 'DM grave (proteinuria)', severe_multi: 'DM grave (polimicrovascular)' },
                 erc: { g3_a1: 'ERC G3a-A1', g3a_a2: 'ERC G3a-A2', g1_a2: 'ERC G1-A2', g4: 'ERC G4', g3b_a2: 'ERC G3b-A2' },
                 hf: { hf_isolated: 'HF', hf_3factors: 'HF + 3 factores', hf_eva: 'HF + evento vascular' },
                 subclinic: { mod: 'Afectación subclínica moderada', sev: 'Afectación subclínica severa' },
                 fragile: { yes: 'Paciente frágil' }
             };
             const conds = ['sca', 'eva', 'dm', 'erc', 'hf', 'subclinic', 'fragile'].map(k => COND[k][i[k]]).filter(Boolean);
-            document.getElementById('p_condiciones').innerText = conds.length ? conds.join(' · ') : 'Sin comorbilidades reportadas';
 
-            document.getElementById('w_prev_total').innerText = prevTotal.toFixed(1) + "%";
-            document.getElementById('w_prev_ic').innerText = prevIC.toFixed(1) + "%";
-            document.getElementById('w_prev_tot_opt').innerText = optPrevTotal.toFixed(1) + "%";
-            document.getElementById('w_prev_ic_opt').innerText = optPrevIC.toFixed(1) + "%";
-            document.getElementById('p_prev_total').innerText = prevTotal.toFixed(1) + "%";
-            document.getElementById('p_prev_ic').innerText = prevIC.toFixed(1) + "%";
-            document.getElementById('p_prev_tot_opt').innerText = optPrevTotal.toFixed(1) + "%";
-            document.getElementById('p_prev_ic_opt').innerText = optPrevIC.toFixed(1) + "%";
+            // SCORE2
+            document.getElementById('w_score2_total').innerText = score2.toFixed(1) + "%";
+            // PREVENT
+            document.getElementById('w_prevent_total').innerText = prevent.toFixed(1) + "%";
 
+            const bandaPrimaria = score2 >= prevent ? b2 : bP;
             const wBand = document.getElementById('w_band');
-            wBand.textContent = b.t + ' (' + prevTotal.toFixed(1) + '%)';
-            wBand.style.color = b.c;
+            wBand.textContent = bandaPrimaria.t;
+            wBand.style.color = bandaPrimaria.c;
+            const riesgoPrimario = Math.max(score2, prevent);
             const g = document.getElementById('w_gauge');
-            g.style.width = Math.min(100, prevTotal) + '%';
-            g.style.background = b.c;
-            g.parentElement.setAttribute('aria-valuenow', prevTotal.toFixed(1));
-            document.getElementById('scorePanel').style.borderLeft = '10px solid ' + b.c;
-            document.getElementById('p_band').textContent = b.t; // sin color: el PDF se imprime mayormente en B/N
-            document.getElementById('p_gauge').style.width = Math.min(100, prevTotal) + '%';
+            g.style.width = Math.min(100, riesgoPrimario) + '%';
+            g.style.background = bandaPrimaria.c;
+            g.parentElement.setAttribute('aria-valuenow', riesgoPrimario.toFixed(1));
+            document.getElementById('scorePanel').style.borderLeft = '10px solid ' + bandaPrimaria.c;
 
             const ab = document.getElementById('alert_box');
-            if (crit.length) { ab.innerHTML = '⚠ Valores críticos: ' + crit.join('  •  '); ab.classList.remove('hidden'); }
+            if (crit.length) { ab.innerHTML = '&#9888; Valores críticos: ' + crit.join(' &#8226; '); ab.classList.remove('hidden'); }
             else ab.classList.add('hidden');
-            const pc = document.getElementById('p_crit');
-            if (crit.length) { pc.textContent = '⚠ Valores críticos: ' + crit.join(' • '); pc.style.display = 'block'; }
-            else pc.style.display = 'none';
-
             let htmlT = "", htmlTP = "";
             dataFila.forEach(row => {
                 htmlT += `<tr><td class="p-3 border-b">${row.n}</td><td class="p-3 border-b text-center font-bold text-red-600">${row.a.toFixed(1)}%</td><td class="p-3 border-b text-center font-bold text-emerald-600">${row.o.toFixed(1)}%</td></tr>`;
-                let nombreImpresion = row.n === "SCORE PREVENT: Riesgo de Hospitalización por Insuficiencia Cardíaca"
-                    ? "Riesgo de Hospitalización por Insuficiencia Cardíaca"
-                    : row.n;
-                htmlTP += `<tr><td>${nombreImpresion}</td><td style="text-align: center; font-weight: bold; color: #dc2626;">${row.a.toFixed(1)}%</td><td style="text-align: center; font-weight: bold; color: #059669;">${row.o.toFixed(1)}%</td></tr>`;
+                htmlTP += `<tr><td>${row.n}</td><td style="text-align: center; font-weight: bold; color: #dc2626;">${row.a.toFixed(1)}%</td><td style="text-align: center; font-weight: bold; color: #059669;">${row.o.toFixed(1)}%</td></tr>`;
             });
             document.getElementById('w_table_body').innerHTML = htmlT;
-            document.getElementById('p_table_body').innerHTML = htmlTP;
 
+            // Lp(a) modulation
+            const infartoSin = score2;
+            const infartoCon = Math.min(99.9, score2 * factorLpa);
             document.getElementById('w_inf_sin').innerText = infartoSin.toFixed(1) + "%";
             document.getElementById('w_inf_con').innerText = infartoCon.toFixed(1) + "%";
-            document.getElementById('p_inf_sin').innerText = infartoSin.toFixed(1) + "%";
-            document.getElementById('p_inf_con').innerText = infartoCon.toFixed(1) + "%";
-            document.getElementById('p_inf_delta').innerText = infartoSin > 0 ? '+' + (((infartoCon / infartoSin) - 1) * 100).toFixed(0) + '%' : '—';
 
             let cHtml = "", cpHtml = "";
             contribuciones.forEach(c => {
@@ -909,58 +1170,154 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 let val = Math.abs(c.v).toFixed(1);
                 cHtml += `<div class="flex justify-between items-center bg-slate-50 p-2 border border-slate-100 rounded"><span>${c.f}:</span> <strong class="${colorWeb} text-sm">${sign}${val}%</strong></div>`;
                 let hexColor = c.p || c.v <= 0 ? '#059669' : '#dc2626';
-                cpHtml += `<div style="display:flex; justify-content:space-between; border-bottom: 1px dashed #cbd5e1; padding: 3px 0;"><span>${c.f}:</span> <strong style="color: ${hexColor};">${sign}${val}%</strong></div>`;
+                cpHtml += `<div style="display:flex; justify-content:space-between; align-items:center; padding: 3px 4px;"><span style="font-size:0.95em;">${c.f}:</span> <strong style="color: ${hexColor}; font-size:1.15em;">${sign}${val}%</strong></div>`;
             });
             document.getElementById('w_contrib_factors').innerHTML = cHtml;
-            document.getElementById('p_contrib_factors').innerHTML = cpHtml;
 
             document.getElementById('w_strat_pct').innerText = strRed;
-            document.getElementById('p_pct_ldl').innerText = strRed;
             document.getElementById('w_strat_improv').innerText = mejora;
-            document.getElementById('p_risk_red').innerText = mejora;
-
-            document.getElementById('p_age_sex').innerText = `${i.age} Años / ${i.sex === 'male' ? 'Masc.' : 'Fem.'}`;
-            // Nombre/médico: si se llenaron en el formulario van impresos; si no, línea para escribir a mano.
-            document.getElementById('p_paciente').innerText = i.patientName || '______________________________';
-            document.getElementById('p_medico').innerText = i.doctorName || '______________________________';
-            document.getElementById('p_smoker').innerText = i.smoker === 'yes' ? 'Fumador Activo' : 'No Fumador';
-            document.getElementById('p_antrop').innerText = `${i.weight} kg / ${i.height * 100} cm`;
-            document.getElementById('p_imc').innerText = imc.toFixed(1);
-            document.getElementById('p_tc').innerText = i.tc;
-            document.getElementById('p_ldl').innerText = i.ldl;
-            document.getElementById('p_hdl').innerText = i.hdl;
-            document.getElementById('p_nohdl').innerText = (i.tc - i.hdl);
-            document.getElementById('p_tg').innerText = isNaN(i.tg) ? '—' : i.tg;
-            document.getElementById('p_gl').innerText = isNaN(i.glucose) ? '—' : i.glucose;
-            document.getElementById('p_hba1c').innerText = isNaN(i.hba1c) ? '—' : i.hba1c + "%";
-            document.getElementById('p_cr').innerText = i.cr;
-            document.getElementById('p_acr').innerText = isNaN(i.acr) ? '—' : i.acr;
-            document.getElementById('p_lpa').innerText = i.lpa ? i.lpa + " mg/dL" : '—';
 
             const sexo = i.sex === 'male' ? 'Varón' : 'Mujer';
-            const narrativa = sexo + ' de ' + i.age + ' años. Riesgo cardiovascular ' + b.t + ' a 10 años: ' + prevTotal.toFixed(1) + '%. ' +
-                'Con tratamiento óptimo podría reducirse a ~' + optPrevTotal.toFixed(1) + '%. ' +
-                'Meta LDL sugerida: < ' + metaLdl + ' mg/dL (' + criterio + ').';
+            const riesgoEvitable = (riesgoPrimario * 0.6).toFixed(1);
+            const narrativa = 'Perfil de Riesgo: Paciente ' + sexo.toLowerCase() + ' de ' + i.age + ' años categorizado en Riesgo ' + bandaPrimaria.t + '. ' +
+                'SCORE2 (ESC 2021): ' + score2.toFixed(1) + '% | PREVENT (AHA 2024): ' + prevent.toFixed(1) + '%. ' +
+                'Oportunidad Terapéutica: Con control intensivo de C-LDL (Meta < ' + metaLdl + ' mg/dL) y optimización de PA, es posible prevenir hasta un ' + riesgoEvitable + '% de riesgo absoluto. ' +
+                'Estrategia sugerida: Iniciar/titular estatina de alta potencia ± Ezetimiba según perfil lipídico y tolerancia.';
             const wNarr = document.getElementById('w_narrativa');
             wNarr.textContent = narrativa;
-            wNarr.parentElement.style.borderLeft = '6px solid ' + b.c;
-            document.getElementById('p_narrativa').innerText = narrativa;
+            wNarr.parentElement.style.borderLeft = '6px solid ' + bandaPrimaria.c;
+
+            // PDF NUEVO (p2_ IDs)
+            try {
+            document.getElementById('p2_fecha').textContent = new Date().toLocaleDateString('es-ES');
+            document.getElementById('p2_paciente').innerText = i.patientName || '______________________________';
+            document.getElementById('p2_medico').innerText = i.doctorName || '______________________________';
+            document.getElementById('p2_medico_sub').innerText = i.doctorName || '______________________________';
+            document.getElementById('p2_age_sex').innerText = `${i.age} Años / ${i.sex === 'male' ? 'Masc.' : 'Fem.'}`;
+            document.getElementById('p2_smoker').innerText = i.smoker === 'yes' ? 'Fumador Activo' : 'No Fumador';
+            document.getElementById('p2_antrop').innerText = `${i.weight} kg / ${i.height * 100} cm`;
+            document.getElementById('p2_imc').innerText = imc.toFixed(1);
+            document.getElementById('p2_tc').innerText = i.tc + ' mg/dL';
+            document.getElementById('p2_ldl').innerText = i.ldl + ' mg/dL';
+            document.getElementById('p2_hdl').innerText = i.hdl + ' mg/dL';
+            document.getElementById('p2_nohdl').innerText = (i.tc - i.hdl) + ' mg/dL';
+            document.getElementById('p2_tg').innerText = isNaN(i.tg) ? '—' : i.tg + ' mg/dL';
+            document.getElementById('p2_gl').innerText = isNaN(i.glucose) ? '—' : i.glucose + ' mg/dL';
+            document.getElementById('p2_hba1c').innerText = isNaN(i.hba1c) ? '—' : i.hba1c + '%';
+            document.getElementById('p2_cr').innerText = i.cr + ' mg/dL';
+            document.getElementById('p2_acr').innerText = isNaN(i.acr) ? '—' : i.acr + ' mg/g';
+            document.getElementById('p2_lpa').innerText = i.lpa ? i.lpa + ' mg/dL' : '—';
+            const labMap = { p2_tc:'tc', p2_ldl:'ldl', p2_hdl:'hdl', p2_nohdl:'nohdl', p2_tg:'tg', p2_gl:'glucose', p2_hba1c:'hba1c', p2_cr:'creatinine', p2_acr:'acr', p2_lpa:'lpa' };
+            const bandaLabel = bandaPrimaria.t;
+            for (const [elId, lab] of Object.entries(labMap)) {
+                const el = document.getElementById(elId);
+                if (!el) continue;
+                const v = parseFloat(el.innerText);
+                if (isNaN(v)) continue;
+                el.style.color = colorAlerta(lab, v, i.sex, bandaLabel);
+            }
+            document.getElementById('p2_comorb').innerText = criterio;
+            document.getElementById('p2_condiciones').innerText = conds.length ? conds.join(' · ') : 'Sin comorbilidades reportadas';
+            document.getElementById('p2_tfg').innerText = tfgStr;
+            document.getElementById('p2_meta_ldl').innerText = '< ' + metaLdl;
+            document.getElementById('p2_pct_ldl').innerText = strRed;
+            document.getElementById('p2_band').textContent = bandaPrimaria.t;
+            const gaugeMax = 25;
+            document.getElementById('p2_gauge').style.width = Math.min(100, (riesgoPrimario / gaugeMax) * 100) + '%';
+            const thresholds = [5, 10, 20];
+            const labels = ['5%', '10%', '20%'];
+            const gaugeWrap = document.getElementById('p2_gauge').parentElement;
+            if (gaugeWrap) {
+                gaugeWrap.querySelectorAll('.p2-tick').forEach(el => el.remove());
+                thresholds.forEach(t => {
+                    const pos = (t / gaugeMax) * 100;
+                    gaugeWrap.insertAdjacentHTML('beforeend', `<span class="p2-tick" style="position:absolute; top:0; bottom:0; left:${pos}%; width:1px; background:#94a3b8;"></span>`);
+                });
+            }
+            const p2Marks = document.getElementById('p2_marks');
+            const p2Legend = document.getElementById('p2_legend');
+            if (p2Marks) {
+                let htmlMarks = '<span style="position:absolute; left:0;">0%</span>';
+                thresholds.forEach((t, i) => {
+                    const pos = (t / gaugeMax) * 100;
+                    htmlMarks += `<span style="position:absolute; left:${pos}%; transform:translateX(-50%);">${labels[i]}</span>`;
+                });
+                p2Marks.innerHTML = htmlMarks;
+                if (!p2Legend) {
+                    const el = document.createElement('div');
+                    el.id = 'p2_legend';
+                    el.style.cssText = 'position:relative;height:9px;font-size:5.5pt;color:#475569;margin-top:2px;';
+                    p2Marks.parentElement.insertBefore(el, p2Marks.nextSibling);
+                }
+                const legend = document.getElementById('p2_legend');
+                if (legend) {
+                    const catLabels = ['Moderado', 'Alto', 'Muy Alto'];
+                    const catPositions = [5, 10, 20].map(t => (t / gaugeMax) * 100);
+                    let legendHtml = '';
+                    catPositions.forEach((pos, i) => {
+                        legendHtml += `<span style="position:absolute; left:${pos}%; transform:translateX(-50%); font-weight:600;">${catLabels[i]}</span>`;
+                    });
+                    legend.innerHTML = legendHtml;
+                }
+            }
+            document.getElementById('p2_prev_total').innerText = score2.toFixed(1) + '%';
+            document.getElementById('p2_prev_tot_opt').innerText = (score2 * 0.4).toFixed(1) + '%';
+            document.getElementById('p2_prev_ic').innerText = prevent.toFixed(1) + '%';
+            document.getElementById('p2_prev_ic_opt').innerText = (prevent * 0.4).toFixed(1) + '%';
+            document.getElementById('p2_table_body').innerHTML = htmlTP;
+            document.getElementById('p2_inf_sin').innerText = infartoSin.toFixed(1) + '%';
+            document.getElementById('p2_inf_con').innerText = infartoCon.toFixed(1) + '%';
+            document.getElementById('p2_inf_delta').innerText = infartoSin > 0 ? '+' + (((infartoCon / infartoSin) - 1) * 100).toFixed(0) + '%' : '—';
+            document.getElementById('p2_contrib_factors').innerHTML = cpHtml;
+            document.getElementById('p2_risk_red').innerText = mejora;
+            document.getElementById('p2_narrativa').innerText = narrativa;
+            const p2crit = document.getElementById('p2_crit');
+            if (crit.length) { p2crit.innerHTML = '&#9888; Valores críticos: ' + crit.join(' &#8226; '); p2crit.style.display = 'block'; }
+            else p2crit.style.display = 'none';
+            } catch(e) {}
+
+            const patientExplain = document.getElementById('patient_explain');
+            const patientRisk = document.getElementById('w_patient_risk');
+            if (patientExplain && patientRisk) {
+                const riesgoAbs = riesgoPrimario.toFixed(1);
+                let bandaTexto = 'bajo';
+                if (riesgoPrimario >= 20) bandaTexto = 'muy alto';
+                else if (riesgoPrimario >= 10) bandaTexto = 'alto';
+                else if (riesgoPrimario >= 5) bandaTexto = 'moderado';
+                patientRisk.textContent = 'Su probabilidad de tener un infarto o un derrame cerebral en los próximos 10 años es de ' + riesgoAbs + '%, lo que se considera un riesgo ' + bandaTexto + '.';
+                patientExplain.classList.remove('hidden');
+            }
+
+            // Gráfico Lp(a)
+            const chartCanvas = document.getElementById('chartLpa');
+            if (chartCanvas && typeof Chart !== 'undefined') {
+                const ctx = chartCanvas.getContext('2d');
+                if (instanceChart) instanceChart.destroy();
+                instanceChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: { labels: ['Sin Lp(a) elevada', 'Con Lp(a) elevada'], datasets: [{ data: [infartoSin, infartoCon], backgroundColor: ['#4f46e5', '#e11d48'], borderRadius: 4 }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
+            }
+            document.getElementById('btn_pdf_bottom').disabled = false;
         }
 
-        // Orquesta el flujo: valida -> lee -> calcula -> renderiza -> grafica. Punto de entrada del botón.
-        // scroll=true solo desde acción explícita del usuario (botón/Enter), no desde recalcLive.
+        // Orquesta el flujo: valida -> lee -> calcula -> renderiza. Punto de entrada del botón.
         function ejecutarCalculos(scroll) {
+            const btn = document.getElementById('btn_calcular');
+            btn.classList.add('btn-loading');
+            const origText = btn.innerText;
+            btn.innerText = 'Calculando';
+
             const errs = validar();
             const box = document.getElementById('error_box');
             if (errs.length) {
-                box.innerHTML = '⚠ Revise los campos en rojo (' + errs.length + '): ' + errs.join(', ') + '.';
+                box.innerHTML = 'âš  Revise los campos en rojo (' + errs.length + '): ' + errs.join(', ') + '.';
                 box.classList.remove('hidden');
+                box.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 track('validation_failed', { errores: errs.length });
-                const firstInvalid = document.querySelector('.input-invalid');
-                if (firstInvalid) {
-                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    firstInvalid.focus({ preventScroll: true });
-                }
+                btn.classList.remove('btn-loading');
+                btn.innerText = origText;
                 return;
             }
             box.classList.add('hidden');
@@ -968,22 +1325,16 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             const i = leerEntradas();
             const r = calcularRiesgo(i);
             renderResultados(r);
-            lastBanda = r.b.t;
+            lastBanda = r.bandaECV;
             const nComorb = ['sca','eva','dm','erc','hf','subclinic'].filter(k => i[k] !== 'none').length + (i.fragile === 'yes' ? 1 : 0);
-            track('calculation_completed', { banda: r.b.t, comorbilidades: nComorb });
+            track('calculation_completed', { banda: r.bandaECV, comorbilidades: nComorb });
 
             document.getElementById('panel_resultados').classList.remove('hidden');
             document.getElementById('introCard').classList.add('hidden');
             if (scroll) document.getElementById('panel_resultados').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            const ctx = document.getElementById('chartLpa').getContext('2d');
-            if (instanceChart) instanceChart.destroy();
-            instanceChart = new Chart(ctx, {
-                type: 'bar',
-                data: { labels: ['Sin Lp(a)', 'Con Lp(a)'], datasets: [{ data: [r.infartoSin, r.infartoCon], backgroundColor: ['#4f46e5', '#e11d48'], borderRadius: 4 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
-            document.getElementById('btn_pdf_bottom').disabled = false;
+            btn.classList.remove('btn-loading');
+            btn.innerText = origText;
         }
 
         // Accesibilidad: asociar <label> a cada <input>/<select> (lectores de pantalla)
@@ -999,41 +1350,68 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             ['nohdl','imc_disp','patient_name','doctor_name'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
             document.querySelectorAll('main select').forEach(s => s.selectedIndex = 0);
             document.querySelectorAll('input[name="sex"], input[name="smoker"]').forEach(r => r.checked = false);
-            document.querySelectorAll('main input, main select').forEach(el => { el.classList.remove('input-invalid'); el.removeAttribute('title'); });
+            document.querySelectorAll('main input, main select').forEach(el => { el.classList.remove('input-invalid', 'input-valid'); el.removeAttribute('title'); });
             document.getElementById('alert_box').classList.add('hidden');
             document.getElementById('error_box').classList.add('hidden');
             document.getElementById('panel_resultados').classList.add('hidden');
             document.getElementById('introCard').classList.remove('hidden');
-            badgeUpdaters.forEach(f => f()); // limpiar() no dispara eventos input: refrescar badges manualmente
             track('form_cleared');
+            const btnCalc = document.getElementById('btn_calcular');
+            if (btnCalc) { btnCalc.classList.remove('btn-loading'); btnCalc.innerText = 'Estratificar Paciente y Obtener Metas'; }
             document.getElementById('btn_pdf_bottom').disabled = true;
+            if (instanceChart) { instanceChart.destroy(); instanceChart = null; }
+        }
+        function cargarEjemplo() {
+            document.getElementById('patient_name').value = 'Paciente de prueba';
+            document.getElementById('doctor_name').value = 'Medico de Prueba';
+            const ejemplos = { age:58, sbp:145, weight:88, height:172, tc:230, hdl:42, ldl:148, creatinine:1.25, tg:210, glucose:112, hba1c:6.6, lpa:75, acr:55 };
+            Object.keys(ejemplos).forEach(id => { const el = document.getElementById(id); if (el) el.value = ejemplos[id]; });
+            document.querySelectorAll('main select').forEach(s => s.selectedIndex = 0);
+            const m = document.querySelector('input[name="sex"][value="male"]');
+            if (m) m.checked = true;
+            const ns = document.querySelector('input[name="smoker"][value="no"]');
+            if (ns) ns.checked = true;
+            updateDerivedMetrics();
+            document.getElementById('alert_box').classList.add('hidden');
+            document.getElementById('error_box').classList.add('hidden');
+            document.getElementById('panel_resultados').classList.add('hidden');
+            document.getElementById('introCard').classList.remove('hidden');
+            const btnCalc2 = document.getElementById('btn_calcular');
+            if (btnCalc2) { btnCalc2.classList.remove('btn-loading'); btnCalc2.innerText = 'Estratificar Paciente y Obtener Metas'; }
             if (instanceChart) { instanceChart.destroy(); instanceChart = null; }
         }
         document.querySelectorAll('main input[type=number]').forEach(el => {
             el.setAttribute('inputmode', 'decimal');
             if (!el.hasAttribute('step')) el.step = 'any';
             const r = RANGES[el.id];
-            if (r) el.placeholder = OPTIONAL.includes(el.id) ? 'Opcional (' + r[0] + '–' + r[1] + ')' : r[0] + '–' + r[1];
+            if (r) el.placeholder = r[0] + ' - ' + r[1];
             el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ejecutarCalculos(true); } });
             el.addEventListener('blur', () => validarCampo(el.id));
-            el.addEventListener('input', () => { el.classList.remove('input-invalid'); el.removeAttribute('title'); });
+            el.addEventListener('input', () => { el.classList.remove('input-invalid', 'input-valid'); el.removeAttribute('title'); });
         });
 
         // Tooltips explicativos por parámetro
         const TIPS = {
-            age:'Edad del paciente en años. Rango válido: 18–100.',
-            sbp:'Presión arterial sistólica en mmHg. Óptimo <120, hipertensión ≥140.',
+            age:'Edad del paciente en años. Rango válido: 18 - 100.',
+            sbp:'Presión arterial sistólica en mmHg. Óptimo <120, hipertensión =140.',
             weight:'Peso corporal en kg.',
             height:'Estatura en centímetros (ej. 170).',
             tc:'Colesterol total en mg/dL. Óptimo <190.',
             hdl:'Colesterol HDL ("bueno") en mg/dL. Cuanto mayor, mejor.',
             ldl:'Colesterol LDL ("malo") en mg/dL. Objetivo según riesgo.',
             tg:'Triglicéridos en mg/dL. Óptimo <150.',
-            glucose:'Glicemia en ayunas en mg/dL. Normal 70–99.',
+            glucose:'Glicemia en ayunas en mg/dL. Normal 70 - 99.',
             hba1c:'Hemoglobina glicosilada (%). Refleja control glucémico a 3 meses.',
             lpa:'Lipoproteína (a) en mg/dL. Riesgo independiente; objetivo <30.',
             creatinine:'Creatinina sérica en mg/dL. Para calcular TFG (CKD-EPI).',
-            acr:'Relación albúmina/creatinina en orina (mg/g). Marcador de daño renal.'
+            acr:'Relación albúmina/creatinina en orina (mg/g). Marcador de daño renal.',
+            sca_status:'Síndrome Coronario Agudo: angina inestable, IMSEST o IMCEST previo.',
+            eva_status:'Enfermedad Vascular Aterosclerótica: eventos vasculares previos.',
+            dm_status:'Diabetes Mellitus: clasificación por control y daño a órgano diana.',
+            erc_status:'Enfermedad Renal Crónica: estadio por FG y albuminuria (KDIGO).',
+            hf_status:'Insuficiencia Cardíaca: gravedad según factores asociados.',
+            subclinic_status:'Afectación Subclínica: score de calcio coronario (CaSc).',
+            fragile_status:'Fragilidad: paciente frágil o anciano con limitación funcional.'
         };
         let _tipTimer;
         // Muestra un toast con la ayuda del parámetro (al pulsar el "?").
@@ -1051,7 +1429,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             el.dataset.label = lbl.textContent.trim();
             lbl.setAttribute('title', TIPS[id]);
             const req = document.createElement('span');
-            if (OPTIONAL.includes(id)) { req.className = 'text-slate-400 font-normal text-[10px] ml-1 normal-case'; req.textContent = '(opcional)'; }
+            if (OPTIONAL.includes(id)) { req.className = 'text-slate-400 font-normal text-[10px] ml-1 normal-case'; req.textContent = ''; }
             else { req.className = 'req'; req.textContent = '*'; }
             lbl.appendChild(req);
             const tip = document.createElement('button'); tip.type = 'button'; tip.className = 'tip'; tip.setAttribute('aria-label', 'Ayuda: ' + el.dataset.label); tip.textContent = '?';
@@ -1097,12 +1475,11 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             const txt = [
                 'INFORME DE RIESGO CARDIOVASCULAR',
                 'Fecha: ' + new Date().toLocaleDateString('es-ES'),
-                '',
-                'Paciente: ' + g('p_age_sex') + ' | ' + g('p_smoker'),
-                'LDL: ' + g('p_ldl') + ' | HDL: ' + g('p_hdl') + ' | Col Total: ' + g('p_tc'),
-                'Meta LDL: ' + g('p_meta_ldl') + ' | Categoría: ' + g('p_band'),
-                'Riesgo 10a ECV Total: ' + g('p_prev_total') + ' | Óptimo: ' + g('p_prev_tot_opt'),
-                'Lp(a): ' + g('p_lpa')
+                'Paciente: ' + g('p2_age_sex') + ' | ' + g('p2_smoker'),
+                'LDL: ' + g('p2_ldl') + ' | HDL: ' + g('p2_hdl') + ' | Col Total: ' + g('p2_tc'),
+                'Meta LDL: ' + g('p2_meta_ldl') + ' | Categoría: ' + g('p2_band'),
+                'Riesgo 10a ECV Total: ' + g('p2_prev_total') + ' | Óptimo: ' + g('p2_prev_tot_opt'),
+                'Lp(a): ' + g('p2_lpa'),
             ].join('\n');
             const ok = () => {
                 const btn = document.getElementById('btn_copiar');
@@ -1128,19 +1505,34 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         // Exportar PDF con nombre de archivo sugerido (fecha)
         // Valida el formulario y abre el diálogo de impresión/guardar PDF (usa @media print).
         function exportarPDF() {
+            const btn = document.getElementById('btn_pdf_bottom');
+            btn.disabled = true;
+            btn.classList.add('btn-loading');
+            const origText = btn.innerText;
+            btn.innerText = 'Generando PDF';
+
             const errs = validar();
             const box = document.getElementById('error_box');
             if (errs.length) {
-                box.innerHTML = '⚠ Revise los campos en rojo (' + errs.length + '): ' + errs.join(', ') + '.';
+                box.innerHTML = 'âš  Revise los campos en rojo (' + errs.length + '): ' + errs.join(', ') + '.';
                 box.classList.remove('hidden');
-                document.getElementById('btn_pdf_bottom').disabled = true;
+                box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                btn.classList.remove('btn-loading');
+                btn.innerText = origText;
                 return;
             }
             track('pdf_exported', { banda: lastBanda });
-            document.getElementById('p_fecha').textContent = new Date().toLocaleDateString('es-ES');
+            document.getElementById('p2_fecha').textContent = new Date().toLocaleDateString('es-ES');
+            document.getElementById('p2_folio').innerText = Math.floor(1000 + Math.random() * 9000);
             const prevTitle = document.title;
             document.title = 'Informe_Riesgo_CV_' + new Date().toISOString().slice(0, 10);
-            window.onafterprint = () => { document.title = prevTitle; window.onafterprint = null; };
+            window.onafterprint = () => {
+                document.title = prevTitle;
+                btn.classList.remove('btn-loading');
+                btn.innerText = origText;
+                btn.disabled = false;
+                window.onafterprint = null;
+            };
             window.print();
         }
 
@@ -1157,50 +1549,6 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             el.addEventListener('input', recalcLive);
             el.addEventListener('change', recalcLive);
         });
-
-        // Acordeón exclusivo: al abrir una sección se cierran las demás
-        document.querySelectorAll('main details').forEach(d => {
-            d.addEventListener('toggle', () => {
-                if (d.open) document.querySelectorAll('main details[open]').forEach(o => { if (o !== d) o.open = false; });
-            });
-        });
-
-        // En móvil: colapsar secciones 2 y 3 al cargar (menos scroll inicial; sección 1 queda abierta)
-        if (window.matchMedia('(max-width:767px)').matches) {
-            document.querySelectorAll('main details[open]').forEach((d, idx) => { if (idx > 0) d.removeAttribute('open'); });
-        }
-
-        // Badges de completitud "n/total" en los summaries de las secciones 1 y 2.
-        // Cuenta campos numéricos (no readonly) + cada grupo de radio como 1 campo
-        // (Sexo y Tabaquismo cuentan; por eso antes "no cuadraba" con lo visible).
-        const badgeUpdaters = [];
-        document.querySelectorAll('main details').forEach(det => {
-            const sum = det.querySelector('summary');
-            if (!sum || sum.textContent.includes('Comorbilidades')) return; // la 3 tiene su propio badge
-            const b = document.createElement('span'); b.className = 'comorb-badge'; sum.appendChild(b);
-            const nums = [...det.querySelectorAll('input[type=number]')].filter(el => !el.readOnly && !OPTIONAL.includes(el.id));
-            const groups = [...new Set([...det.querySelectorAll('input[type=radio]')].map(r => r.name))];
-            const upd = () => {
-                const n = nums.filter(el => el.value !== '').length
-                        + groups.filter(g => det.querySelector('input[name="' + g + '"]:checked')).length;
-                b.textContent = n + '/' + (nums.length + groups.length);
-            };
-            det.querySelectorAll('input').forEach(el => { el.addEventListener('input', upd); el.addEventListener('change', upd); });
-            badgeUpdaters.push(upd);
-            upd();
-        });
-
-        // Badge de comorbilidades seleccionadas en el tercer acordeón
-        const comorbSummary = [...document.querySelectorAll('details > summary')].find(s => s.textContent.includes('Comorbilidades'));
-        if (comorbSummary) {
-            const b = document.createElement('span'); b.id = 'comorb_badge'; b.className = 'comorb-badge'; comorbSummary.appendChild(b);
-            const det = comorbSummary.parentElement;
-            // fragile_status usa valores no/yes (no "none"): solo cuenta cuando es "yes".
-            const updComorb = () => { let n = 0; det.querySelectorAll('select').forEach(s => { if (s.id === 'fragile_status') { if (s.value === 'yes') n++; } else if (s.value && s.value !== 'none') n++; }); b.textContent = n ? '(' + n + ')' : ''; };
-            det.querySelectorAll('select').forEach(s => s.addEventListener('change', updComorb));
-            badgeUpdaters.push(updComorb);
-            updComorb();
-        }
 
         // Al cargar: foco en el primer campo (solo desktop, evita teclado en móvil) y tarjeta de bienvenida.
         if (!window.matchMedia('(max-width:767px)').matches) document.getElementById('age').focus({ preventScroll: true });
@@ -1253,3 +1601,4 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
     </script>
 </body>
 </html>
+
