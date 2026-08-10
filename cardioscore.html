@@ -201,7 +201,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <p class="text-sm text-slate-700 leading-relaxed max-w-3xl mx-auto" data-i18n-html="hero_1">CardioScore es una herramienta de estratificación cardiovascular <strong>gratuita</strong> desarrollada por <strong><a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-slate-700 hover:text-blue-600 underline">MatsonSoft</a></strong> y revisada por el <strong><a href="https://instagram.com/postgradocardiologiaudobolivar" target="_blank" rel="noopener" class="text-slate-700 hover:text-blue-600 underline">Postgrado de Cardiología del Hospital Ruiz y Páez</a></strong>, Ciudad Bolívar, Venezuela.</p>
         </div>
         <div class="bg-white border border-slate-200 rounded-lg px-5 py-3 text-center">
-            <p class="text-sm text-slate-600 leading-relaxed" data-i18n-html="hero_2">CardioScore implementa los modelos <strong>SCORE2</strong> (ESC 2021), <strong>PREVENT</strong> (AHA 2024) y <strong>WHO CVD Risk Charts</strong> (OMS — Central Latin America) para estimar riesgo CV a 10 años, calcular eGFR y definir metas personalizadas de C-LDL. <span class="text-slate-600 text-xs block mt-1">Para Venezuela se recomienda el modelo WHO-Central L.A.; SCORE2 (región Alta europea) y PREVENT (EE.UU.) son aproximaciones comparativas. Próxima actualización: <strong>SCORE2-LAC</strong> (ESC Congress 2026).</span></p>
+            <p class="text-sm text-slate-600 leading-relaxed" data-i18n-html="hero_2">CardioScore implementa los modelos <strong>SCORE2</strong> (ESC 2021), <strong>PREVENT</strong> (AHA 2024), <strong>WHO CVD Risk Charts</strong> (OMS — Central Latin America) y <strong>SMART2</strong> (riesgo residual en prevención secundaria) para estimar riesgo CV a 10 años, calcular eGFR y definir metas personalizadas de C-LDL. <span class="text-slate-600 text-xs block mt-1">Para Venezuela se recomienda el modelo WHO-Central L.A.; SCORE2 (región Alta europea) y PREVENT (EE.UU.) son aproximaciones comparativas. Próxima actualización: <strong>SCORE2-LAC</strong> (ESC Congress 2026).</span></p>
         </div>
 
         <div id="tab_calculator">
@@ -483,6 +483,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <a href="#m-score2-card" class="text-[#B91C1C] hover:underline">SCORE2</a>
             <a href="#m-prevent" class="text-[#B91C1C] hover:underline">PREVENT</a>
             <a href="#m-who" class="text-emerald-700 hover:underline">WHO</a>
+            <a href="#m-smart" class="text-violet-700 hover:underline">SMART</a>
             <a href="#m-interpretar" class="text-slate-700 hover:underline">Interpretación</a>
             <a href="#m-poblaciones" class="text-slate-700 hover:underline">Poblaciones</a>
             <a href="#m-notas" class="text-slate-700 hover:underline">Notas técnicas</a>
@@ -491,13 +492,14 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         </nav>
 
         <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
-            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">¿Por qué tres modelos?</h3>
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">¿Por qué cuatro modelos?</h3>
             <p class="text-sm text-slate-700 leading-relaxed">
                 CardioScore implementa los modelos de riesgo cardiovascular más actualizados y validados:
                 <strong>SCORE2</strong> de la Sociedad Europea de Cardiología (ESC), <strong>PREVENT</strong> de la
-                American Heart Association (AHA) y <strong>WHO CVD Risk Charts</strong> de la Organización Mundial de la
-                Salud. Para Venezuela, el modelo calibrado a la región es <strong>WHO — Central Latin America</strong>;
-                SCORE2 (región Alta europea) y PREVENT (EE.UU.) se ofrecen como aproximaciones comparativas.
+                American Heart Association (AHA), <strong>WHO CVD Risk Charts</strong> de la Organización Mundial de la
+                Salud y <strong>SMART2</strong> para el riesgo residual en prevención secundaria. Para Venezuela, el
+                modelo calibrado a la región es <strong>WHO — Central Latin America</strong>; SCORE2 (región Alta
+                europea) y PREVENT (EE.UU.) se ofrecen como aproximaciones comparativas.
             </p>
         </div>
 
@@ -533,8 +535,20 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Población</td><td class="py-1.5">40-79a · Región Central L.A. (incluye Venezuela)</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Desenlace</td><td class="py-1.5">CHD + ACV fatales/no fatales a 10 años</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Variables</td><td class="py-1.5">Edad, sexo, tabaco, PAS, CT, DM (modelo laboratorial)</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Versiones</td><td class="py-1.5">Laboratorial (CT + DM) y No-laboratorial (IMC, sin laboratorio)</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Modelo</td><td class="py-1.5">Cox (ERFC) sexo-específico, recalibrado por región</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Nota</td><td class="py-1.5">Modelo calibrado a la región. Referencia regional para Venezuela; SCORE2-LAC lo actualizará cuando se publique.</td></tr>
+                </tbody></table>
+            </div>
+            <div id="m-smart" class="bg-white p-6 rounded-xl border border-violet-200 border-t-4 border-t-violet-700">
+                <h4 class="font-bold text-violet-700 mb-4 text-sm uppercase">SMART2 (2022)</h4>
+                <table class="w-full text-xs text-slate-700">
+                    <tbody><tr><td class="py-1.5 pr-3 font-semibold align-top w-[80px]">Publicación</td><td class="py-1.5">Eur Heart J 2022;43(18):1715-1727</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Población</td><td class="py-1.5">ASCVD establecida (CAD, cerebrovascular, PAD, AAA) · 40-80a</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Desenlace</td><td class="py-1.5">Riesgo residual: recurrencia (IM, ACV) o muerte CV a 10 años</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Variables</td><td class="py-1.5">Edad, sexo, tabaco, DM, PAS, non-HDL, hsCRP, eGFR, años desde el evento, historia CAD/ACV/PAD/AAA, aspirina</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Modelo</td><td class="py-1.5">Fine-Gray (riesgo competitivo), recalibrado por región (LatAm: REACH)</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Uso</td><td class="py-1.5">Riesgo residual en prevención secundaria (ESC 2021). Reemplaza a los scores de prevención primaria cuando hay ECV establecida.</td></tr>
                 </tbody></table>
             </div>
         </div>
@@ -547,6 +561,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <li><strong>WHO CVD Risk Charts</strong> predice CHD + ACV (OMS 2019). Único modelo calibrado a la región Central Latin America (incluye Venezuela).</li>
                 <li><strong>Prioridad para Venezuela:</strong> usar el WHO-Central L.A. como referencia; SCORE2 (región Alta) y PREVENT (EE.UU.) como comparativos.</li>
                 <li><strong>Discrepancia</strong> entre modelos es esperable: miden desenlaces distintos. En prevención secundaria los scores no aplican (riesgo Muy Alto directo).</li>
+                <li><strong>SMART2</strong> estima el riesgo residual a 10 años en prevención secundaria (ECV establecida): los scores de prevención primaria no aplican y se usa SMART2 (recalibrado LatAm).</li>
+                <li><strong>Modifiers (Lp(a), CaSc):</strong> Lp(a) ≥50 mg/dL y calcio coronario (CAC ≥100) reclasifican hacia arriba; CAC=0 sugiere menor riesgo aterosclerótico.</li>
+                <li><strong>Simulador:</strong> proyecta el riesgo a 10 años si el C-LDL y la PAS se llevan a la meta (oportunidad terapéutica).</li>
                 <li><strong>Meta LDL</strong> se define por la categoría de riesgo más alta, basada en comorbilidades y eventos previos (ESC 2023).</li>
                 <li><strong>Discordancia &gt;5%:</strong> Si SCORE2 &gt; PREVENT, fenotipo lipídico/hipertensivo → priorizar SCORE2. Si PREVENT &gt; SCORE2, fenotipo metabólico/renal → priorizar PREVENT.</li>
             </ul>
@@ -562,6 +579,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <li><strong>≥70 años:</strong> SCORE2-OP con coeficientes independientes.</li>
                 <li><strong>DM tipo 2:</strong> SCORE2-Diabetes (ESC 2023). Requiere HbA1c, eGFR y edad al diagnóstico.</li>
                 <li><strong>CKM Staging:</strong> Basado en AHA Presidential Advisory 2023. Stage 0 (óptimo) a 4 (ECV clínica).</li>
+                <li><strong>Risk modifiers:</strong> Lp(a) ≥50 mg/dL (reclasificador ESC, especialmente con historia familiar) y calcio coronario (CAC): 100-299 sube a riesgo alto, ≥300 a muy alto, 0 reduce la estimación.</li>
                 <li><strong>LATAM:</strong> Modelo regional WHO CVD Risk Charts — Central Latin America (incluye Venezuela). SCORE2 y PREVENT son aproximaciones fuera de calibración para el país. SCORE2-LAC en desarrollo (ESC Congress 2026).</li>
             </ul>
         </div>
@@ -604,6 +622,12 @@ const risk = 1 - Math.pow(1 - base, Math.exp(dLp));</pre>
                     <p class="text-slate-600 mt-1">Cox sexo-específico por endpoint (CHD y stroke), combinados como 1 − (1−pCHD)(1−pStroke). Predictores: edad (lineal, centrada en 60), CT (mmol/L, centrado en 6), PAS (centrado en 120), DM y tabaquismo, con interacciones × edad. Recalibración regional (γ, δ) reconstruida del chart oficial de la OMS.</p>
                     <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const lp = c.age*(age-60) + c.tc*(tcM-6) + c.sbp*(sbp-120) + c.dm*dm + c.smoke*smoke;
 const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <span class="font-bold text-violet-700">SMART2 — riesgo residual</span>
+                    <p class="text-slate-600 mt-1">Fine-Gray con muerte no-CV como riesgo competitivo. LP con edad y edad², eGFR y eGFR², ln(non-HDL en mmol/L), ln(hsCRP en mg/L), PAS por 10 mmHg, años desde el evento (lineal y²), binarias de territorio (CAD/ACV/PAD/AAA) y aspirina como offset fijo (HR 0.81). Recalibración LatAm: factor E/O 0.5076 (cohorte REACH). Fórmula: riesgo = 1 − (1 − baserisk₁₀)^exp(LP − LP_mean − ln(k)).</p>
+                    <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const E = lp - LP_mean - Math.log(0.5075670);
+const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 </div>
             </div>
         </div>
@@ -651,6 +675,7 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                 <li>SCORE2-Diabetes. <em>Eur Heart J</em> 2023;44(28):2544-2556.</li>
                 <li>SCORE2-CKD. <em>Eur J Prev Cardiol</em> 2023;30(1):8-16.</li>
                 <li>PREVENT. <em>Circulation</em> 2024;149:430-449.</li>
+                <li>SMART2. <em>Eur Heart J</em> 2022;43(18):1715-1727.</li>
                 <li>CKM Syndrome. <em>Circulation</em> 2023;148:1606-1635.</li>
                 <li>WHO CVD Risk Chart Working Group. <em>Lancet Global Health</em> 2019;7(10):e1332-e1345.</li>
                 <li>CKD-EPI 2021. <em>N Engl J Med</em> 2021;385(19):1737-1749.</li>
@@ -684,6 +709,7 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
             <a href="#m-en-score2" class="text-[#0054A6] hover:underline">SCORE2</a>
             <a href="#m-en-prevent" class="text-[#B91C1C] hover:underline">PREVENT</a>
             <a href="#m-en-who" class="text-emerald-700 hover:underline">WHO</a>
+            <a href="#m-en-smart" class="text-violet-700 hover:underline">SMART</a>
             <a href="#m-en-interpretar" class="text-slate-700 hover:underline">Interpretation</a>
             <a href="#m-en-poblaciones" class="text-slate-700 hover:underline">Populations</a>
             <a href="#m-en-notas" class="text-slate-700 hover:underline">Technical Notes</a>
@@ -692,13 +718,14 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
         </nav>
 
         <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
-            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Why Three Models?</h3>
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Why Four Models?</h3>
             <p class="text-sm text-slate-700 leading-relaxed">
                 CardioScore implements the most current and validated cardiovascular risk models:
                 <strong>SCORE2</strong> from the European Society of Cardiology (ESC), <strong>PREVENT</strong> from the
-                American Heart Association (AHA), and <strong>WHO CVD Risk Charts</strong> from the World Health
-                Organization. For Venezuela, the region-calibrated model is <strong>WHO — Central Latin America</strong>;
-                SCORE2 (High-risk Europe) and PREVENT (US) are offered as comparative approximations.
+                American Heart Association (AHA), <strong>WHO CVD Risk Charts</strong> from the World Health
+                Organization, and <strong>SMART2</strong> for residual risk in secondary prevention. For Venezuela, the
+                region-calibrated model is <strong>WHO — Central Latin America</strong>; SCORE2 (High-risk Europe) and
+                PREVENT (US) are offered as comparative approximations.
             </p>
         </div>
 
@@ -734,8 +761,20 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Population</td><td class="py-1.5">40-79y · Central L.A. region (includes Venezuela)</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Outcome</td><td class="py-1.5">Fatal/non-fatal CHD + Stroke at 10 years</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Variables</td><td class="py-1.5">Age, sex, smoking, SBP, Total Chol, DM (lab model)</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Versions</td><td class="py-1.5">Laboratory (Total Chol + DM) and Non-laboratory (BMI, no lab)</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Model</td><td class="py-1.5">Sex-specific Cox (ERFC), region-recalibrated</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Note</td><td class="py-1.5">Region-calibrated model. Regional reference for Venezuela; SCORE2-LAC will supersede when published.</td></tr>
+                </tbody></table>
+            </div>
+            <div id="m-en-smart" class="bg-white p-6 rounded-xl border border-violet-200 border-t-4 border-t-violet-700">
+                <h4 class="font-bold text-violet-700 mb-4 text-sm uppercase">SMART2 (2022)</h4>
+                <table class="w-full text-xs text-slate-700">
+                    <tbody><tr><td class="py-1.5 pr-3 font-semibold align-top w-[80px]">Publication</td><td class="py-1.5">Eur Heart J 2022;43(18):1715-1727</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Population</td><td class="py-1.5">Established ASCVD (CAD, cerebrovascular, PAD, AAA) · 40-80y</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Outcome</td><td class="py-1.5">Residual risk: recurrence (MI, Stroke) or CV death at 10 years</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Variables</td><td class="py-1.5">Age, sex, smoking, DM, SBP, non-HDL, hsCRP, eGFR, years since event, CAD/Stroke/PAD/AAA history, aspirin</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Model</td><td class="py-1.5">Fine-Gray (competing risk), region-recalibrated (LatAm: REACH)</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Use</td><td class="py-1.5">Residual risk in secondary prevention (ESC 2021). Replaces primary-prevention scores when ASCVD is established.</td></tr>
                 </tbody></table>
             </div>
         </div>
@@ -748,6 +787,9 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                 <li><strong>WHO CVD Risk Charts</strong> predicts CHD + Stroke (WHO 2019). The only model calibrated to the Central Latin America region (includes Venezuela).</li>
                 <li><strong>Priority for Venezuela:</strong> use WHO-Central L.A. as the reference; SCORE2 (High region) and PREVENT (US) as comparisons.</li>
                 <li><strong>Discrepancy</strong> between models is expected: they measure different outcomes. In secondary prevention the scores do not apply (direct very-high risk).</li>
+                <li><strong>SMART2</strong> estimates the 10-year residual risk in secondary prevention (established ASCVD): primary-prevention scores do not apply and SMART2 is used instead (LatAm recalibrated).</li>
+                <li><strong>Modifiers (Lp(a), CAC):</strong> Lp(a) ≥50 mg/dL and coronary calcium (CAC ≥100) reclassify upward; CAC=0 suggests lower atherosclerotic risk.</li>
+                <li><strong>Simulator:</strong> projects 10-year risk if LDL-C and SBP reach target (therapeutic opportunity).</li>
                 <li><strong>LDL Target</strong> is defined by the highest risk category, based on comorbidities and prior events (ESC 2023).</li>
                 <li><strong>Discordance &gt;5%:</strong> If SCORE2 &gt; PREVENT, lipid/hypertensive phenotype suggests prioritizing SCORE2. If PREVENT &gt; SCORE2, metabolic/renal phenotype suggests prioritizing PREVENT.</li>
             </ul>
@@ -763,6 +805,7 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                 <li><strong>≥70 years:</strong> SCORE2-OP with independent coefficients.</li>
                 <li><strong>Type 2 DM:</strong> SCORE2-Diabetes (ESC 2023). Requires HbA1c, eGFR, and age at diagnosis.</li>
                 <li><strong>CKM Staging:</strong> Based on AHA Presidential Advisory 2023. Stage 0 (optimal) to 4 (clinical CVD).</li>
+                <li><strong>Risk modifiers:</strong> Lp(a) ≥50 mg/dL (ESC reclassifier, especially with family history) and coronary calcium (CAC): 100-299 raises to high risk, ≥300 to very high, 0 lowers the estimate.</li>
                 <li><strong>LATAM:</strong> Regional model WHO CVD Risk Charts — Central Latin America (includes Venezuela). SCORE2 and PREVENT are out-of-calibration approximations for the country. SCORE2-LAC under development (ESC Congress 2026).</li>
             </ul>
         </div>
@@ -805,6 +848,12 @@ const risk = 1 - Math.pow(1 - base, Math.exp(dLp));</pre>
                     <p class="text-slate-600 mt-1">Sex-specific Cox by endpoint (CHD and stroke), combined as 1 − (1−pCHD)(1−pStroke). Predictors: age (linear, centered at 60), total cholesterol (mmol/L, centered at 6), SBP (centered at 120), DM and smoking, with age interactions. Regional recalibration (γ, δ) reconstructed from the official WHO chart.</p>
                     <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const lp = c.age*(age-60) + c.tc*(tcM-6) + c.sbp*(sbp-120) + c.dm*dm + c.smoke*smoke;
 const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <span class="font-bold text-violet-700">SMART2 — residual risk</span>
+                    <p class="text-slate-600 mt-1">Fine-Gray with non-CV death as competing risk. LP with age and age², eGFR and eGFR², ln(non-HDL in mmol/L), ln(hsCRP in mg/L), SBP per 10 mmHg, years since event (linear and²), territory binaries (CAD/Stroke/PAD/AAA), and aspirin as a fixed offset (HR 0.81). LatAm recalibration: E/O factor 0.5076 (REACH cohort). Formula: risk = 1 − (1 − baserisk₁₀)^exp(LP − LP_mean − ln(k)).</p>
+                    <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const E = lp - LP_mean - Math.log(0.5075670);
+const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 </div>
             </div>
         </div>
@@ -852,6 +901,7 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                 <li>SCORE2-Diabetes. <em>Eur Heart J</em> 2023;44(28):2544-2556.</li>
                 <li>SCORE2-CKD. <em>Eur J Prev Cardiol</em> 2023;30(1):8-16.</li>
                 <li>PREVENT. <em>Circulation</em> 2024;149:430-449.</li>
+                <li>SMART2. <em>Eur Heart J</em> 2022;43(18):1715-1727.</li>
                 <li>CKM Syndrome. <em>Circulation</em> 2023;148:1606-1635.</li>
                 <li>WHO CVD Risk Chart Working Group. <em>Lancet Global Health</em> 2019;7(10):e1332-e1345.</li>
                 <li>CKD-EPI 2021. <em>N Engl J Med</em> 2021;385(19):1737-1749.</li>
@@ -1200,7 +1250,7 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                 p_disclaimer: 'Herramienta de soporte diagnóstico. Los resultados son estimaciones probabilísticas y no sustituyen el juicio del profesional de la salud.',
                 // Heroes
                 hero_1: 'CardioScore es una herramienta de estratificación cardiovascular <strong>gratuita</strong> desarrollada por <strong><a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-slate-700 hover:text-blue-600 underline">MatsonSoft</a></strong> y revisada por el <strong><a href="https://instagram.com/postgradocardiologiaudobolivar" target="_blank" rel="noopener" class="text-slate-700 hover:text-blue-600 underline">Postgrado de Cardiología del Hospital Ruiz y Páez</a></strong>, Ciudad Bolívar, Venezuela.',
-                hero_2: 'CardioScore implementa los modelos <strong>SCORE2</strong> (ESC 2021), <strong>PREVENT</strong> (AHA 2024) y <strong>WHO CVD Risk Charts</strong> (OMS — Central Latin America) para estimar riesgo CV a 10 años, calcular eGFR y definir metas personalizadas de C-LDL. <span class="text-slate-600 text-xs block mt-1">Para Venezuela se recomienda el modelo WHO-Central L.A.; SCORE2 (región Alta europea) y PREVENT (EE.UU.) son aproximaciones comparativas. Próxima actualización: <strong>SCORE2-LAC</strong> (ESC Congress 2026).</span>',
+                hero_2: 'CardioScore implementa los modelos <strong>SCORE2</strong> (ESC 2021), <strong>PREVENT</strong> (AHA 2024), <strong>WHO CVD Risk Charts</strong> (OMS — Central Latin America) y <strong>SMART2</strong> (riesgo residual en prevención secundaria) para estimar riesgo CV a 10 años, calcular eGFR y definir metas personalizadas de C-LDL. <span class="text-slate-600 text-xs block mt-1">Para Venezuela se recomienda el modelo WHO-Central L.A.; SCORE2 (región Alta europea) y PREVENT (EE.UU.) son aproximaciones comparativas. Próxima actualización: <strong>SCORE2-LAC</strong> (ESC Congress 2026).</span>',
                 legend_both: 'Ambos',
                 badge_esc: '(ESC)', badge_aha: '(AHA)',
                 gauge_aria: 'Riesgo cardiovascular a 10 años',
@@ -1416,7 +1466,7 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                 p_disclaimer: 'Diagnostic support tool. Results are probabilistic estimates and do not replace the judgment of a healthcare professional.',
                 // Heroes
                 hero_1: 'CardioScore is a <strong>free</strong> cardiovascular risk stratification tool developed by <strong><a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-slate-700 hover:text-blue-600 underline">MatsonSoft</a></strong> and reviewed by the <strong><a href="https://instagram.com/postgradocardiologiaudobolivar" target="_blank" rel="noopener" class="text-slate-700 hover:text-blue-600 underline">Cardiology Postgraduate Program of Hospital Ruiz y Páez</a></strong>, Ciudad Bolívar, Venezuela.',
-                hero_2: 'CardioScore implements the <strong>SCORE2</strong> (ESC 2021), <strong>PREVENT</strong> (AHA 2024), and <strong>WHO CVD Risk Charts</strong> (WHO — Central Latin America) models to estimate 10-year CV risk, calculate eGFR and set personalized LDL-C targets. <span class="text-slate-600 text-xs block mt-1">For Venezuela, the WHO-Central L.A. model is recommended; SCORE2 (High-risk Europe) and PREVENT (US) are comparative approximations. Next update: <strong>SCORE2-LAC</strong> (ESC Congress 2026).</span>',
+                hero_2: 'CardioScore implements the <strong>SCORE2</strong> (ESC 2021), <strong>PREVENT</strong> (AHA 2024), <strong>WHO CVD Risk Charts</strong> (WHO — Central Latin America), and <strong>SMART2</strong> (residual risk in secondary prevention) models to estimate 10-year CV risk, calculate eGFR and set personalized LDL-C targets. <span class="text-slate-600 text-xs block mt-1">For Venezuela, the WHO-Central L.A. model is recommended; SCORE2 (High-risk Europe) and PREVENT (US) are comparative approximations. Next update: <strong>SCORE2-LAC</strong> (ESC Congress 2026).</span>',
                 legend_both: 'Both',
                 badge_esc: '(ESC)', badge_aha: '(AHA)',
                 gauge_aria: '10-year cardiovascular risk',
