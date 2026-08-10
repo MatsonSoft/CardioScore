@@ -371,6 +371,11 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                             <span class="block text-[10px] text-white/60 mb-1" data-i18n="res_out_who">CHD + ACV</span>
                             <span id="w_who_total" class="text-2xl md:text-3xl font-black text-white tracking-tight">-</span>
                         </div>
+                        <div id="w_smart_card" class="bg-white/10 backdrop-blur-sm p-3.5 rounded-xl border border-white/15 text-center hidden">
+                            <span class="block text-[10px] font-extrabold text-violet-200 uppercase tracking-wide"><span data-i18n="result_smart">SMART2</span> <span class="text-violet-300/60" data-i18n="badge_smart">(residual)</span></span>
+                            <span class="block text-[10px] text-white/60 mb-1" data-i18n="res_out_smart">Recurrencia + muerte CV</span>
+                            <span id="w_smart_total" class="text-2xl md:text-3xl font-black text-white tracking-tight">-</span>
+                        </div>
                     </div>
                     <div class="space-y-1">
                         <div class="flex justify-between text-[10px] font-bold text-blue-200 uppercase">
@@ -573,7 +578,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Poblaciones especiales</h3>
             <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5">
                 <li><strong>ERC:</strong> Add-on SCORE2-CKD (Eur J Prev Cardiol 2023) aplicado al riesgo recalibrado: compara eGFR y ACR observados con el valor esperado para el perfil de riesgo (método predictor patch). ACR (mg/g) opcional; sin ACR se aplica solo eGFR.</li>
-                <li><strong>Prevención secundaria:</strong> SCA, EVA o IC establecidas, CKD grave (eGFR &lt;30 o 30-44 + ACR &gt;30) o DM con daño de órgano: riesgo Muy Alto directo (ESC 2021 Tabla 4); los scores de prevención primaria no aplican.</li>
+                <li><strong>Prevención secundaria:</strong> SCA o EVA establecidas: riesgo Muy Alto directo (ESC 2021 Tabla 4) y se calcula el riesgo residual con SMART2. IC establecida, CKD grave (eGFR &lt;30 o 30-44 + ACR &gt;30) o DM con daño de órgano: Muy Alto directo; los scores de prevención primaria no aplican (sin evento vascular, SMART2 tampoco aplica).</li>
                 <li><strong>&lt;40 años:</strong> Edad vascular: qué edad tendría que tener para igual riesgo con factores óptimos.</li>
                 <li><strong>Enf. autoinmunes:</strong> AR, LES, psoriasis, VIH. Factor ×1.5 basado en CPDAI (EULAR 2010).</li>
                 <li><strong>≥70 años:</strong> SCORE2-OP con coeficientes independientes.</li>
@@ -665,6 +670,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Simulador antes/después: proyección del riesgo con LDL y PAS en meta</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Pacientes de prueba ahora cargan medicamentos y antecedentes (fix mapeo selects/radios); perfiles incluyen Lp(a), CaSc, hsCRP y años de evento</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Umbrales de laboratorio alineados a guías (CT 200, TG 150) y nuevos valores críticos (LDL>190, TG>500, CT>310, ACR>300)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> SMART2 ahora se muestra como score principal cuando hay evento vascular (SCA/EVA); en muy alto sin ASCVD (IC/CKD/DM grave) se explica sin score</li>
                 </ul>
             </div>
         </div>
@@ -801,7 +807,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Special Populations</h3>
             <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5">
                 <li><strong>CKD:</strong> SCORE2-CKD add-on (Eur J Prev Cardiol 2023) applied to the recalibrated risk: compares observed eGFR and ACR with the expected values for the risk profile (predictor-patch method). ACR (mg/g) optional; eGFR-only add-on when ACR is missing.</li>
-                <li><strong>Secondary prevention:</strong> established ASCVD (ACS, prior stroke/PAD), heart failure, severe CKD (eGFR &lt;30 or 30-44 + ACR &gt;30) or DM with target-organ damage: direct very-high risk (ESC 2021 Table 4); primary-prevention scores do not apply.</li>
+                <li><strong>Secondary prevention:</strong> Established ACS or cerebrovascular/PAD: direct very-high risk (ESC 2021 Table 4) and residual risk is estimated with SMART2. Established heart failure, severe CKD (eGFR &lt;30 or 30-44 + ACR &gt;30) or DM with target-organ damage: direct very-high risk; primary-prevention scores do not apply (without a vascular event, SMART2 does not apply either).</li>
                 <li><strong>&lt;40 years:</strong> Vascular age estimate: what age would give the same risk with optimal risk factors.</li>
                 <li><strong>Autoimmune diseases:</strong> RA, SLE, psoriasis, HIV. Factor ×1.5 based on CPDAI (EULAR 2010).</li>
                 <li><strong>≥70 years:</strong> SCORE2-OP with independent coefficients.</li>
@@ -893,6 +899,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Before/after simulator: risk projection with LDL and BP at target</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Sample patients now load medications and history (selects/radios mapping); profiles include Lp(a), CAC, hsCRP, years since event</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Lab thresholds aligned to guidelines (TC 200, TG 150) and new critical values (LDL>190, TG>500, TC>310, ACR>300)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> SMART2 now shown as the primary score when a vascular event exists (ACS/Stroke); in very-high risk without ASCVD (HF/CKD/DM) it is explained without a score</li>
                 </ul>
             </div>
         </div>
@@ -1162,9 +1169,9 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 erc: 'ERC', ic: 'IC', subclinic: 'Ateroscl.',                 fragile: 'Fragilidad', autoimmune: 'Autoinmune', fhx: 'Hx Familiar',
                 lpa: 'Lp(a)', cac: 'CaSc', hscrp: 'hsCRP', smartYears: 'Años evento',
                 result_title: 'Estimación de Riesgo a 10 Años',
-                result_score2: 'SCORE2', result_prevent: 'PREVENT', result_who: 'WHO',
-                badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)',
-                res_out_s2: 'IAM + ACV', res_out_pv: 'ECV Total + IC', res_out_who: 'CHD + ACV',
+                result_score2: 'SCORE2', result_prevent: 'PREVENT', result_who: 'WHO', result_smart: 'SMART2',
+                badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)', badge_smart: '(residual)',
+                res_out_s2: 'IAM + ACV', res_out_pv: 'ECV Total + IC', res_out_who: 'CHD + ACV', res_out_smart: 'Recurrencia + muerte CV',
                 result_category: 'Categoría:', result_combined: 'Riesgo Combinado',
                 result_tfg: 'TFG (CKD-EPI)', result_meta: 'Meta LDL', result_reduction: 'Reducción LDL Necesaria',
                 result_benefit: 'Beneficio Clínico Esperado:',
@@ -1390,9 +1397,9 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 erc: 'CKD', ic: 'HF', subclinic: 'Subclin. Athero.', fragile: 'Frailty', autoimmune: 'Autoimmune', fhx: 'Family Hx',
                 lpa: 'Lp(a)', cac: 'CAC', hscrp: 'hsCRP', smartYears: 'Years since event',
                 result_title: '10-Year Risk Estimate',
-                result_score2: 'SCORE2', result_prevent: 'PREVENT', result_who: 'WHO',
-                badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)',
-                res_out_s2: 'MI + Stroke', res_out_pv: 'Total CVD + HF', res_out_who: 'CHD + Stroke',
+                result_score2: 'SCORE2', result_prevent: 'PREVENT', result_who: 'WHO', result_smart: 'SMART2',
+                badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)', badge_smart: '(residual)',
+                res_out_s2: 'MI + Stroke', res_out_pv: 'Total CVD + HF', res_out_who: 'CHD + Stroke', res_out_smart: 'Recurrence + CV death',
                 result_category: 'Category:', result_combined: 'Combined Risk',
                 result_tfg: 'eGFR (CKD-EPI)', result_meta: 'LDL Target', result_reduction: 'LDL Reduction Needed',
                 result_benefit: 'Expected Clinical Benefit:',
@@ -2413,14 +2420,16 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             // --- Muy alto riesgo directo sin score (ESC 2021 Tabla 4) ---
             // ASCVD documentada (SCA, EVA, IC), CKD grave (eGFR<30 o 30-44+ACR>30),
             // o DM con daño de órgano (TOD): no aplica SCORE2/PREVENT (prevención primaria).
-            const prevencionSecundaria = i.sca !== 'none' || i.eva !== 'none' || i.hf !== 'none'
+            const ascvdEstablecida = i.sca !== 'none' || i.eva !== 'none';
+            const prevencionSecundaria = ascvdEstablecida || i.hf !== 'none'
                 || i.erc === 'g4' || i.erc === 'g3b_a2'
                 || i.dm.includes('severe');
 
-            // --- SMART2: riesgo residual a 10 años en prevención secundaria (LatAm) ---
+            // --- SMART2: riesgo residual a 10 años (solo con ASCVD establecida) ---
             // Mapeo: CAD = SCA; cerebrovascular/PAD = EVA (aproximación); AAA no capturado.
+            // No aplica en IC/CKD grave/DM grave sin evento vascular (SMART2 exige ASCVD).
             let smart2 = null;
-            if (prevencionSecundaria) {
+            if (ascvdEstablecida) {
                 smart2 = calcSmart2(i.age, i.sex, i.smoker, i.sbp, i.tc, i.hdl, i.dm, tfg,
                                     i.hscrp, i.smartYears,
                                     i.sca !== 'none' ? 1 : 0,
@@ -2526,13 +2535,13 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
 
             return { i, imc, tfgStr, metaLdl, criterio, score2, prevent, who, whoNl, smart2, b2, bP, bW, bandaPrimaria,
                      crit, warnings, dataFila, contribuciones, strRed, mejora,
-                     region, bandaECV: b2.t, edadVascular, autoInmune, ckm, prevencionSecundaria };
+                     region, bandaECV: b2.t, edadVascular, autoInmune, ckm, prevencionSecundaria, ascvdEstablecida };
         }
 
         // Vuelca todos los resultados del cálculo en la interfaz (vista web + vista impresión).
         function renderResultados(r) {
             const { i, imc, tfgStr, metaLdl, criterio, score2, prevent, who, whoNl, smart2, bandaPrimaria,
-                    crit, warnings, dataFila, contribuciones, strRed, mejora, edadVascular, autoInmune, ckm, prevencionSecundaria } = r;
+                    crit, warnings, dataFila, contribuciones, strRed, mejora, edadVascular, autoInmune, ckm, prevencionSecundaria, ascvdEstablecida } = r;
 
             document.getElementById('w_tfg').innerText = tfgStr;
             document.getElementById('w_meta').innerText = "< " + metaLdl + " mg/dL";
@@ -2551,21 +2560,32 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             const s2v = isNaN(score2) ? -1 : score2;
             const pv = isNaN(prevent) ? -1 : prevent;
             const wv = isNaN(who) ? -1 : who;
-            document.getElementById('w_score2_total').innerText = prevencionSecundaria ? noAplica : s2v.toFixed(1) + "%";
-            document.getElementById('w_prevent_total').innerText = prevencionSecundaria ? noAplica : pv.toFixed(1) + "%";
-            document.getElementById('w_who_total').innerText = prevencionSecundaria ? noAplica : (wv < 0 ? '—' : wv.toFixed(1) + "%");
+            const smartCard = document.getElementById('w_smart_card');
+            if (ascvdEstablecida && smart2 != null) {
+                // Prevención secundaria con evento vascular (SCA/EVA): SMART2 es el score válido
+                document.getElementById('w_score2_total').innerText = noAplica;
+                document.getElementById('w_prevent_total').innerText = noAplica;
+                document.getElementById('w_who_total').innerText = noAplica;
+                document.getElementById('w_smart_total').innerText = smart2.toFixed(1) + "%";
+                smartCard.classList.remove('hidden');
+            } else {
+                document.getElementById('w_score2_total').innerText = prevencionSecundaria ? noAplica : s2v.toFixed(1) + "%";
+                document.getElementById('w_prevent_total').innerText = prevencionSecundaria ? noAplica : pv.toFixed(1) + "%";
+                document.getElementById('w_who_total').innerText = prevencionSecundaria ? noAplica : (wv < 0 ? '—' : wv.toFixed(1) + "%");
+                smartCard.classList.add('hidden');
+            }
 
             const wBand = document.getElementById('w_band');
             wBand.textContent = txt(bandaPrimaria.t);
             wBand.style.background = bandaPrimaria.c;
-            const riesgoPrimario = prevencionSecundaria ? 25 : Math.max(s2v, pv, wv);
+            const riesgoPrimario = (ascvdEstablecida && smart2 != null) ? smart2 : (prevencionSecundaria ? 25 : Math.max(s2v, pv, wv));
             const g = document.getElementById('w_gauge');
             const gaugeMaxWeb = 25;
             g.style.width = Math.min(100, (riesgoPrimario / gaugeMaxWeb) * 100) + '%';
             g.style.background = bandaPrimaria.c;
             g.parentElement.setAttribute('aria-valuenow', riesgoPrimario.toFixed(1));
             const gv = document.getElementById('w_gauge_val');
-            if (gv) gv.textContent = (prevencionSecundaria ? '—' : riesgoPrimario.toFixed(1)) + '%';
+            if (gv) gv.textContent = ((ascvdEstablecida && smart2 != null) ? riesgoPrimario.toFixed(1) : (prevencionSecundaria ? '—' : riesgoPrimario.toFixed(1))) + '%';
 
             // Advertencias de aplicabilidad (rangos de edad, prevención secundaria, etc.)
             const warnEl = document.getElementById('w_warnings');
@@ -2834,7 +2854,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             const perfiles = [
                 { age:35, sbp:115, weight:68, height:170, tc:170, hdl:55, ldl:95,  creatinine:0.85, hba1c:5.2, acr:8,  trig:110, waist:84, sex:'male', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'moderate', statin:'no', htnTx:'no', dmAge:'', lpa:15, cac:0, hscrp:0.8, patientName:'sample_pac_0', doctorName:'Doctor CardioScore' },
                 { age:55, sbp:140, weight:82, height:172, tc:210, hdl:44, ldl:130, creatinine:1.0,  hba1c:5.7, acr:15, trig:150, waist:96, sex:'male', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'no', htnTx:'no', dmAge:'', lpa:25, cac:80, hscrp:1.1, patientName:'sample_pac_1', doctorName:'Doctor CardioScore' },
-                { age:62, sbp:155, weight:92, height:175, tc:245, hdl:38, ldl:165, creatinine:1.15, hba1c:6.0, acr:25, trig:190, waist:104, sex:'male', smoker:'yes', dm:'mild', sca:'none', erc:'none', hf:'isolated', eva:'none', subclinic:'mod', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:58, lpa:35, cac:180, hscrp:2.8, smartYears:1, patientName:'sample_pac_2', doctorName:'Doctor CardioScore' },
+                { age:62, sbp:155, weight:92, height:175, tc:245, hdl:38, ldl:165, creatinine:1.15, hba1c:6.0, acr:25, trig:190, waist:104, sex:'male', smoker:'yes', dm:'mild', sca:'stemi', erc:'none', hf:'none', eva:'none', subclinic:'mod', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:58, lpa:35, cac:180, hscrp:2.8, smartYears:1, patientName:'sample_pac_2', doctorName:'Doctor CardioScore' },
                 { age:58, sbp:150, weight:88, height:168, tc:230, hdl:40, ldl:150, creatinine:1.2,  hba1c:7.8, acr:55, trig:210, waist:92, sex:'female', smoker:'no', dm:'mod', sca:'none', erc:'g3a_a2', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:50, lpa:60, hscrp:1.2, patientName:'sample_pac_3', doctorName:'Doctor CardioScore' },
                 { age:55, sbp:148, weight:78, height:165, tc:200, hdl:48, ldl:120, creatinine:2.1,  hba1c:5.6, acr:250, trig:160, waist:90, sex:'female', smoker:'no', dm:'none', sca:'none', erc:'g4', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:'', lpa:20, cac:400, hscrp:1.6, patientName:'sample_pac_4', doctorName:'Doctor CardioScore' },
                 { age:74, sbp:158, weight:70, height:163, tc:220, hdl:42, ldl:140, creatinine:1.3,  hba1c:5.8, acr:35, trig:120, waist:86, sex:'female', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'yes', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:'', lpa:30, cac:120, hscrp:1.9, patientName:'sample_pac_5', doctorName:'Doctor CardioScore' }
