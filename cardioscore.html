@@ -207,7 +207,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         <div id="tab_calculator">
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
         <!-- COLUMNA IZQUIERDA -->
-        <div class="xl:col-span-6 bg-white rounded-2xl border border-slate-200 p-4 md:p-6 space-y-5">
+        <div class="xl:col-span-6 space-y-4">
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 md:p-6 space-y-5">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
                 <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
                     <span class="w-2.5 h-5 bg-[#0054A6] rounded-md inline-block"></span>
@@ -300,7 +301,58 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <button type="button" id="btn_calcular" onclick="ejecutarCalculos(true)" class="bg-[#0054A6] hover:bg-[#003A73] text-white font-bold py-3 px-8 rounded-md shadow text-sm uppercase tracking-wider transition flex-1 max-w-xs"><span data-i18n="calc_btn">Estratificar</span></button>
                 <button type="button" onclick="limpiar()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-5 rounded-md shadow text-sm uppercase tracking-wider transition"><span data-i18n="clean_btn">Limpiar</span></button>
             </div>
-        </div>
+            </div>
+            </div>
+
+            <!-- RESUMEN DEL PACIENTE -->
+            <div id="w_patient_summary" class="hidden bg-white rounded-2xl border border-slate-200 p-4 space-y-3">
+                <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2" data-i18n="result_summary">Resumen del Paciente</h4>
+                <div class="grid grid-cols-2 gap-2.5 text-xs">
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                        <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="result_imc">IMC</span>
+                        <span id="sum_imc" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                        <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="result_tfg">TFG (CKD-EPI)</span>
+                        <span id="sum_tfg" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                        <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="region">Región SCORE2</span>
+                        <span id="sum_region" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
+                    </div>
+                    <div class="p-3 bg-purple-50 border border-purple-200 rounded-xl">
+                        <span class="block text-[10px] font-bold text-purple-800 uppercase" data-i18n="result_vasc_age">Edad Vascular</span>
+                        <span id="sum_va" class="text-sm font-black text-purple-900 mt-0.5 block">-</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs">
+                    <span class="font-bold text-blue-800 uppercase text-[10px]" data-i18n="ckm_stage">Estadio CKM</span>
+                    <span id="sum_ckm" class="font-black text-blue-900">-</span>
+                </div>
+            </div>
+
+            <!-- SIMULADOR ANTES/DESPUÉS -->
+            <div class="bg-white rounded-xl border border-blue-200 overflow-hidden no-print">
+                <button type="button" id="btn_sim" onclick="toggleSim()" class="w-full flex items-center justify-between gap-2 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-[#0054A6] text-xs font-bold uppercase tracking-wider transition">
+                    <span data-i18n="sim_btn">Simular control óptimo (LDL y PAS en meta)</span>
+                    <span id="sim_chev" class="text-base leading-none font-black">+</span>
+                </button>
+                <div id="w_sim" class="hidden p-4 text-xs space-y-2 bg-white"></div>
+            </div>
+
+            <!-- EXPLICACIÓN AL PACIENTE -->
+            <details id="patient_explain" class="bg-white border border-sky-200 rounded-xl overflow-hidden hidden">
+                <summary class="flex items-center justify-between px-5 py-3 cursor-pointer hover:bg-sky-50 transition text-sm font-bold text-sky-800 uppercase tracking-wider">
+                    <span data-i18n="res_explain">Cómo explicar al paciente</span>
+                    <svg class="w-4 h-4 transition-transform" style="transform: rotate(0deg);"><polyline points="6 4 14 12 6 20" fill="none" stroke="currentColor" stroke-width="2"></polyline></svg>
+                </summary>
+                <div class="px-5 pb-5 pt-2 text-sm text-slate-700 leading-relaxed space-y-3">
+                    <p id="w_patient_risk" class="font-medium text-slate-800">-</p>
+                    <p id="w_patient_lifestyle" data-i18n="res_lifestyle">Esto se puede mejorar significativamente con cambios en el estilo de vida: alimentación saludable, actividad física regular y control del peso.</p>
+                    <p id="w_patient_treatment" data-i18n="res_treatment">Además, existen medicamentos que ayudan a controlar el colesterol y la presión arterial, reduciendo drásticamente su riesgo de sufrir un infarto o un derrame cerebral.</p>
+                    <p class="text-sky-700 text-xs border-t border-sky-100 pt-3" data-i18n="res_supervision">El tratamiento se ajusta a sus metas personalizadas y será supervisado por su médico tratante.</p>
+                </div>
+            </details>
         <!-- FIN COLUMNA IZQUIERDA -->
 
         <!-- COLUMNA DERECHA: Resultados -->
@@ -330,28 +382,6 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <p id="w_narrativa" class="text-xs md:text-sm font-medium leading-relaxed text-slate-100">-</p>
                 </div>
 
-                <!-- SIMULADOR ANTES/DESPUÉS -->
-                <div class="bg-white rounded-xl border border-blue-200 overflow-hidden no-print">
-                    <button type="button" id="btn_sim" onclick="toggleSim()" class="w-full flex items-center justify-between gap-2 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-[#0054A6] text-xs font-bold uppercase tracking-wider transition">
-                        <span data-i18n="sim_btn">Simular control óptimo (LDL y PAS en meta)</span>
-                        <span id="sim_chev" class="text-base leading-none font-black">+</span>
-                    </button>
-                    <div id="w_sim" class="hidden p-4 text-xs space-y-2 bg-white"></div>
-                </div>
-
-                <!-- EXPLICACIÓN AL PACIENTE -->
-                <details id="patient_explain" class="bg-white border border-sky-200 rounded-xl overflow-hidden hidden">
-                    <summary class="flex items-center justify-between px-5 py-3 cursor-pointer hover:bg-sky-50 transition text-sm font-bold text-sky-800 uppercase tracking-wider">
-                        <span data-i18n="res_explain">Cómo explicar al paciente</span>
-                        <svg class="w-4 h-4 transition-transform" style="transform: rotate(0deg);"><polyline points="6 4 14 12 6 20" fill="none" stroke="currentColor" stroke-width="2"></polyline></svg>
-                    </summary>
-                    <div class="px-5 pb-5 pt-2 text-sm text-slate-700 leading-relaxed space-y-3">
-                        <p id="w_patient_risk" class="font-medium text-slate-800">-</p>
-                        <p id="w_patient_lifestyle" data-i18n="res_lifestyle">Esto se puede mejorar significativamente con cambios en el estilo de vida: alimentación saludable, actividad física regular y control del peso.</p>
-                        <p id="w_patient_treatment" data-i18n="res_treatment">Además, existen medicamentos que ayudan a controlar el colesterol y la presión arterial, reduciendo drásticamente su riesgo de sufrir un infarto o un derrame cerebral.</p>
-                        <p class="text-sky-700 text-xs border-t border-sky-100 pt-3" data-i18n="res_supervision">El tratamiento se ajusta a sus metas personalizadas y será supervisado por su médico tratante.</p>
-                    </div>
-                </details>
                 <div class="bg-gradient-to-br from-[#002B5C] via-[#003A73] to-[#0054A6] text-white rounded-2xl p-5 shadow-xl border border-blue-400/30 space-y-4">
                     <div class="flex items-center justify-between gap-2 border-b border-white/15 pb-2 flex-wrap">
                         <h3 class="text-xs font-extrabold uppercase tracking-widest text-blue-200" data-i18n="result_title">Estimación de Riesgo a 10 Años</h3>
@@ -707,6 +737,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> innerText → textContent en toda la app (corrige el coloreado de labs del PDF, que fallaba en elementos ocultos)</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Web: badge de versión v2.3, eliminado carácter suelto "&gt;" en la vista, scrollIntoView robusto y grids del formulario responsive en móvil</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Resultados reestructurados por filas: Desglose de Scores → Metas Terapéuticas → Contribución de Factores → Botones; panel ampliado a 6/12 en desktop</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Rebalanceo de columnas: Simulador y Explicación al paciente pasan a la izquierda bajo el formulario; nueva tarjeta "Resumen del Paciente" (IMC, TFG, región, edad vascular, CKM) llena el vacío</li>
                 </ul>
             </div>
         </div>
@@ -958,6 +989,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> innerText → textContent across the app (fixes PDF lab coloring, which failed on hidden elements)</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Web: version badge v2.3, removed stray "&gt;" character in the view, robust scrollIntoView and responsive form grids on mobile</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Results restructured in rows: Score Breakdown → Therapeutic Targets → Risk Factor Contribution → Buttons; panel widened to 6/12 on desktop</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Column rebalance: Simulator and Patient Explanation moved to the left under the form; new "Patient Summary" card (BMI, eGFR, region, vascular age, CKM) fills the space</li>
                 </ul>
             </div>
         </div>
@@ -1233,7 +1265,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)', badge_smart: '(residual)',
                 res_out_s2: 'IAM + ACV', res_out_pv: 'ECV Total + IC', res_out_who: 'CHD + ACV', res_out_smart: 'Recurrencia + muerte CV',
                 result_category: 'Categoría:', result_combined: 'Riesgo Combinado',
-                result_tfg: 'TFG (CKD-EPI)', result_meta: 'Meta LDL', result_imc: 'IMC', result_criterio: 'Criterio de la Meta', result_reduction: 'Reducción LDL Necesaria',
+                result_tfg: 'TFG (CKD-EPI)', result_meta: 'Meta LDL', result_imc: 'IMC', result_criterio: 'Criterio de la Meta', result_summary: 'Resumen del Paciente', result_reduction: 'Reducción LDL Necesaria',
                 result_benefit: 'Beneficio Clínico Esperado:',
                 result_opt: 'Óptimo (est.)', result_current: 'Riesgo Actual',
                 result_copy: 'Copiar Informe', result_pdf: 'Exportar PDF',
@@ -1471,7 +1503,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)', badge_smart: '(residual)',
                 res_out_s2: 'MI + Stroke', res_out_pv: 'Total CVD + HF', res_out_who: 'CHD + Stroke', res_out_smart: 'Recurrence + CV death',
                 result_category: 'Category:', result_combined: 'Combined Risk',
-                result_tfg: 'eGFR (CKD-EPI)', result_meta: 'LDL Target', result_imc: 'BMI', result_criterio: 'Target Criterion', result_reduction: 'LDL Reduction Needed',
+                result_tfg: 'eGFR (CKD-EPI)', result_meta: 'LDL Target', result_imc: 'BMI', result_criterio: 'Target Criterion', result_summary: 'Patient Summary', result_reduction: 'LDL Reduction Needed',
                 result_benefit: 'Expected Clinical Benefit:',
                 result_opt: 'Optimal (est.)', result_current: 'Current Risk',
                 result_copy: 'Copy Report', result_pdf: 'Export PDF',
@@ -2605,6 +2637,15 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             if (wImc) wImc.textContent = imc.toFixed(1);
             const wCrit = document.getElementById('w_criterio');
             if (wCrit) wCrit.textContent = criterio;
+            const sumCard = document.getElementById('w_patient_summary');
+            if (sumCard) {
+                sumCard.classList.remove('hidden');
+                const sImc = document.getElementById('sum_imc'); if (sImc) sImc.textContent = imc.toFixed(1);
+                const sTfg = document.getElementById('sum_tfg'); if (sTfg) sTfg.textContent = tfgStr;
+                const sReg = document.getElementById('sum_region'); if (sReg) sReg.textContent = txt({ low:'region_name_low', moderate:'region_name_mod', high:'region_name_high', very_high:'region_name_vhigh' }[r.region] || 'region_name_high');
+                const sVa = document.getElementById('sum_va'); if (sVa) sVa.textContent = edadVascular ? '~' + edadVascular + ' ' + txt('unit_years') : '—';
+                const sCkm = document.getElementById('sum_ckm'); if (sCkm) sCkm.textContent = txt('ckm_stage') + ' ' + ckm;
+            }
             const COND = {
                 sca: { ua: 'cond_sca_ua', nstemi: 'cond_sca_nstemi', stemi: 'cond_sca_stemi' },
                 eva: { two_episodes: 'cond_eva_two', one_risk: 'cond_eva_one' },
@@ -2892,13 +2933,15 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         // Resetea el formulario, oculta resultados y limpia el gráfico Lp(a).
         function limpiar() {
             Object.keys(RANGES).forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-            ['nohdl','imc_disp','patient_name','doctor_name'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            ['patient_name','doctor_name'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
             document.querySelectorAll('main select').forEach(s => s.selectedIndex = 0);
             document.querySelectorAll('input[name="sex"], input[name="smoker"], input[name="statin"], input[name="htn_tx"]').forEach(r => r.checked = false);
             document.querySelectorAll('main input, main select').forEach(el => { el.classList.remove('input-invalid', 'input-valid'); el.removeAttribute('title'); });
             document.getElementById('alert_box').classList.add('hidden');
             document.getElementById('error_box').classList.add('hidden');
             document.getElementById('panel_resultados').classList.add('hidden');
+            const sumCard = document.getElementById('w_patient_summary');
+            if (sumCard) sumCard.classList.add('hidden');
             document.getElementById('introCard').classList.remove('hidden');
             track('form_cleared');
             const btnCalc = document.getElementById('btn_calcular');
