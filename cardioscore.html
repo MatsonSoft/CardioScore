@@ -284,6 +284,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="fragile" for="fragile_status" title="Fragilidad o limitación funcional.">Fragilidad<button type="button" class="tip" aria-label="Ayuda: Fragilidad" aria-expanded="false">?</button></label><select id="fragile_status" class="form-select text-[11px] h-9 w-full" data-label="Fragilidad"><option value="no" data-i18n="opt_no">No</option><option value="yes" data-i18n="opt_yes">Sí</option></select></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="autoimmune" for="autoimmune_status">Autoinmune</label><select id="autoimmune_status" class="form-select text-[11px] h-9 w-full"><option value="no" data-i18n="opt_no">No</option><option value="yes" data-i18n="opt_yes">Sí</option></select></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="fhx" for="fhx_status" title="Historia familiar de ECV prematura: familiar de 1er grado con ECV &lt;55a (hombre) o &lt;65a (mujer). Modificador de riesgo ESC 2021.">Hx Familiar<button type="button" class="tip" aria-label="Ayuda: Hx Familiar" aria-expanded="false">?</button></label><select id="fhx_status" class="form-select text-[11px] h-9 w-full"><option value="no" data-i18n="opt_no">No</option><option value="yes" data-i18n="opt_yes">Sí</option></select></div>
+                    <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="antiaggr" for="antiaggr_status" title="Antiagregación en prevención secundaria (aspirina/clopidogrel). SMART2 asume cuidado estándar (sí); si no la toma, el riesgo residual aumenta.">Antiagr.<button type="button" class="tip" aria-label="Ayuda: Antiagregación" aria-expanded="false">?</button></label><select id="antiaggr_status" class="form-select text-[11px] h-9 w-full"><option value="yes" data-i18n="opt_yes">Sí</option><option value="no" data-i18n="opt_no">No</option></select></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="lpa" for="lpa" title="Lipoproteína(a) en mg/dL. Modificador de riesgo ESC: ≥50 mg/dL (≈125 nmol/L) eleva la categoría.">Lp(a) <span class="unit-tag" title="mg/dL">mg/dL</span><button type="button" class="tip" aria-label="Ayuda: Lp(a)" aria-expanded="false">?</button></label><input type="number" id="lpa" class="form-input text-xs h-9" data-i18n-placeholder="placeholder_mgdl" placeholder="mg/dL" min="1" max="300" inputmode="decimal" step="any" data-label="Lp(a)"></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="cac" for="cac" title="Calcio coronario (score de Agatston). Reclasifica riesgo intermedio (ESC IIa): 0 reduce, 100-299 alto, ≥300 muy alto.">CaSc <span class="unit-tag" title="Agatston">Agat</span><button type="button" class="tip" aria-label="Ayuda: CaSc" aria-expanded="false">?</button></label><input type="number" id="cac" class="form-input text-xs h-9" placeholder="0-4000" min="0" max="4000" inputmode="decimal" step="any" data-label="CaSc"></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="hscrp" for="hscrp" title="PCR ultrasensible en mg/L. Requerida para SMART (imputa 2.0 si vacío).">hsCRP <span class="unit-tag" title="mg/L">mg/L</span><button type="button" class="tip" aria-label="Ayuda: hsCRP" aria-expanded="false">?</button></label><input type="number" id="hscrp" step="0.1" class="form-input text-xs h-9" data-i18n-placeholder="placeholder_hscrp" placeholder="mg/L" min="0.1" max="100" inputmode="decimal" data-label="hsCRP"></div>
@@ -554,6 +555,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Variables</td><td class="py-1.5">Edad, sexo, tabaco, DM, PAS, non-HDL, hsCRP, eGFR, años desde el evento, historia CAD/ACV/PAD/AAA, aspirina</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Modelo</td><td class="py-1.5">Fine-Gray (riesgo competitivo), recalibrado por región (LatAm: REACH)</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Uso</td><td class="py-1.5">Riesgo residual en prevención secundaria (ESC 2021). Reemplaza a los scores de prevención primaria cuando hay ECV establecida.</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Nota</td><td class="py-1.5">Antiagregación: asume cuidado estándar (campo "Antiagr."). Territorio del evento: SCA=CAD, EVA=cerebrovascular; PAD y AAA no se diferencian.</td></tr>
                 </tbody></table>
             </div>
         </div>
@@ -671,6 +673,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Pacientes de prueba ahora cargan medicamentos y antecedentes (fix mapeo selects/radios); perfiles incluyen Lp(a), CaSc, hsCRP y años de evento</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Umbrales de laboratorio alineados a guías (CT 200, TG 150) y nuevos valores críticos (LDL>190, TG>500, CT>310, ACR>300)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> SMART2 ahora se muestra como score principal cuando hay evento vascular (SCA/EVA); en muy alto sin ASCVD (IC/CKD/DM grave) se explica sin score</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Campo antiagregación para SMART2 (riesgo residual aumenta si no la toma)</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Limpieza de código muerto (toUS, updateDerivedMetrics)</li>
                 </ul>
             </div>
         </div>
@@ -783,6 +787,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Variables</td><td class="py-1.5">Age, sex, smoking, DM, SBP, non-HDL, hsCRP, eGFR, years since event, CAD/Stroke/PAD/AAA history, aspirin</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Model</td><td class="py-1.5">Fine-Gray (competing risk), region-recalibrated (LatAm: REACH)</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Use</td><td class="py-1.5">Residual risk in secondary prevention (ESC 2021). Replaces primary-prevention scores when ASCVD is established.</td></tr>
+                    <tr><td class="py-1.5 pr-3 font-semibold align-top">Note</td><td class="py-1.5">Antiplatelet: standard care assumed ("Antiplatelet" field). Event territory: ACS=CAD, stroke/PAD= cerebrovascular; PAD and AAA are not differentiated.</td></tr>
                 </tbody></table>
             </div>
         </div>
@@ -900,6 +905,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Sample patients now load medications and history (selects/radios mapping); profiles include Lp(a), CAC, hsCRP, years since event</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Lab thresholds aligned to guidelines (TC 200, TG 150) and new critical values (LDL>190, TG>500, TC>310, ACR>300)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> SMART2 now shown as the primary score when a vascular event exists (ACS/Stroke); in very-high risk without ASCVD (HF/CKD/DM) it is explained without a score</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Antiplatelet field for SMART2 (residual risk increases when not on it)</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Dead code cleanup (toUS, updateDerivedMetrics)</li>
                 </ul>
             </div>
         </div>
@@ -1143,7 +1150,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         /* =========================================================================
            CALCULADORA DE RIESGO CARDIOVASCULAR "” lógica de la app
            Estructura del código (de arriba abajo):
-             1. updateDerivedMetrics / RANGES / validación  -> entrada y control
+             1. RANGES / validación / unidades             -> entrada y control
              2. MODEL + leerEntradas / calcularRiesgo        -> modelo (sin DOM)
              3. renderResultados / ejecutarCalculos          -> salida y orquestación
              4. limpiar / showTip / copiarResumen / exportarPDF / recalcLive -> UX
@@ -1168,6 +1175,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 sca: 'SCA', eva: 'EVA', dm: 'DM', dmAge: 'Edad Dx DM',
                 erc: 'ERC', ic: 'IC', subclinic: 'Ateroscl.',                 fragile: 'Fragilidad', autoimmune: 'Autoinmune', fhx: 'Hx Familiar',
                 lpa: 'Lp(a)', cac: 'CaSc', hscrp: 'hsCRP', smartYears: 'Años evento',
+                antiaggr: 'Antiagregación',
                 result_title: 'Estimación de Riesgo a 10 Años',
                 result_score2: 'SCORE2', result_prevent: 'PREVENT', result_who: 'WHO', result_smart: 'SMART2',
                 badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)', badge_smart: '(residual)',
@@ -1396,6 +1404,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 sca: 'ACS', eva: 'Vascular Disease', dm: 'DM', dmAge: 'Age at DM Dx',
                 erc: 'CKD', ic: 'HF', subclinic: 'Subclin. Athero.', fragile: 'Frailty', autoimmune: 'Autoimmune', fhx: 'Family Hx',
                 lpa: 'Lp(a)', cac: 'CAC', hscrp: 'hsCRP', smartYears: 'Years since event',
+                antiaggr: 'Antiplatelet',
                 result_title: '10-Year Risk Estimate',
                 result_score2: 'SCORE2', result_prevent: 'PREVENT', result_who: 'WHO', result_smart: 'SMART2',
                 badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)', badge_smart: '(residual)',
@@ -1609,15 +1618,6 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         let _userSetUnits = false; // el usuario eligió unidades: la geo no las pisa
         function txt(key) { return (LANG[_lang] || LANG.es)[key] || key; }
 
-        // Unidades: conversiones. El motor recibe siempre US (mg/dL, kg, cm).
-        function toUS(val, unit) {
-            if (unit === 'si') {
-                // mmol/L → mg/dL: lípidos ×38.67, creatinina ×0.0113
-                return val; // los lipids en mmol/L necesitan conversion - handled in leerEntradas
-            }
-            return val;
-        }
-
         // Geo IP detection
         function detectGeo() {
             let hasUnitsPref = false;
@@ -1811,7 +1811,6 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             _units = u; applyUnits();
             try { localStorage.setItem('cardioscore_units', u); } catch(e){}
             track('units_changed', { units: u });
-            updateDerivedMetrics();
             const pr = document.getElementById('panel_resultados');
             if (pr && !pr.classList.contains('hidden')) {
                 const i = leerEntradas(); _lastInput = i;
@@ -1833,29 +1832,6 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         }
         let lastBanda = null;
         let _lastInput = null;
-
-        document.getElementById('tc').addEventListener('input', updateDerivedMetrics);
-        document.getElementById('hdl').addEventListener('input', updateDerivedMetrics);
-        document.getElementById('weight').addEventListener('input', updateDerivedMetrics);
-        document.getElementById('height').addEventListener('input', updateDerivedMetrics);
-
-        // Calcula en vivo No-HDL (TC-HDL) e IMC a partir de los inputs.
-        function updateDerivedMetrics() {
-            const tc = aCanonical('tc') || 0;
-            const hdl = aCanonical('hdl') || 0;
-            const nohdlEl = document.getElementById('nohdl');
-            if (nohdlEl) nohdlEl.value = Math.max(0, tc - hdl);
-            const weight = aCanonical('weight') || 0;
-            const height = (aCanonical('height') || 100) / 100;
-            const imc = weight / (height * height);
-            const imcEl = document.getElementById('imc_disp');
-            if (imcEl) {
-                imcEl.value = imc.toFixed(1);
-                imcEl.style.fontWeight = '700';
-                imcEl.style.color = imc < 18.5 ? '#2563eb' : imc < 25 ? '#059669' : imc < 30 ? '#d97706' : '#dc2626';
-            }
-        }
-        updateDerivedMetrics();
 
         // Rangos válidos de entrada [min, max]; usados en validación y límites HTML.
         const RANGES = {
@@ -2334,7 +2310,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 aspirin: -0.21072103
             }
         };
-        function calcSmart2(age, sex, smoker, sbp, tc, hdl, dm, egfr, hscrp, yearsSince, cad, cvd, pad, aaa) {
+        function calcSmart2(age, sex, smoker, sbp, tc, hdl, dm, egfr, hscrp, yearsSince, cad, cvd, pad, aaa, aspirin) {
             const b = SMART2.b;
             const male = sex === 'male' ? 1 : 0;
             const smk = smoker === 'yes' ? 1 : 0;
@@ -2345,7 +2321,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             const lp = b.age * age + b.age2 * age * age + b.male * male + b.smoke * smk + b.dm * dmBin
                 + b.sbp10 * (sbp / 10) + b.nonHdlLog * Math.log(nonHdl) + b.hscrpLog * Math.log(hscrpV)
                 + b.egfr * egfr + b.egfr2 * egfr * egfr + b.years * years + b.years2 * years * years
-                + b.cad * cad + b.cvd * cvd + b.pad * pad + b.aaa * aaa + b.aspirin * 1;
+                + b.cad * cad + b.cvd * cvd + b.pad * pad + b.aaa * aaa + b.aspirin * (aspirin === 1 ? 1 : 0);
             const E = lp - SMART2.LP_mean - Math.log(SMART2.ratioLatAm);
             return Math.min(99.9, Math.max(0.1, (1 - Math.pow(1 - SMART2.baserisk10, Math.exp(E))) * 100));
         }
@@ -2382,7 +2358,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 riskRegion: sel('risk_region'),
                 statin: radio('statin'), htnTx: radio('htn_tx'),
                 autoimmune: sel('autoimmune_status'), fhx: sel('fhx_status'),
-                lpa: num('lpa'), cac: num('cac'), hscrp: num('hscrp'), smartYears: num('smart_years')
+                lpa: num('lpa'), cac: num('cac'), hscrp: num('hscrp'), smartYears: num('smart_years'),
+                antiaggr: sel('antiaggr_status')
             };
         }
 
@@ -2427,13 +2404,14 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
 
             // --- SMART2: riesgo residual a 10 años (solo con ASCVD establecida) ---
             // Mapeo: CAD = SCA; cerebrovascular/PAD = EVA (aproximación); AAA no capturado.
-            // No aplica en IC/CKD grave/DM grave sin evento vascular (SMART2 exige ASCVD).
+            // Aspirina/antiagregación: offset HR 0.81 (cuidado estándar = sí).
             let smart2 = null;
             if (ascvdEstablecida) {
                 smart2 = calcSmart2(i.age, i.sex, i.smoker, i.sbp, i.tc, i.hdl, i.dm, tfg,
                                     i.hscrp, i.smartYears,
                                     i.sca !== 'none' ? 1 : 0,
-                                    i.eva !== 'none' ? 1 : 0, 0, 0);
+                                    i.eva !== 'none' ? 1 : 0, 0, 0,
+                                    i.antiaggr === 'no' ? 0 : 1);
             }
 
             // --- Edad vascular para <40 años ---
@@ -2854,7 +2832,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             const perfiles = [
                 { age:35, sbp:115, weight:68, height:170, tc:170, hdl:55, ldl:95,  creatinine:0.85, hba1c:5.2, acr:8,  trig:110, waist:84, sex:'male', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'moderate', statin:'no', htnTx:'no', dmAge:'', lpa:15, cac:0, hscrp:0.8, patientName:'sample_pac_0', doctorName:'Doctor CardioScore' },
                 { age:55, sbp:140, weight:82, height:172, tc:210, hdl:44, ldl:130, creatinine:1.0,  hba1c:5.7, acr:15, trig:150, waist:96, sex:'male', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'no', htnTx:'no', dmAge:'', lpa:25, cac:80, hscrp:1.1, patientName:'sample_pac_1', doctorName:'Doctor CardioScore' },
-                { age:62, sbp:155, weight:92, height:175, tc:245, hdl:38, ldl:165, creatinine:1.15, hba1c:6.0, acr:25, trig:190, waist:104, sex:'male', smoker:'yes', dm:'mild', sca:'stemi', erc:'none', hf:'none', eva:'none', subclinic:'mod', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:58, lpa:35, cac:180, hscrp:2.8, smartYears:1, patientName:'sample_pac_2', doctorName:'Doctor CardioScore' },
+                { age:62, sbp:155, weight:92, height:175, tc:245, hdl:38, ldl:165, creatinine:1.15, hba1c:6.0, acr:25, trig:190, waist:104, sex:'male', smoker:'yes', dm:'mild', sca:'stemi', erc:'none', hf:'none', eva:'none', subclinic:'mod', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:58, lpa:35, cac:180, hscrp:2.8, smartYears:1, antiaggr:'no', patientName:'sample_pac_2', doctorName:'Doctor CardioScore' },
                 { age:58, sbp:150, weight:88, height:168, tc:230, hdl:40, ldl:150, creatinine:1.2,  hba1c:7.8, acr:55, trig:210, waist:92, sex:'female', smoker:'no', dm:'mod', sca:'none', erc:'g3a_a2', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:50, lpa:60, hscrp:1.2, patientName:'sample_pac_3', doctorName:'Doctor CardioScore' },
                 { age:55, sbp:148, weight:78, height:165, tc:200, hdl:48, ldl:120, creatinine:2.1,  hba1c:5.6, acr:250, trig:160, waist:90, sex:'female', smoker:'no', dm:'none', sca:'none', erc:'g4', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:'', lpa:20, cac:400, hscrp:1.6, patientName:'sample_pac_4', doctorName:'Doctor CardioScore' },
                 { age:74, sbp:158, weight:70, height:163, tc:220, hdl:42, ldl:140, creatinine:1.3,  hba1c:5.8, acr:35, trig:120, waist:86, sex:'female', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'yes', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:'', lpa:30, cac:120, hscrp:1.9, patientName:'sample_pac_5', doctorName:'Doctor CardioScore' }
@@ -2867,11 +2845,10 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             ['age','sbp','weight','height','tc','hdl','ldl','creatinine','hba1c','acr','trig','waist','lpa','cac','hscrp','smart_years'].forEach(id => { const el = document.getElementById(id); if (el) el.value = (p[id] === undefined || p[id] === '') ? '' : p[id]; });
             if (_units === 'si') convertirUnidades('us', 'si');
             document.getElementById('dm_age').value = p.dmAge || '';
-            const selMap = { sca_status:'sca', eva_status:'eva', dm_status:'dm', erc_status:'erc', hf_status:'hf', subclinic_status:'subclinic', fragile_status:'fragile', autoimmune_status:'autoimmune', fhx_status:'fhx', risk_region:'riskRegion' };
+            const selMap = { sca_status:'sca', eva_status:'eva', dm_status:'dm', erc_status:'erc', hf_status:'hf', subclinic_status:'subclinic', fragile_status:'fragile', autoimmune_status:'autoimmune', fhx_status:'fhx', antiaggr_status:'antiaggr', risk_region:'riskRegion' };
             document.querySelectorAll('main select').forEach(s => { const key = selMap[s.id] || s.id; const v = p[key]; if (v) s.value = v; else s.selectedIndex = 0; });
             const radioMap = { sex:'sex', smoker:'smoker', statin:'statin', htn_tx:'htnTx' };
             ['sex','smoker','statin','htn_tx'].forEach(n => { const key = radioMap[n] || n; const r = document.querySelector('input[name="' + n + '"][value="' + (p[key]||'no') + '"]'); if (r) r.checked = true; });
-            updateDerivedMetrics();
             document.getElementById('alert_box').classList.add('hidden');
             document.getElementById('error_box').classList.add('hidden');
             document.getElementById('panel_resultados').classList.add('hidden');
