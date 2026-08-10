@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:css": "tailwindcss -i src/tailwind.css -o cardioscore.css --minify",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:css": "tailwindcss -i src/tailwind.css -o cardioscore.css --minify"
   },
   "repository": {
     "type": "git",
