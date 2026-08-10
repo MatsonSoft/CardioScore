@@ -353,9 +353,12 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     </div>
                 </details>
                 <div class="bg-gradient-to-br from-[#002B5C] via-[#003A73] to-[#0054A6] text-white rounded-2xl p-5 shadow-xl border border-blue-400/30 space-y-4">
-                    <div class="flex items-center justify-between border-b border-white/15 pb-2">
+                    <div class="flex items-center justify-between gap-2 border-b border-white/15 pb-2 flex-wrap">
                         <h3 class="text-xs font-extrabold uppercase tracking-widest text-blue-200" data-i18n="result_title">Estimación de Riesgo a 10 Años</h3>
-                        <span id="w_band" class="text-xs font-black px-2.5 py-1 rounded-md bg-white text-slate-900 uppercase">-</span>
+                        <span class="flex items-center gap-2">
+                            <span id="w_region" class="text-[10px] font-bold text-blue-200/80 uppercase">-</span>
+                            <span id="w_band" class="text-xs font-black px-2.5 py-1 rounded-md bg-white text-slate-900 uppercase">-</span>
+                        </span>
                     </div>
                     <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
                         <div class="bg-white/10 backdrop-blur-sm p-3.5 rounded-xl border border-white/15 text-center">
@@ -448,6 +451,14 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                                 <div class="p-3 bg-purple-50 border border-purple-200 rounded-xl">
                                     <span class="block text-[10px] font-bold text-purple-800 uppercase" data-i18n="result_vasc_age">Edad Vascular</span>
                                     <span id="w_vascular_age" class="text-sm font-black text-purple-900 mt-0.5 block">-</span>
+                                </div>
+                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                    <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="result_imc">IMC</span>
+                                    <span id="w_imc" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
+                                </div>
+                                <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl col-span-2">
+                                    <span class="block text-[10px] font-bold text-blue-700 uppercase" data-i18n="result_criterio">Criterio de la Meta</span>
+                                    <span id="w_criterio" class="text-xs font-semibold text-blue-900 mt-0.5 block leading-snug">-</span>
                                 </div>
                             </div>
                             <div class="p-3 bg-emerald-50 text-emerald-900 rounded-xl border border-emerald-200 text-xs">
@@ -691,6 +702,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Campo de territorio vascular para SMART2 (Coronario/Cerebrovascular/PAD/AAA)</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Limpieza de código muerto (toUS, updateDerivedMetrics)</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Botones de ayuda "?" unificados: se eliminaron los manuales duplicados y todos los campos (incl. Lp(a), CaSc, hsCRP, años evento, Hx familiar, antiagregación, territorio) muestran su tooltip correcto</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Panel de resultados: muestra región SCORE2, IMC y criterio de la meta LDL en la web</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> innerText → textContent en toda la app (corrige el coloreado de labs del PDF, que fallaba en elementos ocultos)</li>
                 </ul>
             </div>
         </div>
@@ -938,6 +951,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Vascular territory field for SMART2 (Coronary/Cerebrovascular/PAD/AAA)</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Dead code cleanup (toUS, updateDerivedMetrics)</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Unified "?" help buttons: removed manual duplicates and all fields (incl. Lp(a), CAC, hsCRP, years since event, family Hx, antiplatelet, territory) now show their correct tooltip</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Results panel: shows SCORE2 region, BMI and LDL target criterion on the web</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> innerText → textContent across the app (fixes PDF lab coloring, which failed on hidden elements)</li>
                 </ul>
             </div>
         </div>
@@ -1213,7 +1228,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)', badge_smart: '(residual)',
                 res_out_s2: 'IAM + ACV', res_out_pv: 'ECV Total + IC', res_out_who: 'CHD + ACV', res_out_smart: 'Recurrencia + muerte CV',
                 result_category: 'Categoría:', result_combined: 'Riesgo Combinado',
-                result_tfg: 'TFG (CKD-EPI)', result_meta: 'Meta LDL', result_reduction: 'Reducción LDL Necesaria',
+                result_tfg: 'TFG (CKD-EPI)', result_meta: 'Meta LDL', result_imc: 'IMC', result_criterio: 'Criterio de la Meta', result_reduction: 'Reducción LDL Necesaria',
                 result_benefit: 'Beneficio Clínico Esperado:',
                 result_opt: 'Óptimo (est.)', result_current: 'Riesgo Actual',
                 result_copy: 'Copiar Informe', result_pdf: 'Exportar PDF',
@@ -1451,7 +1466,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 badge_esc: '(ESC)', badge_aha: '(AHA)', badge_who: '(Central L.A.)', badge_smart: '(residual)',
                 res_out_s2: 'MI + Stroke', res_out_pv: 'Total CVD + HF', res_out_who: 'CHD + Stroke', res_out_smart: 'Recurrence + CV death',
                 result_category: 'Category:', result_combined: 'Combined Risk',
-                result_tfg: 'eGFR (CKD-EPI)', result_meta: 'LDL Target', result_reduction: 'LDL Reduction Needed',
+                result_tfg: 'eGFR (CKD-EPI)', result_meta: 'LDL Target', result_imc: 'BMI', result_criterio: 'Target Criterion', result_reduction: 'LDL Reduction Needed',
                 result_benefit: 'Expected Clinical Benefit:',
                 result_opt: 'Optimal (est.)', result_current: 'Current Risk',
                 result_copy: 'Copy Report', result_pdf: 'Export PDF',
@@ -2577,8 +2592,14 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             const { i, imc, tfgStr, metaLdl, criterio, score2, prevent, who, whoNl, smart2, bandaPrimaria,
                     crit, warnings, dataFila, contribuciones, strRed, mejora, edadVascular, autoInmune, ckm, prevencionSecundaria, ascvdEstablecida } = r;
 
-            document.getElementById('w_tfg').innerText = tfgStr;
-            document.getElementById('w_meta').innerText = "< " + metaLdl + " mg/dL";
+            document.getElementById('w_tfg').textContent = tfgStr;
+            document.getElementById('w_meta').textContent = "< " + metaLdl + " mg/dL";
+            const wReg = document.getElementById('w_region');
+            if (wReg) wReg.textContent = txt({ low:'region_name_low', moderate:'region_name_mod', high:'region_name_high', very_high:'region_name_vhigh' }[r.region] || 'region_name_high');
+            const wImc = document.getElementById('w_imc');
+            if (wImc) wImc.textContent = imc.toFixed(1);
+            const wCrit = document.getElementById('w_criterio');
+            if (wCrit) wCrit.textContent = criterio;
             const COND = {
                 sca: { ua: 'cond_sca_ua', nstemi: 'cond_sca_nstemi', stemi: 'cond_sca_stemi' },
                 eva: { two_episodes: 'cond_eva_two', one_risk: 'cond_eva_one' },
@@ -2597,15 +2618,15 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             const smartCard = document.getElementById('w_smart_card');
             if (ascvdEstablecida && smart2 != null) {
                 // Prevención secundaria con evento vascular (SCA/EVA): SMART2 es el score válido
-                document.getElementById('w_score2_total').innerText = noAplica;
-                document.getElementById('w_prevent_total').innerText = noAplica;
-                document.getElementById('w_who_total').innerText = noAplica;
-                document.getElementById('w_smart_total').innerText = smart2.toFixed(1) + "%";
+                document.getElementById('w_score2_total').textContent = noAplica;
+                document.getElementById('w_prevent_total').textContent = noAplica;
+                document.getElementById('w_who_total').textContent = noAplica;
+                document.getElementById('w_smart_total').textContent = smart2.toFixed(1) + "%";
                 smartCard.classList.remove('hidden');
             } else {
-                document.getElementById('w_score2_total').innerText = prevencionSecundaria ? noAplica : s2v.toFixed(1) + "%";
-                document.getElementById('w_prevent_total').innerText = prevencionSecundaria ? noAplica : pv.toFixed(1) + "%";
-                document.getElementById('w_who_total').innerText = prevencionSecundaria ? noAplica : (wv < 0 ? '—' : wv.toFixed(1) + "%");
+                document.getElementById('w_score2_total').textContent = prevencionSecundaria ? noAplica : s2v.toFixed(1) + "%";
+                document.getElementById('w_prevent_total').textContent = prevencionSecundaria ? noAplica : pv.toFixed(1) + "%";
+                document.getElementById('w_who_total').textContent = prevencionSecundaria ? noAplica : (wv < 0 ? '—' : wv.toFixed(1) + "%");
                 smartCard.classList.add('hidden');
             }
 
@@ -2648,8 +2669,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             });
             document.getElementById('w_table_body').innerHTML = htmlT;
 
-            document.getElementById('w_inf_sin').innerText = prevencionSecundaria ? noAplica : s2v.toFixed(1) + "%";
-            document.getElementById('w_inf_con').innerText = prevencionSecundaria ? noAplica : pv.toFixed(1) + "%";
+            document.getElementById('w_inf_sin').textContent = prevencionSecundaria ? noAplica : s2v.toFixed(1) + "%";
+            document.getElementById('w_inf_con').textContent = prevencionSecundaria ? noAplica : pv.toFixed(1) + "%";
 
             let cHtml = "", cpHtml = "";
             contribuciones.forEach(c => {
@@ -2662,8 +2683,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             });
             document.getElementById('w_contrib_factors').innerHTML = cHtml;
 
-            document.getElementById('w_strat_pct').innerText = strRed;
-            document.getElementById('w_strat_improv').innerText = mejora;
+            document.getElementById('w_strat_pct').textContent = strRed;
+            document.getElementById('w_strat_improv').textContent = mejora;
 
             const sexo = i.sex === 'male' ? txt('sex_male') : txt('sex_female');
             let narrativa;
@@ -2725,35 +2746,35 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             // PDF NUEVO (p2_ IDs)
             try {
             document.getElementById('p2_fecha').textContent = new Date().toLocaleDateString(_lang === 'es' ? 'es-ES' : 'en-GB');
-            document.getElementById('p2_paciente').innerText = i.patientName || '______________________________';
-            document.getElementById('p2_medico').innerText = i.doctorName || '______________________________';
-            document.getElementById('p2_medico_sub').innerText = i.doctorName || '______________________________';
-            document.getElementById('p2_age_sex').innerText = `${i.age} ${txt('yr_short_cap')} / ${i.sex === 'male' ? txt('sex_masc') : txt('sex_fem')}`;
-            document.getElementById('p2_smoker').innerText = i.smoker === 'yes' ? txt('smoker_active') : txt('smoker_no');
-            document.getElementById('p2_antrop').innerText = `${i.weight} kg / ${i.height * 100} cm`;
-            document.getElementById('p2_imc').innerText = imc.toFixed(1);
-            document.getElementById('p2_tc').innerText = i.tc + ' mg/dL';
-            document.getElementById('p2_ldl').innerText = i.ldl + ' mg/dL';
-            document.getElementById('p2_hdl').innerText = i.hdl + ' mg/dL';
-            document.getElementById('p2_nohdl').innerText = (i.tc - i.hdl) + ' mg/dL';
-            if (document.getElementById('p2_hba1c')) document.getElementById('p2_hba1c').innerText = isNaN(i.hba1c) ? '—' : i.hba1c + '%';
-            if (document.getElementById('p2_tg')) document.getElementById('p2_tg').innerText = isNaN(i.trig) ? '—' : i.trig + ' mg/dL';
-            if (document.getElementById('p2_cr')) document.getElementById('p2_cr').innerText = i.cr + ' mg/dL';
-            if (document.getElementById('p2_acr')) document.getElementById('p2_acr').innerText = isNaN(i.acr) ? '—' : i.acr + ' mg/g';
+            document.getElementById('p2_paciente').textContent = i.patientName || '______________________________';
+            document.getElementById('p2_medico').textContent = i.doctorName || '______________________________';
+            document.getElementById('p2_medico_sub').textContent = i.doctorName || '______________________________';
+            document.getElementById('p2_age_sex').textContent = `${i.age} ${txt('yr_short_cap')} / ${i.sex === 'male' ? txt('sex_masc') : txt('sex_fem')}`;
+            document.getElementById('p2_smoker').textContent = i.smoker === 'yes' ? txt('smoker_active') : txt('smoker_no');
+            document.getElementById('p2_antrop').textContent = `${i.weight} kg / ${i.height * 100} cm`;
+            document.getElementById('p2_imc').textContent = imc.toFixed(1);
+            document.getElementById('p2_tc').textContent = i.tc + ' mg/dL';
+            document.getElementById('p2_ldl').textContent = i.ldl + ' mg/dL';
+            document.getElementById('p2_hdl').textContent = i.hdl + ' mg/dL';
+            document.getElementById('p2_nohdl').textContent = (i.tc - i.hdl) + ' mg/dL';
+            if (document.getElementById('p2_hba1c')) document.getElementById('p2_hba1c').textContent = isNaN(i.hba1c) ? '—' : i.hba1c + '%';
+            if (document.getElementById('p2_tg')) document.getElementById('p2_tg').textContent = isNaN(i.trig) ? '—' : i.trig + ' mg/dL';
+            if (document.getElementById('p2_cr')) document.getElementById('p2_cr').textContent = i.cr + ' mg/dL';
+            if (document.getElementById('p2_acr')) document.getElementById('p2_acr').textContent = isNaN(i.acr) ? '—' : i.acr + ' mg/g';
             const labMap = { p2_tc:'tc', p2_ldl:'ldl', p2_hdl:'hdl', p2_nohdl:'nohdl', p2_hba1c:'hba1c', p2_tg:'trig', p2_cr:'creatinine', p2_acr:'acr' };
             const bandaLabel = bandaPrimaria.t;
             for (const [elId, lab] of Object.entries(labMap)) {
                 const el = document.getElementById(elId);
                 if (!el) continue;
-                const v = parseFloat(el.innerText);
+                const v = parseFloat(el.textContent);
                 if (isNaN(v)) continue;
                 el.style.color = colorAlerta(lab, v, i.sex, bandaLabel);
             }
-            document.getElementById('p2_comorb').innerText = criterio;
-            document.getElementById('p2_condiciones').innerText = conds.length ? conds.join(' · ') : txt('no_comorb');
-            document.getElementById('p2_tfg').innerText = tfgStr;
-            document.getElementById('p2_meta_ldl').innerText = '< ' + metaLdl;
-            document.getElementById('p2_pct_ldl').innerText = strRed;
+            document.getElementById('p2_comorb').textContent = criterio;
+            document.getElementById('p2_condiciones').textContent = conds.length ? conds.join(' · ') : txt('no_comorb');
+            document.getElementById('p2_tfg').textContent = tfgStr;
+            document.getElementById('p2_meta_ldl').textContent = '< ' + metaLdl;
+            document.getElementById('p2_pct_ldl').textContent = strRed;
             document.getElementById('p2_band').textContent = txt(bandaPrimaria.t);
             const gaugeMax = 25;
             document.getElementById('p2_gauge').style.width = Math.min(100, (riesgoPrimario / gaugeMax) * 100) + '%';
@@ -2793,17 +2814,17 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     legend.innerHTML = legendHtml;
                 }
             }
-            document.getElementById('p2_prev_total').innerText = score2.toFixed(1) + '%';
-            document.getElementById('p2_prev_tot_opt').innerText = (score2 * 0.4).toFixed(1) + '%';
-            document.getElementById('p2_prev_ic').innerText = prevent.toFixed(1) + '%';
-            document.getElementById('p2_prev_ic_opt').innerText = (prevent * 0.4).toFixed(1) + '%';
+            document.getElementById('p2_prev_total').textContent = score2.toFixed(1) + '%';
+            document.getElementById('p2_prev_tot_opt').textContent = (score2 * 0.4).toFixed(1) + '%';
+            document.getElementById('p2_prev_ic').textContent = prevent.toFixed(1) + '%';
+            document.getElementById('p2_prev_ic_opt').textContent = (prevent * 0.4).toFixed(1) + '%';
             document.getElementById('p2_table_body').innerHTML = htmlTP;
-            document.getElementById('p2_inf_sin').innerText = score2.toFixed(1) + '%';
-            document.getElementById('p2_inf_con').innerText = prevent.toFixed(1) + '%';
-            document.getElementById('p2_inf_delta').innerText = score2 > 0 ? '+' + (((prevent / score2) - 1) * 100).toFixed(0) + '%' : '—';
+            document.getElementById('p2_inf_sin').textContent = score2.toFixed(1) + '%';
+            document.getElementById('p2_inf_con').textContent = prevent.toFixed(1) + '%';
+            document.getElementById('p2_inf_delta').textContent = score2 > 0 ? '+' + (((prevent / score2) - 1) * 100).toFixed(0) + '%' : '—';
             document.getElementById('p2_contrib_factors').innerHTML = cpHtml;
-            document.getElementById('p2_risk_red').innerText = mejora;
-            document.getElementById('p2_narrativa').innerText = narrativa;
+            document.getElementById('p2_risk_red').textContent = mejora;
+            document.getElementById('p2_narrativa').textContent = narrativa;
             const p2crit = document.getElementById('p2_crit');
             if (crit.length) { p2crit.innerHTML = '&#9888; ' + txt('values_critical') + ' ' + crit.join(' &#8226; '); p2crit.style.display = 'block'; }
             else p2crit.style.display = 'none';
@@ -2879,7 +2900,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             if (btnCalc) {
                 btnCalc.classList.remove('btn-loading');
                 const sp = btnCalc.querySelector('[data-i18n="calc_btn"]');
-                if (sp) sp.textContent = txt('calc_btn'); else btnCalc.innerText = txt('calc_btn');
+                if (sp) sp.textContent = txt('calc_btn'); else btnCalc.textContent = txt('calc_btn');
             }
             document.getElementById('btn_pdf_bottom').disabled = true;
             
@@ -2913,7 +2934,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             if (btnCalc2) {
                 btnCalc2.classList.remove('btn-loading');
                 const sp2 = btnCalc2.querySelector('[data-i18n="calc_btn"]');
-                if (sp2) sp2.textContent = txt('calc_btn'); else btnCalc2.innerText = txt('calc_btn');
+                if (sp2) sp2.textContent = txt('calc_btn'); else btnCalc2.textContent = txt('calc_btn');
             }
             
             if (autoCalc) setTimeout(() => ejecutarCalculos(true), 100);
@@ -3011,7 +3032,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         // Copiar resumen al portapapeles (HIS/EMR)
         // Copia un informe textual al portapapeles (para pegar en HIS/EMR).
         function copiarResumen() {
-            const g = id => (document.getElementById(id).innerText || '').trim();
+            const g = id => (document.getElementById(id).textContent || '').trim();
             const txt_ = [
                 txt('copy_title'),
                 txt('copy_date') + ' ' + new Date().toLocaleDateString(_lang === 'es' ? 'es-ES' : 'en-GB'),
@@ -3023,8 +3044,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             const ok = () => {
                 const btn = document.getElementById('btn_copiar');
                 const sp = btn.querySelector('[data-i18n="result_copy"]');
-                const set = t => { if (sp) sp.textContent = t; else btn.innerText = t; };
-                const t = sp ? sp.textContent : btn.innerText;
+                const set = t => { if (sp) sp.textContent = t; else btn.textContent = t; };
+                const t = sp ? sp.textContent : btn.textContent;
                 set(txt('copy_ok')); setTimeout(() => set(t), 1500);
                 track('summary_copied', { banda: lastBanda });
             };
@@ -3049,10 +3070,10 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         function exportarPDF() {
             const btn = document.getElementById('btn_pdf_bottom');
             const sp = btn.querySelector('[data-i18n="result_pdf"]');
-            const set = t => { if (sp) sp.textContent = t; else btn.innerText = t; };
+            const set = t => { if (sp) sp.textContent = t; else btn.textContent = t; };
             btn.disabled = true;
             btn.classList.add('btn-loading');
-            const origText = sp ? sp.textContent : btn.innerText;
+            const origText = sp ? sp.textContent : btn.textContent;
             set(txt('pdf_generating'));
 
             const errs = validar();
@@ -3068,7 +3089,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             }
             track('pdf_exported', { banda: lastBanda });
             document.getElementById('p2_fecha').textContent = new Date().toLocaleDateString(_lang === 'es' ? 'es-ES' : 'en-GB');
-            document.getElementById('p2_folio').innerText = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('p2_folio').textContent = Math.floor(1000 + Math.random() * 9000);
             const prevTitle = document.title;
             document.title = 'Informe_Riesgo_CV_' + new Date().toISOString().slice(0, 10);
             window.onafterprint = () => {
