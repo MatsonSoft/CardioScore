@@ -207,7 +207,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         <div id="tab_calculator">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         <!-- COLUMNA IZQUIERDA -->
-        <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 p-4 md:p-6 space-y-5">
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 p-4 md:p-6 space-y-5">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
                 <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
                     <span class="w-2.5 h-5 bg-[#0054A6] rounded-md inline-block"></span>
@@ -304,7 +304,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         <!-- FIN COLUMNA IZQUIERDA -->
 
         <!-- COLUMNA DERECHA: Resultados -->
-        <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-20">
+        <div class="lg:col-span-6 space-y-4 lg:sticky lg:top-20">
             <div id="introCard" class="bg-white rounded-2xl border border-slate-200 p-6 text-center space-y-4">
                 <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 mx-auto flex items-center justify-center border border-blue-100"><svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" role="img" aria-label="Gráfico de barras"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V9m4 10V5m4 14v-7m4 7V9"></path></svg></div>
                 <div>
@@ -408,69 +408,70 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <p class="text-[10px] text-white/60 leading-relaxed mt-3 border-t border-white/10 pt-2" data-i18n="disclaimer_calib">SCORE2 (región Alta europea) y PREVENT (EE.UU.) son aproximaciones para Venezuela. El modelo calibrado a la región es WHO CVD Risk Charts — Central Latin America. SCORE2-LAC en desarrollo (ESC Congress 2026).</p>
                 </div>
 
-                <div class="grid grid-cols-1 2xl:grid-cols-3 gap-5">
-                    <div class="2xl:col-span-2 space-y-5">
-                        <div class="bg-white rounded-xl border border-slate-200 p-5">
-                            <h3 class="text-sm font-bold uppercase border-b pb-2 mb-3 text-slate-800" data-i18n="res_breakdown">Desglose de Scores Predictivos</h3>
-                            <table class="w-full text-left text-sm mb-5">
-                                <thead><tr class="bg-slate-50 text-slate-600"><th class="p-3 border-b" data-i18n="res_compound">Compuesto Clínico</th><th class="p-3 border-b text-center" data-i18n="result_current">Riesgo Actual</th><th class="p-3 border-b text-center text-emerald-600" data-i18n="result_opt">Óptimo</th></tr></thead>
-                                <tbody id="w_table_body" class="divide-y divide-slate-100"></tbody>
-                            </table>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t pt-5">
-                                <div class="text-sm space-y-3 flex flex-col justify-center">
-                                    <div class="p-3 bg-slate-100 border border-slate-200 rounded-lg flex justify-between items-center">
-                                        <span class="font-semibold text-slate-800" data-i18n="res_inf_sin">SCORE2 (IAM + ACV):</span> <span id="w_inf_sin" class="font-bold text-slate-700 text-lg">-</span>
-                                    </div>
-                                    <div class="p-3 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
-                                        <span class="font-semibold text-red-800" data-i18n="res_inf_con">PREVENT (ECV Total + IC):</span> <span id="w_inf_con" class="font-bold text-red-700 text-lg">-</span>
-                                    </div>
+                <div class="space-y-5">
+                    <div class="bg-white rounded-xl border border-slate-200 p-5">
+                        <h3 class="text-sm font-bold uppercase border-b pb-2 mb-3 text-slate-800" data-i18n="res_breakdown">Desglose de Scores Predictivos</h3>
+                        <table class="w-full text-left text-sm mb-5">
+                            <thead><tr class="bg-slate-50 text-slate-600"><th class="p-3 border-b" data-i18n="res_compound">Compuesto Clínico</th><th class="p-3 border-b text-center" data-i18n="result_current">Riesgo Actual</th><th class="p-3 border-b text-center text-emerald-600" data-i18n="result_opt">Óptimo</th></tr></thead>
+                            <tbody id="w_table_body" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t pt-5">
+                            <div class="text-sm space-y-3 flex flex-col justify-center">
+                                <div class="p-3 bg-slate-100 border border-slate-200 rounded-lg flex justify-between items-center">
+                                    <span class="font-semibold text-slate-800" data-i18n="res_inf_sin">SCORE2 (IAM + ACV):</span> <span id="w_inf_sin" class="font-bold text-slate-700 text-lg">-</span>
+                                </div>
+                                <div class="p-3 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
+                                    <span class="font-semibold text-red-800" data-i18n="res_inf_con">PREVENT (ECV Total + IC):</span> <span id="w_inf_con" class="font-bold text-red-700 text-lg">-</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="bg-white rounded-xl border border-slate-200 p-5">
-                            <h3 class="text-sm font-bold uppercase border-b pb-2 mb-4 text-slate-800" data-i18n="res_contrib">Contribución de Cada Factor de Riesgo (ASCVD)</h3>
-                            <div id="w_contrib_factors" class="grid grid-cols-2 gap-3 text-xs"></div>
                         </div>
                     </div>
-                    <div class="space-y-5">
-                        <div class="bg-white rounded-2xl border border-slate-200 p-4 space-y-3">
-                            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2" data-i18n="result_goals">Metas Terapéuticas y Función Renal</h4>
-                            <div class="grid grid-cols-2 gap-2.5 text-xs">
-                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
-                                    <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="result_tfg">TFG (CKD-EPI)</span>
-                                    <span id="w_tfg" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
-                                </div>
-                                <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl">
-                                    <span class="block text-[10px] font-bold text-blue-700 uppercase" data-i18n="result_meta">Meta LDL</span>
-                                    <span id="w_meta" class="text-sm font-black text-blue-900 mt-0.5 block">-</span>
-                                </div>
-                                <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl">
-                                    <span class="block text-[10px] font-bold text-amber-800 uppercase" data-i18n="result_reduction">Reducción LDL Necesaria</span>
-                                    <span id="w_strat_pct" class="text-sm font-black text-amber-900 mt-0.5 block">-</span>
-                                </div>
-                                <div class="p-3 bg-purple-50 border border-purple-200 rounded-xl">
-                                    <span class="block text-[10px] font-bold text-purple-800 uppercase" data-i18n="result_vasc_age">Edad Vascular</span>
-                                    <span id="w_vascular_age" class="text-sm font-black text-purple-900 mt-0.5 block">-</span>
-                                </div>
-                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
-                                    <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="result_imc">IMC</span>
-                                    <span id="w_imc" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
-                                </div>
-                                <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl col-span-2">
-                                    <span class="block text-[10px] font-bold text-blue-700 uppercase" data-i18n="result_criterio">Criterio de la Meta</span>
-                                    <span id="w_criterio" class="text-xs font-semibold text-blue-900 mt-0.5 block leading-snug">-</span>
-                                </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-200 p-4 space-y-3">
+                        <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2" data-i18n="result_goals">Metas Terapéuticas y Función Renal</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="result_tfg">TFG (CKD-EPI)</span>
+                                <span id="w_tfg" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
                             </div>
-                            <div class="p-3 bg-emerald-50 text-emerald-900 rounded-xl border border-emerald-200 text-xs">
-                                <span class="block font-bold text-[10px] uppercase text-emerald-800 mb-1" data-i18n="result_benefit">Beneficio Clínico Esperado:</span>
-                                <p id="w_strat_improv" class="leading-relaxed font-medium">-</p>
+                            <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl">
+                                <span class="block text-[10px] font-bold text-blue-700 uppercase" data-i18n="result_meta">Meta LDL</span>
+                                <span id="w_meta" class="text-sm font-black text-blue-900 mt-0.5 block">-</span>
+                            </div>
+                            <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl">
+                                <span class="block text-[10px] font-bold text-amber-800 uppercase" data-i18n="result_reduction">Reducción LDL Necesaria</span>
+                                <span id="w_strat_pct" class="text-sm font-black text-amber-900 mt-0.5 block">-</span>
+                            </div>
+                            <div class="p-3 bg-purple-50 border border-purple-200 rounded-xl">
+                                <span class="block text-[10px] font-bold text-purple-800 uppercase" data-i18n="result_vasc_age">Edad Vascular</span>
+                                <span id="w_vascular_age" class="text-sm font-black text-purple-900 mt-0.5 block">-</span>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="result_imc">IMC</span>
+                                <span id="w_imc" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
+                            </div>
+                            <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl md:col-span-3">
+                                <span class="block text-[10px] font-bold text-blue-700 uppercase" data-i18n="result_criterio">Criterio de la Meta</span>
+                                <span id="w_criterio" class="text-xs font-semibold text-blue-900 mt-0.5 block leading-snug">-</span>
                             </div>
                         </div>
-                        <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl shadow text-sm uppercase tracking-wider transition no-print flex items-center justify-center gap-2">
+                        <div class="p-3 bg-emerald-50 text-emerald-900 rounded-xl border border-emerald-200 text-xs">
+                            <span class="block font-bold text-[10px] uppercase text-emerald-800 mb-1" data-i18n="result_benefit">Beneficio Clínico Esperado:</span>
+                            <p id="w_strat_improv" class="leading-relaxed font-medium">-</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-5">
+                        <h3 class="text-sm font-bold uppercase border-b pb-2 mb-4 text-slate-800" data-i18n="res_contrib">Contribución de Cada Factor de Riesgo (ASCVD)</h3>
+                        <div id="w_contrib_factors" class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 no-print">
+                        <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl shadow text-sm uppercase tracking-wider transition flex items-center justify-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                             <span data-i18n="result_copy">Copiar Informe</span>
                         </button>
-                        <button id="btn_pdf_bottom" type="button" onclick="exportarPDF()" disabled="" class="w-full bg-[#0054A6] hover:bg-[#003A73] text-white font-bold py-3 px-4 rounded-xl shadow text-sm uppercase tracking-wider transition no-print flex items-center justify-center gap-2">
+                        <button id="btn_pdf_bottom" type="button" onclick="exportarPDF()" disabled="" class="w-full bg-[#0054A6] hover:bg-[#003A73] text-white font-bold py-3 px-4 rounded-xl shadow text-sm uppercase tracking-wider transition flex items-center justify-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="right" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             <span data-i18n="result_pdf">Exportar PDF</span>
                         </button>
@@ -705,6 +706,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Panel de resultados: muestra región SCORE2, IMC y criterio de la meta LDL en la web</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> innerText → textContent en toda la app (corrige el coloreado de labs del PDF, que fallaba en elementos ocultos)</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Web: badge de versión v2.3, eliminado carácter suelto "&gt;" en la vista, scrollIntoView robusto y grids del formulario responsive en móvil</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Resultados reestructurados por filas: Desglose de Scores → Metas Terapéuticas → Contribución de Factores → Botones; panel ampliado a 6/12 en desktop</li>
                 </ul>
             </div>
         </div>
@@ -955,6 +957,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Results panel: shows SCORE2 region, BMI and LDL target criterion on the web</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> innerText → textContent across the app (fixes PDF lab coloring, which failed on hidden elements)</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Web: version badge v2.3, removed stray "&gt;" character in the view, robust scrollIntoView and responsive form grids on mobile</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Results restructured in rows: Score Breakdown → Therapeutic Targets → Risk Factor Contribution → Buttons; panel widened to 6/12 on desktop</li>
                 </ul>
             </div>
         </div>
