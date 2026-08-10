@@ -2595,7 +2595,7 @@ const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                     simEl.innerHTML = row(txt('composite_s2'), score2, r2.score2)
                         + row(txt('composite_prev'), prevent, r2.prevent)
                         + (wN != null ? row(txt('composite_who'), wN, r2.who) : '')
-                        + row(txt('sim_meta'), metaLdl, ldlTarget);
+                        + row(txt('sim_meta'), i.ldl, ldlTarget);
                     simEl.classList.remove('hidden');
                 } else {
                     simEl.classList.add('hidden');
