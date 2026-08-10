@@ -180,7 +180,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <div>
                     <div class="flex items-center gap-2">
                         <h1 class="text-base md:text-lg font-black uppercase tracking-wider leading-none text-white">CardioScore</h1>
-                        <span class="text-[10px] font-bold bg-white/15 px-2 py-0.5 rounded-full text-blue-200 border border-white/20">v2.1</span>
+                        <span class="text-[10px] font-bold bg-white/15 px-2 py-0.5 rounded-full text-blue-200 border border-white/20">v2.3</span>
                     </div>
                     <p class="text-[11px] text-blue-200/90 font-medium mt-0.5" data-i18n="header">Estratificación de Riesgo Cardiovascular</p>
                 </div>
@@ -240,7 +240,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         <button type="button" id="unit_si" onclick="changeUnits('si')" title="SI: mmol/L · µmol/L · lb · in" class="px-2 py-0.5 rounded-md text-[10px] transition text-slate-600 hover:text-slate-900">SI</button>
                     </div>
                 </h3>
-                <div class="grid grid-cols-4 gap-x-2 gap-y-2">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-2">
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="age" for="age" title="Edad del paciente en años. Rango: 18-100.">Edad <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span></label><input type="number" id="age" class="form-input" data-i18n-placeholder="placeholder_years" placeholder="años" min="18" max="100" inputmode="decimal" step="any" data-label="Edad"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="sbp" for="sbp" title="Presión arterial sistólica en mmHg. Óptimo &lt;120.">PAS <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" title="mmHg">mmHg</span></label><input type="number" id="sbp" class="form-input" data-i18n-placeholder="placeholder_mmhg" placeholder="mmHg" min="70" max="300" inputmode="decimal" step="any" data-label="PAS mmHg"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="tc" for="tc" title="Colesterol total en mg/dL. Óptimo &lt;190.">Col Total  <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" id="unit_tc" title="1 mg/dL = 0.026 mmol/L">mg/dL</span></label><input type="number" id="tc" class="form-input" data-i18n-placeholder="placeholder_mgdl" placeholder="mg/dL" min="80" max="600" inputmode="decimal" step="any" data-label="Col Total"></div>
@@ -255,7 +255,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="waist" for="waist" title="Cintura abdominal en cm. Criterio CKM stage 1 (≥102 hombres / ≥88 mujeres).">Cintura <span class="inline-block w-1.5 h-1.5 rounded-full bg-slate-300 ml-0.5"></span><span class="unit-tag" title="cm">cm</span></label><input type="number" id="waist" class="form-input" data-i18n-placeholder="placeholder_cm" placeholder="cm" min="40" max="250" inputmode="decimal" step="any" data-label="Cintura"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="hba1c" for="hba1c" title="Hemoglobina glicosilada (%). Requerido si DM para SCORE2-DM.">HbA1c <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" title="% (NGSP)">%</span></label><input type="number" id="hba1c" step="0.1" class="form-input" data-i18n-placeholder="placeholder_pct" placeholder="%" min="3" max="20" inputmode="decimal" data-label="HbA1c %"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="acr" for="acr" title="Albúmina/creatinina en orina (mg/g). Mejora precisión PREVENT.">ACR <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" title="mg/g">mg/g</span></label><input type="number" id="acr" class="form-input" data-i18n-placeholder="placeholder_mgg" placeholder="mg/g" min="0" max="3000" inputmode="decimal" step="any" data-label="ACR mg/g"></div>
-                    <div class="col-span-4">
+                    <div class="col-span-2 md:col-span-4">
                         <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="region" for="risk_region">Región SCORE2 <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#0054A6] ml-0.5"></span></label>
                         <select id="risk_region" class="form-select text-xs">
                             <option value="low" data-i18n="region_opt_low">Bajo</option>
@@ -271,7 +271,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <!-- SECCIÓN 3: Medicamentos + Antecedentes (3 cols) -->
             <div class="mb-2">
                 <h3 class="text-xs font-bold text-slate-700 uppercase mb-1.5 border-b border-slate-200 pb-0.5" data-i18n="section_meds">2. Medicamentos y Antecedentes</h3>
-                <div class="grid grid-cols-3 gap-x-2 gap-y-1.5">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-1.5">
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5" data-i18n="statin">Estatina <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#B91C1C] ml-0.5"></span></label><div class="chip-group"><label class="chip" data-i18n="opt_no"><input type="radio" name="statin" value="no"> No</label><label class="chip" data-i18n="opt_yes"><input type="radio" name="statin" value="yes"> Sí</label></div></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5" data-i18n="htnTx">Tto HTA <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#B91C1C] ml-0.5"></span></label><div class="chip-group"><label class="chip" data-i18n="opt_no"><input type="radio" name="htn_tx" value="no"> No</label><label class="chip" data-i18n="opt_yes"><input type="radio" name="htn_tx" value="yes"> Sí</label></div></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="sca" for="sca_status" title="Síndrome Coronario Agudo previo.">SCA</label><select id="sca_status" class="form-select text-[11px] h-9 w-full" data-label="SCA"><option value="none" data-i18n="opt_no">No</option><option value="ua" data-i18n="sca_ua">Angina inestable</option><option value="nstemi" data-i18n="sca_nstemi">IMSEST</option><option value="stemi" data-i18n="sca_stemi">IMCEST</option></select></div>
@@ -304,7 +304,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         <!-- FIN COLUMNA IZQUIERDA -->
 
         <!-- COLUMNA DERECHA: Resultados -->
-        <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-20">&gt;
+        <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-20">
             <div id="introCard" class="bg-white rounded-2xl border border-slate-200 p-6 text-center space-y-4">
                 <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 mx-auto flex items-center justify-center border border-blue-100"><svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" role="img" aria-label="Gráfico de barras"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V9m4 10V5m4 14v-7m4 7V9"></path></svg></div>
                 <div>
@@ -704,6 +704,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Botones de ayuda "?" unificados: se eliminaron los manuales duplicados y todos los campos (incl. Lp(a), CaSc, hsCRP, años evento, Hx familiar, antiagregación, territorio) muestran su tooltip correcto</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Panel de resultados: muestra región SCORE2, IMC y criterio de la meta LDL en la web</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> innerText → textContent en toda la app (corrige el coloreado de labs del PDF, que fallaba en elementos ocultos)</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Web: badge de versión v2.3, eliminado carácter suelto "&gt;" en la vista, scrollIntoView robusto y grids del formulario responsive en móvil</li>
                 </ul>
             </div>
         </div>
@@ -953,6 +954,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Unified "?" help buttons: removed manual duplicates and all fields (incl. Lp(a), CAC, hsCRP, years since event, family Hx, antiplatelet, territory) now show their correct tooltip</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Results panel: shows SCORE2 region, BMI and LDL target criterion on the web</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> innerText → textContent across the app (fixes PDF lab coloring, which failed on hidden elements)</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Web: version badge v2.3, removed stray "&gt;" character in the view, robust scrollIntoView and responsive form grids on mobile</li>
                 </ul>
             </div>
         </div>
@@ -2855,7 +2857,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             if (errs.length) {
                 box.innerHTML = txt('v_review').replace('{n}', errs.length).replace('{list}', errs.join(', '));
                 box.classList.remove('hidden');
-                box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (box.scrollIntoView) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 track('validation_failed', { errores: errs.length });
                 btn.classList.remove('btn-loading');
                 return;
@@ -2872,7 +2874,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
 
             document.getElementById('panel_resultados').classList.remove('hidden');
             document.getElementById('introCard').classList.add('hidden');
-            if (scroll) document.getElementById('panel_resultados').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (scroll) { const pr = document.getElementById('panel_resultados'); if (pr && pr.scrollIntoView) pr.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 
             btn.classList.remove('btn-loading');
         }
@@ -3081,7 +3083,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             if (errs.length) {
                 box.innerHTML = txt('v_review').replace('{n}', errs.length).replace('{list}', errs.join(', '));
                 box.classList.remove('hidden');
-                box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (box.scrollIntoView) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 btn.classList.remove('btn-loading');
                 set(origText);
                 btn.disabled = false;
