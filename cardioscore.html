@@ -531,7 +531,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5">
                 <li><strong>SCORE2</strong> predice IAM + ACV (ESC 2021). Estándar europeo para decisiones de estatina en prevención primaria.</li>
                 <li><strong>PREVENT</strong> predice ECV total + IC (AHA 2024). Útil cuando hay IC, ERC u obesidad. Reemplaza al PCE 2013.</li>
-                <li><strong>Discrepancia</strong> entre ambos es esperable: miden desenlaces distintos. Usar el más alto como referencia primaria.</li>
+                <li><strong>WHO CVD Risk Charts</strong> predice CHD + ACV (OMS 2019). Único modelo calibrado a la región Central Latin America (incluye Venezuela).</li>
+                <li><strong>Prioridad para Venezuela:</strong> usar el WHO-Central L.A. como referencia; SCORE2 (región Alta) y PREVENT (EE.UU.) como comparativos.</li>
+                <li><strong>Discrepancia</strong> entre modelos es esperable: miden desenlaces distintos. En prevención secundaria los scores no aplican (riesgo Muy Alto directo).</li>
                 <li><strong>Meta LDL</strong> se define por la categoría de riesgo más alta, basada en comorbilidades y eventos previos (ESC 2023).</li>
                 <li><strong>Discordancia &gt;5%:</strong> Si SCORE2 &gt; PREVENT, fenotipo lipídico/hipertensivo → priorizar SCORE2. Si PREVENT &gt; SCORE2, fenotipo metabólico/renal → priorizar PREVENT.</li>
             </ul>
@@ -541,6 +543,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Poblaciones especiales</h3>
             <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5">
                 <li><strong>ERC:</strong> Add-on SCORE2-CKD (Eur J Prev Cardiol 2023) aplicado al riesgo recalibrado: compara eGFR y ACR observados con el valor esperado para el perfil de riesgo (método predictor patch). ACR (mg/g) opcional; sin ACR se aplica solo eGFR.</li>
+                <li><strong>Prevención secundaria:</strong> SCA, EVA o IC establecidas, CKD grave (eGFR &lt;30 o 30-44 + ACR &gt;30) o DM con daño de órgano: riesgo Muy Alto directo (ESC 2021 Tabla 4); los scores de prevención primaria no aplican.</li>
                 <li><strong>&lt;40 años:</strong> Edad vascular: qué edad tendría que tener para igual riesgo con factores óptimos.</li>
                 <li><strong>Enf. autoinmunes:</strong> AR, LES, psoriasis, VIH. Factor ×1.5 basado en CPDAI (EULAR 2010).</li>
                 <li><strong>≥70 años:</strong> SCORE2-OP con coeficientes independientes.</li>
@@ -576,6 +579,18 @@ const hba1cStd = (hba1c_mmol - 31) / 9.34;</pre>
                     <p class="text-slate-600 mt-1">Transformación cloglog con parámetros de escala (s1) y forma (s2) por sexo/edad/región.</p>
                     <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const uncal = 1 - Math.pow(s0, Math.exp(lp - offset));
 const risk = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))));</pre>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <span class="font-bold text-[#0054A6]">SCORE2-CKD — predictor patch</span>
+                    <p class="text-slate-600 mt-1">Compara eGFR y ACR observados con el valor esperado para el perfil de riesgo (regresiones de expected) y ajusta el riesgo ya recalibrado: 1 − (1−riesgo)^e^ΔLP. Splines de eGFR con knots en 60 y 90; ACR en log base 8. Aplica sobre SCORE2 y SCORE2-OP, no sobre SCORE2-Diabetes (ya incluye eGFR en su LP).</p>
+                    <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const dLp = 0.4713*(s1-x1) + 0.0956*(s2-x2) - 0.0802*a5*(s1-x1) + 0.0088*a5*(s2-x2);
+const risk = 1 - Math.pow(1 - base, Math.exp(dLp));</pre>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <span class="font-bold text-emerald-700">WHO-Central L.A. — modelo laboratorial</span>
+                    <p class="text-slate-600 mt-1">Cox sexo-específico por endpoint (CHD y stroke), combinados como 1 − (1−pCHD)(1−pStroke). Predictores: edad (lineal, centrada en 60), CT (mmol/L, centrado en 6), PAS (centrado en 120), DM y tabaquismo, con interacciones × edad. Recalibración regional (γ, δ) reconstruida del chart oficial de la OMS.</p>
+                    <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const lp = c.age*(age-60) + c.tc*(tcM-6) + c.sbp*(sbp-120) + c.dm*dm + c.smoke*smoke;
+const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                 </div>
             </div>
         </div>
@@ -619,6 +634,7 @@ const risk = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))));<
                 <li>CKM Syndrome. <em>Circulation</em> 2023;148:1606-1635.</li>
                 <li>WHO CVD Risk Chart Working Group. <em>Lancet Global Health</em> 2019;7(10):e1332-e1345.</li>
                 <li>CKD-EPI 2021. <em>N Engl J Med</em> 2021;385(19):1737-1749.</li>
+                <li>2021 ESC Guidelines on cardiovascular disease prevention in clinical practice. <em>Eur Heart J</em> 2021;42(34):3227-3337.</li>
             </ol>
         </div>
 
@@ -709,7 +725,9 @@ const risk = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))));<
             <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5">
                 <li><strong>SCORE2</strong> predicts MI + Stroke (ESC 2021). European standard for statin decisions in primary prevention.</li>
                 <li><strong>PREVENT</strong> predicts total CVD + HF (AHA 2024). Useful when HF, CKD, or obesity is present. Replaces PCE 2013.</li>
-                <li><strong>Discrepancy</strong> between both is expected: they measure different outcomes. Use the higher one as primary reference.</li>
+                <li><strong>WHO CVD Risk Charts</strong> predicts CHD + Stroke (WHO 2019). The only model calibrated to the Central Latin America region (includes Venezuela).</li>
+                <li><strong>Priority for Venezuela:</strong> use WHO-Central L.A. as the reference; SCORE2 (High region) and PREVENT (US) as comparisons.</li>
+                <li><strong>Discrepancy</strong> between models is expected: they measure different outcomes. In secondary prevention the scores do not apply (direct very-high risk).</li>
                 <li><strong>LDL Target</strong> is defined by the highest risk category, based on comorbidities and prior events (ESC 2023).</li>
                 <li><strong>Discordance &gt;5%:</strong> If SCORE2 &gt; PREVENT, lipid/hypertensive phenotype suggests prioritizing SCORE2. If PREVENT &gt; SCORE2, metabolic/renal phenotype suggests prioritizing PREVENT.</li>
             </ul>
@@ -719,6 +737,7 @@ const risk = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))));<
             <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Special Populations</h3>
             <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5">
                 <li><strong>CKD:</strong> SCORE2-CKD add-on (Eur J Prev Cardiol 2023) applied to the recalibrated risk: compares observed eGFR and ACR with the expected values for the risk profile (predictor-patch method). ACR (mg/g) optional; eGFR-only add-on when ACR is missing.</li>
+                <li><strong>Secondary prevention:</strong> established ASCVD (ACS, prior stroke/PAD), heart failure, severe CKD (eGFR &lt;30 or 30-44 + ACR &gt;30) or DM with target-organ damage: direct very-high risk (ESC 2021 Table 4); primary-prevention scores do not apply.</li>
                 <li><strong>&lt;40 years:</strong> Vascular age estimate: what age would give the same risk with optimal risk factors.</li>
                 <li><strong>Autoimmune diseases:</strong> RA, SLE, psoriasis, HIV. Factor ×1.5 based on CPDAI (EULAR 2010).</li>
                 <li><strong>≥70 years:</strong> SCORE2-OP with independent coefficients.</li>
@@ -754,6 +773,18 @@ const hba1cStd = (hba1c_mmol - 31) / 9.34;</pre>
                     <p class="text-slate-600 mt-1">Cloglog transformation with scale (s1) and shape (s2) parameters by sex/age/region.</p>
                     <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const uncal = 1 - Math.pow(s0, Math.exp(lp - offset));
 const risk = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))));</pre>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <span class="font-bold text-[#0054A6]">SCORE2-CKD — predictor patch</span>
+                    <p class="text-slate-600 mt-1">Compares observed eGFR and ACR with the expected values for the risk profile (expected regressions) and adjusts the already recalibrated risk: 1 − (1−risk)^e^ΔLP. eGFR splines with knots at 60 and 90; ACR in log base 8. Applies to SCORE2 and SCORE2-OP, not SCORE2-Diabetes (already includes eGFR in its LP).</p>
+                    <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const dLp = 0.4713*(s1-x1) + 0.0956*(s2-x2) - 0.0802*a5*(s1-x1) + 0.0088*a5*(s2-x2);
+const risk = 1 - Math.pow(1 - base, Math.exp(dLp));</pre>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <span class="font-bold text-emerald-700">WHO-Central L.A. — laboratory model</span>
+                    <p class="text-slate-600 mt-1">Sex-specific Cox by endpoint (CHD and stroke), combined as 1 − (1−pCHD)(1−pStroke). Predictors: age (linear, centered at 60), total cholesterol (mmol/L, centered at 6), SBP (centered at 120), DM and smoking, with age interactions. Regional recalibration (γ, δ) reconstructed from the official WHO chart.</p>
+                    <pre class="bg-slate-800 text-slate-200 text-xs p-3 rounded mt-2">const lp = c.age*(age-60) + c.tc*(tcM-6) + c.sbp*(sbp-120) + c.dm*dm + c.smoke*smoke;
+const p = 1 - Math.exp(-Math.exp(gamma*lp + delta));</pre>
                 </div>
             </div>
         </div>
@@ -797,6 +828,7 @@ const risk = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))));<
                 <li>CKM Syndrome. <em>Circulation</em> 2023;148:1606-1635.</li>
                 <li>WHO CVD Risk Chart Working Group. <em>Lancet Global Health</em> 2019;7(10):e1332-e1345.</li>
                 <li>CKD-EPI 2021. <em>N Engl J Med</em> 2021;385(19):1737-1749.</li>
+                <li>2021 ESC Guidelines on cardiovascular disease prevention in clinical practice. <em>Eur Heart J</em> 2021;42(34):3227-3337.</li>
             </ol>
         </div>
 
