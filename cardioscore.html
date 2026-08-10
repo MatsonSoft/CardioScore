@@ -663,6 +663,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> WHO-Central L.A. no-laboratorial (IMC, sin laboratorio)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Risk modifiers Lp(a) ≥50 y calcio coronario (CAC) que reclasifican el riesgo</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Simulador antes/después: proyección del riesgo con LDL y PAS en meta</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Pacientes de prueba ahora cargan medicamentos y antecedentes (fix mapeo selects/radios); perfiles incluyen Lp(a), CaSc, hsCRP y años de evento</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Umbrales de laboratorio alineados a guías (CT 200, TG 150) y nuevos valores críticos (LDL>190, TG>500, CT>310, ACR>300)</li>
                 </ul>
             </div>
         </div>
@@ -889,6 +891,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> WHO-Central L.A. non-laboratory model (BMI, no lab)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Risk modifiers Lp(a) ≥50 and coronary calcium (CAC) reclassify risk</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Before/after simulator: risk projection with LDL and BP at target</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Sample patients now load medications and history (selects/radios mapping); profiles include Lp(a), CAC, hsCRP, years since event</li>
+                    <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Lab thresholds aligned to guidelines (TC 200, TG 150) and new critical values (LDL>190, TG>500, TC>310, ACR>300)</li>
                 </ul>
             </div>
         </div>
@@ -1285,6 +1289,10 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 crit_hba1c: 'HbA1c > 10% (mal control glucémico)',
                 crit_cr: 'Creatinina > 1.5 mg/dL (eGFR reducida, ajustar dosis)',
                 crit_age: 'Edad > 80 años (valorar fragilidad/beneficio)',
+                crit_ldl: 'C-LDL > 190 mg/dL (muy alto)',
+                crit_trig: 'TG > 500 mg/dL (riesgo de pancreatitis)',
+                crit_tc: 'CT > 310 mg/dL (considerar hipercolesterolemia familiar)',
+                crit_acr: 'ACR > 300 mg/g (proteinuria)',
                 values_critical: 'Valores críticos:',
                 no_aplica: 'No aplica*',
                 warn_age_lt40: 'Menor de 40 años: SCORE2 no aplica (ESC 2021). El riesgo a 10 años es impreciso; priorizar estilo de vida y riesgo relativo.',
@@ -1501,6 +1509,10 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 crit_hba1c: 'HbA1c > 10% (poor glycemic control)',
                 crit_cr: 'Creatinine > 1.5 mg/dL (reduced eGFR, adjust dosing)',
                 crit_age: 'Age > 80 years (consider frailty/benefit)',
+                crit_ldl: 'LDL-C > 190 mg/dL (very high)',
+                crit_trig: 'TG > 500 mg/dL (pancreatitis risk)',
+                crit_tc: 'Total chol > 310 mg/dL (consider familial hypercholesterolemia)',
+                crit_acr: 'ACR > 300 mg/g (proteinuria)',
                 values_critical: 'Critical values:',
                 no_aplica: 'N/A*',
                 warn_age_lt40: 'Under 40 years: SCORE2 does not apply (ESC 2021). 10-year risk is imprecise; prioritize lifestyle and relative risk.',
@@ -1849,12 +1861,12 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         const OPTIONAL = ['hba1c', 'acr', 'ldl', 'dm_age', 'trig', 'waist', 'lpa', 'cac', 'hscrp', 'smart_years'];
 
         const UMBRALES = {
-            tc: { warning: 190, critical: 240, severe: 310 },
+            tc: { warning: 200, critical: 240, severe: 310 },
             ldl: { warning: 116, critical: 190 },
             nohdl: { warning: 130, critical: 160 },
             hba1c: { warning: 5.7, critical: 6.5, severe: 9.0 },
             acr: { warning: 30, critical: 300 },
-            trig: { warning: 135, critical: 200 },
+            trig: { warning: 150, critical: 200 },
             hdl: { male: { low_warning: 40, low_critical: 30, high_critical: 90 }, female: { low_warning: 50, low_critical: 30, high_critical: 90 } },
             waist: { male: { warning: 102 }, female: { warning: 88 } },
             creatinine: { male: { warning: 1.3, critical: 2.0 }, female: { warning: 1.1, critical: 2.0 } }
@@ -2462,6 +2474,10 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             if (i.hba1c > 10) crit.push(txt('crit_hba1c'));
             if (i.cr > 1.5) crit.push(txt('crit_cr'));
             if (i.age > 80) crit.push(txt('crit_age'));
+            if (i.ldl > 190) crit.push(txt('crit_ldl'));
+            if (i.trig > 500) crit.push(txt('crit_trig'));
+            if (i.tc > 310) crit.push(txt('crit_tc'));
+            if (i.acr > 300) crit.push(txt('crit_acr'));
 
             const warnings = [];
             if (i.age < 40) warnings.push(txt('warn_age_lt40'));
@@ -2816,23 +2832,25 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         }
         function cargarEjemplo(autoCalc) {
             const perfiles = [
-                { age:35, sbp:115, weight:68, height:170, tc:170, hdl:55, ldl:95,  creatinine:0.85, hba1c:5.2, acr:8,  trig:110, waist:84, sex:'male', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'moderate', statin:'no', htnTx:'no', dmAge:'', patientName:'sample_pac_0', doctorName:'Doctor CardioScore' },
-                { age:55, sbp:140, weight:82, height:172, tc:210, hdl:44, ldl:130, creatinine:1.0,  hba1c:5.7, acr:15, trig:150, waist:96, sex:'male', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'no', htnTx:'no', dmAge:'', patientName:'sample_pac_1', doctorName:'Doctor CardioScore' },
-                { age:62, sbp:155, weight:92, height:175, tc:245, hdl:38, ldl:165, creatinine:1.15, hba1c:6.0, acr:25, trig:190, waist:104, sex:'male', smoker:'yes', dm:'mild', sca:'none', erc:'none', hf:'isolated', eva:'none', subclinic:'mod', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:58, patientName:'sample_pac_2', doctorName:'Doctor CardioScore' },
-                { age:58, sbp:150, weight:88, height:168, tc:230, hdl:40, ldl:150, creatinine:1.2,  hba1c:7.8, acr:55, trig:210, waist:92, sex:'female', smoker:'no', dm:'mod', sca:'none', erc:'g3a_a2', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:50, patientName:'sample_pac_3', doctorName:'Doctor CardioScore' },
-                { age:55, sbp:148, weight:78, height:165, tc:200, hdl:48, ldl:120, creatinine:2.1,  hba1c:5.6, acr:250, trig:160, waist:90, sex:'female', smoker:'no', dm:'none', sca:'none', erc:'g4', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:'', patientName:'sample_pac_4', doctorName:'Doctor CardioScore' },
-                { age:74, sbp:158, weight:70, height:163, tc:220, hdl:42, ldl:140, creatinine:1.3,  hba1c:5.8, acr:35, trig:120, waist:86, sex:'female', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'yes', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:'', patientName:'sample_pac_5', doctorName:'Doctor CardioScore' }
+                { age:35, sbp:115, weight:68, height:170, tc:170, hdl:55, ldl:95,  creatinine:0.85, hba1c:5.2, acr:8,  trig:110, waist:84, sex:'male', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'moderate', statin:'no', htnTx:'no', dmAge:'', lpa:15, cac:0, hscrp:0.8, patientName:'sample_pac_0', doctorName:'Doctor CardioScore' },
+                { age:55, sbp:140, weight:82, height:172, tc:210, hdl:44, ldl:130, creatinine:1.0,  hba1c:5.7, acr:15, trig:150, waist:96, sex:'male', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'no', htnTx:'no', dmAge:'', lpa:25, cac:80, hscrp:1.1, patientName:'sample_pac_1', doctorName:'Doctor CardioScore' },
+                { age:62, sbp:155, weight:92, height:175, tc:245, hdl:38, ldl:165, creatinine:1.15, hba1c:6.0, acr:25, trig:190, waist:104, sex:'male', smoker:'yes', dm:'mild', sca:'none', erc:'none', hf:'isolated', eva:'none', subclinic:'mod', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:58, lpa:35, cac:180, hscrp:2.8, smartYears:1, patientName:'sample_pac_2', doctorName:'Doctor CardioScore' },
+                { age:58, sbp:150, weight:88, height:168, tc:230, hdl:40, ldl:150, creatinine:1.2,  hba1c:7.8, acr:55, trig:210, waist:92, sex:'female', smoker:'no', dm:'mod', sca:'none', erc:'g3a_a2', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:50, lpa:60, hscrp:1.2, patientName:'sample_pac_3', doctorName:'Doctor CardioScore' },
+                { age:55, sbp:148, weight:78, height:165, tc:200, hdl:48, ldl:120, creatinine:2.1,  hba1c:5.6, acr:250, trig:160, waist:90, sex:'female', smoker:'no', dm:'none', sca:'none', erc:'g4', hf:'none', eva:'none', subclinic:'none', fragile:'no', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:'', lpa:20, cac:400, hscrp:1.6, patientName:'sample_pac_4', doctorName:'Doctor CardioScore' },
+                { age:74, sbp:158, weight:70, height:163, tc:220, hdl:42, ldl:140, creatinine:1.3,  hba1c:5.8, acr:35, trig:120, waist:86, sex:'female', smoker:'no', dm:'none', sca:'none', erc:'none', hf:'none', eva:'none', subclinic:'none', fragile:'yes', autoimmune:'no', riskRegion:'high', statin:'yes', htnTx:'yes', dmAge:'', lpa:30, cac:120, hscrp:1.9, patientName:'sample_pac_5', doctorName:'Doctor CardioScore' }
             ];
             const idx = (window._perfilIdx === undefined) ? 0 : (window._perfilIdx + 1) % perfiles.length;
             window._perfilIdx = idx;
             const p = perfiles[idx];
             document.getElementById('patient_name').value = txt(p.patientName) || '';
             document.getElementById('doctor_name').value = p.doctorName || '';
-            ['age','sbp','weight','height','tc','hdl','ldl','creatinine','hba1c','acr','trig','waist'].forEach(id => { const el = document.getElementById(id); if (el) el.value = p[id] || ''; });
+            ['age','sbp','weight','height','tc','hdl','ldl','creatinine','hba1c','acr','trig','waist','lpa','cac','hscrp','smart_years'].forEach(id => { const el = document.getElementById(id); if (el) el.value = (p[id] === undefined || p[id] === '') ? '' : p[id]; });
             if (_units === 'si') convertirUnidades('us', 'si');
             document.getElementById('dm_age').value = p.dmAge || '';
-            document.querySelectorAll('main select').forEach(s => { const v = p[s.id]; if (v) s.value = v; else s.selectedIndex = 0; });
-            ['sex','smoker','statin','htn_tx'].forEach(n => { const r = document.querySelector('input[name="' + n + '"][value="' + (p[n]||'no') + '"]'); if (r) r.checked = true; });
+            const selMap = { sca_status:'sca', eva_status:'eva', dm_status:'dm', erc_status:'erc', hf_status:'hf', subclinic_status:'subclinic', fragile_status:'fragile', autoimmune_status:'autoimmune', fhx_status:'fhx', risk_region:'riskRegion' };
+            document.querySelectorAll('main select').forEach(s => { const key = selMap[s.id] || s.id; const v = p[key]; if (v) s.value = v; else s.selectedIndex = 0; });
+            const radioMap = { sex:'sex', smoker:'smoker', statin:'statin', htn_tx:'htnTx' };
+            ['sex','smoker','statin','htn_tx'].forEach(n => { const key = radioMap[n] || n; const r = document.querySelector('input[name="' + n + '"][value="' + (p[key]||'no') + '"]'); if (r) r.checked = true; });
             updateDerivedMetrics();
             document.getElementById('alert_box').classList.add('hidden');
             document.getElementById('error_box').classList.add('hidden');
