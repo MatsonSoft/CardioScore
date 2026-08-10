@@ -240,7 +240,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         <button type="button" id="unit_si" onclick="changeUnits('si')" title="SI: mmol/L · µmol/L · lb · in" class="px-2 py-0.5 rounded-md text-[10px] transition text-slate-600 hover:text-slate-900">SI</button>
                     </div>
                 </h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-2">
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-2 gap-y-2">
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="age" for="age" title="Edad del paciente en años. Rango: 18-100.">Edad <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span></label><input type="number" id="age" class="form-input" data-i18n-placeholder="placeholder_years" placeholder="años" min="18" max="100" inputmode="decimal" step="any" data-label="Edad"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="sbp" for="sbp" title="Presión arterial sistólica en mmHg. Óptimo &lt;120.">PAS <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" title="mmHg">mmHg</span></label><input type="number" id="sbp" class="form-input" data-i18n-placeholder="placeholder_mmhg" placeholder="mmHg" min="70" max="300" inputmode="decimal" step="any" data-label="PAS mmHg"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="tc" for="tc" title="Colesterol total en mg/dL. Óptimo &lt;190.">Col Total  <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" id="unit_tc" title="1 mg/dL = 0.026 mmol/L">mg/dL</span></label><input type="number" id="tc" class="form-input" data-i18n-placeholder="placeholder_mgdl" placeholder="mg/dL" min="80" max="600" inputmode="decimal" step="any" data-label="Col Total"></div>
@@ -255,7 +255,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="waist" for="waist" title="Cintura abdominal en cm. Criterio CKM stage 1 (≥102 hombres / ≥88 mujeres).">Cintura <span class="inline-block w-1.5 h-1.5 rounded-full bg-slate-300 ml-0.5"></span><span class="unit-tag" title="cm">cm</span></label><input type="number" id="waist" class="form-input" data-i18n-placeholder="placeholder_cm" placeholder="cm" min="40" max="250" inputmode="decimal" step="any" data-label="Cintura"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="hba1c" for="hba1c" title="Hemoglobina glicosilada (%). Requerido si DM para SCORE2-DM.">HbA1c <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" title="% (NGSP)">%</span></label><input type="number" id="hba1c" step="0.1" class="form-input" data-i18n-placeholder="placeholder_pct" placeholder="%" min="3" max="20" inputmode="decimal" data-label="HbA1c %"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="acr" for="acr" title="Albúmina/creatinina en orina (mg/g). Mejora precisión PREVENT.">ACR <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" title="mg/g">mg/g</span></label><input type="number" id="acr" class="form-input" data-i18n-placeholder="placeholder_mgg" placeholder="mg/g" min="0" max="3000" inputmode="decimal" step="any" data-label="ACR mg/g"></div>
-                    <div class="col-span-2 md:col-span-4">
+                    <div class="col-span-2 md:col-span-4 lg:col-span-6">
                         <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="region" for="risk_region">Región SCORE2 <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#0054A6] ml-0.5"></span></label>
                         <select id="risk_region" class="form-select text-xs">
                             <option value="low" data-i18n="region_opt_low">Bajo</option>
@@ -271,7 +271,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <!-- SECCIÓN 3: Medicamentos + Antecedentes (3 cols) -->
             <div class="mb-2">
                 <h3 class="text-xs font-bold text-slate-700 uppercase mb-1.5 border-b border-slate-200 pb-0.5" data-i18n="section_meds">2. Medicamentos y Antecedentes</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-1.5">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-1.5">
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5" data-i18n="statin">Estatina <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#B91C1C] ml-0.5"></span></label><div class="chip-group"><label class="chip" data-i18n="opt_no"><input type="radio" name="statin" value="no"> No</label><label class="chip" data-i18n="opt_yes"><input type="radio" name="statin" value="yes"> Sí</label></div></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5" data-i18n="htnTx">Tto HTA <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#B91C1C] ml-0.5"></span></label><div class="chip-group"><label class="chip" data-i18n="opt_no"><input type="radio" name="htn_tx" value="no"> No</label><label class="chip" data-i18n="opt_yes"><input type="radio" name="htn_tx" value="yes"> Sí</label></div></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="sca" for="sca_status" title="Síndrome Coronario Agudo previo.">SCA</label><select id="sca_status" class="form-select text-[11px] h-9 w-full" data-label="SCA"><option value="none" data-i18n="opt_no">No</option><option value="ua" data-i18n="sca_ua">Angina inestable</option><option value="nstemi" data-i18n="sca_nstemi">IMSEST</option><option value="stemi" data-i18n="sca_stemi">IMCEST</option></select></div>
@@ -322,6 +322,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
             <!-- PANELES DE RESULTADO WEB -->
             <div id="panel_resultados" class="hidden space-y-5" aria-live="polite">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                 <!-- RESUMEN DEL PACIENTE -->
                 <div id="w_patient_summary" class="hidden bg-white rounded-2xl border border-slate-200 p-4 space-y-3">
                     <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2" data-i18n="result_summary">Resumen del Paciente</h4>
@@ -349,12 +350,13 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     </div>
                 </div>
 
-                <div id="card_narrativa" class="bg-slate-900 text-white rounded-2xl p-4 md:p-5 shadow-lg space-y-2 border-l-8 border-l-blue-500">
+                <div id="card_narrativa" class="lg:col-span-2 bg-slate-900 text-white rounded-2xl p-4 md:p-5 shadow-lg space-y-2 border-l-8 border-l-blue-500">
                     <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-blue-300">
                         <span data-i18n="res_synopsis">Síntesis Clínica</span>
                         <span id="w_ckm_badge" class="bg-blue-500/20 px-2 py-0.5 rounded text-blue-200 border border-blue-400/30">CKM -</span>
                     </div>
                     <p id="w_narrativa" class="text-xs md:text-sm font-medium leading-relaxed text-slate-100">-</p>
+                </div>
                 </div>
 
                 <div class="bg-gradient-to-br from-[#002B5C] via-[#003A73] to-[#0054A6] text-white rounded-2xl p-5 shadow-xl border border-blue-400/30 space-y-4">
@@ -414,6 +416,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 </div>
 
                 <div class="space-y-5">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                     <div class="bg-white rounded-xl border border-slate-200 p-5">
                         <h3 class="text-sm font-bold uppercase border-b pb-2 mb-3 text-slate-800" data-i18n="res_breakdown">Desglose de Scores Predictivos</h3>
                         <table class="w-full text-left text-sm mb-5">
@@ -465,7 +468,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                             <p id="w_strat_improv" class="leading-relaxed font-medium">-</p>
                         </div>
                     </div>
-
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                     <div class="bg-white rounded-xl border border-slate-200 p-5">
                         <h3 class="text-sm font-bold uppercase border-b pb-2 mb-4 text-slate-800" data-i18n="res_contrib">Contribución de Cada Factor de Riesgo (ASCVD)</h3>
                         <div id="w_contrib_factors" class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs"></div>
@@ -479,6 +483,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         </button>
                         <div id="w_sim" class="hidden p-4 text-xs space-y-2 bg-white"></div>
                     </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
 
                     <!-- EXPLICACIÓN AL PACIENTE -->
                     <details id="patient_explain" class="bg-white border border-sky-200 rounded-xl overflow-hidden hidden">
@@ -503,6 +509,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="right" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             <span data-i18n="result_pdf">Exportar PDF</span>
                         </button>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -736,6 +743,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Web: badge de versión v2.3, eliminado carácter suelto "&gt;" en la vista, scrollIntoView robusto y grids del formulario responsive en móvil</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Resultados reestructurados por filas: Desglose de Scores → Metas Terapéuticas → Contribución de Factores → Botones; panel ampliado a 6/12 en desktop</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Layout por filas apiladas: formulario del paciente arriba y resultados abajo, ambos a ancho completo; tarjeta "Resumen del Paciente" al inicio del panel de resultados</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Aprovecha el ancho en desktop: biometría a 6 columnas y antecedentes a 4; resultados agrupados en filas de 2 columnas (resumen+síntesis, desglose+metas, contribución+simulador, explicación+botones)</li>
                 </ul>
             </div>
         </div>
@@ -988,6 +996,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Web: version badge v2.3, removed stray "&gt;" character in the view, robust scrollIntoView and responsive form grids on mobile</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Results restructured in rows: Score Breakdown → Therapeutic Targets → Risk Factor Contribution → Buttons; panel widened to 6/12 on desktop</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Stacked-rows layout: patient form on top and results below, both full-width; "Patient Summary" card at the top of the results panel</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Uses desktop width: biomedicine at 6 columns and history at 4; results grouped in 2-column rows (summary+synopsis, breakdown+targets, contribution+simulator, explanation+buttons)</li>
                 </ul>
             </div>
         </div>
