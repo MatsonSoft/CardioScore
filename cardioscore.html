@@ -231,8 +231,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="patient_name" data-i18n="patient_name">Nombre del Paciente</label><input type="text" id="patient_name" class="form-input" data-i18n-placeholder="patient_ph" placeholder="Paciente de prueba (opcional, solo PDF)" autocomplete="off"></div>
                 <div><label class="block text-xs font-semibold text-slate-600 mb-1" for="doctor_name" data-i18n="doctor_name">Médico Tratante</label><input type="text" id="doctor_name" class="form-input" data-i18n-placeholder="doctor_ph" placeholder="Opcional solo para PDF" autocomplete="off"></div>
             </div>
-            <!-- Biometría + Laboratorio en grid 4-col -->
-            <div class="mb-3">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/60 space-y-2">
                 <h3 class="text-xs font-bold text-slate-700 uppercase mb-1.5 border-b border-slate-200 pb-0.5 flex items-center justify-between gap-2">
                     <span data-i18n="section_bio">1. Biometría y Laboratorio</span>
                     <div class="flex items-center bg-slate-100 rounded-lg p-0.5 border border-slate-300 font-normal normal-case">
@@ -240,7 +240,6 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                         <button type="button" id="unit_si" onclick="changeUnits('si')" title="SI: mmol/L · µmol/L · lb · in" class="px-2 py-0.5 rounded-md text-[10px] transition text-slate-600 hover:text-slate-900">SI</button>
                     </div>
                 </h3>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-2">
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="age" for="age" title="Edad del paciente en años. Rango: 18-100.">Edad <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span></label><input type="number" id="age" class="form-input" data-i18n-placeholder="placeholder_years" placeholder="años" min="18" max="100" inputmode="decimal" step="any" data-label="Edad"></div>
                     <div class="col-span-1"><label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="sbp" for="sbp" title="Presión arterial sistólica en mmHg. Óptimo &lt;120.">PAS <span class="inline-block w-2 h-2 rounded-full border-2 border-[#0054A6] bg-[#B91C1C] ml-0.5"></span><span class="unit-tag" title="mmHg">mmHg</span></label><input type="number" id="sbp" class="form-input" data-i18n-placeholder="placeholder_mmhg" placeholder="mmHg" min="70" max="300" inputmode="decimal" step="any" data-label="PAS mmHg"></div>
@@ -268,8 +267,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     </div>
                 </div>
 
-            <!-- SECCIÓN 3: Medicamentos + Antecedentes (3 cols) -->
-            <div class="mb-2">
+                </div>
+
+                <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/60 space-y-2">
                 <h3 class="text-xs font-bold text-slate-700 uppercase mb-1.5 border-b border-slate-200 pb-0.5" data-i18n="section_meds">2. Medicamentos y Antecedentes</h3>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-1.5">
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5" data-i18n="statin">Estatina <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#B91C1C] ml-0.5"></span></label><div class="chip-group"><label class="chip" data-i18n="opt_no"><input type="radio" name="statin" value="no"> No</label><label class="chip" data-i18n="opt_yes"><input type="radio" name="statin" value="yes"> Sí</label></div></div>
@@ -291,8 +291,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="hscrp" for="hscrp" title="PCR ultrasensible en mg/L. Requerida para SMART (imputa 2.0 si vacío).">hsCRP <span class="unit-tag" title="mg/L">mg/L</span></label><input type="number" id="hscrp" step="0.1" class="form-input text-xs h-9" data-i18n-placeholder="placeholder_hscrp" placeholder="mg/L" min="0.1" max="100" inputmode="decimal" data-label="hsCRP"></div>
                     <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="smartYears" for="smart_years" title="Años desde el primer evento vascular. Requerido para SMART2 (default 1 si vacío).">Años evento</label><input type="number" id="smart_years" class="form-input text-xs h-9" data-i18n-placeholder="placeholder_years" placeholder="años" min="0" max="60" inputmode="decimal" step="any" data-label="Años evento"></div>
                 </div>
-            </div>
-            </div>
+                </div>
             </div>
 
             <div id="error_box" role="alert" class="hidden mt-4 p-3 bg-red-50 border border-red-300 text-red-700 text-sm rounded-md"></div>
