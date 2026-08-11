@@ -186,11 +186,11 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 </div>
             </div>
             <div class="flex items-center gap-2 text-xs">
-                <button type="button" id="nav_method" onclick="switchTab('method')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-blue-200 hover:bg-white/10 hover:text-white transition border border-white/10">
+                <button type="button" id="nav_method" onclick="switchTab('method')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-blue-200 hover:bg-white/10 hover:text-white transition border border-white/10 active:scale-95">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     <span data-i18n="nav_method">Metodología</span>
                 </button>
-                <button type="button" id="lang_toggle" onclick="toggleLang()" class="px-2.5 py-1.5 rounded-lg font-bold transition bg-white/20 text-white shadow-xs hover:bg-white/30">EN</button>
+                <button type="button" id="lang_toggle" onclick="toggleLang()" class="px-2.5 py-1.5 rounded-lg font-bold transition bg-white/20 text-white shadow-xs hover:bg-white/30 active:scale-95">EN</button>
             </div>
         </div>
     </header>
@@ -220,8 +220,8 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-[#0054A6] from-50% to-[#B91C1C] to-50%"></span> <span data-i18n="legend_both">Ambos</span></span>
                 </div>
             </div>
-            <div class="flex items-center justify-end gap-2">
-                <button type="button" onclick="cargarEjemplo(true)" class="bg-blue-50 hover:bg-blue-100 text-[#0054A6] font-bold py-2 px-3.5 rounded-xl border border-blue-200 text-xs transition flex items-center gap-1.5 whitespace-nowrap">
+            <div class="flex items-center justify-end">
+                <button type="button" onclick="cargarEjemplo(true)" class="text-[#0054A6] hover:text-[#003A73] hover:underline font-semibold text-xs transition flex items-center gap-1.5 whitespace-nowrap active:opacity-70" title="Cargar un paciente de ejemplo">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     <span data-i18n="sample_btn">Paciente de Prueba</span>
                 </button>
@@ -297,9 +297,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             <div id="error_box" role="alert" class="hidden mt-4 p-3 bg-red-50 border border-red-300 text-red-700 text-sm rounded-md"></div>
             <div id="alert_box" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-800 text-sm rounded-md no-print"></div>
 
-            <div class="mt-6 flex gap-3 justify-center">
-                <button type="button" id="btn_calcular" onclick="ejecutarCalculos(true)" class="bg-[#0054A6] hover:bg-[#003A73] text-white font-bold py-3 px-8 rounded-md shadow text-sm uppercase tracking-wider transition flex-1 max-w-xs"><span data-i18n="calc_btn">Estratificar</span></button>
-                <button type="button" onclick="limpiar()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-5 rounded-md shadow text-sm uppercase tracking-wider transition"><span data-i18n="clean_btn">Limpiar</span></button>
+            <div class="mt-6 flex flex-wrap items-center justify-end gap-3">
+                <button type="button" onclick="limpiar()" class="border-2 border-slate-300 text-slate-600 hover:bg-slate-50 hover:text-slate-800 hover:border-slate-400 font-bold py-3 px-6 rounded-lg text-sm uppercase tracking-wider transition active:scale-[0.98]"><span data-i18n="clean_btn">Limpiar</span></button>
+                <button type="button" id="btn_calcular" onclick="ejecutarCalculos(true)" class="bg-[#0054A6] hover:bg-[#003A73] text-white font-bold py-3.5 px-10 rounded-lg shadow-lg text-sm uppercase tracking-wider transition active:scale-[0.98]"><span data-i18n="calc_btn">Estratificar</span></button>
             </div>
             </div>
         <!-- FIN FILA 1 -->
@@ -492,7 +492,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
                     <!-- SIMULADOR ANTES/DESPUÉS -->
                     <div class="bg-white rounded-xl border border-blue-200 overflow-hidden no-print">
-                        <button type="button" id="btn_sim" onclick="toggleSim()" class="w-full flex items-center justify-between gap-2 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-[#0054A6] text-xs font-bold uppercase tracking-wider transition">
+                        <button type="button" id="btn_sim" onclick="toggleSim()" class="w-full flex items-center justify-between gap-2 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-[#0054A6] text-xs font-bold uppercase tracking-wider transition active:scale-[0.99]">
                             <span data-i18n="sim_btn">Simular control óptimo (LDL y PAS en meta)</span>
                             <span id="sim_chev" class="text-base leading-none font-black">+</span>
                         </button>
@@ -500,11 +500,11 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 no-print">
-                        <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl shadow text-sm uppercase tracking-wider transition flex items-center justify-center gap-2">
+                        <button id="btn_copiar" type="button" onclick="copiarResumen()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl shadow text-sm uppercase tracking-wider transition flex items-center justify-center gap-2 active:scale-[0.98]">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                             <span data-i18n="result_copy">Copiar Informe</span>
                         </button>
-                        <button id="btn_pdf_bottom" type="button" onclick="exportarPDF()" disabled="" class="w-full bg-[#0054A6] hover:bg-[#003A73] text-white font-bold py-3 px-4 rounded-xl shadow text-sm uppercase tracking-wider transition flex items-center justify-center gap-2">
+                        <button id="btn_pdf_bottom" type="button" onclick="exportarPDF()" disabled="" class="w-full bg-[#0054A6] hover:bg-[#003A73] text-white font-bold py-3 px-4 rounded-xl shadow text-sm uppercase tracking-wider transition flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="right" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             <span data-i18n="result_pdf">Exportar PDF</span>
                         </button>
@@ -743,6 +743,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Layout por filas apiladas: formulario del paciente arriba y resultados abajo, ambos a ancho completo; tarjeta "Resumen del Paciente" al inicio del panel de resultados</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Aprovecha el ancho en desktop: biometría a 6 columnas y antecedentes a 4; resultados agrupados en filas de 2 columnas (resumen+síntesis, desglose+metas, contribución+simulador, explicación+botones)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Formulario en 2 columnas en desktop (Biometría | Medicamentos/Antecedentes); estimación de riesgo a la izquierda con "Cómo explicar al paciente" a la derecha</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Jerarquía de botones (UX): "Paciente de Prueba" como enlace discreto arriba; "Estratificar" primario a la derecha; "Limpiar" en outline; active/disabled states en todos los botones</li>
                 </ul>
             </div>
         </div>
@@ -997,6 +998,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Stacked-rows layout: patient form on top and results below, both full-width; "Patient Summary" card at the top of the results panel</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Uses desktop width: biomedicine at 6 columns and history at 4; results grouped in 2-column rows (summary+synopsis, breakdown+targets, contribution+simulator, explanation+buttons)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Two-column form on desktop (Biomedicine | Medications/History); 10-year risk estimate on the left with "How to explain to the patient" on the right</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Button hierarchy (UX): "Sample patient" as a discreet link on top; "Stratify" primary on the right; "Clear" in outline; active/disabled states on all buttons</li>
                 </ul>
             </div>
         </div>
