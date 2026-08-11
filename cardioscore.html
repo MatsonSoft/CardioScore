@@ -116,6 +116,11 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
             }
 
             .no-print { display: none !important; }
+
+            /* El print-page es hijo del main; ocultar todos los hermanos pero mostrar la plantilla */
+            #main { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
+            #main > *:not(.print-page) { display: none !important; }
+            .print-page { display: flex !important; }
             
             /* Contenedor principal: alto fijo en pt (unidad física, funciona igual en todo browser) */
             .print-page {
@@ -165,7 +170,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
 </head>
 <body class="text-slate-800 antialiased">
-        <a href="#main" class="skip-link" data-i18n="skip_link">Saltar al contenido</a>
+        <a href="#main" class="skip-link no-print" data-i18n="skip_link">Saltar al contenido</a>
 
         <header class="bg-gradient-to-r from-[#002B5C] via-[#003A73] to-[#0054A6] text-white py-3 px-4 md:px-6 shadow-xl sticky top-0 z-40 no-print border-b border-blue-400/20 backdrop-blur-md">
         <div class="max-w-[1600px] mx-auto flex items-center justify-between gap-3">
@@ -189,7 +194,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
         </div>
     </header>
 
-    <main id="main" class="max-w-[1600px] mx-auto p-4 space-y-4 no-print">
+    <main id="main" class="max-w-[1600px] mx-auto p-4 space-y-4">
 
         <div class="bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-center">
             <p class="text-sm text-slate-700 leading-relaxed max-w-3xl mx-auto" data-i18n-html="hero_1">CardioScore es una herramienta de estratificación cardiovascular <strong>gratuita</strong> desarrollada por <strong><a href="https://matsonsoft.com" target="_blank" rel="noopener" class="text-slate-700 hover:text-blue-600 underline">MatsonSoft</a></strong> y revisada por el <strong><a href="https://instagram.com/postgradocardiologiaudobolivar" target="_blank" rel="noopener" class="text-slate-700 hover:text-blue-600 underline">Postgrado de Cardiología del Hospital Ruiz y Páez</a></strong>, Ciudad Bolívar, Venezuela.</p>
@@ -807,6 +812,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Eliminadas referencias a código abierto, GitHub y correo de auditoría (la herramienta ya no es open source)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> PDF actualizado: pronóstico con los 4 modelos (SCORE2/PREVENT/WHO/SMART2), Lp(a) llenado y modulación por Lp(a) corregida (riesgo de IM ajustado)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> PDF ahora incluye región SCORE2, estadio CKM y las advertencias de aplicabilidad (antes solo la web)</li>
+                    <li><span class="inline-block bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Bug</span> PDF salía en blanco al imprimir: la plantilla estaba dentro del <code>&lt;main class="no-print"&gt;</code> (padre oculto en print); corregido mostrando solo la plantilla al imprimir</li>
+                    <li><span class="inline-block bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Bug</span> Edad vascular en la narrativa dejaba <code>{va}</code> literal (placeholder duplicado en ES/EN)</li>
                 </ul>
             </div>
         </div>
@@ -1181,6 +1188,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Removed open-source, GitHub and audit-email references (tool is no longer open source)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> PDF updated: prognosis with the 4 models (SCORE2/PREVENT/WHO/SMART2), Lp(a) filled and Lp(a) modulation fixed (adjusted MI risk)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> PDF now includes SCORE2 region, CKM stage and applicability warnings (previously web only)</li>
+                    <li><span class="inline-block bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Bug</span> PDF printed blank: the template was inside <code>&lt;main class="no-print"&gt;</code> (hidden parent on print); fixed by showing only the template when printing</li>
+                    <li><span class="inline-block bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Bug</span> Vascular age in the narrative left a literal <code>{va}</code> (duplicate placeholder in ES/EN)</li>
                 </ul>
             </div>
         </div>
@@ -1607,7 +1616,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 p_s3: '3. Estratificación Clínica y Metas',
                 p_criterio: 'Criterio Diagnóstico:', p_cond: 'Condiciones / Comorbilidades:',                 p_fun_renal: 'Función Renal (eGFR CKD-EPI):', p_region: 'Región SCORE2:', p_ckm: 'Estadio CKM:',
                 p_meta_ldl: 'Meta C-LDL Objetivo', p_reduccion: 'Reducción Necesaria',
-                p_s4: '4. Pronóstico a 10 Años (SCORE / PREVENT)', p_categoria: 'Categoría de Riesgo Cardiovascular:',
+                p_s4: '4. Pronóstico a 10 Años', p_categoria: 'Categoría de Riesgo Cardiovascular:',
                 p_score2: 'SCORE2 (IAM + ACV)', p_prevent: 'PREVENT (ECV + IC)', p_who: 'WHO-CLA (CHD + ACV)', p_smart: 'SMART2 (residual)',
                 p_prev_total: 'Riesgo ECV Total (10a)', p_opt: 'Riesgo Óptimo: ', p_prev_ic: 'Hosp. Insuf. Cardíaca',
                 p_sintesis: 'SÍNTESIS DIAGNÓSTICA:',
@@ -1840,7 +1849,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 p_s3: '3. Clinical Stratification & Goals',
                 p_criterio: 'Diagnostic Criterion:', p_cond: 'Conditions / Comorbidities:',                 p_fun_renal: 'Kidney Function (eGFR CKD-EPI):', p_region: 'SCORE2 Region:', p_ckm: 'CKM Stage:',
                 p_meta_ldl: 'LDL-C Target', p_reduccion: 'Reduction Needed',
-                p_s4: '4. 10-Year Prognosis (SCORE / PREVENT)', p_categoria: 'Cardiovascular Risk Category:',
+                p_s4: '4. 10-Year Prognosis', p_categoria: 'Cardiovascular Risk Category:',
                 p_score2: 'SCORE2 (MI + Stroke)', p_prevent: 'PREVENT (CVD + HF)', p_who: 'WHO-CLA (CHD + Stroke)', p_smart: 'SMART2 (residual)',
                 p_prev_total: 'Total CVD Risk (10y)', p_opt: 'Optimal Risk: ', p_prev_ic: 'HF Hospitalization',
                 p_sintesis: 'DIAGNOSTIC SUMMARY:',
@@ -3022,7 +3031,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     .replace('{meta}', metaLdl).replace('{avoid}', riesgoEvitable);
             }
             if (autoInmune) narrativa += txt('narr_autoimmune');
-            if (edadVascular) narrativa += txt('narr_vasc_age').replace('{va}', edadVascular);
+            if (edadVascular) narrativa += txt('narr_vasc_age').split('{va}').join(edadVascular);
             if (ckm !== undefined) narrativa += txt('narr_ckm').replace('{n}', ckm).replace('{desc}', txt('ckm_' + ckm));
             if (!prevencionSecundaria && score2 && prevent && Math.abs(score2 - prevent) > 5) {
                 const discordNote = score2 > prevent
