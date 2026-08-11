@@ -326,7 +326,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                 <!-- RESUMEN DEL PACIENTE -->
                 <div id="w_patient_summary" class="hidden bg-white rounded-2xl border border-slate-200 p-4 space-y-3">
                     <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2" data-i18n="result_summary">Resumen del Paciente</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-xs">
+                    <div class="grid grid-cols-2 gap-2.5 text-xs">
                         <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
                             <span class="block text-[10px] font-bold text-slate-500 uppercase" data-i18n="result_imc">IMC</span>
                             <span id="sum_imc" class="text-sm font-black text-slate-800 mt-0.5 block">-</span>
@@ -350,16 +350,30 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     </div>
                 </div>
 
-                <div id="card_narrativa" class="lg:col-span-2 bg-slate-900 text-white rounded-2xl p-4 md:p-5 shadow-lg space-y-2 border-l-8 border-l-blue-500">
+                <div id="card_narrativa" class="bg-slate-900 text-white rounded-2xl p-4 md:p-5 shadow-lg space-y-2 border-l-8 border-l-blue-500">
                     <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-blue-300">
                         <span data-i18n="res_synopsis">Síntesis Clínica</span>
                         <span id="w_ckm_badge" class="bg-blue-500/20 px-2 py-0.5 rounded text-blue-200 border border-blue-400/30">CKM -</span>
                     </div>
                     <p id="w_narrativa" class="text-xs md:text-sm font-medium leading-relaxed text-slate-100">-</p>
                 </div>
+
+                <!-- EXPLICACIÓN AL PACIENTE -->
+                <details id="patient_explain" class="bg-white border border-sky-200 rounded-xl overflow-hidden hidden self-start">
+                    <summary class="flex items-center justify-between px-5 py-3 cursor-pointer hover:bg-sky-50 transition text-sm font-bold text-sky-800 uppercase tracking-wider">
+                        <span data-i18n="res_explain">Cómo explicar al paciente</span>
+                        <svg class="w-4 h-4 transition-transform" style="transform: rotate(0deg);"><polyline points="6 4 14 12 6 20" fill="none" stroke="currentColor" stroke-width="2"></polyline></svg>
+                    </summary>
+                    <div class="px-5 pb-5 pt-2 text-sm text-slate-700 leading-relaxed space-y-3">
+                        <p id="w_patient_risk" class="font-medium text-slate-800">-</p>
+                        <p id="w_patient_lifestyle" data-i18n="res_lifestyle">Esto se puede mejorar significativamente con cambios en el estilo de vida: alimentación saludable, actividad física regular y control del peso.</p>
+                        <p id="w_patient_treatment" data-i18n="res_treatment">Además, existen medicamentos que ayudan a controlar el colesterol y la presión arterial, reduciendo drásticamente su riesgo de sufrir un infarto o un derrame cerebral.</p>
+                        <p class="text-sky-700 text-xs border-t border-sky-100 pt-3" data-i18n="res_supervision">El tratamiento se ajusta a sus metas personalizadas y será supervisado por su médico tratante.</p>
+                    </div>
+                </details>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5"><div class="lg:col-span-2 bg-gradient-to-br from-[#002B5C] via-[#003A73] to-[#0054A6] text-white rounded-2xl p-5 shadow-xl border border-blue-400/30 space-y-4">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5"><div class="lg:col-span-3 bg-gradient-to-br from-[#002B5C] via-[#003A73] to-[#0054A6] text-white rounded-2xl p-5 shadow-xl border border-blue-400/30 space-y-4">
                     <div class="flex items-center justify-between gap-2 border-b border-white/15 pb-2 flex-wrap">
                         <h3 class="text-xs font-extrabold uppercase tracking-widest text-blue-200" data-i18n="result_title">Estimación de Riesgo a 10 Años</h3>
                         <span class="flex items-center gap-2">
@@ -414,19 +428,6 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <div id="w_warnings" class="hidden mt-3 p-3 bg-amber-400/15 border border-amber-300/40 rounded-lg text-[11px] leading-relaxed text-amber-100"></div>
                     <p class="text-[10px] text-white/60 leading-relaxed mt-3 border-t border-white/10 pt-2" data-i18n="disclaimer_calib">SCORE2 (región Alta europea) y PREVENT (EE.UU.) son aproximaciones para Venezuela. El modelo calibrado a la región es WHO CVD Risk Charts — Central Latin America. SCORE2-LAC en desarrollo (ESC Congress 2026).</p>
                 </div>
-                    <!-- EXPLICACIÓN AL PACIENTE -->
-                    <details id="patient_explain" class="bg-white border border-sky-200 rounded-xl overflow-hidden hidden self-start">
-                        <summary class="flex items-center justify-between px-5 py-3 cursor-pointer hover:bg-sky-50 transition text-sm font-bold text-sky-800 uppercase tracking-wider">
-                            <span data-i18n="res_explain">Cómo explicar al paciente</span>
-                            <svg class="w-4 h-4 transition-transform" style="transform: rotate(0deg);"><polyline points="6 4 14 12 6 20" fill="none" stroke="currentColor" stroke-width="2"></polyline></svg>
-                        </summary>
-                        <div class="px-5 pb-5 pt-2 text-sm text-slate-700 leading-relaxed space-y-3">
-                            <p id="w_patient_risk" class="font-medium text-slate-800">-</p>
-                            <p id="w_patient_lifestyle" data-i18n="res_lifestyle">Esto se puede mejorar significativamente con cambios en el estilo de vida: alimentación saludable, actividad física regular y control del peso.</p>
-                            <p id="w_patient_treatment" data-i18n="res_treatment">Además, existen medicamentos que ayudan a controlar el colesterol y la presión arterial, reduciendo drásticamente su riesgo de sufrir un infarto o un derrame cerebral.</p>
-                            <p class="text-sky-700 text-xs border-t border-sky-100 pt-3" data-i18n="res_supervision">El tratamiento se ajusta a sus metas personalizadas y será supervisado por su médico tratante.</p>
-                        </div>
-                    </details>
                 </div>
 
                 <div class="space-y-5">
@@ -812,6 +813,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Eliminadas referencias a código abierto, GitHub y correo de auditoría (la herramienta ya no es open source)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> PDF actualizado: pronóstico con los 4 modelos (SCORE2/PREVENT/WHO/SMART2), Lp(a) llenado y modulación por Lp(a) corregida (riesgo de IM ajustado)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> PDF ahora incluye región SCORE2, estadio CKM y las advertencias de aplicabilidad (antes solo la web)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Mejora UI (desktop): la sección de resultados ahora tiene 3 columnas — Resumen del Paciente (5 cards en 2×2 + CKM sola), Síntesis Clínica y Cómo explicar al paciente lado a lado; panel de riesgo a ancho completo</li>
                     <li><span class="inline-block bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Bug</span> PDF salía en blanco al imprimir: la plantilla estaba dentro del <code>&lt;main class="no-print"&gt;</code> (padre oculto en print); corregido mostrando solo la plantilla al imprimir</li>
                     <li><span class="inline-block bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Bug</span> Edad vascular en la narrativa dejaba <code>{va}</code> literal (placeholder duplicado en ES/EN)</li>
                 </ul>
@@ -1188,6 +1190,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Removed open-source, GitHub and audit-email references (tool is no longer open source)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> PDF updated: prognosis with the 4 models (SCORE2/PREVENT/WHO/SMART2), Lp(a) filled and Lp(a) modulation fixed (adjusted MI risk)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> PDF now includes SCORE2 region, CKM stage and applicability warnings (previously web only)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Desktop UI improvement: results section now has 3 columns — Patient Summary (5 cards in 2×2 + CKM alone), Clinical Synopsis and How to explain to the patient side by side; risk panel full width</li>
                     <li><span class="inline-block bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Bug</span> PDF printed blank: the template was inside <code>&lt;main class="no-print"&gt;</code> (hidden parent on print); fixed by showing only the template when printing</li>
                     <li><span class="inline-block bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Bug</span> Vascular age in the narrative left a literal <code>{va}</code> (duplicate placeholder in ES/EN)</li>
                 </ul>
