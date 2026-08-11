@@ -86,10 +86,6 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 .chip:has(input:checked) { background:#2563eb; color:#fff; border-color:#2563eb; }
 .chip:focus-within { outline:2px solid #2563eb; outline-offset:1px; }
 @media (prefers-reduced-motion:reduce){ *{transition:none !important; scroll-behavior:auto !important} }
-@media (min-width:768px){
-  /* Action bar siempre visible al hacer scroll por el formulario largo */
-  #actionBar{position:sticky;bottom:12px;background:#fff;padding:10px 12px;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 4px 14px rgba(15,23,42,.10);z-index:40}
-}
 @media (max-width:767px){
   html,body{overflow-x:hidden}
   /* 16px evita el zoom automático de iOS al enfocar inputs */
@@ -97,8 +93,6 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
   /* Target táctil mínimo 44px (WCAG 2.5.5) */
   .chip{min-height:44px}
   details>summary{min-height:44px;display:flex;align-items:center;flex-wrap:wrap}
-  #actionBar{flex-wrap:wrap;gap:8px}
-  #actionBar button{min-height:48px;border-radius:10px;white-space:nowrap}
   .tip{width:20px;height:20px;font-size:12px;margin-left:4px}
   .chip{font-size:11px;padding:6px 6px}
   #tipToast{top:12px;bottom:auto;left:12px;right:12px;transform:none;max-width:none}
@@ -744,6 +738,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Aprovecha el ancho en desktop: biometría a 6 columnas y antecedentes a 4; resultados agrupados en filas de 2 columnas (resumen+síntesis, desglose+metas, contribución+simulador, explicación+botones)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Formulario en 2 columnas en desktop (Biometría | Medicamentos/Antecedentes); estimación de riesgo a la izquierda con "Cómo explicar al paciente" a la derecha</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Jerarquía de botones (UX): "Paciente de Prueba" como enlace discreto arriba; "Estratificar" primario a la derecha; "Limpiar" en outline; active/disabled states en todos los botones</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Footer web con versión, disclaimer y créditos; limpieza de CSS muerto (actionBar)</li>
                 </ul>
             </div>
         </div>
@@ -999,6 +994,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Uses desktop width: biomedicine at 6 columns and history at 4; results grouped in 2-column rows (summary+synopsis, breakdown+targets, contribution+simulator, explanation+buttons)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Two-column form on desktop (Biomedicine | Medications/History); 10-year risk estimate on the left with "How to explain to the patient" on the right</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Button hierarchy (UX): "Sample patient" as a discreet link on top; "Stratify" primary on the right; "Clear" in outline; active/disabled states on all buttons</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Web footer with version, disclaimer and credits; dead CSS cleanup (actionBar)</li>
                 </ul>
             </div>
         </div>
@@ -1234,8 +1230,14 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 <span data-i18n="p_dev_by">CardioScore · Desarrollado por MatsonSoft en colaboración con el Postgrado de Cardiología del Hospital Ruiz y Páez · cardioscore.matsonsoft.com</span><br>
                 <span data-i18n="p_disclaimer">Herramienta de soporte diagnóstico. Los resultados son estimaciones probabilísticas y no sustituyen el juicio del profesional de la salud.</span>
             </p>
-        </footer>
+         </footer>
     </div>
+
+    <footer class="mt-10 border-t border-slate-200 pt-4 pb-2 text-center text-xs text-slate-500 space-y-1 no-print">
+        <p><span class="font-semibold text-slate-600">CardioScore v2.3</span> · <span data-i18n="footer_method">Metodología y Auditoría Clínica</span></p>
+        <p data-i18n="web_disclaimer">Herramienta de soporte diagnóstico. Los resultados son estimaciones probabilísticas y no sustituyen el juicio del profesional de la salud.</p>
+        <p data-i18n="footer_credits">Desarrollado por MatsonSoft con el Postgrado de Cardiología del Hospital Ruiz y Páez (Ciudad Bolívar, Venezuela).</p>
+    </footer>
 
     <!-- SCRIPT DE LÓGICA CLÍNICA -->
     <script>
@@ -1282,6 +1284,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 result_narrative_prefix: 'Perfil de Riesgo: Paciente',
                 intro_title: 'Vista Previa de Resultados',
                 footer_method: 'Metodología y Auditoría Clínica',
+                web_disclaimer: 'Herramienta de soporte diagnóstico. Los resultados son estimaciones probabilísticas y no sustituyen el juicio del profesional de la salud.',
+                footer_credits: 'Desarrollado por MatsonSoft con el Postgrado de Cardiología del Hospital Ruiz y Páez (Ciudad Bolívar, Venezuela).',
                 footer_contact: 'Contacto', footer_report: 'Reportar incidencia',
                 unit_mgdl: 'mg/dL', unit_mmol: 'mmol/L', unit_kg: 'kg', unit_lb: 'lb', unit_cm: 'cm', unit_in: 'in',
                 // Bandas
@@ -1520,6 +1524,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 result_narrative_prefix: 'Risk Profile:',
                 intro_title: 'Results Preview',
                 footer_method: 'Methodology & Clinical Audit',
+                web_disclaimer: 'Diagnostic support tool. Results are probabilistic estimates and do not replace the clinician judgment.',
+                footer_credits: 'Developed by MatsonSoft with the Cardiology Postgraduate Program at Ruiz y Páez Hospital (Ciudad Bolívar, Venezuela).',
                 footer_contact: 'Contact', footer_report: 'Report an issue',
                 unit_mgdl: 'mg/dL', unit_mmol: 'mmol/L', unit_kg: 'kg', unit_lb: 'lb', unit_cm: 'cm', unit_in: 'in',
                 band_low: 'LOW', band_mod: 'LOW-MOD', band_borderline: 'BORDERLINE', band_intermediate: 'INTERMEDIATE',
