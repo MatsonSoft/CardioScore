@@ -806,6 +806,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Metodología ampliada: guía de uso (4 pasos), tabla comparativa de los 4 modelos, ejemplo clínico trabajado, glosario y sección de validación; índice lateral sticky en desktop</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Eliminadas referencias a código abierto, GitHub y correo de auditoría (la herramienta ya no es open source)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> PDF actualizado: pronóstico con los 4 modelos (SCORE2/PREVENT/WHO/SMART2), Lp(a) llenado y modulación por Lp(a) corregida (riesgo de IM ajustado)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> PDF ahora incluye región SCORE2, estadio CKM y las advertencias de aplicabilidad (antes solo la web)</li>
                 </ul>
             </div>
         </div>
@@ -1179,6 +1180,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Methodology expanded: how-to guide (4 steps), 4-model comparison table, worked clinical example, glossary and validation section; sticky side index on desktop</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Removed open-source, GitHub and audit-email references (tool is no longer open source)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> PDF updated: prognosis with the 4 models (SCORE2/PREVENT/WHO/SMART2), Lp(a) filled and Lp(a) modulation fixed (adjusted MI risk)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> PDF now includes SCORE2 region, CKM stage and applicability warnings (previously web only)</li>
                 </ul>
             </div>
         </div>
@@ -1322,6 +1324,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
         </section>
 
         <div id="p2_crit" style="display: none; margin-bottom: 6px; padding: 4px 8px; border: 1.5px solid #dc2626; background-color: #fef2f2; border-radius: 4px; font-weight: 700; color: #991b1b;"></div>
+        <div id="p2_warnings" style="display: none; margin-bottom: 6px; padding: 4px 8px; border: 1.5px solid #d97706; background-color: #fffbeb; border-radius: 4px; font-weight: 600; color: #92400e;"></div>
 
         <section class="print-grid-2" style="margin-bottom: 6px; gap: 8px;">
             <div style="display: flex; flex-direction: column;">
@@ -1341,6 +1344,16 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                         <div style="margin-bottom: 4px;">
                             <span class="print-label" data-i18n="p_fun_renal">Función Renal (eGFR CKD-EPI):</span>
                             <span class="print-text-sm font-bold" id="p2_tfg">-</span>
+                        </div>
+                        <div class="print-grid-2" style="gap: 8px; margin-bottom: 3px;">
+                            <div>
+                                <span class="print-label" data-i18n="p_region">Región SCORE2:</span>
+                                <div class="print-text-sm font-bold" id="p2_region" style="color: #0f172a; margin-top: 1px;">-</div>
+                            </div>
+                            <div>
+                                <span class="print-label" data-i18n="p_ckm">Estadio CKM:</span>
+                                <div class="print-text-sm font-bold" id="p2_ckm" style="color: #0f172a; margin-top: 1px;">-</div>
+                            </div>
                         </div>
                     </div>
                     <div class="print-grid-2" style="gap: 6px; margin-top: 4px;">
@@ -1592,7 +1605,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 p_col_total: 'Col. Total', p_col_ldl: 'Col. LDL', p_col_hdl: 'Col. HDL', p_col_nohdl: 'Col. No-HDL', p_trig: 'Triglicéridos',
                 p_glicemia: 'Glicemia', p_creat: 'Creatinina',
                 p_s3: '3. Estratificación Clínica y Metas',
-                p_criterio: 'Criterio Diagnóstico:', p_cond: 'Condiciones / Comorbilidades:', p_fun_renal: 'Función Renal (eGFR CKD-EPI):',
+                p_criterio: 'Criterio Diagnóstico:', p_cond: 'Condiciones / Comorbilidades:',                 p_fun_renal: 'Función Renal (eGFR CKD-EPI):', p_region: 'Región SCORE2:', p_ckm: 'Estadio CKM:',
                 p_meta_ldl: 'Meta C-LDL Objetivo', p_reduccion: 'Reducción Necesaria',
                 p_s4: '4. Pronóstico a 10 Años (SCORE / PREVENT)', p_categoria: 'Categoría de Riesgo Cardiovascular:',
                 p_score2: 'SCORE2 (IAM + ACV)', p_prevent: 'PREVENT (ECV + IC)', p_who: 'WHO-CLA (CHD + ACV)', p_smart: 'SMART2 (residual)',
@@ -1825,7 +1838,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 p_col_total: 'Total Chol.', p_col_ldl: 'LDL Chol.', p_col_hdl: 'HDL Chol.', p_col_nohdl: 'Non-HDL Chol.', p_trig: 'Triglycerides',
                 p_glicemia: 'Glucose', p_creat: 'Creatinine',
                 p_s3: '3. Clinical Stratification & Goals',
-                p_criterio: 'Diagnostic Criterion:', p_cond: 'Conditions / Comorbidities:', p_fun_renal: 'Kidney Function (eGFR CKD-EPI):',
+                p_criterio: 'Diagnostic Criterion:', p_cond: 'Conditions / Comorbidities:',                 p_fun_renal: 'Kidney Function (eGFR CKD-EPI):', p_region: 'SCORE2 Region:', p_ckm: 'CKM Stage:',
                 p_meta_ldl: 'LDL-C Target', p_reduccion: 'Reduction Needed',
                 p_s4: '4. 10-Year Prognosis (SCORE / PREVENT)', p_categoria: 'Cardiovascular Risk Category:',
                 p_score2: 'SCORE2 (MI + Stroke)', p_prevent: 'PREVENT (CVD + HF)', p_who: 'WHO-CLA (CHD + Stroke)', p_smart: 'SMART2 (residual)',
@@ -3142,6 +3155,15 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             const p2crit = document.getElementById('p2_crit');
             if (crit.length) { p2crit.innerHTML = '&#9888; ' + txt('values_critical') + ' ' + crit.join(' &#8226; '); p2crit.style.display = 'block'; }
             else p2crit.style.display = 'none';
+            const p2warn = document.getElementById('p2_warnings');
+            if (p2warn) {
+                if (warnings.length) { p2warn.innerHTML = '&#9888; ' + warnings.join(' &#8226; '); p2warn.style.display = 'block'; }
+                else p2warn.style.display = 'none';
+            }
+            const p2reg = document.getElementById('p2_region');
+            if (p2reg) p2reg.textContent = txt({ low:'region_name_low', moderate:'region_name_mod', high:'region_name_high', very_high:'region_name_vhigh' }[r.region] || 'region_name_high');
+            const p2ckm = document.getElementById('p2_ckm');
+            if (p2ckm) p2ckm.textContent = txt('ckm_stage') + ' ' + ckm;
             } catch(e) {}
 
             const patientExplain = document.getElementById('patient_explain');
