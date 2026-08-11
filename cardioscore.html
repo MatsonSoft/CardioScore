@@ -525,18 +525,67 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 
         <nav class="bg-white border border-slate-200 rounded-xl p-3 text-xs text-slate-600 flex flex-wrap gap-x-4 gap-y-1 justify-center">
             <a href="#" onclick="switchTab('calc'); return false" class="text-[#0054A6] hover:underline font-semibold">← Volver a la Calculadora</a>
+            <a href="#m-guia" class="text-slate-700 hover:underline">Guía</a>
             <a href="#m-score2" class="text-[#0054A6] hover:underline">Modelos</a>
             <a href="#m-score2-card" class="text-[#B91C1C] hover:underline">SCORE2</a>
             <a href="#m-prevent" class="text-[#B91C1C] hover:underline">PREVENT</a>
             <a href="#m-who" class="text-emerald-700 hover:underline">WHO</a>
             <a href="#m-smart" class="text-violet-700 hover:underline">SMART</a>
+            <a href="#m-comparativa" class="text-slate-700 hover:underline">Comparativa</a>
             <a href="#m-interpretar" class="text-slate-700 hover:underline">Interpretación</a>
             <a href="#m-poblaciones" class="text-slate-700 hover:underline">Poblaciones</a>
+            <a href="#m-ejemplo" class="text-slate-700 hover:underline">Ejemplo</a>
             <a href="#m-notas" class="text-slate-700 hover:underline">Notas técnicas</a>
+            <a href="#m-glosario" class="text-slate-700 hover:underline">Glosario</a>
             <a href="#m-limitaciones" class="text-slate-700 hover:underline">Limitaciones</a>
+            <a href="#m-validacion" class="text-slate-700 hover:underline">Validación</a>
             <a href="#m-changelog" class="text-slate-700 hover:underline">Changelog</a>
             <a href="#m-referencias" class="text-slate-700 hover:underline">Referencias</a>
         </nav>
+
+        <div class="lg:grid lg:grid-cols-[240px_1fr] gap-8 items-start">
+            <aside class="hidden lg:block lg:sticky lg:top-20">
+                <nav class="bg-white border border-slate-200 rounded-xl p-3 text-xs text-slate-600 space-y-1">
+                    <a href="#m-guia" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6] font-semibold">Guía de uso</a>
+                    <a href="#m-score2" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Modelos</a>
+                    <a href="#m-comparativa" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Comparativa</a>
+                    <a href="#m-interpretar" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Interpretación</a>
+                    <a href="#m-poblaciones" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Poblaciones</a>
+                    <a href="#m-ejemplo" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Ejemplo clínico</a>
+                    <a href="#m-notas" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Notas técnicas</a>
+                    <a href="#m-glosario" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Glosario</a>
+                    <a href="#m-limitaciones" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Limitaciones</a>
+                    <a href="#m-validacion" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Validación</a>
+                    <a href="#m-changelog" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Changelog</a>
+                    <a href="#m-referencias" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Referencias</a>
+                </nav>
+            </aside>
+            <div class="space-y-6">
+        <div id="m-guia" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">¿Cómo usar CardioScore?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-[#0054A6] text-white font-black flex items-center justify-center mb-2">1</div>
+                    <p class="font-bold text-slate-800 mb-1">Complete los datos</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">Edad, sexo, tabaco, PAS, lípidos, creatinina y antecedentes en el formulario.</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-[#0054A6] text-white font-black flex items-center justify-center mb-2">2</div>
+                    <p class="font-bold text-slate-800 mb-1">Presione Estratificar</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">Se calculan SCORE2, PREVENT, WHO-Central L.A. y SMART2 (si aplica).</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-[#0054A6] text-white font-black flex items-center justify-center mb-2">3</div>
+                    <p class="font-bold text-slate-800 mb-1">Lea el riesgo</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">Banda, gauge y desglose de scores; revise las advertencias de aplicabilidad.</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-[#0054A6] text-white font-black flex items-center justify-center mb-2">4</div>
+                    <p class="font-bold text-slate-800 mb-1">Aplique las metas</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">Meta de C-LDL, % de reducción y simulador de oportunidad terapéutica.</p>
+                </div>
+            </div>
+        </div>
 
         <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
             <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">¿Por qué cuatro modelos?</h3>
@@ -598,6 +647,21 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Uso</td><td class="py-1.5">Riesgo residual en prevención secundaria (ESC 2021). Reemplaza a los scores de prevención primaria cuando hay ECV establecida.</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Nota</td><td class="py-1.5">Antiagregación: asume cuidado estándar (campo "Antiagr."). Territorio del evento: configurable (Coronario/Cerebrovascular/PAD/AAA); "Auto": SCA=coronario, EVA=cerebrovascular.</td></tr>
                 </tbody></table>
+            </div>
+        </div>
+
+        <div id="m-comparativa" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Comparativa de Modelos</h3>
+            <div class="overflow-x-auto">
+            <table class="w-full text-xs text-slate-700">
+                <thead><tr class="bg-slate-50 text-slate-600 uppercase"><th class="p-3 border-b text-left">Modelo</th><th class="p-3 border-b text-left">Población</th><th class="p-3 border-b text-left">Desenlace</th><th class="p-3 border-b text-left">Variables</th><th class="p-3 border-b text-left">Cuándo usarlo</th></tr></thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr><td class="p-3 font-semibold text-[#0054A6]">SCORE2</td><td class="p-3">40-69a sin ECV</td><td class="p-3">IAM fatal/no fatal + ACV a 10a</td><td class="p-3">Edad, sexo, tabaco, PAS, CT, HDL, DM</td><td class="p-3">Prevención primaria (estándar ESC)</td></tr>
+                    <tr><td class="p-3 font-semibold text-[#B91C1C]">PREVENT</td><td class="p-3">30-79a sin ASCVD/IC</td><td class="p-3">ECV total + IC a 10a</td><td class="p-3">Edad, PAS, non-HDL, HDL, eGFR, DM, tabaco, HTA, estatinas (+ACR, HbA1c)</td><td class="p-3">Con ERC, obesidad o IC (AHA)</td></tr>
+                    <tr><td class="p-3 font-semibold text-emerald-700">WHO-CLA</td><td class="p-3">40-79a</td><td class="p-3">CHD + ACV a 10a</td><td class="p-3">Lab: edad, PAS, CT, DM, tabaco · No-lab: IMC</td><td class="p-3">Referencia regional (Venezuela)</td></tr>
+                    <tr><td class="p-3 font-semibold text-violet-700">SMART2</td><td class="p-3">ASCVD establecida, 40-80a</td><td class="p-3">Recurrencia o muerte CV a 10a</td><td class="p-3">Edad, sexo, tabaco, DM, PAS, non-HDL, hsCRP, eGFR, años, territorio</td><td class="p-3">Prevención secundaria (riesgo residual)</td></tr>
+                </tbody>
+            </table>
             </div>
         </div>
 
@@ -739,7 +803,67 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Formulario en 2 columnas en desktop (Biometría | Medicamentos/Antecedentes); estimación de riesgo a la izquierda con "Cómo explicar al paciente" a la derecha</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Jerarquía de botones (UX): "Paciente de Prueba" como enlace discreto arriba; "Estratificar" primario a la derecha; "Limpiar" en outline; active/disabled states en todos los botones</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Footer web con versión, disclaimer y créditos; limpieza de CSS muerto (actionBar)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Metodología ampliada: guía de uso (4 pasos), tabla comparativa de los 4 modelos, ejemplo clínico trabajado, glosario y sección de validación; índice lateral sticky en desktop</li>
                 </ul>
+            </div>
+        </div>
+
+        <div id="m-ejemplo" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Ejemplo Clínico</h3>
+            <p class="text-sm text-slate-700 leading-relaxed"><strong>Caso:</strong> varón de 55 años, fumador, PAS 140 mmHg, CT 210 mg/dL, HDL 44, LDL 130, creatinina 1.0 (eGFR ≈ 89), sin diabetes, región Alta.</p>
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <p class="font-bold text-slate-800 mb-1">1. SCORE2</p>
+                    <p class="text-2xl font-black text-[#0054A6]">6.7%</p>
+                    <p class="text-slate-600 text-xs mt-1">Riesgo Alto (50-69a: 5-10%)</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <p class="font-bold text-slate-800 mb-1">2. PREVENT</p>
+                    <p class="text-2xl font-black text-[#B91C1C]">6.2%</p>
+                    <p class="text-slate-600 text-xs mt-1">Riesgo intermedio (5-10%)</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <p class="font-bold text-slate-800 mb-1">3. WHO-CLA</p>
+                    <p class="text-2xl font-black text-emerald-700">4.8%</p>
+                    <p class="text-slate-600 text-xs mt-1">Riesgo a 10 años (bajo-medio)</p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl text-sm">
+                <p class="font-bold text-blue-800 mb-1">Interpretación</p>
+                <p class="text-blue-900 leading-relaxed">Categoría <strong>Alto</strong> (SCORE2 6.7%). Meta de C-LDL: <strong>&lt;70 mg/dL</strong>; reducción necesaria ≈ 46%. Estrategia: estatina de alta potencia + cambios de estilo de vida; reevaluar en 1 año.</p>
+            </div>
+        </div>
+
+        <div id="m-glosario" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Glosario</h3>
+            <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+                <div><dt class="font-bold text-slate-800">ASCVD</dt><dd class="text-slate-600 text-xs leading-relaxed">Enfermedad cardiovascular aterosclerótica (IAM, ACV, EAP, AAA).</dd></div>
+                <div><dt class="font-bold text-slate-800">eGFR</dt><dd class="text-slate-600 text-xs leading-relaxed">Filtrado glomerular estimado (CKD-EPI 2021).</dd></div>
+                <div><dt class="font-bold text-slate-800">ACR</dt><dd class="text-slate-600 text-xs leading-relaxed">Albúmina/creatinina en orina (mg/g); ≥30 microalbuminuria.</dd></div>
+                <div><dt class="font-bold text-slate-800">non-HDL</dt><dd class="text-slate-600 text-xs leading-relaxed">Colesterol no-HDL = CT − HDL.</dd></div>
+                <div><dt class="font-bold text-slate-800">CKM</dt><dd class="text-slate-600 text-xs leading-relaxed">Síndrome Cardiovascular-Renal-Metabólico (AHA 2023).</dd></div>
+                <div><dt class="font-bold text-slate-800">hsCRP</dt><dd class="text-slate-600 text-xs leading-relaxed">PCR ultrasensible (mg/L); marcador de inflamación.</dd></div>
+                <div><dt class="font-bold text-slate-800">CAC</dt><dd class="text-slate-600 text-xs leading-relaxed">Calcio coronario (score de Agatston).</dd></div>
+                <div><dt class="font-bold text-slate-800">Lp(a)</dt><dd class="text-slate-600 text-xs leading-relaxed">Lipoproteína(a); ≥50 mg/dL eleva el riesgo.</dd></div>
+                <div><dt class="font-bold text-slate-800">PAS</dt><dd class="text-slate-600 text-xs leading-relaxed">Presión arterial sistólica (mmHg).</dd></div>
+                <div><dt class="font-bold text-slate-800">TOD</dt><dd class="text-slate-600 text-xs leading-relaxed">Daño de órgano diana (riñón, retina, nervios).</dd></div>
+            </dl>
+        </div>
+
+        <div id="m-validacion" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Validación de los Modelos</h3>
+            <p class="text-sm text-slate-700 leading-relaxed mb-4">Cada modelo se verificó contra su fuente primaria (papers, calculadoras oficiales o charts de la OMS). Ejemplos de vectores de referencia:</p>
+            <div class="overflow-x-auto">
+            <table class="w-full text-xs text-slate-700">
+                <thead><tr class="bg-slate-50 text-slate-600 uppercase"><th class="p-3 border-b text-left">Modelo</th><th class="p-3 border-b text-left">Caso</th><th class="p-3 border-b text-left">Esperado</th><th class="p-3 border-b text-left">Calculado</th></tr></thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr><td class="p-3 font-semibold">PREVENT</td><td class="p-3">Mujer 50a (Table S25)</td><td class="p-3">14.7%</td><td class="p-3 font-bold text-emerald-700">14.68%</td></tr>
+                    <tr><td class="p-3 font-semibold">SCORE2-CKD</td><td class="p-3">Varón 55a, eGFR 45, ACR 150</td><td class="p-3">≈16%</td><td class="p-3 font-bold text-emerald-700">16.28%</td></tr>
+                    <tr><td class="p-3 font-semibold">SCORE2-DM</td><td class="p-3">Varón 60a DM (abstract)</td><td class="p-3">≈11%</td><td class="p-3 font-bold text-emerald-700">10.93%</td></tr>
+                    <tr><td class="p-3 font-semibold">WHO-CLA</td><td class="p-3">Varón 55a fumador (chart OMS)</td><td class="p-3">≈8%</td><td class="p-3 font-bold text-emerald-700">8.01%</td></tr>
+                    <tr><td class="p-3 font-semibold">SMART2</td><td class="p-3">Varón 60a ASCVD (LatAm)</td><td class="p-3">21.7%</td><td class="p-3 font-bold text-emerald-700">21.70%</td></tr>
+                </tbody>
+            </table>
             </div>
         </div>
 
@@ -770,6 +894,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 <a href="mailto:matson@matsonsoft.com?subject=Auditor\u00eda%20CardioScore" class="bg-[#0054A6] hover:bg-[#003A73] text-white font-semibold py-3 px-6 rounded-lg text-sm transition">Reportar por Correo</a>
             </div>
         </div>
+            </div>
+            </div>
     </div>
 <div class="lang-en hidden">
 <div class="text-center">
@@ -782,17 +908,66 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
 
         <nav class="bg-white border border-slate-200 rounded-xl p-3 text-xs text-slate-600 flex flex-wrap gap-x-4 gap-y-1 justify-center">
             <a href="#" onclick="switchTab('calc'); return false" class="text-[#0054A6] hover:underline font-semibold">← Back to Calculator</a>
-            <a href="#m-en-score2" class="text-[#0054A6] hover:underline">SCORE2</a>
+            <a href="#m-en-guia" class="text-slate-700 hover:underline">Guide</a>
+            <a href="#m-en-prevent" class="text-[#0054A6] hover:underline">Models</a>
             <a href="#m-en-prevent" class="text-[#B91C1C] hover:underline">PREVENT</a>
             <a href="#m-en-who" class="text-emerald-700 hover:underline">WHO</a>
             <a href="#m-en-smart" class="text-violet-700 hover:underline">SMART</a>
+            <a href="#m-en-comparativa" class="text-slate-700 hover:underline">Comparison</a>
             <a href="#m-en-interpretar" class="text-slate-700 hover:underline">Interpretation</a>
             <a href="#m-en-poblaciones" class="text-slate-700 hover:underline">Populations</a>
+            <a href="#m-en-ejemplo" class="text-slate-700 hover:underline">Example</a>
             <a href="#m-en-notas" class="text-slate-700 hover:underline">Technical Notes</a>
+            <a href="#m-en-glosario" class="text-slate-700 hover:underline">Glossary</a>
             <a href="#m-en-limitaciones" class="text-slate-700 hover:underline">Limitations</a>
+            <a href="#m-en-validacion" class="text-slate-700 hover:underline">Validation</a>
             <a href="#m-en-changelog" class="text-slate-700 hover:underline">Changelog</a>
             <a href="#m-en-referencias" class="text-slate-700 hover:underline">References</a>
         </nav>
+
+        <div class="lg:grid lg:grid-cols-[240px_1fr] gap-8 items-start">
+            <aside class="hidden lg:block lg:sticky lg:top-20">
+                <nav class="bg-white border border-slate-200 rounded-xl p-3 text-xs text-slate-600 space-y-1">
+                    <a href="#m-en-guia" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6] font-semibold">How to Use</a>
+                    <a href="#m-en-prevent" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Models</a>
+                    <a href="#m-en-comparativa" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Comparison</a>
+                    <a href="#m-en-interpretar" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Interpretation</a>
+                    <a href="#m-en-poblaciones" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Populations</a>
+                    <a href="#m-en-ejemplo" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Clinical Example</a>
+                    <a href="#m-en-notas" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Technical Notes</a>
+                    <a href="#m-en-glosario" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Glossary</a>
+                    <a href="#m-en-limitaciones" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Limitations</a>
+                    <a href="#m-en-validacion" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Validation</a>
+                    <a href="#m-en-changelog" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">Changelog</a>
+                    <a href="#m-en-referencias" class="block px-2 py-1.5 rounded hover:bg-slate-50 hover:text-[#0054A6]">References</a>
+                </nav>
+            </aside>
+            <div class="space-y-6">
+        <div id="m-en-guia" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">How to Use CardioScore?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-[#0054A6] text-white font-black flex items-center justify-center mb-2">1</div>
+                    <p class="font-bold text-slate-800 mb-1">Fill in the data</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">Age, sex, smoking, SBP, lipids, creatinine and history in the form.</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-[#0054A6] text-white font-black flex items-center justify-center mb-2">2</div>
+                    <p class="font-bold text-slate-800 mb-1">Press Stratify</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">Computes SCORE2, PREVENT, WHO-Central L.A. and SMART2 (if applicable).</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-[#0054A6] text-white font-black flex items-center justify-center mb-2">3</div>
+                    <p class="font-bold text-slate-800 mb-1">Read the risk</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">Category, gauge and score breakdown; review applicability warnings.</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-[#0054A6] text-white font-black flex items-center justify-center mb-2">4</div>
+                    <p class="font-bold text-slate-800 mb-1">Apply the targets</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">LDL-C target, % reduction and therapeutic-opportunity simulator.</p>
+                </div>
+            </div>
+        </div>
 
         <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
             <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Why Four Models?</h3>
@@ -854,6 +1029,21 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Use</td><td class="py-1.5">Residual risk in secondary prevention (ESC 2021). Replaces primary-prevention scores when ASCVD is established.</td></tr>
                     <tr><td class="py-1.5 pr-3 font-semibold align-top">Note</td><td class="py-1.5">Antiplatelet: standard care assumed ("Antiplatelet" field). Event territory: configurable (Coronary/Cerebrovascular/PAD/AAA); "Auto": ACS=coronary, stroke/PAD=cerebrovascular.</td></tr>
                 </tbody></table>
+            </div>
+        </div>
+
+        <div id="m-en-comparativa" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Model Comparison</h3>
+            <div class="overflow-x-auto">
+            <table class="w-full text-xs text-slate-700">
+                <thead><tr class="bg-slate-50 text-slate-600 uppercase"><th class="p-3 border-b text-left">Model</th><th class="p-3 border-b text-left">Population</th><th class="p-3 border-b text-left">Outcome</th><th class="p-3 border-b text-left">Variables</th><th class="p-3 border-b text-left">When to use</th></tr></thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr><td class="p-3 font-semibold text-[#0054A6]">SCORE2</td><td class="p-3">40-69y without CVD</td><td class="p-3">Fatal/non-fatal MI + Stroke at 10y</td><td class="p-3">Age, sex, smoking, SBP, TC, HDL, DM</td><td class="p-3">Primary prevention (ESC standard)</td></tr>
+                    <tr><td class="p-3 font-semibold text-[#B91C1C]">PREVENT</td><td class="p-3">30-79y without ASCVD/HF</td><td class="p-3">Total CVD + HF at 10y</td><td class="p-3">Age, SBP, non-HDL, HDL, eGFR, DM, smoking, HTN Tx, statins (+ACR, HbA1c)</td><td class="p-3">With CKD, obesity or HF (AHA)</td></tr>
+                    <tr><td class="p-3 font-semibold text-emerald-700">WHO-CLA</td><td class="p-3">40-79y</td><td class="p-3">CHD + Stroke at 10y</td><td class="p-3">Lab: age, SBP, TC, DM, smoking · Non-lab: BMI</td><td class="p-3">Regional reference (Venezuela)</td></tr>
+                    <tr><td class="p-3 font-semibold text-violet-700">SMART2</td><td class="p-3">Established ASCVD, 40-80y</td><td class="p-3">Recurrence or CV death at 10y</td><td class="p-3">Age, sex, smoking, DM, SBP, non-HDL, hsCRP, eGFR, years, territory</td><td class="p-3">Secondary prevention (residual risk)</td></tr>
+                </tbody>
+            </table>
             </div>
         </div>
 
@@ -995,7 +1185,67 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Two-column form on desktop (Biomedicine | Medications/History); 10-year risk estimate on the left with "How to explain to the patient" on the right</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Button hierarchy (UX): "Sample patient" as a discreet link on top; "Stratify" primary on the right; "Clear" in outline; active/disabled states on all buttons</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Web footer with version, disclaimer and credits; dead CSS cleanup (actionBar)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Methodology expanded: how-to guide (4 steps), 4-model comparison table, worked clinical example, glossary and validation section; sticky side index on desktop</li>
                 </ul>
+            </div>
+        </div>
+
+        <div id="m-en-ejemplo" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Clinical Example</h3>
+            <p class="text-sm text-slate-700 leading-relaxed"><strong>Case:</strong> 55-year-old man, smoker, SBP 140 mmHg, TC 210 mg/dL, HDL 44, LDL 130, creatinine 1.0 (eGFR ≈ 89), no diabetes, High-risk region.</p>
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <p class="font-bold text-slate-800 mb-1">1. SCORE2</p>
+                    <p class="text-2xl font-black text-[#0054A6]">6.7%</p>
+                    <p class="text-slate-600 text-xs mt-1">High risk (50-69y: 5-10%)</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <p class="font-bold text-slate-800 mb-1">2. PREVENT</p>
+                    <p class="text-2xl font-black text-[#B91C1C]">6.2%</p>
+                    <p class="text-slate-600 text-xs mt-1">Intermediate risk (5-10%)</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <p class="font-bold text-slate-800 mb-1">3. WHO-CLA</p>
+                    <p class="text-2xl font-black text-emerald-700">4.8%</p>
+                    <p class="text-slate-600 text-xs mt-1">10-year risk (low-medium)</p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl text-sm">
+                <p class="font-bold text-blue-800 mb-1">Interpretation</p>
+                <p class="text-blue-900 leading-relaxed"><strong>High</strong> category (SCORE2 6.7%). LDL-C target: <strong>&lt;70 mg/dL</strong>; required reduction ≈ 46%. Strategy: high-intensity statin + lifestyle changes; re-assess in 1 year.</p>
+            </div>
+        </div>
+
+        <div id="m-en-glosario" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Glossary</h3>
+            <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+                <div><dt class="font-bold text-slate-800">ASCVD</dt><dd class="text-slate-600 text-xs leading-relaxed">Atherosclerotic cardiovascular disease (MI, Stroke, PAD, AAA).</dd></div>
+                <div><dt class="font-bold text-slate-800">eGFR</dt><dd class="text-slate-600 text-xs leading-relaxed">Estimated glomerular filtration rate (CKD-EPI 2021).</dd></div>
+                <div><dt class="font-bold text-slate-800">ACR</dt><dd class="text-slate-600 text-xs leading-relaxed">Urine albumin/creatinine (mg/g); ≥30 microalbuminuria.</dd></div>
+                <div><dt class="font-bold text-slate-800">non-HDL</dt><dd class="text-slate-600 text-xs leading-relaxed">Non-HDL cholesterol = TC − HDL.</dd></div>
+                <div><dt class="font-bold text-slate-800">CKM</dt><dd class="text-slate-600 text-xs leading-relaxed">Cardiovascular-Kidney-Metabolic syndrome (AHA 2023).</dd></div>
+                <div><dt class="font-bold text-slate-800">hsCRP</dt><dd class="text-slate-600 text-xs leading-relaxed">High-sensitivity C-reactive protein (mg/L); inflammation marker.</dd></div>
+                <div><dt class="font-bold text-slate-800">CAC</dt><dd class="text-slate-600 text-xs leading-relaxed">Coronary artery calcium (Agatston score).</dd></div>
+                <div><dt class="font-bold text-slate-800">Lp(a)</dt><dd class="text-slate-600 text-xs leading-relaxed">Lipoprotein(a); ≥50 mg/dL raises risk.</dd></div>
+                <div><dt class="font-bold text-slate-800">SBP</dt><dd class="text-slate-600 text-xs leading-relaxed">Systolic blood pressure (mmHg).</dd></div>
+                <div><dt class="font-bold text-slate-800">TOD</dt><dd class="text-slate-600 text-xs leading-relaxed">Target-organ damage (kidney, retina, nerves).</dd></div>
+            </dl>
+        </div>
+
+        <div id="m-en-validacion" class="bg-white p-6 md:p-8 rounded-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">Model Validation</h3>
+            <p class="text-sm text-slate-700 leading-relaxed mb-4">Each model was verified against its primary source (papers, official calculators or WHO charts). Reference vectors:</p>
+            <div class="overflow-x-auto">
+            <table class="w-full text-xs text-slate-700">
+                <thead><tr class="bg-slate-50 text-slate-600 uppercase"><th class="p-3 border-b text-left">Model</th><th class="p-3 border-b text-left">Case</th><th class="p-3 border-b text-left">Expected</th><th class="p-3 border-b text-left">Calculated</th></tr></thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr><td class="p-3 font-semibold">PREVENT</td><td class="p-3">50y woman (Table S25)</td><td class="p-3">14.7%</td><td class="p-3 font-bold text-emerald-700">14.68%</td></tr>
+                    <tr><td class="p-3 font-semibold">SCORE2-CKD</td><td class="p-3">55y man, eGFR 45, ACR 150</td><td class="p-3">≈16%</td><td class="p-3 font-bold text-emerald-700">16.28%</td></tr>
+                    <tr><td class="p-3 font-semibold">SCORE2-DM</td><td class="p-3">60y man with DM (abstract)</td><td class="p-3">≈11%</td><td class="p-3 font-bold text-emerald-700">10.93%</td></tr>
+                    <tr><td class="p-3 font-semibold">WHO-CLA</td><td class="p-3">55y man smoker (WHO chart)</td><td class="p-3">≈8%</td><td class="p-3 font-bold text-emerald-700">8.01%</td></tr>
+                    <tr><td class="p-3 font-semibold">SMART2</td><td class="p-3">60y man ASCVD (LatAm)</td><td class="p-3">21.7%</td><td class="p-3 font-bold text-emerald-700">21.70%</td></tr>
+                </tbody>
+            </table>
             </div>
         </div>
 
@@ -1026,6 +1276,8 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 <a href="mailto:matson@matsonsoft.com?subject=Auditoría%20CardioScore" class="bg-[#0054A6] hover:bg-[#003A73] text-white font-semibold py-3 px-6 rounded-lg text-sm transition">Report by Email</a>
             </div>
         </div>
+            </div>
+            </div>
     </div>
 </div>
 <!-- PDF NUEVO: PLANTILLA REDISEÑADA (1 PÁGINA, COMPARATIVA)                -->
