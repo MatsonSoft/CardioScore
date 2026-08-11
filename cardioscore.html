@@ -805,6 +805,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Footer web con versión, disclaimer y créditos; limpieza de CSS muerto (actionBar)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> Metodología ampliada: guía de uso (4 pasos), tabla comparativa de los 4 modelos, ejemplo clínico trabajado, glosario y sección de validación; índice lateral sticky en desktop</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Corrección</span> Eliminadas referencias a código abierto, GitHub y correo de auditoría (la herramienta ya no es open source)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Nuevo</span> PDF actualizado: pronóstico con los 4 modelos (SCORE2/PREVENT/WHO/SMART2), Lp(a) llenado y modulación por Lp(a) corregida (riesgo de IM ajustado)</li>
                 </ul>
             </div>
         </div>
@@ -1177,6 +1178,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Web footer with version, disclaimer and credits; dead CSS cleanup (actionBar)</li>
                     <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> Methodology expanded: how-to guide (4 steps), 4-model comparison table, worked clinical example, glossary and validation section; sticky side index on desktop</li>
                     <li><span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">Fix</span> Removed open-source, GitHub and audit-email references (tool is no longer open source)</li>
+                    <li><span class="inline-block bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded mr-1.5">New</span> PDF updated: prognosis with the 4 models (SCORE2/PREVENT/WHO/SMART2), Lp(a) filled and Lp(a) modulation fixed (adjusted MI risk)</li>
                 </ul>
             </div>
         </div>
@@ -1354,7 +1356,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 </div>
             </div>
             <div style="display: flex; flex-direction: column;">
-                <div class="print-section-title" data-i18n="p_s4">4. Pronóstico a 10 Años (SCORE / PREVENT)</div>
+                <div class="print-section-title" data-i18n="p_s4">4. Pronóstico a 10 Años</div>
                 <div class="print-box" style="flex: 1; padding: 6px 8px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div style="text-align: center; margin-bottom: 2px;">
                         <span class="print-label" data-i18n="p_categoria">Categoría de Riesgo Cardiovascular:</span>
@@ -1369,16 +1371,26 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                             <span class="print-tiny" style="position: absolute; right: 0;">100%</span>
                         </div>
                     </div>
-                    <div class="print-grid-2" style="text-align: center; gap: 6px; margin-top: 2px;">
+                    <div class="print-grid-4" style="text-align: center; gap: 6px; margin-top: 2px;">
                         <div style="border: 1px solid #0f172a; border-radius: 4px; padding: 4px; background: #f8fafc;">
-                            <div class="print-label" data-i18n="p_prev_total">Riesgo ECV Total (10a)</div>
+                            <div class="print-label" data-i18n="p_score2">SCORE2 (IAM + ACV)</div>
                             <div class="print-value-lg" id="p2_prev_total" style="margin: 1px 0;">-</div>
-                            <div class="print-label" data-i18n="p_opt">Riesgo Óptimo:   <strong id="p2_prev_tot_opt">-</strong></div>
+                            <div class="print-label" data-i18n="p_opt">Óptimo:   <strong id="p2_prev_tot_opt">-</strong></div>
                         </div>
                         <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px;">
-                            <div class="print-label" data-i18n="p_prev_ic">Hosp. Insuf. Cardíaca</div>
+                            <div class="print-label" data-i18n="p_prevent">PREVENT (ECV + IC)</div>
                             <div class="print-value-lg" id="p2_prev_ic" style="margin: 1px 0;">-</div>
-                            <div class="print-label" data-i18n="p_opt">Riesgo Óptimo:   <strong id="p2_prev_ic_opt">-</strong></div>
+                            <div class="print-label" data-i18n="p_opt">Óptimo:   <strong id="p2_prev_ic_opt">-</strong></div>
+                        </div>
+                        <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px;">
+                            <div class="print-label" data-i18n="p_who">WHO-CLA (CHD + ACV)</div>
+                            <div class="print-value-lg" id="p2_who" style="margin: 1px 0;">-</div>
+                            <div class="print-label" data-i18n="p_opt">Óptimo:   <strong id="p2_who_opt">-</strong></div>
+                        </div>
+                        <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px;">
+                            <div class="print-label" data-i18n="p_smart">SMART2 (residual)</div>
+                            <div class="print-value-lg" id="p2_smart" style="margin: 1px 0;">-</div>
+                            <div class="print-label" data-i18n="p_opt">Óptimo:   <strong id="p2_smart_opt">-</strong></div>
                         </div>
                     </div>
                 </div>
@@ -1583,6 +1595,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 p_criterio: 'Criterio Diagnóstico:', p_cond: 'Condiciones / Comorbilidades:', p_fun_renal: 'Función Renal (eGFR CKD-EPI):',
                 p_meta_ldl: 'Meta C-LDL Objetivo', p_reduccion: 'Reducción Necesaria',
                 p_s4: '4. Pronóstico a 10 Años (SCORE / PREVENT)', p_categoria: 'Categoría de Riesgo Cardiovascular:',
+                p_score2: 'SCORE2 (IAM + ACV)', p_prevent: 'PREVENT (ECV + IC)', p_who: 'WHO-CLA (CHD + ACV)', p_smart: 'SMART2 (residual)',
                 p_prev_total: 'Riesgo ECV Total (10a)', p_opt: 'Riesgo Óptimo: ', p_prev_ic: 'Hosp. Insuf. Cardíaca',
                 p_sintesis: 'SÍNTESIS DIAGNÓSTICA:',
                 p_s5: '5. Desglose de Riesgo Específico (10 Años)',
@@ -1815,6 +1828,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
                 p_criterio: 'Diagnostic Criterion:', p_cond: 'Conditions / Comorbidities:', p_fun_renal: 'Kidney Function (eGFR CKD-EPI):',
                 p_meta_ldl: 'LDL-C Target', p_reduccion: 'Reduction Needed',
                 p_s4: '4. 10-Year Prognosis (SCORE / PREVENT)', p_categoria: 'Cardiovascular Risk Category:',
+                p_score2: 'SCORE2 (MI + Stroke)', p_prevent: 'PREVENT (CVD + HF)', p_who: 'WHO-CLA (CHD + Stroke)', p_smart: 'SMART2 (residual)',
                 p_prev_total: 'Total CVD Risk (10y)', p_opt: 'Optimal Risk: ', p_prev_ic: 'HF Hospitalization',
                 p_sintesis: 'DIAGNOSTIC SUMMARY:',
                 p_s5: '5. Specific Risk Breakdown (10 Years)',
@@ -3111,10 +3125,17 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             document.getElementById('p2_prev_tot_opt').textContent = (score2 * 0.4).toFixed(1) + '%';
             document.getElementById('p2_prev_ic').textContent = prevent.toFixed(1) + '%';
             document.getElementById('p2_prev_ic_opt').textContent = (prevent * 0.4).toFixed(1) + '%';
+            const p2w = document.getElementById('p2_who'); if (p2w) p2w.textContent = isNaN(who) ? '—' : who.toFixed(1) + '%';
+            const p2wo = document.getElementById('p2_who_opt'); if (p2wo) p2wo.textContent = isNaN(who) ? '—' : (who * 0.4).toFixed(1) + '%';
+            const p2s = document.getElementById('p2_smart'); if (p2s) p2s.textContent = smart2 != null ? smart2.toFixed(1) + '%' : '—';
+            const p2so = document.getElementById('p2_smart_opt'); if (p2so) p2so.textContent = smart2 != null ? (smart2 * 0.4).toFixed(1) + '%' : '—';
             document.getElementById('p2_table_body').innerHTML = htmlTP;
+            const p2lpa = document.getElementById('p2_lpa'); if (p2lpa) p2lpa.textContent = (i.lpa ? i.lpa + ' mg/dL' : '—');
+            const lpaFactor = (i.lpa && i.lpa >= 50) ? 1.5 : 1.0;
+            const imCon = score2 * lpaFactor;
             document.getElementById('p2_inf_sin').textContent = score2.toFixed(1) + '%';
-            document.getElementById('p2_inf_con').textContent = prevent.toFixed(1) + '%';
-            document.getElementById('p2_inf_delta').textContent = score2 > 0 ? '+' + (((prevent / score2) - 1) * 100).toFixed(0) + '%' : '—';
+            document.getElementById('p2_inf_con').textContent = imCon.toFixed(1) + '%';
+            document.getElementById('p2_inf_delta').textContent = score2 > 0 ? '+' + Math.round((lpaFactor - 1) * 100) + '%' : '—';
             document.getElementById('p2_contrib_factors').innerHTML = cpHtml;
             document.getElementById('p2_risk_red').textContent = mejora;
             document.getElementById('p2_narrativa').textContent = narrativa;
