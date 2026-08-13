@@ -390,7 +390,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
 <div class="py-0.5"><span class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5" data-i18n="c_wbc" for="wbc">c_wbc <span class="unit-tag" title="×10³/µL">×10³</span></span><input type="number" id="wbc" class="form-input text-xs h-9" placeholder="×10³/µL" min="1" max="30" inputmode="decimal" step="any" data-label="Leucocitos"></div></div>
                     </div>
                 
-<div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/60" id="grace_col">
+                <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/60" id="grace_col">
                         <p class="text-[10px] font-bold text-slate-600 uppercase tracking-wide mb-2 pb-1.5 border-b border-slate-200/70" data-i18n="c_grace_t">GRACE (SCA agudo)</p>
                         <div class="grid grid-cols-1 gap-y-2">
                             <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="c_hr" for="grace_hr">FC <span class="unit-tag" title="lat/min">lpm</span></label><input type="number" id="grace_hr" class="form-input text-xs h-9" placeholder="lpm" min="30" max="250" inputmode="decimal" step="any" data-label="FC"></div>
@@ -398,7 +398,9 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                             <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="c_st" for="grace_st">Desv. ST</label><select id="grace_st" class="form-select text-xs h-9 w-full"><option value="no" data-i18n="opt_no">No</option><option value="elev" data-i18n="c_st_elev">Elevación</option><option value="depr" data-i18n="c_st_depr">Depresión</option></select></div>
                             <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="c_arrest">Paro cardíaco</label><div class="chip-group chip-group-sm"><label class="chip chip-sm" data-i18n="opt_no"><input type="radio" name="grace_arrest" value="no"> No</label><label class="chip chip-sm" data-i18n="opt_yes"><input type="radio" name="grace_arrest" value="yes"> Sí</label></div></div>
                             <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="c_enz">Enzimas elevadas</label><div class="chip-group chip-group-sm"><label class="chip chip-sm" data-i18n="opt_no"><input type="radio" name="grace_enz" value="no"> No</label><label class="chip chip-sm" data-i18n="opt_yes"><input type="radio" name="grace_enz" value="yes"> Sí</label></div></div>
-                    <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/60" id="archbr_col">
+                        </div>
+                    </div>
+                <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/60" id="archbr_col">
                         <p class="text-[10px] font-bold text-slate-600 uppercase tracking-wide mb-2 pb-1.5 border-b border-slate-200/70" data-i18n="c_archbr_t">ARC-HBR (post-PCI)</p>
                         <div class="grid grid-cols-1 gap-y-2">
                             <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="c_oac">Anticoagulación</label><div class="chip-group chip-group-sm"><label class="chip chip-sm" data-i18n="opt_no"><input type="radio" name="archbr_oac" value="no"> No</label><label class="chip chip-sm" data-i18n="opt_yes"><input type="radio" name="archbr_oac" value="yes"> Sí</label></div></div>
@@ -407,8 +409,7 @@ label:has(.tip){ display:flex; align-items:center; gap:4px; }
                             <div><label class="block text-[10px] font-bold text-slate-700 uppercase" data-i18n="c_plaq" for="plaquetas">Plaquetas <span class="unit-tag" title="×10³/µL">×10³</span></label><input type="number" id="plaquetas" class="form-input text-xs h-9" placeholder="×10³/µL" min="20" max="600" inputmode="decimal" step="any" data-label="Plaquetas"></div>
                         </div>
                     </div>
-                        </div>
-                    </div></div></div>
+                    </div></div>
 
             </div>            <div id="error_box" role="alert" class="hidden mt-4 p-3 bg-red-50 border border-red-300 text-red-700 text-sm rounded-md"></div>
             <div id="alert_box" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-800 text-sm rounded-md no-print"></div>
@@ -1356,7 +1357,7 @@ const risk = 100 * (1 - Math.pow(0.99833, Math.exp(A)));</pre>
             <p class="text-xs text-slate-500 mt-3 leading-relaxed"><strong>Nota sobre los vectores:</strong> los casos <em>sin</em> marca (PREVENT, SCORE2-CKD, SCORE2-DM, WHO-CLA, SMART2) son <strong>vectores exactos del paper</strong> (un individuo con todos los valores publicados), replicables al 0.01%. Los marcados como <span class="text-amber-600 font-semibold">promedio</span> (SCORE2-OP, SCORE2-HF) se validan contra <strong>promedios de cohorte reportados por los autores</strong>, no contra un perfil individual publicado; el % calculado es consistente con el modelo (coeficientes idénticos al suplementario) pero no idéntico por estar comparando un individuo con un promedio de población. <strong>PREVENT 30 años</strong> se validó contra la implementación de referencia <em>preventcalculator.com</em> (coincidencia exacta en el caso de prueba: 39.9%).</p>
             <div class="bg-slate-50 border border-blue-200 rounded-xl p-5 mt-4">
                 <h4 class="font-bold text-slate-900 mb-2">Auditoría y colaboración académica</h4>
-                <p class="text-sm text-slate-700 leading-relaxed mb-3">CardioScore es un software <strong>propietario</strong> de Ing. Alexander Matson (MatsonSoft): el código no se publica, pero <strong>la metodología es abierta</strong> — cada fórmula, coeficiente y decisión de diseño está documentada en esta página para que cualquier especialista pueda verificarla.</p>
+                <p class="text-sm text-slate-700 leading-relaxed mb-3">CardioScore es un software <strong>propietario</strong> de Ing. Alexander Matson (MatsonSoft) con <strong>metodología abierta</strong>: el código es público y auditable en esta página — cada fórmula, coeficiente y decisión de diseño está documentada para que cualquier especialista pueda verificarla, reproducir los vectores de referencia y emitir su dictamen.</p>
                 <div class="text-sm text-slate-700 mb-3">
                     <strong class="block mb-1">¿Cómo auditar la metodología?</strong>
                     <ol class="list-decimal pl-5 space-y-1">
@@ -1902,7 +1903,7 @@ const risk = (1 - Math.pow(1 - 0.165822797, Math.exp(E))) * 100;</pre>
             <p class="text-xs text-slate-500 mt-3 leading-relaxed"><strong>Note on reference vectors:</strong> cases <em>without</em> a mark (PREVENT, SCORE2-CKD, SCORE2-DM, WHO-CLA, SMART2) are <strong>exact paper vectors</strong> (an individual with every published value), reproducible to 0.01%. Those marked as <span class="text-amber-600 font-semibold">average</span> (SCORE2-OP, SCORE2-HF) are validated against <strong>cohort averages reported by the authors</strong>, not a published individual profile; the calculated % is consistent with the model (coefficients identical to the supplement) but not identical because an individual is compared against a population average. <strong>PREVENT 30-year</strong> was validated against the reference implementation <em>preventcalculator.com</em> (exact match on the test case: 39.9%).</p>
             <div class="bg-slate-50 border border-blue-200 rounded-xl p-5 mt-4">
                 <h4 class="font-bold text-slate-900 mb-2">Audit and academic collaboration</h4>
-                <p class="text-sm text-slate-700 leading-relaxed mb-3">CardioScore is <strong>proprietary</strong> software by Ing. Alexander Matson (MatsonSoft): the code is not published, but <strong>the methodology is open</strong> — every formula, coefficient and design decision is documented on this page so any specialist can verify it.</p>
+                <p class="text-sm text-slate-700 leading-relaxed mb-3">CardioScore is <strong>proprietary</strong> software by Ing. Alexander Matson (MatsonSoft) with an <strong>open methodology</strong>: the code is public and auditable on this page — every formula, coefficient and design decision is documented so any specialist can verify it, reproduce the reference vectors and issue their assessment.</p>
                 <div class="text-sm text-slate-700 mb-3">
                     <strong class="block mb-1">How to audit the methodology</strong>
                     <ol class="list-decimal pl-5 space-y-1">
@@ -5427,7 +5428,7 @@ const PENCINA30 = {"fullCVD": {"R": [0.34362, 2.63588, 1.8803, 1.12673, -0.90941
                 ['patient_name','doctor_name','age','sbp','weight','height','tc','hdl','ldl','creatinine','hba1c','acr','trig','waist','lpa','cac','hscrp','glucose','dm_age','smart_years','hb','wbc','grace_hr','dbp','plaquetas','la_diam','ef'].forEach(id => {
                     const el = document.getElementById(id); if (el) d.inputs[id] = el.value;
                 });
-                ['sca_status','eva_status','dm_status','erc_status','hf_status','subclinic_status','fragile_status','autoimmune_status','fhx_status','antiaggr_status','territorio_status','risk_region','mesa_race','q_eth','q_dmtype','find_fh','q_sbps5','grace_killip','grace_st','fa_tipo'].forEach(id => {
+                ['sca_status','eva_status','dm_status','erc_status','hf_status','subclinic_status','fragile_status','autoimmune_status','fhx_status','antiaggr_status','territorio_status','mesa_race','q_eth','q_dmtype','find_fh','q_sbps5','grace_killip','grace_st','fa_tipo'].forEach(id => {
                     const el = document.getElementById(id); if (el) d.selects[id] = el.value;
                 });
                 ['sex','smoker','statin','htn_tx','com_fa','com_stroke','com_vasc','com_bleed','com_liver','com_inr','com_aspirin','com_alcohol','find_phys','find_veg','find_glu','q_atypical','q_cortico','q_impot','q_migraine','q_ra','q_smi','q_sle','q_fh','grace_arrest','grace_enz','archbr_oac','archbr_neopl','archbr_surg','preecl','hiv','abi'].forEach(n => {
