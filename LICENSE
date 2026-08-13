@@ -1,0 +1,41 @@
+CardioScore License — All Rights Reserved with Clinical Audit Clause
+
+Copyright (c) 2026 Ing. Alexander Matson (MatsonSoft).
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are prohibited without the prior written permission of
+the copyright holder.
+
+GRANTED RIGHTS (no permission required):
+
+1. CLINICAL USE: Any licensed healthcare professional may use the
+   CardioScore web application (including a public deployment) to
+   estimate cardiovascular risk for patient care and shared
+   decision-making. This is the intended use of the tool.
+
+2. AUDIT AND VERIFICATION: Any specialist, researcher or scientific
+   institution may read, audit, verify and cite the open methodology
+   documented on the CardioScore page (formulas, coefficients,
+   validation vectors and reporting standards). This right exists to
+   enable clinical validation and peer review.
+
+PROHIBITED WITHOUT WRITTEN PERMISSION:
+
+1. Commercial use of the code, methodology or tool as a paid product,
+   service or SaaS offering.
+2. Copying, redistribution, sublicensing or incorporation of the code
+   or algorithm into other software, whether open-source or
+   commercial.
+3. Modification, derivation, translation or adaptation of the
+   application for distribution.
+4. Removal or alteration of this copyright notice.
+
+To request permission for commercial use, licensing or collaboration,
+contact: MatsonSoft.
+
+The CardioScore web application is a clinical decision-support tool.
+Results are probabilistic estimates based on published population
+models and international guidelines; they must be interpreted in the
+clinical context of each patient and do not replace professional
+judgment, diagnosis or personalized medical advice.
