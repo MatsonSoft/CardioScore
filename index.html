@@ -42,7 +42,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   html { -webkit-font-smoothing: antialiased; }
-  html, body { overflow-x: hidden; }
+  html { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  @media (display-mode: standalone) { body { padding-bottom: 0; } }
+  html, body { overflow-x: clip; }
   main p, main li, main td { line-height: 1.75; }
   :focus-visible { outline: 2px solid #0054A6; outline-offset: 2px; border-radius: 4px; }
   .tnum { font-variant-numeric: tabular-nums; }
@@ -240,49 +243,104 @@
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
 <!-- ===================== HEADER ===================== -->
-<header class="bg-white border-b border-zinc-200 sticky top-0 z-30">
-  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
-          <a href="index.html" class="flex items-center gap-3 no-underline shrink-0 h-full">
-      <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center active:scale-[0.98]" aria-hidden="true">
-        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+<header class="bg-white/95 backdrop-blur border-b border-zinc-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3 relative">
+    <div class="flex-1 flex items-center gap-1 min-w-0">
+      <div class="w-10 -ml-2 shrink-0" aria-hidden="true"></div>
+      <div class="hidden md:flex items-center gap-1">
+        <a href="metodologia.html" class="inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Metodología</a>
+        <a href="tools/index.html" class="inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Calculadoras</a>
       </div>
-      <div>
-        <p class="font-display font-bold text-sm leading-tight">CardioScore</p>
-        <p class="hidden sm:block text-[11px] text-zinc-500 -mt-0.5">Riesgo cardiovascular · herramientas clínicas</p>
-      </div>
-    </a>
-    <nav class="flex items-center gap-1" aria-label="Navegación principal">
-      <a href="index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition bg-accent-50 text-accent active:scale-[0.98]">Inicio</a>
-      <a href="metodologia.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Metodología</a>
-      <a href="tools/index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Calculadoras</a>
+    </div>
+          <a href="index.html" class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+        </div>
+        <span class="font-display font-bold text-base text-zinc-900">CardioScore</span>
+      </a>
+    <div class="flex items-center gap-1 shrink-0">
       <button id="btn_tema" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Cambiar entre tema claro y oscuro">
-        <svg id="ico_sol" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4l1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4l1.4-1.4"/></svg>
-        <svg id="ico_luna" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg id="ico_sol" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1M4.2 4.2l.7.7m14.2 14.2l.7.7M3 12h1m16 0h1M4.2 19.8l.7-.7M19.8 4.2l.7.7M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>
+        <svg id="ico_luna" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
       </button>
-    </nav>
-      <button id="btn_menu" class="sm:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Abrir menú" aria-expanded="false">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button id="btn_menu" class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
+    </div>
   </div>
-  <div id="menu_movil" class="sm:hidden hidden bg-white border-t border-zinc-200 px-4 py-3 space-y-1">
-    <a href="index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Inicio</a>
-    <a href="metodologia.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Metodología</a>
-    <a href="tools/index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Calculadoras</a>
+  <div id="menu_movil" class="md:hidden hidden bg-white border-t border-zinc-200 px-4 py-3 space-y-1">
+    <a href="index.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-50">Inicio</a>
+    <a href="metodologia.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-50">Metodología</a>
+    <a href="tools/index.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-50">Calculadoras</a>
   </div>
 </header>
 
 <!-- ===================== PANEL PACIENTES ===================== -->
 
-<main id="main" class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+<main id="main" class="max-w-6xl mx-auto px-4 py-8 space-y-6 pb-24 lg:pb-8">
 
-  <div class="text-center max-w-3xl mx-auto pt-2">
-    <p class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-accent bg-accent-50 border border-accent/20 rounded-full px-3 py-1.5 mb-4">Herramienta clínica de riesgo cardiovascular</p>
-    <h1 class="font-display font-bold text-3xl sm:text-4xl tracking-tight text-zinc-900">Tu riesgo cardiovascular, en 3 pasos</h1>
-    <p class="text-zinc-600 mt-3 max-w-xl mx-auto">CardioScore calcula el riesgo a 10 años con los modelos más actualizados (<strong class="text-zinc-800">SCORE2</strong>, <strong class="text-zinc-800">PREVENT</strong>, <strong class="text-zinc-800">WHO-Central L.A.</strong>), define la meta de C-LDL y te guía para explicarlo al paciente. Para profesionales de la salud y cualquier persona interesada en su riesgo cardiovascular.</p>
-    <div class="mt-5 flex flex-wrap justify-center gap-2">
-      <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Validado clínicamente</span>
-      <a href="tools/index.html" class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-white border border-zinc-200 rounded-full px-3 py-1.5 hover:border-accent hover:text-accent transition-colors">21 calculadoras</a>
-      <a href="metodologia.html" class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-white border border-zinc-200 rounded-full px-3 py-1.5 hover:border-accent hover:text-accent transition-colors">Metodología abierta</a>
+  <div class="max-w-3xl mx-auto pt-2">
+    <div class="text-center bg-gradient-to-b from-accent-50/80 via-accent-50/40 to-transparent dark:from-accent/15 dark:via-accent/5 dark:to-transparent rounded-3xl px-4 sm:px-8 py-8 sm:py-10">
+    <p class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-accent bg-white/70 dark:bg-zinc-900/70 border border-accent/20 rounded-full px-3 py-1.5 mb-4">Herramienta clínica de riesgo cardiovascular</p>
+    <h1 class="font-display font-bold text-3xl sm:text-4xl tracking-tight text-zinc-900">Descubre tu riesgo cardiovascular en 3 pasos</h1>
+    <p class="text-zinc-600 mt-3 max-w-xl mx-auto">En ~2 minutos obtén tu riesgo a 10 años con modelos de las guías <strong class="text-zinc-800">ESC</strong>, <strong class="text-zinc-800">AHA</strong> y <strong class="text-zinc-800">OMS</strong>, tu meta de C-LDL y un plan de acción claro — para profesionales y para ti.</p>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+      <button onclick="irACalcular()" class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-700 text-white font-semibold rounded-xl px-6 py-3.5 min-h-[48px] text-sm transition active:scale-[0.98]" aria-label="Empezar mi evaluación">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+        Empezar mi evaluación
+      </button>
+      <div class="relative inline-block">
+        <button onclick="toggleEjemplos()" class="inline-flex items-center justify-center gap-2 text-sm font-semibold text-accent border border-accent/30 hover:bg-accent-50 rounded-xl px-6 py-3.5 min-h-[48px] transition active:scale-[0.98]" aria-label="Ver un ejemplo de evaluación" aria-expanded="false">
+          Ver un ejemplo
+        </button>
+        <div id="menu_ejemplos" class="hidden fixed top-16 left-1/2 -translate-x-1/2 z-50 w-80 bg-white border border-zinc-200 rounded-2xl shadow-xl z-50 p-2 text-left">
+          <div class="flex items-center gap-2.5 px-3 py-2 mb-1 border-b border-zinc-100">
+            <span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+            </span>
+            <div>
+              <p class="text-[13px] font-bold text-zinc-900 leading-tight">Probar con un ejemplo</p>
+              <p class="text-[11px] text-zinc-500">Perfiles de muestra · elige uno</p>
+            </div>
+          </div>
+          <button onclick="cargarPrueba('joven'); cerrarEjemplos();" class="w-full flex items-center gap-3 px-3 py-2.5 min-h-[46px] rounded-xl hover:bg-accent-50 hover:text-accent transition group">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0" aria-hidden="true"></span>
+            <span class="flex-1 text-left"><span class="block text-sm font-semibold text-zinc-700 group-hover:text-accent">Joven</span><span class="block text-[11px] text-zinc-400">Menor de 40 · riesgo bajo</span></span>
+            <svg class="w-4 h-4 text-zinc-300 group-hover:text-accent shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="cargarPrueba('moderado'); cerrarEjemplos();" class="w-full flex items-center gap-3 px-3 py-2.5 min-h-[46px] rounded-xl hover:bg-accent-50 hover:text-accent transition group">
+            <span class="w-2 h-2 rounded-full bg-amber-500 shrink-0" aria-hidden="true"></span>
+            <span class="flex-1 text-left"><span class="block text-sm font-semibold text-zinc-700 group-hover:text-accent">Moderado</span><span class="block text-[11px] text-zinc-400">Fumador · riesgo moderado</span></span>
+            <svg class="w-4 h-4 text-zinc-300 group-hover:text-accent shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="cargarPrueba('alto'); cerrarEjemplos();" class="w-full flex items-center gap-3 px-3 py-2.5 min-h-[46px] rounded-xl hover:bg-accent-50 hover:text-accent transition group">
+            <span class="w-2 h-2 rounded-full bg-orange-500 shrink-0" aria-hidden="true"></span>
+            <span class="flex-1 text-left"><span class="block text-sm font-semibold text-zinc-700 group-hover:text-accent">Alto riesgo</span><span class="block text-[11px] text-zinc-400">LDL 190 · Lp(a) alto</span></span>
+            <svg class="w-4 h-4 text-zinc-300 group-hover:text-accent shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="cargarPrueba('op'); cerrarEjemplos();" class="w-full flex items-center gap-3 px-3 py-2.5 min-h-[46px] rounded-xl hover:bg-accent-50 hover:text-accent transition group">
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0" aria-hidden="true"></span>
+            <span class="flex-1 text-left"><span class="block text-sm font-semibold text-zinc-700 group-hover:text-accent">Adulto mayor</span><span class="block text-[11px] text-zinc-400">≥70 · SCORE2-OP</span></span>
+            <svg class="w-4 h-4 text-zinc-300 group-hover:text-accent shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="cargarPrueba('dm'); cerrarEjemplos();" class="w-full flex items-center gap-3 px-3 py-2.5 min-h-[46px] rounded-xl hover:bg-accent-50 hover:text-accent transition group">
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0" aria-hidden="true"></span>
+            <span class="flex-1 text-left"><span class="block text-sm font-semibold text-zinc-700 group-hover:text-accent">Diabetes</span><span class="block text-[11px] text-zinc-400">HbA1c 7.2%</span></span>
+            <svg class="w-4 h-4 text-zinc-300 group-hover:text-accent shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="cargarPrueba('erc'); cerrarEjemplos();" class="w-full flex items-center gap-3 px-3 py-2.5 min-h-[46px] rounded-xl hover:bg-accent-50 hover:text-accent transition group">
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0" aria-hidden="true"></span>
+            <span class="flex-1 text-left"><span class="block text-sm font-semibold text-zinc-700 group-hover:text-accent">ERC</span><span class="block text-[11px] text-zinc-400">eGFR 41 · ACR 45</span></span>
+            <svg class="w-4 h-4 text-zinc-300 group-hover:text-accent shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+    </div>
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2 max-w-lg mx-auto">
+      <div class="flex items-center justify-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2"><span class="text-accent font-bold">%</span> Tu riesgo a 10 años</div>
+      <div class="flex items-center justify-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2"><span class="text-accent font-bold">LDL</span> Tu meta de C-LDL</div>
+      <div class="flex items-center justify-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2"><span class="text-accent font-bold">Plan</span> Tu plan de acción</div>
+    </div>
+    </div>
     </div>
   </div>
 
@@ -296,7 +354,7 @@
     <div class="w-6 sm:w-16 h-px bg-zinc-300 shrink-0" aria-hidden="true"></div>
     <div class="flex items-center gap-2 step-paso" data-paso="2">
       <span id="s2n" class="step-num w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold bg-zinc-300 text-zinc-600">2</span>
-      <span id="s2l" class="text-[13px] sm:text-sm font-medium text-zinc-500 whitespace-nowrap">Datos del paciente</span>
+      <span id="s2l" class="text-[13px] sm:text-sm font-medium text-zinc-500 whitespace-nowrap">Datos<span class="hidden sm:inline"> del paciente</span></span>
     </div>
     <div class="w-6 sm:w-16 h-px bg-zinc-300 shrink-0" aria-hidden="true"></div>
     <div class="flex items-center gap-2 step-paso" data-paso="3">
@@ -308,210 +366,32 @@
   <!-- ===================== PASO 1 · ESCENARIO ===================== -->
   <section id="paso1" aria-labelledby="paso1-t">
     <div class="text-center max-w-2xl mx-auto mb-7">
-      <p class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-accent bg-accent-50 border border-accent/20 rounded-full px-3 py-1.5 mb-3 active:scale-[0.98]">Paso 1 de 3</p>
-      <h2 id="paso1-t" class="font-display font-bold text-2xl sm:text-3xl tracking-tight text-zinc-900">Los modelos se eligen solos</h2>
-      <p class="text-zinc-500 mt-2 max-w-xl mx-auto">CardioScore activa los modelos correctos según la <strong class="text-zinc-700">edad</strong> y los <strong class="text-zinc-700">antecedentes</strong> del paciente. Completa los datos en el siguiente paso.</p>
+      <h2 id="paso1-t" class="font-display font-bold text-2xl sm:text-3xl tracking-tight text-zinc-900">Tú traes los datos, nosotros el riesgo</h2>
+      <p class="text-zinc-500 mt-2 max-w-xl mx-auto">Sin elegir modelos ni conocer ecuaciones. CardioScore aplica automáticamente las guías <strong class="text-zinc-700">ESC</strong>, <strong class="text-zinc-700">AHA</strong> y <strong class="text-zinc-700">OMS</strong> según el caso, y te devuelve el riesgo, la meta de C-LDL y el plan de acción.</p>
     </div>
 
-    <div class="bg-white border border-accent/20 rounded-xl p-4 mb-5">
-      <div class="flex items-center justify-between flex-wrap gap-3 mb-3">
-        <div class="flex items-center gap-2.5">
-          <span class="w-9 h-9 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-          </span>
-          <div>
-            <p class="text-sm font-bold text-zinc-900 leading-tight">Modelos activos</p>
-            <p class="text-[11px] text-zinc-500">Automático · según escenario y edad</p>
-          </div>
-        </div>
-        <span id="modelos_paso1_count" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-accent bg-accent-50 border border-accent/20 rounded-full px-3 py-1">0 modelos</span>
-      </div>
-      <div id="modelos_chips" class="flex flex-wrap gap-1.5"></div>
-      <p class="mt-3 pt-3 border-t border-zinc-100 text-[11px] text-zinc-400 leading-snug">Se eligen según tu escenario y antecedentes; se actualizan con los datos que cargues.</p>
-    </div>
 
-    <details id="ajustar_modelos" class="mb-6 bg-white border border-zinc-200 rounded-xl overflow-hidden">
-      <summary class="cursor-pointer select-none text-sm font-semibold text-zinc-700 px-4 py-3 flex items-center justify-between gap-2 min-h-[46px]">
-        Ajustar modelos manualmente (opcional)
-        <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
-      </summary>
-      <div class="px-4 pb-4 pt-4 border-t border-zinc-100">
-    <div class="max-w-md mx-auto mb-6">
-      <label for="buscar_esc" class="block text-[13px] font-semibold text-zinc-700 mb-1.5">Buscar escenario</label>
-      <div class="relative">
-        <svg class="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M20 20l-3.5-3.5"/></svg>
-        <input id="buscar_esc" type="search" autocomplete="off" class="w-full rounded-lg border border-zinc-300 bg-white pl-9 pr-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" placeholder="Ej: fibrilación, diabetes, GRACE, sangrado…" aria-label="Buscar escenario">
-      </div>
-    </div>
 
-    <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3" id="esc_grid">
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="primario" checked>
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">SCORE2 · WHO-CLA · PREVENT</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Riesgo CV primario</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Primera valoración en prevención primaria.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="dm">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">SCORE2-Diabetes</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Diabetes tipo 2</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Ajusta el riesgo del paciente con DM2.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="erc">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">SCORE2-CKD · KFRE</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Enfermedad renal</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">ERC, eGFR y riesgo de fallo renal.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="ic">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">SCORE2-HF</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Insuficiencia cardíaca</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Riesgo de IC incidente a 10 años.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="fa">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">CHA2DS2-VA · HAS-BLED</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Fibrilación auricular</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Anticoagulación y riesgo de sangrado.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="sca">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">GRACE 2.0</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Síndrome coronario agudo</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Mortalidad intrahospitalaria y a 6 meses.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="pci">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">ARC-HBR · PRECISE-DAPT</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Post-PCI · sangrado</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Riesgo de sangrado tras el stent.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="acv">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">SPI-II</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">ACV previo</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Riesgo de ACV recurrente a 2 años.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="sec">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">SMART2</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Prevención secundaria</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">ECV establecida: riesgo residual a 10 años.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="op">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">SCORE2-OP</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Mayor de 70 años</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Coeficientes propios del adulto mayor.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="joven">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">Riesgo 30 años</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Menor de 40 años</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Riesgo a largo plazo y edad cardiovascular.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="qrisk">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">QRISK3</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Reino Unido · QRISK3</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Modelo británico (NICE) con etnia y comorbilidades.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="findrisk">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">FINDRISC</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Screening DM2 · FINDRISC</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Riesgo de DM2 en 10 años.</span>
-        </span>
-      </label>
-
-      <label class="sccard block h-full">
-        <input type="checkbox" name="esc" value="mesa">
-        <span class="sc-inner relative block h-full bg-white border-2 border-zinc-200 rounded-xl p-4 transition min-h-[140px]">
-          <span class="sc-check absolute top-3 right-3 w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center active:scale-[0.98]" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-          <span class="block text-[11px] font-bold uppercase tracking-wide text-accent-700 mb-2 pr-6">MESA CaSc</span>
-          <span class="block font-display font-bold text-sm text-zinc-900 leading-snug pr-6">Calcio coronario · MESA</span>
-          <span class="block text-xs text-zinc-500 mt-1 leading-snug">Probabilidad de calcio coronario &gt;0.</span>
-        </span>
-      </label>
-        </div>
-
-          <div class="mt-6 pt-5 border-t border-zinc-100">
-            <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
-              <div>
-                <p class="text-[11px] font-bold uppercase tracking-wide text-accent-700 flex items-center gap-1.5">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 20.5a8 8 0 0 0 8-8c0-2-.5-3.5-1.5-4.5L8 17c1 1 2 1.5 2.5 3.5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6.5L20 2l2 2-7.5 6.5-4-2z"/></svg>
-                  Pacientes de prueba
-                </p>
-                <p class="text-xs text-zinc-500 mt-0.5">Carga un perfil representativo para probar cada flujo y modelo.</p>
-              </div>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
-              <button type="button" data-prueba="joven" class="text-left bg-white border border-zinc-200 rounded-lg px-3 py-2 min-h-[44px] hover:border-accent hover:text-accent transition active:scale-[0.98]"><span class="block text-[12px] font-semibold text-zinc-800">Joven</span><span class="block text-[11px] text-zinc-500">28 · F · 30 años</span></button>
-              <button type="button" data-prueba="moderado" class="text-left bg-white border border-zinc-200 rounded-lg px-3 py-2 min-h-[44px] hover:border-accent hover:text-accent transition active:scale-[0.98]"><span class="block text-[12px] font-semibold text-zinc-800">Moderado</span><span class="block text-[11px] text-zinc-500">55 · M · SCORE2</span></button>
-              <button type="button" data-prueba="alto" class="text-left bg-white border border-zinc-200 rounded-lg px-3 py-2 min-h-[44px] hover:border-accent hover:text-accent transition active:scale-[0.98]"><span class="block text-[12px] font-semibold text-zinc-800">Alto</span><span class="block text-[11px] text-zinc-500">62 · M · alto</span></button>
-              <button type="button" data-prueba="op" class="text-left bg-white border border-zinc-200 rounded-lg px-3 py-2 min-h-[44px] hover:border-accent hover:text-accent transition active:scale-[0.98]"><span class="block text-[12px] font-semibold text-zinc-800">Adulto mayor</span><span class="block text-[11px] text-zinc-500">74 · F · OP</span></button>
-              <button type="button" data-prueba="dm" class="text-left bg-white border border-zinc-200 rounded-lg px-3 py-2 min-h-[44px] hover:border-accent hover:text-accent transition active:scale-[0.98]"><span class="block text-[12px] font-semibold text-zinc-800">Diabetes</span><span class="block text-[11px] text-zinc-500">58 · M · DM</span></button>
-              <button type="button" data-prueba="erc" class="text-left bg-white border border-zinc-200 rounded-lg px-3 py-2 min-h-[44px] hover:border-accent hover:text-accent transition active:scale-[0.98]"><span class="block text-[12px] font-semibold text-zinc-800">ERC</span><span class="block text-[11px] text-zinc-500">60 · F · CKD</span></button>
-            </div>
-          </div>
-      </div>
-    </details>
+    <div class="hidden" aria-hidden="true">
+  <input type="checkbox" name="esc" value="primario" checked>
+  <input type="checkbox" name="esc" value="dm">
+  <input type="checkbox" name="esc" value="erc">
+  <input type="checkbox" name="esc" value="ic">
+  <input type="checkbox" name="esc" value="fa">
+  <input type="checkbox" name="esc" value="sca">
+  <input type="checkbox" name="esc" value="pci">
+  <input type="checkbox" name="esc" value="acv">
+  <input type="checkbox" name="esc" value="sec">
+  <input type="checkbox" name="esc" value="op">
+  <input type="checkbox" name="esc" value="joven">
+  <input type="checkbox" name="esc" value="qrisk">
+  <input type="checkbox" name="esc" value="findrisk">
+  <input type="checkbox" name="esc" value="mesa">
+</div>
 
     <div class="flex justify-center">
-      <button id="btn_paso2" class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-6 sm:px-8 py-3.5 min-h-[52px] text-base transition active:scale-[0.98]" aria-label="Continuar con los datos del paciente">
-        Continuar con los datos del paciente
+      <button id="btn_paso2" class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-6 sm:px-8 py-3.5 min-h-[52px] text-base transition active:scale-[0.98]" aria-label="Llenar los datos del paciente">
+        Llenar los datos del paciente
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
     </div>
@@ -521,7 +401,6 @@
   <!-- ===================== PASO 2 · DATOS ===================== -->
   <section id="paso2" aria-labelledby="paso2-t" class="hidden">
     <div class="max-w-2xl mx-auto mb-6">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Paso 2 de 3</p>
       <div class="flex flex-wrap items-center justify-between gap-3">
         <h2 id="paso2-t" class="font-display font-bold text-2xl sm:text-3xl tracking-tight text-zinc-900">Datos del paciente</h2>
         <label class="inline-flex items-center gap-2 cursor-pointer select-none" aria-label="Activar modo rápido">
@@ -540,6 +419,19 @@
       </div>
     </div>
 
+
+        <div id="panel_modelos_uso" class="mb-5 bg-white border border-accent/20 rounded-xl p-4">
+      <div class="flex items-center gap-2.5 mb-2.5">
+        <span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+        </span>
+        <div>
+          <p class="text-sm font-bold text-zinc-900 leading-tight">Modelos que se están usando</p>
+          <p class="text-[11px] text-zinc-500">Se activan solos según el caso y los datos que completas</p>
+        </div>
+      </div>
+      <div id="modelos_uso_chips" class="flex flex-wrap gap-1.5"></div>
+    </div>
 
     <section id="cfg_panel" class="bg-white border border-zinc-200 rounded-xl p-5 mb-5" aria-label="Configuración de región y unidades">
       <div class="flex items-center justify-between mb-4">
@@ -1001,10 +893,7 @@
 
       <!-- Panel lateral -->
       <aside class="space-y-4 lg:sticky lg:top-24 self-start" aria-label="Resumen de la evaluación">
-        <div class="grid grid-cols-2 gap-2">
-          <button id="btn_compartir_caso" class="inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-zinc-700 border border-zinc-200 bg-white rounded-lg px-3 py-2.5 min-h-[44px] hover:border-accent hover:text-accent transition" aria-label="Compartir este caso">Compartir</button>
-          <button id="btn_importar_caso" class="inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-zinc-700 border border-zinc-200 bg-white rounded-lg px-3 py-2.5 min-h-[44px] hover:border-accent hover:text-accent transition" aria-label="Importar un caso">Importar</button>
-        </div>
+
         <div class="bg-white border border-zinc-200 rounded-xl p-5">
           <p class="text-xs font-bold uppercase tracking-wide text-zinc-500 mb-3">Evaluación</p>
           <ul id="resumen_esc" class="space-y-2"></ul>
@@ -1039,7 +928,7 @@
 
 
   <!-- ===================== ONBOARDING ===================== -->
-  <div id="onboarding" class="hidden fixed bottom-6 left-4 right-4 sm:left-auto sm:right-6 z-50 max-w-xs bg-white border border-zinc-200 rounded-2xl p-5 shadow-xl no-print">
+  <div id="onboarding" class="hidden fixed bottom-24 sm:bottom-6 left-4 right-4 sm:left-auto sm:right-6 z-50 max-w-xs bg-white border border-zinc-200 rounded-2xl p-5 shadow-xl no-print">
     <p class="text-[10px] font-bold uppercase tracking-widest text-accent mb-1">Primeros pasos</p>
     <p id="ob_titulo" class="font-display font-bold text-sm text-zinc-900 mb-1"></p>
     <p id="ob_texto" class="text-[13px] text-zinc-600 mb-3 leading-snug"></p>
@@ -1067,7 +956,7 @@
     </nav>
 
     <div class="max-w-2xl mx-auto mb-7 text-center">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Paso 3 de 3 · Resultado</p>
+      <p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Resultado</p>
       <h2 id="paso3-t" class="font-display font-bold text-2xl sm:text-3xl tracking-tight text-zinc-900">Resumen clínico</h2>
       <p class="text-zinc-500 mt-2"><span id="res_identidad">—</span></p>
     </div>
@@ -1546,48 +1435,6 @@
     </div>
   </section>
 
-  <!-- ===================== TRANSPARENCIA Y RECURSOS ===================== -->
-  <section id="transparencia" aria-labelledby="transparencia-t" class="pt-6 border-t border-zinc-200">
-    <div class="max-w-2xl mx-auto mb-6 text-center">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Transparencia y recursos</p>
-      <h2 id="transparencia-t" class="font-display font-bold text-2xl tracking-tight text-zinc-900">Cómo se construye cada número</h2>
-      <p class="text-zinc-500 mt-2">Toda la ciencia detrás de CardioScore, abierta para que cualquier especialista la audite.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <a href="metodologia.html" class="group block bg-white border border-zinc-200 rounded-2xl p-6 hover:border-accent hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,84,166,0.08)] transition">
-        <div class="flex items-center justify-between mb-3">
-          <h3 class="font-display font-bold text-zinc-900">Metodología completa</h3>
-          <span class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-2 py-0.5 active:scale-[0.98]">TRIPOD · PROBAST</span>
-        </div>
-        <p class="text-[13px] text-zinc-500 leading-relaxed">Fórmulas, coeficientes, vectores reproducibles al 0.01%, poblaciones especiales, comparativa entre modelos y estándares de reporte.</p>
-        <p class="text-accent text-[13px] font-semibold mt-3 inline-flex items-center gap-1 group-hover:gap-2 transition-all">Ver metodología →</p>
-      </a>
-      <a href="tools/index.html" class="group block bg-white border border-zinc-200 rounded-2xl p-6 hover:border-accent hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,84,166,0.08)] transition">
-        <div class="flex items-center justify-between mb-3">
-          <h3 class="font-display font-bold text-zinc-900">Calculadoras por escala</h3>
-          <span class="text-[10px] font-bold uppercase text-zinc-600 bg-zinc-100 rounded px-2 py-0.5">21 herramientas</span>
-        </div>
-        <p class="text-[13px] text-zinc-500 leading-relaxed">SCORE2, HAS-BLED, PREVENT, WHO-CLA, GRACE, SMART2 y más, cada una con su página dedicada.</p>
-        <p class="text-accent text-[13px] font-semibold mt-3 inline-flex items-center gap-1 group-hover:gap-2 transition-all">Ver calculadoras →</p>
-      </a>
-      <a href="metodologia.html#validacion-clinica" class="group block bg-white border border-zinc-200 rounded-2xl p-6 hover:border-accent hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,84,166,0.08)] transition">
-        <div class="flex items-center justify-between mb-3">
-          <h3 class="font-display font-bold text-zinc-900">Monitorización clínica</h3>
-          <span class="text-[10px] font-bold uppercase text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-2 py-0.5">Endorsement</span>
-        </div>
-        <p class="text-[13px] text-zinc-500 leading-relaxed">Postgrado de Cardiología — Hospital Ruiz y Páez. Monitorización continua y uso en formación, extensible a más instituciones.</p>
-        <p class="text-accent text-[13px] font-semibold mt-3 inline-flex items-center gap-1 group-hover:gap-2 transition-all">Ver monitorización →</p>
-      </a>
-      <a href="#paso1" class="group block bg-white border border-zinc-200 rounded-2xl p-6 hover:border-accent hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,84,166,0.08)] transition">
-        <div class="flex items-center justify-between mb-3">
-          <h3 class="font-display font-bold text-zinc-900">Empezar una evaluación</h3>
-          <span class="text-[10px] font-bold uppercase text-zinc-600 bg-zinc-100 rounded px-2 py-0.5">21 modelos</span>
-        </div>
-        <p class="text-[13px] text-zinc-500 leading-relaxed">Completa los datos del paciente y obtén el riesgo, la meta de LDL y el plan de acción en una sola consulta.</p>
-        <p class="text-accent text-[13px] font-semibold mt-3 inline-flex items-center gap-1 group-hover:gap-2 transition-all">Empezar →</p>
-      </a>
-    </div>
-  </section>
 
 <div class="print-page" id="print_a" style="font-family:'Noto Sans',sans-serif;">
   <!-- 0. Header -->
@@ -1595,7 +1442,6 @@
     <div style="display:flex;align-items:center;gap:5px;">
       <div style="width:20px;height:20px;background:#0054A6;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:9pt;">CS</div>
       <span style="font-weight:800;font-size:10.5pt;color:#0f172a;">CardioScore</span>
-      <span style="font-size:6pt;color:#64748b;border:1px solid #cbd5e1;border-radius:3px;padding:0 3px;">v3.3</span>
     </div>
     <div style="text-align:right;font-size:6pt;color:#475569;line-height:1.3;">
       <div style="font-weight:800;color:#0f172a;font-size:7.5pt;">Informe clínico de riesgo cardiovascular</div>
@@ -1797,44 +1643,44 @@
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="border-t border-zinc-200 bg-white mt-10">
-  <div class="max-w-6xl mx-auto px-4 py-10">
-    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 items-start">
-      <div>
-        <div class="flex items-center gap-2.5 mb-3">
-          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center active:scale-[0.98]" aria-hidden="true">
+  <div class="max-w-6xl mx-auto px-4 pt-10 pb-28 lg:pb-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr] gap-8 items-start">
+      <div class="max-w-sm">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-7 h-7 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
           </div>
           <p class="font-display font-bold text-sm text-zinc-900">CardioScore</p>
-          <span class="text-[11px] font-semibold text-zinc-500 border border-zinc-200 rounded px-1.5 py-0.5">v3.3</span>
         </div>
-        <p class="text-[13px] text-zinc-600 leading-relaxed max-w-md">Estratificación del riesgo cardiovascular con los modelos más actualizados (ESC, AHA, OMS), metodología abierta y monitorización institucional. Todo el cálculo ocurre en tu navegador.</p>
-        <div class="mt-4">
-          <p class="text-[13px] font-semibold text-zinc-600 mb-2.5">Construida por <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="footer-link underline underline-offset-2">Ing. Alexander Matson</a> y monitorizada por:</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5">
-              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
-              Postgrado de Cardiología — Hospital Ruiz y Páez
-            </span>
+        <p class="text-[12px] text-zinc-500 leading-relaxed">Estratificación del riesgo cardiovascular con modelos ESC, AHA y OMS.</p>
+        <div class="mt-3 space-y-2 text-[12px] text-zinc-600">
+          <p><strong class="block text-zinc-800 mb-0.5">Desarrollada por</strong> Ing. Alexander Matson · <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="footer-link underline underline-offset-2">MatsonSoft</a></p>
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-wide text-zinc-500 mb-1.5">Colaboradores</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" aria-hidden="true"></span>Monitor · Postgrado de Cardiología — Hospital Ruiz y Páez</span>
+              <!-- Validadores y monitores se añaden aquí -->
+            </div>
           </div>
+          <p class="text-zinc-500 pt-1">¿Quieres monitorizar o validar esta herramienta? <a href="mailto:matson@matsonsoft.com" class="footer-link underline underline-offset-2">Escríbenos</a></p>
         </div>
       </div>
-      <div class="md:justify-self-end">
-        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Enlaces</p>
-        <ul class="space-y-2.5 text-sm">
-          <li><a href="index.html" class="text-zinc-600 hover:text-accent transition-colors">Inicio</a></li>
-          <li><a href="tools/index.html" class="text-zinc-600 hover:text-accent transition-colors">Calculadoras</a></li>
-          <li><a href="metodologia.html" class="text-zinc-600 hover:text-accent transition-colors">Metodología</a></li>
-          <li><a href="metodologia.html#feedback" class="text-zinc-600 hover:text-accent transition-colors">Reportar un error</a></li>
+      <div class="hidden md:block">
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Para quién</p>
+        <ul class="space-y-2 text-[13px] text-zinc-600">
+          <li>Profesionales de la salud</li>
+          <li>Pacientes y personas interesadas</li>
+          <li>Instituciones y postgrados</li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Recursos</p>
+        <ul class="space-y-2 text-sm">
+          <li class="hidden md:block"><a href="metodologia.html" class="text-zinc-600 hover:text-accent transition-colors">Metodología</a></li>
+          <li class="hidden md:block"><a href="tools/index.html" class="text-zinc-600 hover:text-accent transition-colors">Calculadoras</a></li>
           <li><a href="terminos.html" class="text-zinc-600 hover:text-accent transition-colors">Términos de uso</a></li>
         </ul>
-        <div class="mt-5 space-y-2 text-sm">
-          <a href="mailto:matson@matsonsoft.com" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v12H7l-3 4z"/></svg>matson@matsonsoft.com</a>
-          <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>matsonsoft.com</a>
-        </div>
       </div>
-    </div>
-    <div class="mt-8 pt-6 border-t border-zinc-200">
-      <p class="text-xs text-zinc-500 leading-relaxed max-w-5xl mx-auto text-center">Los resultados son estimaciones probabilísticas basadas en modelos de población y guías internacionales (ESC/EAS, AHA, OMS);<br>deben interpretarse en el contexto clínico de cada paciente y no sustituyen el juicio profesional, el diagnóstico ni la consejería médica personalizada.</p>
     </div>
   </div>
 </footer>
@@ -1933,10 +1779,22 @@
     return set.map(function (v) { return { value: v }; });
   }
 
+  function actualizarModelosDinamicos() {
+    const cont = document.getElementById('modelos_uso_chips');
+    if (!cont) return;
+    const mods = [];
+    activos().forEach(function (cb) {
+      const info = escInfo[cb.value];
+      if (info) info.mods.forEach(function (m) { if (mods.indexOf(m) === -1) mods.push(m); });
+    });
+    cont.innerHTML = mods.map(function (m) {
+      return '<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-accent bg-accent-50 border border-accent/20 rounded-full px-2.5 py-1">' + m + '</span>';
+    }).join('') || '<span class="text-[11px] text-zinc-400">Sin modelos por ahora — completa los datos</span>';
+  }
   function actualizarModelos() {
     const sel = activos();
     const chips = $('#modelos_chips'), resumen = $('#resumen_esc'), b7 = $('#b7');
-    chips.innerHTML = ''; resumen.innerHTML = '';
+    if (chips) chips.innerHTML = ''; resumen.innerHTML = '';
     const mods = [];
     sel.forEach(function (cb) {
       const info = escInfo[cb.value];
@@ -1947,9 +1805,10 @@
       li.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0 active:scale-[0.98]"></span>' + info.label;
       resumen.appendChild(li);
     });
+    actualizarModelosDinamicos();
     var cont = document.getElementById('modelos_paso1_count');
     if (cont) cont.textContent = mods.length + ' modelo' + (mods.length === 1 ? '' : 's');
-    mods.forEach(function (m) {
+    if (chips) mods.forEach(function (m) {
       const s = document.createElement('span');
       s.className = 'inline-flex items-center gap-1.5 text-[11px] font-semibold bg-white text-zinc-700 border border-zinc-200 rounded-full px-3 py-1.5 transition-colors';
       s.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>' + m;
@@ -2042,6 +1901,29 @@
     toast('Escenario aplicado: ' + (labels2[btn.dataset.esc] || 'prevención primaria'));
   });
 
+  window.toggleEjemplos = function () {
+    var m = document.getElementById('menu_ejemplos'), b = document.querySelector('[onclick="toggleEjemplos()"]');
+    if (!m) return;
+    var oculto = m.classList.contains('hidden');
+    m.classList.toggle('hidden', !oculto);
+    if (b) b.setAttribute('aria-expanded', String(oculto));
+  };
+  window.cerrarEjemplos = function () {
+    var m = document.getElementById('menu_ejemplos');
+    if (m) m.classList.add('hidden');
+    var b = document.querySelector('[onclick="toggleEjemplos()"]');
+    if (b) b.setAttribute('aria-expanded', 'false');
+  };
+  document.addEventListener('click', function (ev) {
+    var m = document.getElementById('menu_ejemplos');
+    if (m && !m.classList.contains('hidden') && ev.target.closest && !ev.target.closest('#menu_ejemplos') && ev.target.getAttribute && ev.target.getAttribute('onclick') !== 'toggleEjemplos()') {
+      m.classList.add('hidden');
+      var b = document.querySelector('[onclick="toggleEjemplos()"]');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    }
+  });
+  window.verEjemplo = function () { try { toggleEjemplos(); } catch (e) {} };
+  try { window.cargarPrueba = cargarPrueba; } catch (e) {}
   function nuevaEvaluacion() {
     document.querySelectorAll('main input[type="number"], main input[type="text"]').forEach(function (el) { el.value = ''; });
     document.querySelectorAll('main select[id]').forEach(function (el) {
@@ -2064,6 +1946,17 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   try { window.nuevaEvaluacion = nuevaEvaluacion; } catch (e) {}
+
+  function irACalcular() {
+    if (window._rM) { nuevaEvaluacion(); return; }
+    sugerirPorEdad();
+    setPaso(2);
+    actualizarProgreso();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var first = document.querySelector('#paso2 input, #paso2 select');
+    if (first) first.focus({ preventScroll: true });
+  }
+  try { window.irACalcular = irACalcular; } catch (e) {}
 
   // ===== Antecedentes → escenario =====
   const mapaAnte = { dm: 'dm', fa: 'fa', erc: 'erc', ic: 'ic', eva: 'sec', sca: 'sca', pci: 'pci', acv: 'acv', eap: 'sec' };
@@ -2315,15 +2208,6 @@
   }
   document.querySelectorAll('[data-prueba]').forEach(function (b) {
     b.addEventListener('click', function () { cargarPrueba(b.dataset.prueba); });
-  });
-
-  // ===== Búsqueda de escenarios =====
-  const buscarEsc = $('#buscar_esc');
-  buscarEsc.addEventListener('input', function () {
-    const q = buscarEsc.value.trim().toLowerCase();
-    $$('#esc_grid .sccard').forEach(function (label) {
-      label.classList.toggle('hidden', q !== '' && label.textContent.toLowerCase().indexOf(q) === -1);
-    });
   });
 
   // ===== Fichas de transparencia por modelo =====
@@ -3121,38 +3005,32 @@ function actualizarMetas(rM) {
 
   // ===== Compartir y exportar =====
   function whatsappResumen() {
-    const cat = document.querySelector('#paso3 .text-red-800, #paso3 .text-red-700, #paso3 .text-amber-700, #paso3 .text-emerald-700');
-    const texto = 'CardioScore — Riesgo cardiovascular\n' +
-      'Riesgo a 10 años: ' + $('#riesgo_principal').textContent.trim() + (cat ? ' (' + cat.textContent.trim().replace(/\s+/g, ' ') + ')' : '') + '\n' +
-      'Validado por el Postgrado de Cardiología — Hospital Ruiz y Páez';
+    const rM = window._rM;
+    if (!rM) { try { toast('Primero estratifica el riesgo'); } catch (e) {} return; }
+    const bandas = { band_low: 'Riesgo bajo', band_mod: 'Riesgo moderado', band_high: 'Riesgo alto', band_vhigh: 'Riesgo muy alto' };
+    const pNombre = document.getElementById('p_nombre');
+    const nombre = (pNombre && pNombre.value.trim()) || 'Paciente';
+    const modeloN = rM.cla ? 'WHO-CLA' : rM.riesgoPrincipal === rM.prevent ? 'PREVENT' : rM.riesgoPrincipal === rM.who ? 'WHO-CLA' : rM.prevent30 ? 'Riesgo a 30 años' : 'SCORE2';
+    const plan = (rM.banda === 'band_high' || rM.banda === 'band_vhigh') ? 'Estatina de alta intensidad + cambios de estilo de vida' : 'Estatina de intensidad moderada + cambios de estilo de vida';
+    const reeval = document.getElementById('reeval_fecha');
+    const reevalTxt = (reeval && reeval.textContent.trim() && reeval.textContent.trim() !== '—') ? reeval.textContent.trim() : '12 meses';
+    let texto = 'CardioScore — Resumen de riesgo cardiovascular\n' +
+      'Paciente: ' + nombre + '\n' +
+      'Riesgo a 10 años: ' + rM.riesgoPrincipal.toFixed(1) + '% (' + (bandas[rM.banda] || '') + ')\n' +
+      'Modelo: ' + modeloN + (rM.edadVascular ? ' · Edad cardiovascular: ' + rM.edadVascular + ' años' : '') + '\n' +
+      'Meta de C-LDL: < ' + rM.metaLdl + ' mg/dL' + (rM.ldl ? ' (actual: ' + rM.ldl + ' mg/dL · reducir ~' + rM.reduccion + '%)' : '') + '\n' +
+      'Plan: ' + plan + '\n' +
+      'Reevaluar en: ' + reevalTxt + '\n' +
+      '\nGenerado por CardioScore · cardioscore.matsonsoft.com';
     window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank');
   }
-  function fallbackCopy(texto, msg) {
-    const ta = document.createElement('textarea'); ta.value = texto; document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); toast(msg); } catch (e) { toast('No se pudo copiar'); }
-    ta.remove();
-  }
-  function copiarTexto(texto, msg) {
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(function () { toast(msg); }).catch(function () { fallbackCopy(texto, msg); });
-    else fallbackCopy(texto, msg);
-  }
-  function compartirCaso() {
-    copiarTexto(JSON.stringify(obtenerSnapshot()), 'Caso copiado (JSON) — pégaselo a otro médico');
-  }
-  function importarCaso() {
-    const json = prompt('Pega el caso compartido (JSON):');
-    if (!json) return;
-    try {
-      aplicarSnapshot(JSON.parse(json));
-      actualizarModelos();
-      sugerirPorEdad();
-      setPaso(2);
-      toast('Caso importado');
-    } catch (e) { toast('JSON no válido'); }
-  }
   $('#btn_whatsapp').addEventListener('click', function () { try { trackCS('cs_exportar', { canal: 'whatsapp' }); } catch (e) {} whatsappResumen(); });
-  $('#btn_compartir_caso').addEventListener('click', compartirCaso);
-  $('#btn_importar_caso').addEventListener('click', importarCaso);
+  document.addEventListener('input', function (ev) {
+    if (ev.target && ev.target.closest && ev.target.closest('#paso2')) actualizarModelosDinamicos();
+  });
+  document.addEventListener('click', function (ev) {
+    if (ev.target && ev.target.closest && ev.target.closest('#paso2 .ante-chip, #paso2 .qrisk-chip')) actualizarModelosDinamicos();
+  });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { cerrarLab(); } });
 
   // ===== Modal laboratorio =====
@@ -3592,8 +3470,7 @@ function exportarPDF_A() {
   doc.setLineWidth(0.1);
   setTxt(BLANCO, 10, true);
   doc.text('CardioScore', 16.5, 7.2);
-  setTxt([160, 190, 220], 5.5, false);
-  doc.text('v3.3', 44, 7.2);
+
   setTxt(BLANCO, 7, true);
   doc.text('Informe clínico de riesgo cardiovascular', 204, 6.2, { align: 'right' });
   setTxt([190, 210, 230], 5.5, false);
@@ -3983,7 +3860,7 @@ function abrirInformePestana(autoPrint) {
     '<button onclick="window.print()">Imprimir / Guardar como PDF</button></div>' +
     '<div class="wrap"><div class="page">' +
     '<div class="hdr"><div class="logo"><div class="logo-b">CS</div><div class="logo-t">CardioScore</div></div>' +
-    '<div class="hdr-r"><div style="font-weight:800;color:#0f172a;">Informe clínico de riesgo cardiovascular</div>Fecha: ' + hoy + ' · v3.3</div></div>' +
+    '<div class="hdr-r"><div style="font-weight:800;color:#0f172a;">Informe clínico de riesgo cardiovascular</div>Fecha: ' + hoy + '</div></div>' +
     '<div class="st">1 · Filiación y perfil</div>' +
     '<div class="box"><b style="font-size:14px;">' + nombre + '</b> <span style="color:#475569;font-size:11px;">' + fili + '</span><br>' +
     '<span style="font-size:11px;color:#475569;">' + criterio + ' · ' + region + '<br>' + filum + '<br>Antecedentes: ' + (antes.length ? antes.join(' · ') : 'Sin antecedentes') + '</span></div>' +
@@ -4035,5 +3912,50 @@ function abrirInformePestana(autoPrint) {
 
 </script>
 
+  <!-- ===== Barra inferior (PWA mobile) ===== -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-zinc-200 lg:hidden safe-area-bottom" aria-label="Navegación inferior">
+    <div class="grid grid-cols-3 max-w-md mx-auto">
+      <a href="tools/index.html" class="flex flex-col items-center justify-center gap-0.5 min-h-[60px] text-zinc-500" aria-label="Calculadoras">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7zM8 3v3M16 3v3M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>
+        <span class="text-[10px] font-semibold">Calculadoras</span>
+      </a>
+      <button onclick="irACalcular()" class="flex flex-col items-center justify-center gap-0.5 min-h-[60px] text-accent active:scale-[0.98] transition" aria-label="Calcular riesgo">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+        <span class="text-[10px] font-bold">Calcular</span>
+      </button>
+      <a href="metodologia.html" class="flex flex-col items-center justify-center gap-0.5 min-h-[60px] text-zinc-500" aria-label="Metodología">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4zM8 8h8M8 12h5"/></svg>
+        <span class="text-[10px] font-semibold">Metodología</span>
+      </a>
+    </div>
+  </nav>
+<script>
+(function () {
+  var btn = document.getElementById('btn_subir');
+  if (!btn) return;
+  var onScroll = function () {
+    var show = window.scrollY > 300;
+    btn.classList.toggle('opacity-0', !show);
+    btn.classList.toggle('pointer-events-none', !show);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+window.subirArriba = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+</script>
+
+  <button id="btn_arriba" class="hidden fixed bottom-20 lg:bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-accent text-white shadow-lg items-center justify-center transition hover:bg-accent-700 active:scale-95 inline-flex" aria-label="Volver arriba">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('btn_arriba');
+  if (!btn) return;
+  var onScroll = function () { btn.classList.toggle('hidden', window.scrollY <= 300); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  onScroll();
+})();
+</script>
+
 </body>
-</html>
