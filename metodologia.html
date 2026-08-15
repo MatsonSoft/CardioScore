@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try { if (localStorage.getItem('cs_tema') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}</script>
+<title>Metodología CardioScore — Transparencia algorítmica (TRIPOD 2025 · PROBAST)</title>
+<meta property="og:url" content="https://cardioscore.matsonsoft.com/metodologia.html">
+<meta property="og:title" content="Metodología CardioScore — transparencia algorítmica">
+<meta property="og:description" content="Fórmulas, coeficientes, vectores reproducibles y estándares TRIPOD 2025 / PROBAST.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#0054A6">
+<meta name="description" content="Metodología completa de CardioScore: fórmulas, coeficientes, vectores de validación reproducibles, poblaciones especiales, comparativa de modelos y estándares de reporte TRIPOD 2025 / PROBAST / DECIDE-AI.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cardioscore.matsonsoft.com/metodologia.html">
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DmjHF4fQ8Rkfu3Jz2fUQgXWMbTrbFwRAkpoLiAmpJjSb', { api_host: 'https://app.posthog.com', persistence: 'localStorage+cookie', autocapture: true, disable_session_recording: true, property_blacklist: ['$current_url'] });
+  posthog.register({ app: 'cardioscore', app_version: '3.3' });
+</script>
+<script>
+  function trackCS(n, p) {
+    try {
+      var id = localStorage.getItem('cs_anon_id');
+      if (!id) { id = 'anon-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10); localStorage.setItem('cs_anon_id', id); }
+      if (id && window.posthog) { posthog.identify(id); posthog.capture(n, p || {}); }
+    } catch (e) {}
+  }
+  trackCS('cs_visita', {});
+</script>
+
+</script>
+<link rel="stylesheet" href="tailwind.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+      main details[id] p, main details[id] li, main details[id] td { line-height: 1.75; }
+  main details[id] ul { margin-bottom: 0.25rem; }
+    details[id] summary svg { transition: transform .2s ease; }
+  details[id][open] summary svg { transform: rotate(180deg); }
+  main details[id] > summary { transition: background-color .15s ease; }
+  main details[id] > summary:hover { background-color: rgba(244,244,245,.6); }
+  :focus-visible { outline: 2px solid #0054A6; outline-offset: 2px; border-radius: 4px; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
+    aside nav a { transition: background-color .15s ease, color .15s ease; }
+  aside nav a.active { background: #EAF3FB; color: #0054A6; }
+  a.touch44 { position: relative; }
+  a.touch44::after { content: ""; position: absolute; inset: -10px -6px; }
+  .req-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: #52525B; background: #F4F4F5; border: 1px solid #E4E4E7; border-radius: 6px; padding: 1px 6px; }
+  html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: background-color .18s ease, color .18s ease, border-color .18s ease !important; }
+  .dark .bg-white { background-color: #141A24 !important; }
+  .dark .bg-zinc-50 { background-color: #0C111A !important; }
+  .dark .bg-zinc-100 { background-color: #1A212D !important; }
+  .dark .bg-accent-50 { background-color: #0F2233 !important; }
+  .dark .text-zinc-900 { color: #E8E8EC !important; }
+  .dark .text-zinc-700 { color: #D4D4D8 !important; }
+  .dark .text-zinc-600, .dark .text-zinc-500 { color: #A1A1AA !important; }
+  .dark .text-zinc-500 { color: #8E8E96 !important; }
+  .dark .border-zinc-200, .dark .border-zinc-300, .dark .border-slate-200 { border-color: #262E3C !important; }
+  .dark header { background-color: #11161F !important; border-color: #262E3C !important; }
+  .dark input, .dark select, .dark textarea { background-color: #141A24 !important; border-color: #333C4D !important; color: #E8E8EC !important; }
+  .dark .bg-red-50 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-50 { background-color: #33271A !important; }
+  .dark .bg-emerald-50 { background-color: #14301F !important; }
+  .dark .bg-blue-50 { background-color: #14283A !important; }
+  .dark .text-red-700, .dark .text-red-800, .dark .text-red-600 { color: #F2A6A6 !important; }
+  .dark .text-amber-800, .dark .text-amber-700 { color: #F0C987 !important; }
+  .dark .text-emerald-700, .dark .text-emerald-800 { color: #A7E3C0 !important; }
+  .dark .text-blue-700, .dark .text-blue-800 { color: #A9CFF2 !important; }
+  .dark .border-red-200 { border-color: #5A2A30 !important; }
+  .dark .border-amber-200 { border-color: #5A4630 !important; }
+  .dark .border-emerald-200 { border-color: #2A5A40 !important; }
+  .dark .border-blue-200 { border-color: #2A4A6A !important; }
+  .dark .text-accent { color: #8AB4F8 !important; }
+  .dark .text-accent-700 { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent:hover { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent-700:hover { color: #8AB4F8 !important; }
+  .dark .text-zinc-800 { color: #D4D4D8 !important; }
+  .dark .text-ink { color: #E8E8EC !important; }
+  .dark .bg-accent { background-color: #1E6BB8 !important; }
+  .dark .bg-accent-700 { background-color: #1E6BB8 !important; }
+  .dark .border-accent { border-color: #4A7FC0 !important; }
+  .dark .border-accent\/20 { border-color: rgba(74, 127, 192, .32) !important; }
+  .dark .border-accent\/30 { border-color: rgba(74, 127, 192, .4) !important; }
+  .dark .bg-zinc-200 { background-color: #333C4D !important; }
+  .dark .bg-zinc-300 { background-color: #3A4455 !important; }
+  .dark .bg-zinc-50\/95 { background-color: rgba(12, 17, 26, 0.95) !important; }
+  .dark .peer:checked ~ .peer-checked\:bg-white { background-color: #2A3442 !important; }
+  .dark .shadow-sm, .dark .shadow { box-shadow: 0 1px 3px rgba(0,0,0,.5) !important; }
+  .dark .shadow-xl { box-shadow: 0 20px 40px rgba(0,0,0,.6) !important; }
+  .dark .shadow-2xl { box-shadow: 0 25px 50px rgba(0,0,0,.6) !important; }
+  .dark .req-tag { background: #1A212D !important; color: #D4D4D8 !important; }
+  .dark .req-tag-acc { background: #0F2233 !important; border-color: rgba(74,127,192,.3) !important; color: #8AB4F8 !important; }
+  .dark .bg-red-100 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-100 { background-color: #33271A !important; }
+  .dark .bg-emerald-100 { background-color: #14301F !important; }
+  .dark .bg-blue-100 { background-color: #14283A !important; }
+  .dark .bg-red-50\/40 { background-color: rgba(58, 26, 31, 0.55) !important; }
+  .dark .bg-amber-50\/40 { background-color: rgba(51, 39, 26, 0.55) !important; }
+  .dark .bg-emerald-50\/40 { background-color: rgba(20, 48, 31, 0.55) !important; }
+  .dark .bg-accent-50\/40 { background-color: rgba(15, 34, 51, 0.6) !important; }
+  .dark .odd\:bg-zinc-50\/60:nth-child(odd) { background-color: rgba(12, 17, 26, 0.5) !important; }
+  .dark .border-zinc-100 { border-color: #1A212D !important; }
+  .dark .hover\:shadow-\[0_10px_30px_rgba\(0\,84\,166\,0\.08\)\]:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, .45) !important; }
+  .dark .footer-link { color: #8AB4F8; }
+  .dark .bg-white.border.border-zinc-200 { box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  .dark input.sr-only:focus-visible + span { outline-color: #8AB4F8; }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; accent-color: #8AB4F8; }
+  html.dark ::selection { background: rgba(138, 180, 248, .35); color: #E8E8EC; }
+  html.dark input::placeholder, html.dark textarea::placeholder { color: #71717A !important; }
+  html.dark .tip::after { background: #E8E8EC !important; color: #0E1420 !important; }
+  html.dark .tip::before { border-top-color: #E8E8EC !important; }
+  @media (prefers-reduced-motion: reduce) { html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    .skel, .paso-in, #toast, .fade-in { animation: none !important; }
+    .ante-chip, .qrisk-chip, .sccard, .sc-inner { transition: none !important; }
+    #gauge_aguja, #gauge_punto { transition: none !important; }
+  }
+  #menu_movil:not(.hidden) { animation: fadein .22s ease; }
+  #onboarding:not(.hidden) { animation: fadein .25s ease; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardioscore.matsonsoft.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Metodología", "item": "https://cardioscore.matsonsoft.com/metodologia.html" }
+  ]
+}
+</script>
+<style>html, body { overflow-x: hidden; }</style>
+</head>
+<body class="bg-zinc-50 text-ink font-sans text-[15px] leading-relaxed">
+<div class="fixed top-0 left-0 right-0 h-0.5 z-50 bg-transparent"><div id="barra_progreso" class="h-full bg-accent" style="width:0%"></div></div>
+
+<header class="bg-white border-b border-zinc-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+          <a href="index.html" class="flex items-center gap-3 no-underline shrink-0 h-full">
+      <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+      </div>
+      <div>
+        <p class="font-display font-bold text-sm leading-tight">CardioScore</p>
+        <p class="hidden sm:block text-[11px] text-zinc-500 -mt-0.5">Riesgo cardiovascular · herramientas clínicas</p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-1" aria-label="Navegación principal">
+      <a href="index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Inicio</a>
+      <a href="metodologia.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition bg-accent-50 text-accent">Metodología</a>
+      <a href="tools/index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Calculadoras</a>
+      <a href="index.html#panel_pac" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Pacientes guardados">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM4 21v-1a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v1"/></svg>
+        <span class="hidden sm:inline">Pacientes</span>
+        <span id="pac_count" class="hidden text-[10px] font-bold bg-accent text-white rounded-full min-w-[18px] h-[18px] px-1 inline-flex items-center justify-center">0</span>
+      </a>
+      <button id="btn_tema" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Cambiar entre tema claro y oscuro">
+        <svg id="ico_sol" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="ico_luna" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    
+    </nav>
+      <button id="btn_menu" class="sm:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+  </div>
+  <div id="menu_movil" class="sm:hidden hidden bg-white border-t border-zinc-200 px-4 py-3 space-y-1">
+    <a href="index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Inicio</a>
+    <a href="metodologia.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Metodología</a>
+    <a href="tools/index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Calculadoras</a>
+  </div>
+</header>
+
+<main id="main" class="max-w-6xl mx-auto px-4 py-10">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="max-w-3xl mb-10">
+    <p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Transparencia algorítmica · v3.3</p>
+    <h1 class="font-display font-bold text-3xl sm:text-4xl tracking-tight text-zinc-900">La ciencia detrás de cada número</h1>
+    <p class="text-zinc-500 mt-3 text-[17px]">CardioScore documenta cada fórmula, coeficiente y decisión de diseño para que cualquier especialista pueda <strong class="text-zinc-700">verificar los cálculos, reproducir los vectores de referencia y emitir su dictamen</strong>. La confianza clínica no viene de abrir el código, sino de documentar la ciencia detrás de cada número.</p>
+    <div class="mt-4 flex flex-wrap items-center gap-2">
+      <button id="btn_met_todo" class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-accent bg-accent-50 border border-accent/20 rounded-lg px-3 py-1.5 min-h-[44px] transition active:scale-[0.98]" aria-label="Expandir o colapsar todas las secciones"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 6l-4 6 4 6M16 6l4 6-4 6"/></svg>Colapsar todo</button>
+
+      
+      <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-accent bg-accent-50 border border-accent/20 rounded-full px-3 py-1.5 min-h-[40px]"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg> TRIPOD 2025</span>
+      <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-zinc-100 border border-zinc-200 rounded-full px-3 py-1.5 min-h-[40px]"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg> PROBAST</span>
+      <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-zinc-100 border border-zinc-200 rounded-full px-3 py-1.5 min-h-[40px]"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg> DECIDE-AI</span>
+    </div>
+  </section>
+
+  <div class="lg:grid lg:grid-cols-[240px_1fr] gap-8 items-start">
+
+    <!-- ===================== ÍNDICE LATERAL ===================== -->
+    <aside class="lg:sticky lg:top-20 mb-6 lg:mb-0">
+      <details id="indice_det" class="bg-white border border-zinc-200 rounded-xl" open>
+        <summary class="lg:hidden cursor-pointer select-none px-4 py-3 flex items-center justify-between gap-2 text-sm font-semibold text-zinc-800">Índice de secciones <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="p-3">
+      <div class="mb-3">
+        <label for="buscar_indice" class="sr-only">Buscar en la metodología</label>
+        <div class="relative">
+          <svg class="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M20 20l-3.5-3.5"/></svg>
+          <input id="buscar_indice" type="search" placeholder="Buscar sección…" class="w-full rounded-lg border border-zinc-300 bg-white pl-9 pr-3 py-2.5 min-h-[44px] text-sm focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Buscar sección">
+        </div>
+      </div>
+      <nav class="text-xs text-zinc-600 space-y-1" aria-label="Índice de la metodología">
+        <p class="px-2 pt-1 pb-1.5 font-bold text-zinc-500 uppercase tracking-wider text-[10px]">Contenido</p>
+        <a href="#guia" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Guía de uso</a>
+        <a href="#modelos" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Modelos</a>
+        <a href="#complementarios" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Complementarios</a>
+        <a href="#comparativa" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Comparativa</a>
+        <a href="#interpretar" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Interpretación</a>
+        <a href="#storytelling" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Storytelling</a>
+        <a href="#ejemplo" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Ejemplo clínico</a>
+        <a href="#flujo" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Flujo de decisión</a>
+        <a href="#poblaciones" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Poblaciones</a>
+        <a href="#validacion-clinica" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Validación clínica</a>
+        <a href="#validacion" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Validación técnica</a>
+        <a href="#rendimiento" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Rendimiento</a>
+        <a href="#calibracion-regional" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Calibración regional</a>
+        <a href="#notas" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Notas técnicas</a>
+        <a href="#variables" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Variables y rangos</a>
+        <a href="#limitaciones" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Limitaciones</a>
+        <a href="#glosario" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Glosario</a>
+        <a href="#definiciones" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Definiciones</a>
+        <a href="#reporte" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Reporte</a>
+        <a href="#transparencia" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Transparencia</a>
+        <a href="#privacidad" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Privacidad</a>
+        <a href="#referencias" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Referencias</a>
+        <a href="#feedback" class="transition-colors block px-2 py-2.5 lg:py-1.5 min-h-[44px] lg:min-h-0 flex items-center rounded hover:bg-slate-50 hover:text-accent">Reportar un error</a>
+      </nav>
+      </div>
+      </details>
+    </aside>
+
+    <!-- ===================== CONTENIDO ===================== -->
+    <div class="space-y-6">
+
+      <!-- GUÍA -->
+      <details id="guia" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24" open>
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6h10M9 12h10M9 18h10"/><circle cx="4.5" cy="6" r="0.5"/><circle cx="4.5" cy="12" r="0.5"/><circle cx="4.5" cy="18" r="0.5"/></svg></span><span class="pr-2">¿Cómo usar CardioScore?</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <div class="flex items-center gap-2.5 mb-2"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 10h6M9 14h4"/></svg></span><p class="text-[10px] font-bold text-zinc-600 uppercase tracking-wide">1 · Complete los datos</p></div>
+            <p class="text-sm text-zinc-700">Edad, sexo, tabaco, PAS, lípidos, creatinina y antecedentes en el formulario.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <div class="flex items-center gap-2.5 mb-2"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2M15 3v2M9 19v2M15 19v2M5 7h14M5 17h14M7 12h10"/></svg></span><p class="text-[10px] font-bold text-zinc-600 uppercase tracking-wide">2 · Presione Estratificar</p></div>
+            <p class="text-sm text-zinc-700">Se calculan SCORE2, PREVENT, WHO-Central L.A. y SMART2 (si aplica).</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <div class="flex items-center gap-2.5 mb-2"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4a8 8 0 1 1-6.9 4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 12l3-3"/></svg></span><p class="text-[10px] font-bold text-zinc-600 uppercase tracking-wide">3 · Lea el riesgo</p></div>
+            <p class="text-sm text-zinc-700">Banda, gauge y desglose de scores; revise las advertencias de aplicabilidad.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <div class="flex items-center gap-2.5 mb-2"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><p class="text-[10px] font-bold text-zinc-600 uppercase tracking-wide">4 · Aplique las metas</p></div>
+            <p class="text-sm text-zinc-700">Meta de C-LDL, % de reducción y simulador de oportunidad terapéutica.</p>
+          </div>
+        </div>
+      </div>
+</details>
+
+      <!-- MODELOS -->
+      <details id="modelos" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></span><span class="pr-2">¿Qué modelos implementa?</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">CardioScore implementa los modelos de riesgo cardiovascular más actualizados, agrupados por situación clínica, con su <strong class="text-zinc-700">fuente</strong> de referencia:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+<div class="rounded-xl border border-zinc-200 p-4">
+            <div class="flex items-center justify-between mb-1.5"><p class="font-bold text-zinc-900">Prevención primaria</p><span class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-1.5 py-0.5">10 años</span></div>
+            <ul class="text-[13px]">          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SCORE2</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2021</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">PREVENT</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">AHA 2024</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">WHO-Central L.A.</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">OMS 2019</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SCORE2-HF</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2026</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">QRISK3</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">NICE 2017</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">MESA CaSc</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ACC 2015</span></li>
+          </ul>
+          </div>
+<div class="rounded-xl border border-zinc-200 p-4">
+            <div class="flex items-center justify-between mb-1.5"><p class="font-bold text-zinc-900">Poblaciones especiales</p><span class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-1.5 py-0.5">Ajuste</span></div>
+            <ul class="text-[13px]">          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SCORE2-Diabetes</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2023</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SCORE2-CKD</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">EJPC 2023</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SCORE2-OP</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2021</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SMART2</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2022</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">Riesgo 30 años</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">Pencina 2009</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">FINDRISC</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">2003</span></li>
+          </ul>
+          </div>
+<div class="rounded-xl border border-zinc-200 p-4">
+            <div class="flex items-center justify-between mb-1.5"><p class="font-bold text-zinc-900">Fibrilación auricular</p><span class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-1.5 py-0.5">FA</span></div>
+            <ul class="text-[13px]">          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">CHA2DS2-VA</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2024</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">HAS-BLED</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2019</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">ORBIT</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">EHJ 2015</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">APPLE</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">2015</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">CHARGE-AF</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">Circulation 2013</span></li>
+          </ul>
+          </div>
+<div class="rounded-xl border border-zinc-200 p-4">
+            <div class="flex items-center justify-between mb-1.5"><p class="font-bold text-zinc-900">Agudo y post-evento</p><span class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-1.5 py-0.5">Agudo</span></div>
+            <ul class="text-[13px]">          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">GRACE 2.0</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">BMJ 2014</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">ARC-HBR</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">Circulation 2019</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">PRECISE-DAPT</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">Lancet 2017</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SPI-II</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">Stroke 2001</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">KFRE</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">BMJ 2016</span></li>
+          </ul>
+          </div>
+        </div>
+        <p class="mt-4 text-sm text-zinc-600 leading-relaxed">En los resultados puedes alternar el <strong>marco de guías</strong>: <strong>ESC/EAS 2025</strong> (por defecto, Venezuela/LatAm/Europa) usa SCORE2 y bandas 2/10/20 con metas &lt;55/&lt;70/&lt;100 mg/dL; <strong>AHA/ACC 2026</strong> (EE.UU.) usa PREVENT — a 10 años (bandas 3/5/10) y a 30 años.</p>
+      </div>
+</details>
+
+      <!-- COMPLEMENTARIOS -->
+      <details id="complementarios" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8"/></svg></span><span class="pr-2">Modelos complementarios</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">Scores de alta utilidad en la consulta que se activan automáticamente cuando los datos aplican (fibrilación auricular, post-ICP, sospecha de DM2, etc.).</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">QRISK3 <span class="req-tag">NICE</span></p><p class="text-zinc-600 text-[13px] mt-1">IAM + ACV a 10 años. Port fiel (LGPL) del algoritmo ClinRisk. 25-84 años, prevención primaria.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">MESA CaSc</p><p class="text-zinc-600 text-[13px] mt-1">Riesgo de CHD a 10 años (McClelland 2015) con el calcio coronario continuo. 45-84 años. Reclasifica.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">FINDRISC</p><p class="text-zinc-600 text-[13px] mt-1">Riesgo de DM2 a 10 años (Lindström 2003). Puntaje 0-26 por categorías (edad, IMC, cintura, actividad, dieta, HTA, glucosa, historia familiar).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">CHA2DS2-VASc / -VA</p><p class="text-zinc-600 text-[13px] mt-1">Riesgo de ACV en FA (Lip 2010). CHA2DS2-VA (ESC 2024) elimina el punto del sexo; umbral ≥2 para anticoagular.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">HAS-BLED</p><p class="text-zinc-600 text-[13px] mt-1">Riesgo de sangrado mayor con anticoagulación (Pisters 2010). 9 criterios; ≥3 = alto riesgo.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">PRECISE-DAPT</p><p class="text-zinc-600 text-[13px] mt-1">Riesgo de sangrado con DAPT tras stent (Costa 2017). Nomograma 0-100; ≥25 sugiere DAPT corto.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">GRACE 2.0</p><p class="text-zinc-600 text-[13px] mt-1">Mortalidad en SCA (Fox 2014). Score 0-263 con Killip, FC, PAS, creatinina, paro, ST y enzimas. Categorías ≤88/89-118/≥119.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">SPI-II</p><p class="text-zinc-600 text-[13px] mt-1">ACV recurrente a 2 años tras ACV isquémico (Kerr 2001).</p></div>
+        </div>
+      </div>
+</details>
+
+      <!-- COMPARATIVA -->
+      <details id="comparativa" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 20h16"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 20v-6M12 20v-10M17 20v-4"/></svg></span><span class="pr-2">Comparativa de modelos</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-3 font-bold">Modelo</th><th class="py-2 pr-3 font-bold">Predice</th><th class="py-2 pr-3 font-bold">Rol</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold">SCORE2</td><td class="py-2.5 pr-3">IAM + ACV (ESC 2021)</td><td class="py-2.5">Estándar europeo para estatina</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold">PREVENT</td><td class="py-2.5 pr-3">ECV total + IC (AHA 2024)</td><td class="py-2.5">Útil en IC, ERC u obesidad</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-3 font-semibold text-accent">WHO-Central L.A.</td><td class="py-2.5 pr-3">CHD + ACV (OMS 2019)</td><td class="py-2.5"><strong>Referencia para Venezuela</strong> (único calibrado a la región)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm text-zinc-600 leading-relaxed">La <strong>discrepancia entre modelos es esperable</strong>: miden desenlaces distintos. En prevención secundaria los scores no aplican (riesgo Muy Alto directo) y se usa <strong>SMART2</strong> (recalibrado LatAm). <strong>SCORE2-HF</strong> complementa a SCORE2/OP, que predicen eventos ateroscleróticos pero no IC.</p>
+      </div>
+</details>
+
+      <!-- INTERPRETACIÓN -->
+      <details id="interpretar" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="pr-2">Cómo interpretar los resultados</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl border border-emerald-200 bg-emerald-50/40 p-4">
+            <p class="font-bold text-emerald-800 mb-1.5 flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Modifiers · reclasificación</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed"><strong>Lp(a) ≥50</strong> y <strong>CAC ≥100</strong> suben la categoría; <strong>CAC = 0</strong> la reduce. Ejemplo: riesgo intermedio + Lp(a) 80 → riesgo alto.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5 flex items-center gap-1.5"><svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>Simulador de oportunidad</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Proyecta el riesgo si el <strong>C-LDL</strong> y la <strong>PAS</strong> llegan a la meta — el beneficio esperado del tratamiento.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5 flex items-center gap-1.5"><svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18"/></svg>Meta de C-LDL</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Se define por la <strong>categoría más alta</strong> (comorbilidades, eventos previos y SCORE2/OP, ESC/EAS 2025): &lt;55 / &lt;70 / &lt;100 / &lt;116 mg/dL.</p>
+          </div>
+          <div class="rounded-xl border border-amber-200 bg-amber-50/40 p-4">
+            <p class="font-bold text-amber-800 mb-1.5 flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>Discordancia &gt;5%</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Si <strong>SCORE2 &gt; PREVENT</strong> → fenotipo lipídico/hipertensivo, prioriza SCORE2. Si <strong>PREVENT &gt; SCORE2</strong> → fenotipo metabólico/renal, prioriza PREVENT.</p>
+          </div>
+        </div>
+        <div class="mt-4 rounded-xl border border-zinc-200 bg-zinc-50 p-4 text-sm">
+          <p class="font-bold text-zinc-900 mb-2">Ejemplo aplicado</p>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-zinc-700">
+            <span>Varón 55a, fumador, PAS 140, LDL 130</span>
+            <span class="font-mono tnum">SCORE2 <span class="font-mono tnum">11.4%</span> → <strong class="text-red-700">Alto</strong></span>
+            <span>Meta <strong class="font-mono">&lt;70</strong> mg/dL</span>
+            <span>Reducción <strong class="font-mono">≈46%</strong></span>
+            <span class="text-accent font-semibold">Estatina de alta intensidad</span>
+          </div>
+        </div>
+      </div>
+</details>
+
+      <!-- STORYTELLING -->
+      <details id="storytelling" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H4l2-3a8.5 8.5 0 1 1 15-5.5z"/></svg></span><span class="pr-2">Storytelling y comunicación del riesgo</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <p class="text-sm text-zinc-700 leading-relaxed">Los resultados siguen un <strong>orden narrativo</strong> que replica el flujo natural de la consulta, y la comunicación usa <strong>frecuencias absolutas</strong> (Gigerenzer).</p>
+        <ol class="mt-3 space-y-2 text-sm text-zinc-700">
+          <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">1</span><strong>El veredicto</strong>: riesgo a 10 años, categoría, meta de LDL y acción.</li>
+          <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">2</span><strong>Los números</strong>: modelos y desglose con zonas.</li>
+          <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">3</span><strong>El porqué</strong>: riesgo vs promedio, contribución de cada factor y "¿qué pasaría si?".</li>
+          <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">4</span><strong>Qué hacer</strong>: metas, plan y simulación del control óptimo (beneficio absoluto).</li>
+          <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">5</span><strong>La conversación</strong>: pictograma "X de cada 100" y frase para el paciente.</li>
+          <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">6</span><strong>El futuro</strong>: trayectoria del riesgo y fecha de re-evaluación.</li>
+        </ol>
+        <p class="mt-3 text-sm text-zinc-600 leading-relaxed">Se usan frecuencias naturales y el <strong>NNT</strong> para el beneficio absoluto; se evita el <strong>riesgo relativo aislado</strong>, que sobreestima el beneficio percibido.</p>
+      </div>
+</details>
+
+      <!-- EJEMPLO CLÍNICO (corregido) -->
+      <details id="ejemplo" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9h6M9 13h6"/></svg></span><span class="pr-2">Ejemplo clínico</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <p class="text-sm text-zinc-700 leading-relaxed"><strong>Caso:</strong> varón de 55 años, fumador, PAS 140 mmHg, CT 210 mg/dL, HDL 44, LDL 130, creatinina 1.0 (eGFR ≈ 89), sin diabetes, región Alta.</p>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+          <div class="p-4 bg-zinc-50 border border-zinc-200 rounded-xl"><p class="font-bold text-zinc-800 mb-1">1. SCORE2</p><p class="text-2xl font-black text-[#0054A6] tnum">11.4%</p><p class="text-zinc-600 text-xs mt-1">Riesgo alto (10-20%, ESC/EAS 2025)</p></div>
+          <div class="p-4 bg-zinc-50 border border-zinc-200 rounded-xl"><p class="font-bold text-zinc-800 mb-1">2. PREVENT</p><p class="text-2xl font-black text-[#B91C1C] tnum">9.0%</p><p class="text-zinc-600 text-xs mt-1">Riesgo intermedio (5-10%)</p></div>
+          <div class="p-4 bg-zinc-50 border border-zinc-200 rounded-xl"><p class="font-bold text-zinc-800 mb-1">3. WHO-CLA</p><p class="text-2xl font-black text-emerald-700 tnum">7.9%</p><p class="text-zinc-600 text-xs mt-1">Riesgo a 10 años (OMS)</p></div>
+        </div>
+        <div class="mt-4 p-4 bg-accent-50 border border-accent/20 rounded-xl text-sm">
+          <p class="font-bold text-accent mb-1">Interpretación</p>
+          <p class="text-accent-700 leading-relaxed">Categoría <strong>Alto</strong> (SCORE2 11.4%, umbrales ESC/EAS 2025). Meta de C-LDL: <strong>&lt;70 mg/dL</strong>; reducción necesaria ≈ 46%. Estrategia: estatina de alta intensidad + cambios de estilo de vida; reevaluar en 1 año.</p>
+        </div>
+      </div>
+</details>
+
+
+      <!-- Flujo de decisión del riesgo -->
+<details id="flujo" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h6v6H4zM14 14h6v6h-6z"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 12v2a2 2 0 0 0 2 2h5"/></svg></span><span class="pr-2">Flujo de decisión del riesgo</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">CardioScore decide el modelo y la categoría en un orden fijo que replica las guías ESC/EAS 2025:</p>
+        <div class="space-y-2 text-sm">
+          <div class="flex gap-3 rounded-xl border border-zinc-200 p-4"><span class="w-7 h-7 rounded-full bg-accent-50 text-accent text-[12px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">1</span><p class="text-zinc-700"><strong>Filtro de aplicabilidad.</strong> Menor de 40: edad vascular, sin SCORE2. Con ECV establecida, IC, CKD grave o DM con daño de órgano: <strong>Muy Alto directo</strong> (ESC 2021, Tabla 4) y se calcula <strong>SMART2</strong> como riesgo residual.</p></div>
+          <div class="flex justify-center text-zinc-300" aria-hidden="true"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+          <div class="flex gap-3 rounded-xl border border-zinc-200 p-4"><span class="w-7 h-7 rounded-full bg-accent-50 text-accent text-[12px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">2</span><p class="text-zinc-700"><strong>Elección del modelo por edad y comorbilidad.</strong> ≥70 → <strong>SCORE2-OP</strong>; DM2 → <strong>SCORE2-Diabetes</strong>; ERC → <strong>SCORE2-CKD</strong> sobre el base correspondiente; FA → scores complementarios (CHA2DS2-VA, HAS-BLED).</p></div>
+          <div class="flex justify-center text-zinc-300" aria-hidden="true"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+          <div class="flex gap-3 rounded-xl border border-zinc-200 p-4"><span class="w-7 h-7 rounded-full bg-accent-50 text-accent text-[12px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">3</span><p class="text-zinc-700"><strong>Marco de guías (toggle).</strong> ESC/EAS 2025: SCORE2/OP/Diabetes/CKD con bandas 2/10/20. AHA/ACC 2026: <strong>PREVENT</strong> a 10 y 30 años con bandas 3/5/10.</p></div>
+          <div class="flex justify-center text-zinc-300" aria-hidden="true"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+          <div class="flex gap-3 rounded-xl border border-zinc-200 p-4"><span class="w-7 h-7 rounded-full bg-accent-50 text-accent text-[12px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">4</span><p class="text-zinc-700"><strong>Categoría final = la más alta.</strong> Máximo entre comorbilidades y la categoría del score, con los <strong>risk modifiers</strong> (Lp(a) ≥50, LDL ≥190, CAC 100-299 → alto, ≥300 → muy alto, CAC 0 reduce).</p></div>
+          <div class="flex justify-center text-zinc-300" aria-hidden="true"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+          <div class="flex gap-3 rounded-xl border border-zinc-200 p-4"><span class="w-7 h-7 rounded-full bg-accent-50 text-accent text-[12px] font-bold inline-flex items-center justify-center shrink-0 mt-0.5">5</span><p class="text-zinc-700"><strong>Meta de C-LDL</strong> por categoría (ESC/EAS 2025): &lt;116 → &lt;100 → &lt;70 → &lt;55 mg/dL, con la reducción relativa necesaria.</p></div>
+        </div>
+      </div>
+</details>
+
+      <!-- POBLACIONES -->
+      <details id="poblaciones" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 21v-1a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v1"/></svg></span><span class="pr-2">Poblaciones especiales</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5">Enfermedad renal crónica</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Add-on <strong>SCORE2-CKD</strong> (Eur J Prev Cardiol 2023) por eGFR y ACR (predictor patch). ACR opcional.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5">Prevención secundaria</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Riesgo <strong>Muy Alto</strong> directo (ESC 2021) + riesgo residual con <strong>SMART2</strong>. IC establecida, CKD grave o DM con daño de órgano: Muy Alto directo.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5">Menor de 40 años</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Edad vascular: qué edad tendría que tener para igual riesgo con factores óptimos.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5">Enfermedades autoinmunes</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">AR, LES, psoriasis, VIH. Factor <strong>×1.5</strong> (CPDAI, EULAR 2010).</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5">Mayor de 70 · Diabetes</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed"><strong>SCORE2-OP</strong> (coeficientes independientes) y <strong>SCORE2-Diabetes</strong> (ESC 2023).</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5">Estadio CKM</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">AHA Presidential Advisory 2023, stage 0 a 4.</p>
+          </div>
+          <div class="rounded-xl border border-amber-200 bg-amber-50/40 p-4 md:col-span-2">
+            <p class="font-bold text-zinc-900 mb-1.5">Risk modifiers (ESC/EAS 2025)</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Lp(a) ≥50, LDL ≥190, CT &gt;310, PAS ≥180, historia familiar y hsCRP ≥2 <strong>suben la categoría</strong>. CAC 100-299 → alto, ≥300 → muy alto, 0 reduce.</p>
+          </div>
+        </div>
+      </div>
+</details>
+
+      <!-- VALIDACIÓN CLÍNICA -->
+      <details id="validacion-clinica" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg></span><span class="pr-2">Validación clínica</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">CardioScore se valida en <strong class="text-zinc-700">tres niveles progresivos</strong>, de la matemática al uso clínico real:</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4 text-sm">
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="text-[10px] font-bold uppercase text-accent mb-1">Nivel 1 · Técnica</p>
+            <p class="font-bold text-zinc-900 mb-1">Vectores reproducibles</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Cada modelo se verifica al 0.01% contra el paper y las calculadoras oficiales.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="text-[10px] font-bold uppercase text-emerald-700 mb-1">Nivel 2 · Clínica</p>
+            <p class="font-bold text-zinc-900 mb-1">Endorsement de especialistas</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Revisión por cardiólogos en ejercicio y uso en formación de postgrado.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="text-[10px] font-bold uppercase text-accent-700 mb-1">Nivel 3 · Institucional</p>
+            <p class="font-bold text-zinc-900 mb-1">Validación multi-institucional</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Endorsement de postgrados, sociedades e institutos (en expansión).</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-zinc-200 p-4 mb-4">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <p class="font-bold text-zinc-900">Postgrado de Cardiología — Hospital Ruiz y Páez</p>
+              <p class="text-[12px] text-zinc-500 mt-0.5">Venezuela</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1 shrink-0">Activo</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 mt-2.5">
+            <span class="text-[13px] text-zinc-600">Revisión de especialistas · endorsement · uso en formación</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-1.5 py-0.5">Validación clínica</span>
+          </div>
+        </div>
+        <p class="text-sm text-zinc-600"><strong>Revisado:</strong> agosto de 2026. Se invita a otros <strong>postgrados, sociedades científicas e institutos</strong> a auditar la metodología y emitir su endorsement. <strong>Uso previsto:</strong> consulta de cardiología y medicina interna en Venezuela/Latinoamérica. No reemplaza el juicio clínico.</p>
+        <div class="mt-4 rounded-xl border border-accent/20 bg-accent-50/40 p-4 text-sm">
+          <p class="font-bold text-accent-700 mb-2">¿Cómo auditar la metodología?</p>
+          <ol class="space-y-1.5 text-[13px] text-zinc-700">
+            <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0">1</span>Revisa las fórmulas y coeficientes en las <strong>Notas técnicas</strong>.</li>
+            <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0">2</span>Reproduce los <strong>vectores de validación</strong> de cada sección.</li>
+            <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0">3</span>Compara con la calculadora oficial (heartscore.org, OMS, AHA) y emite tu dictamen.</li>
+          </ol>
+        </div>
+      </div>
+</details>
+
+      <!-- VALIDACIÓN TÉCNICA -->
+      <details id="validacion" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span><span class="pr-2">Validación de los modelos</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <p class="text-sm text-zinc-600 mb-4">Cada modelo se verificó contra su fuente primaria (papers, calculadoras oficiales o charts de la OMS).</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-3 font-bold">Modelo</th><th class="py-2 pr-3 font-bold">Caso de referencia</th><th class="py-2 pr-3 font-bold">Paper</th><th class="py-2 font-bold">Calculado</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">GRACE 2.0</td><td class="py-2.5 pr-3">Varón 62a, SCA, PAS 150, FC 100…</td><td class="py-2.5 pr-3">BMJ 2014</td><td class="py-2.5 font-mono tnum">126 · alto</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">SCORE2</td><td class="py-2.5 pr-3">Varón 55, fumador, región alta</td><td class="py-2.5 pr-3">Eur Heart J 2021</td><td class="py-2.5 font-mono tnum">11.4% · alto</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">SCORE2-CKD</td><td class="py-2.5 pr-3">Varón 55a, eGFR 45, ACR 150</td><td class="py-2.5 pr-3">Eur J Prev Cardiol 2023</td><td class="py-2.5 font-mono tnum">16.28%</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">PREVENT 30 años</td><td class="py-2.5 pr-3">preventcalculator.com</td><td class="py-2.5 pr-3">Circulation 2024</td><td class="py-2.5 font-mono tnum">39.9% · exacto</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">WHO-Central L.A.</td><td class="py-2.5 pr-3">Caso ejemplo</td><td class="py-2.5 pr-3">Lancet Glob Health 2019</td><td class="py-2.5 font-mono tnum">7.9%</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">SCORE2-OP / SCORE2-HF</td><td class="py-2.5 pr-3">Promedios de cohorte</td><td class="py-2.5 pr-3">Eur Heart J 2021/2026</td><td class="py-2.5">Consistente (coef. idénticos)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm text-zinc-600 leading-relaxed">Los casos sin marca son <strong>vectores exactos del paper</strong>, replicables al 0.01%. Los marcados como promedio (SCORE2-OP, SCORE2-HF) se validan contra promedios de cohorte reportados por los autores. Sigue los <a href="#validacion-clinica" class="transition-colors touch44 text-accent font-semibold underline underline-offset-2 hover:text-accent-700">pasos de auditoría</a> en la sección Validación clínica.</p>
+      </div>
+</details>
+
+
+      <!-- Rendimiento y exactitud de la implementación -->
+<details id="rendimiento" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 20h16"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 20v-8M10 20V8M14 20v-12M18 20v-5"/></svg></span><span class="pr-2">Rendimiento y exactitud de la implementación</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">CardioScore implementa modelos publicados; su rendimiento se reporta en dos planos: la <strong>exactitud de la implementación</strong> (verificada por vectores) y la <strong>discriminación de los modelos originales</strong> (C-statistic reportado en los papers).</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mb-4">
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5">Exactitud de implementación</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Cada modelo se verifica contra su fuente primaria con vectores de referencia. Tolerancia de <strong>0.01%</strong> en el riesgo absoluto; salida redondeada a 1 decimal y clampeada a [0.1, 99.9]%. Casos sin marca en la validación técnica = vectores exactos del paper.</p>
+          </div>
+          <div class="rounded-xl border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-900 mb-1.5">Discriminación publicada (C-index)</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Valores reportados en las cohortes originales: SCORE2 ≈0.67 · PREVENT ≈0.70 · QRISK3 ≈0.87 · SMART2 ≈0.67 · GRACE 2.0 ≈0.83 · CHARGE-AF ≈0.76 · KFRE ≈0.90 · WHO-CLA ≈0.72-0.76. No son métricas propias; la calibración local en Venezuela es el siguiente paso (ver Calibración regional).</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-accent/20 bg-accent-50/40 p-4 text-sm">
+          <p class="font-bold text-accent-700 mb-1.5">Ítems TRIPOD 13-16</p>
+          <p class="text-zinc-700 text-[13px] leading-relaxed">Los ítems de desarrollo de modelo (13-15) se responden por referencia: CardioScore no deriva modelos, reproduce los publicados. El ítem 16 (rendimiento) se documenta arriba. La discriminación de la herramienta como CDSS se evaluará de forma prospectiva con <strong>DECIDE-AI</strong>.</p>
+        </div>
+      </div>
+</details>
+
+
+      <!-- Calibración regional (Venezuela y Latinoamérica) -->
+<details id="calibracion-regional" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span><span class="pr-2">Calibración regional (Venezuela y Latinoamérica)</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">La mayoría de los scores provienen de cohortes europeas y estadounidenses. CardioScore documenta qué está calibrado a la región y qué es una <strong>traslación</strong> con su correspondiente advertencia:</p>
+        <div class="overflow-x-auto mb-4">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-3 font-bold">Modelo</th><th class="py-2 pr-3 font-bold">Origen</th><th class="py-2 font-bold">Calibración en CardioScore</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold">WHO-Central L.A.</td><td class="py-2.5 pr-3">OMS 2019</td><td class="py-2.5"><span class="text-emerald-700 font-semibold">Nativa</span> — coeficientes de la región Central L.A. (laboratorial). Referencia para Venezuela.</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold">SMART2</td><td class="py-2.5 pr-3">Holanda (UCC-SMART)</td><td class="py-2.5"><span class="text-emerald-700 font-semibold">Recalibrado LatAm</span> — resta ln(ratio REACH LatAm) del predictor.</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold">SCORE2 / SCORE2-OP / SCORE2-HF</td><td class="py-2.5 pr-3">Cohortes europeas</td><td class="py-2.5">Recalibración por región ESC; se usa la región <strong>high</strong> como proxy conservador para Venezuela/LatAm.</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold">PREVENT / QRISK3 / MESA</td><td class="py-2.5 pr-3">EE.UU. / Reino Unido</td><td class="py-2.5">Sin recalibración. PREVENT sin SDI (apropiado fuera de EE.UU.); QRISK3 NICE tal cual.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-zinc-600"><strong>Lo que no existe:</strong> coeficientes calibrados específicamente para Venezuela. La <strong>validación externa local</strong> (discriminación y calibración en una cohorte venezolana) es el siguiente paso metodológico y está prevista en el plan DECIDE-AI. Hasta entonces, las estimaciones deben interpretarse como riesgo relativo bien calibrado en su origen, con traslación regional razonada.</p>
+      </div>
+</details>
+
+      <!-- NOTAS TÉCNICAS -->
+      <details id="notas" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l-3 3 3 3"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 9l3 3-3 3"/><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l-2 14"/></svg></span><span class="pr-2">Notas técnicas de implementación</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <div class="space-y-4 text-sm">
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">PREVENT — escalado de lípidos</p>
+            <p class="text-zinc-600 mt-1">Usa colesterol no-HDL y HDL en mmol/L: no-HDL centrado en 3.5, HDL centrado en 1.3 (÷0.3). Conversión mg/dL → mmol/L × 0.02586.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">nonHdl = (tc - hdl) * 0.02586 - 3.5
+hdlC   = (hdl * 0.02586 - 1.3) / 0.3</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">PREVENT — eGFR (spline lineal)</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">egfrLt  = (Math.min(egfr, 60) - 60) / -15
+egfrGte = (Math.max(egfr, 60) - 90) / -15</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">SCORE2 — recalibración Weibull</p>
+            <p class="text-zinc-600 mt-1">Transformación cloglog con parámetros de escala (s1) y forma (s2) por sexo/edad/región.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">uncal = 1 - Math.pow(s0, Math.exp(lp - offset))
+risk  = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))))</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">SCORE2-Diabetes — HbA1c (IFCC)</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">hba1c_mmol = (hba1c - 2.15) * 10.929
+hba1cStd   = (hba1c_mmol - 31) / 9.34</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">SCORE2-CKD — predictor patch</p>
+            <p class="text-zinc-600 mt-1">Ajusta el riesgo recalibrado: 1 − (1−riesgo)^e^ΔLP. Splines de eGFR (knots 60 y 90); ACR en log base 8. Aplica sobre SCORE2 y SCORE2-OP, no sobre SCORE2-Diabetes.</p>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">SCORE2 — lineal predictor</p>
+            <p class="text-zinc-600 mt-1">Predictores centrados (edad 60, PAS 120, CT 6, HDL 1.3). Los coeficientes de diabetes se fuerzan a 0 en el flujo de prevención primaria (la DM usa SCORE2-Diabetes).</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">a5=(age-60)/5 · sbp20=(sbp-120)/20 · tc1=(tcM-6) · hdl05=(hdlM-1.3)/0.5
+lp = 0.3742·a5 + 0.6012·smk + 0.2777·sbp20 + 0.1458·tc1 - 0.2698·hdl05
+     - 0.0755·a5·smk - 0.0255·a5·sbp20 - 0.0281·a5·tc1 + 0.0426·a5·hdl05</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">SCORE2-OP — lineal predictor (≥70)</p>
+            <p class="text-zinc-600 mt-1">Edad centrada en 73, HDL centrado en 1.4 (no 1.3); región de recalibración fijada a <strong>high</strong>.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">a73=(age-73) · hdl14=(hdlM-1.4)
+lp = 0.0634·a73 + 0.3524·smk + 0.0094·(sbp-150) + 0.0850·(tcM-6) - 0.3564·hdl14
+     - 0.0247·a73·smk - 0.0005·a73·(sbp-150) + 0.0073·a73·(tcM-6) + 0.0091·a73·hdl14
+uncal = 1 - S0^exp(lp - 0.0929)   (S0 = 0.7576)
+risk  = 1 - exp(-exp(0.08 + 1.15·ln(-ln(1 - uncal))))</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">WHO-Central L.A. — doble Weibull</p>
+            <p class="text-zinc-600 mt-1">Dos ecuaciones independientes por sexo (CHD y stroke) combinadas como riesgo conjunto. Único modelo calibrado a la región.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">a=age-60 · t=tcM-6 · s=sbp-120
+lp_chd = 0.0719227·a + 0.2284944·t + 0.0132183·s + 0.6410114·dm + 0.5638109·smoke
+         - 0.0045806·a·t - 0.0001576·a·s - 0.0124966·a·dm - 0.0182545·a·smoke   [male]
+r_chd = 1 - exp(-exp(0.95826063·lp_chd - 3.35743219))
+pCVD  = 1 - (1 - r_chd)·(1 - r_stroke)</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">PREVENT 30 años — Weibull log-log</p>
+            <p class="text-zinc-600 mt-1">Versión "clínica simple" de 11 coeficientes por sexo (sin ACR/HbA1c); valida contra preventcalculator.com.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">lp = 1.4150·(ln age - ln55) + 1.5500·(lnSBP - ln130) + 0.4720·I(htnTx)
+     + 0.5580·(ln nonHDL - ln3.5) - 0.3520·(lnHDL - ln1.3) - 0.1740·I(stat)
+     - 0.3730·(ln eGFR - ln90) + 0.4350·(lnIMC - ln25) + 0.6510·DM + 0.3980·smk  [male]
+risk = 1 - 0.7211^exp(lp)   (female S0 = 0.8087)</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">MESA CaSc — Cox con calcio continuo</p>
+            <p class="text-zinc-600 mt-1">TC y HDL en mg/dL (sin convertir); el calcio entra como ln(CAC+1).</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">A = 0.0172·age + 0.4079·male + 0.3892·dm + 0.3717·smk + 0.0043·TC - 0.0114·HDL
+    + 0.1206·stat + 0.0066·SBP + 0.2278·htnTx + 0.3239·fhx + 0.2743·ln(CAC+1)   [si CAC&gt;0]
+risk = 100·(1 - 0.99833^exp(A))</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">SCORE2-HF — Weibull con ln(HR)</p>
+            <p class="text-zinc-600 mt-1">Los coeficientes se almacenan como ln(HR); incluye IMC, eGFR, HbA1c (IFCC) y tratamiento de HTA.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">cage=(age-60)/5 · csbp=(sbp-120)/20 · cbmi=(bmi-25)/5 · clne=(ln eGFR-4.5)/0.15
+lp = ln(1.58)·cage + ln(1.64)·smk + ln(1.16)·csbp + ln(1.16)·dm + ln(1.59)·I(htnTx)
+     + ln(1.36)·cbmi + ln(0.97)·clne + interacciones ·cage·smk, csbp·I(htn), dm·hba1c
+risk = 1 - 0.9885^exp(lp)   (recalibración SC región high male)</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">SMART2 — Fine-Gray recalibrado LatAm</p>
+            <p class="text-zinc-600 mt-1">Riesgo competitivo; la recalibración regional resta ln(ratio REACH LatAm) del predictor.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">lp = -0.03496022·age + 0.000551072·age² + 0.287658743·male + 0.345583271·smk
+     + 0.318170659·dm + 0.018913154·(sbp/10) + 0.540364249·ln(nonHDL_mmol)
+     + 0.151760173·ln(hsCRP) - 0.03967521·eGFR + 0.000218613·eGFR² + 0.047699585·años
+     - 0.00164973·años² + 0.294701954·CAD + 0.34831786·CVD + 0.22446658·PAD + 0.330356631·AAA
+E = lp - (-0.0463729) - ln(0.5075670)    [LP_mean y ratio LatAm REACH]
+risk = 1 - (1 - 0.165822797)^exp(E)</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">QRISK3 — Cox polinómico</p>
+            <p class="text-zinc-600 mt-1">Port fiel del algoritmo ClinRisk (LGPL) con fracciones polinómicas de edad e IMC. Tabaco simplificado a no fumador/fumador; town fijado a 0.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">dage=age/10 · age_1=dage⁻¹(-0.23477) · age_2=dage³(-77.284)
+bmi_1=(IMC/10)⁻² · bmi_2=bmi_1·ln(IMC/10)   (centrados)
+R=CT/HDL-4.301 · S=SBP-128.572 · S5=SD-SBP-8.757 · T=town-0.526
+a = -17.8398·age_1 + 0.0022965·age_2 + 2.4563·bmi_1 - 8.3011·bmi_2 + 0.1734·R
+    + 0.01291·S + 0.01025·S5 + 0.03327·T + etnia·tabaco·comorbilidades
+    + interacciones age_1× y age_2×
+risk = 100·(1 - 0.977268^exp(a))   (female survivor 0.988876)</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">CHARGE-AF — Cox Weibull</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">lp = -6.330 + 0.0495·edad + 0.4282·raza_negra + 0.0092·talla_cm + 0.0120·peso_kg
+     + 0.0074·PAS - 0.0051·PAD + 0.1570·tabaco + 0.2927·antihipertensivos
+     + 0.3853·DM + 0.9123·IC + 0.4447·IAM
+risk = 1 - 0.97175^exp(lp)   (clampeado a [0.1, 60]%)</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">KFRE — 4 variables</p>
+            <p class="text-zinc-600 mt-1">Versión de 4 variables (edad, sexo, eGFR, ACR); intercepto distinto por horizonte temporal.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">lp5 = 0.834 + 0.053·edad - 0.022·eGFR - 0.068·ln(ACR) + 0.367·mujer
+lp2 = 2.435 + 0.053·edad - 0.022·eGFR - 0.068·ln(ACR) + 0.367·mujer
+risk = (1 - S^exp(lp))·100    S(5a)=0.94376 · S(2a)=0.97468</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">GRACE 2.0 — score de puntos</p>
+            <p class="text-zinc-600 mt-1">Puntos por categorías (0-263); categorías &lt;=88 / 89-118 / &gt;=119.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">Edad: &lt;40→0 40→18 50→36 60→55 70→73 ≥80→91
+FC:   &lt;50→0 50-69→3 70-89→9 90-109→15 110-149→24 ≥150→38
+PAS:  &lt;80→58 80-99→53 100-119→43 120-139→34 140-159→24 160-199→10 ≥200→0
+Cr:   &lt;0.4→1 0.4-0.79→3 0.8-1.19→5 1.2-1.59→7 1.6-1.99→9 2.0-3.99→15 ≥4.0→20
+Killip I-IV→0/20/39/59 · paro→39 · ST elevado→28 · enzimas→14</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">FINDRISC — puntos 0-26</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">Edad: &lt;45→0 45-54→2 55-64→3 ≥65→4
+IMC:  &lt;25→0 25-30→1 &gt;30→3
+Cintura: H &lt;94→0 94-102→3 &gt;102→4 · M &lt;80→0 80-88→3 &gt;88→4
++2 sin actividad · +1 dieta pobre · +2 HTA · +5 glucosa elevada
+FH DM: 1er grado→5 · otro→3
+Categorías: &lt;7→≈1% · 7-11→≈4% · 12-14→≈17% · 15-20→≈33% · ≥21→≈50%</pre>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">Scores de FA y sangrado — puntos</p>
+            <p class="text-zinc-600 mt-1">CHA2DS2-VA: edad 65-74→1 / ≥75→2 · IC→1 · HTA→1 · DM→1 · ictus previo→2 · enf. vascular→1 (0-8). El sexo NO puntúa (ESC 2024).</p>
+            <p class="text-zinc-600 mt-1">HAS-BLED: PAS&gt;160→1 · renal→1 · hepática→1 · ictus→1 · sangrado→1 · INR lábil→1 · edad&gt;65→1 · alcohol/drogas→1 (0-8).</p>
+            <p class="text-zinc-600 mt-1">ORBIT: edad≥74→1 · eGFR&lt;60→1 · sangrado previo→1 · antiagregante→1 · Hgb &lt;13/&lt;12→1 (0-5).</p>
+            <p class="text-zinc-600 mt-1">APPLE: edad&gt;65→1 · FA persistente→1 · eGFR&lt;60→1 · AI≥47mm→1 · FEVI&lt;50%→1 (0-5).</p>
+          </div>
+          <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+            <p class="font-bold text-zinc-800">SPI-II y ARC-HBR</p>
+            <p class="text-zinc-600 mt-1">SPI-II (0-7): edad≥70→2 · DM→1 · HTA→1 · IAM previo→1 · ictus carotídeo→1 · IC→1 · EAP→1. Categorías: 0-1→8-14% · 2→≈21% · 3→≈27% · ≥4→35-49%.</p>
+            <p class="text-zinc-600 mt-1">ARC-HBR (regla booleana): HBR si (≥1 criterio MAYOR) o (≥2 criterios MENORES). Mayores: sangrado mayor previo, anemia grave (Hgb&lt;10), trombocitopenia (&lt;100), cirugía mayor reciente, IC moderada/grave, malignidad activa, ictus hemorrágico previo, DAPT prolongada, SCA/CRM. Menores: edad≥75, DM2, plaquetas 100-150, anemia leve (Hgb 11-13), eGFR&lt;60, AINEs a altas dosis.</p>
+          </div>
+        </div>
+      </div>
+</details>
+
+
+      <!-- Variables, rangos y manejo de datos -->
+<details id="variables" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16"/><circle cx="9" cy="8" r="2"/><circle cx="15" cy="16" r="2"/></svg></span><span class="pr-2">Variables, rangos y manejo de datos</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">Reglas transversales: conversión mg/dL → mmol/L ×0.02586 (÷38.67); sin imputación de datos clínicos (excepto hsCRP = 2.0 por defecto en SMART2, documentado); salida clampeada a [0.1, 99.9]% con 1 decimal.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-3 font-bold">Variable</th><th class="py-2 pr-3 font-bold">Unidad</th><th class="py-2 pr-3 font-bold">Rango aceptado</th><th class="py-2 pr-3 font-bold">Fuera de rango</th><th class="py-2 font-bold">Obligatoria</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">Edad</td><td class="py-2 pr-3">años</td><td class="py-2 pr-3">20-95</td><td class="py-2 pr-3">Aviso; ruta según modelo (SCORE2 40-69, OP 70-89, PREVENT 30-79)</td><td class="py-2">Sí</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">Sexo</td><td class="py-2 pr-3">M / F</td><td class="py-2 pr-3">-</td><td class="py-2 pr-3">-</td><td class="py-2">Sí</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">Tabaquismo</td><td class="py-2 pr-3">sí / no</td><td class="py-2 pr-3">-</td><td class="py-2 pr-3">-</td><td class="py-2">Sí</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">PAS</td><td class="py-2 pr-3">mmHg</td><td class="py-2 pr-3">80-220</td><td class="py-2 pr-3">Aviso</td><td class="py-2">Sí</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">PAD</td><td class="py-2 pr-3">mmHg</td><td class="py-2 pr-3">40-140</td><td class="py-2 pr-3">Aviso</td><td class="py-2">Opcional</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">CT / LDL / HDL</td><td class="py-2 pr-3">mg/dL</td><td class="py-2 pr-3">CT 100-400 · LDL 20-300 · HDL 20-100</td><td class="py-2 pr-3">Aviso</td><td class="py-2">Según modelo</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">IMC</td><td class="py-2 pr-3">kg/m²</td><td class="py-2 pr-3">15-60</td><td class="py-2 pr-3">Aviso</td><td class="py-2">Opcional</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">eGFR</td><td class="py-2 pr-3">mL/min/1.73m²</td><td class="py-2 pr-3">5-140</td><td class="py-2 pr-3">Aviso; splines del modelo</td><td class="py-2">Opcional (obligatoria en ERC/DM)</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">Creatinina</td><td class="py-2 pr-3">mg/dL</td><td class="py-2 pr-3">0.3-15</td><td class="py-2 pr-3">Aviso</td><td class="py-2">Opcional</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">ACR</td><td class="py-2 pr-3">mg/g</td><td class="py-2 pr-3">5-5000</td><td class="py-2 pr-3">Aviso</td><td class="py-2">Opcional</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">HbA1c</td><td class="py-2 pr-3">%</td><td class="py-2 pr-3">4-15</td><td class="py-2 pr-3">Aviso</td><td class="py-2">SCORE2-Diabetes obliga</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">hsCRP</td><td class="py-2 pr-3">mg/L</td><td class="py-2 pr-3">0.1-50</td><td class="py-2 pr-3">Default 2.0 si falta (SMART2)</td><td class="py-2">Opcional</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">Lp(a)</td><td class="py-2 pr-3">mg/dL</td><td class="py-2 pr-3">5-300</td><td class="py-2 pr-3">Modifier (≥50 sube)</td><td class="py-2">Opcional</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">CAC</td><td class="py-2 pr-3">AU</td><td class="py-2 pr-3">0-3000</td><td class="py-2 pr-3">Modifier (100-299 alto, ≥300 muy alto, 0 reduce)</td><td class="py-2">Opcional</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2 pr-3 font-semibold">Años desde el evento</td><td class="py-2 pr-3">años</td><td class="py-2 pr-3">0-30</td><td class="py-2 pr-3">Aviso</td><td class="py-2">SMART2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm text-zinc-600">Ítems TRIPOD 8-9: no se añaden participantes ni se imputan datos; cada campo valida su rango y los opcionales se indican en la interfaz.</p>
+      </div>
+</details>
+
+      <!-- LIMITACIONES -->
+      <details id="limitaciones" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 17h.01"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span><span class="pr-2">Limitaciones conocidas</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">PREVENT — SDI</p><p class="text-zinc-600 text-[13px] leading-relaxed">Se usa la versión sin índice de deprivación social (apropiada fuera de EE.UU.).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">SCORE2 en &lt;40 años</p><p class="text-zinc-600 text-[13px] leading-relaxed">No aplica (ESC); la app advierte y sugiere enfoque de estilo de vida / riesgo relativo.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">SCORE2-Diabetes sin HbA1c</p><p class="text-zinc-600 text-[13px] leading-relaxed">Si falta HbA1c, eGFR o edad al diagnóstico se usa SCORE2 base con diabetes (práctica de consenso).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">QRISK4</p><p class="text-zinc-600 text-[13px] leading-relaxed">Supera a QRISK3 pero sus coeficientes no están publicados; se usa QRISK3 (NICE).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">PRECISE-DAPT</p><p class="text-zinc-600 text-[13px] leading-relaxed">Validado en la era clopidogrel; precaución con prasugrel/ticagrelor.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">SMART2</p><p class="text-zinc-600 text-[13px] leading-relaxed">La validación externa sugiere que tiende a subestimar el riesgo recurrente en poblaciones vulnerables.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4 md:col-span-2"><p class="font-bold text-zinc-900 mb-1.5">Calibración regional</p><p class="text-zinc-600 text-[13px] leading-relaxed">Los coeficientes WHO-Central L.A. y SMART2-LatAm se reconstruyeron de los charts/cohortes publicados.</p></div>
+        </div>
+      </div>
+</details>
+
+      <!-- GLOSARIO -->
+      <details id="glosario" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 4h6a4 4 0 0 1 4 4v12a4 4 0 0 0-4-4H2z"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 4h-6a4 4 0 0 0-4 4v12a4 4 0 0 1 4-4h6z"/></svg></span><span class="pr-2">Glosario</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">ASCVD</p><p class="text-zinc-600 text-[13px]">Enfermedad cardiovascular aterosclerótica (IAM, ACV, EAP, AAA).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">eGFR</p><p class="text-zinc-600 text-[13px]">Filtrado glomerular estimado (CKD-EPI 2021).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">ACR</p><p class="text-zinc-600 text-[13px]">Albúmina/creatinina en orina (mg/g); ≥30 microalbuminuria.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">non-HDL</p><p class="text-zinc-600 text-[13px]">Colesterol no-HDL = CT − HDL.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">CKM</p><p class="text-zinc-600 text-[13px]">Síndrome Cardiovascular-Renal-Metabólico (AHA 2023).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">Lp(a)</p><p class="text-zinc-600 text-[13px]">Lipoproteína(a); ≥50 mg/dL eleva el riesgo.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">CAC</p><p class="text-zinc-600 text-[13px]">Calcio coronario (score de Agatston).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">hsCRP</p><p class="text-zinc-600 text-[13px]">PCR ultrasensible (mg/L); marcador de inflamación.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">KFRE</p><p class="text-zinc-600 text-[13px]">Kidney Failure Risk Equation: riesgo de fallo renal en ERC.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">PREVENT 30</p><p class="text-zinc-600 text-[13px]">Riesgo de ECV a 30 años (AHA 2024, Khan); la ecuación 30 años de Pencina (Framingham 2009) queda como referencia histórica.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">DAPT</p><p class="text-zinc-600 text-[13px]">Doble terapia antiplaquetaria (aspirina + P2Y12).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900">Killip</p><p class="text-zinc-600 text-[13px]">Clasificación de la insuficiencia cardíaca en el IAM (I-IV).</p></div>
+        </div>
+      </div>
+</details>
+
+
+      <!-- Definiciones operativas -->
+<details id="definiciones" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2H9z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2 2 4-4"/></svg></span><span class="pr-2">Definiciones operativas</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Tabaquismo</p><p class="text-zinc-600 text-[13px] leading-relaxed">≥1 cigarrillo (o equivalente) al día en el último mes en la evaluación. Exfumador se registra como no fumador.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Diabetes mellitus</p><p class="text-zinc-600 text-[13px] leading-relaxed">HbA1c ≥6.5% (48 mmol/mol), glucemia en ayunas ≥126 mg/dL, glucemia al azar ≥200 mg/dL con síntomas, o en tratamiento antidiabético.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">eGFR (CKD-EPI 2021)</p><p class="text-zinc-600 text-[13px] leading-relaxed">142 · min(Cr/κ, 1)ᵅ · max(Cr/κ, 1)⁻¹·² · 0.9938^edad; κ = 0.7 (M) / 0.9 (F), α = −0.241 / −0.302. Sin coeficiente de raza.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">ACR</p><p class="text-zinc-600 text-[13px] leading-relaxed">Albúmina/creatinina en orina puntual (mg/g). ≥30 microalbuminuria; ≥300 macroalbuminuria.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Región ESC</p><p class="text-zinc-600 text-[13px] leading-relaxed">Clasificación nacional de riesgo de la ESC (low / moderate / high / very high). Venezuela no tiene región propia; CardioScore usa <strong>high</strong>.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Enfermedad vascular (CHA2DS2-VA)</p><p class="text-zinc-600 text-[13px] leading-relaxed">IAM previo, enfermedad arterial periférica o placa aórtica.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Edad vascular</p><p class="text-zinc-600 text-[13px] leading-relaxed">Edad a la que un paciente con factores óptimos tendría el mismo riesgo absoluto del paciente evaluado.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Lp(a) elevada</p><p class="text-zinc-600 text-[13px] leading-relaxed">≥50 mg/dL (≈125 nmol/L), según ESC/EAS 2025: sube una categoría de riesgo.</p></div>
+        </div>
+      </div>
+</details>
+
+      <!-- REPORTE -->
+      <details id="reporte" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="pr-2">Estándares de reporte: TRIPOD 2025, PROBAST y rendimiento</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">CardioScore es una implementación de modelos publicados y validados (no deriva modelos nuevos). La documentación sigue <strong>TRIPOD 2025</strong>, se autoevalúa con <strong>PROBAST</strong>, cuenta con <strong>validación clínica institucional</strong> y está preparada para <strong>DECIDE-AI</strong>.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Alcance <span class="text-zinc-500 text-[11px]">ítems 1-5</span></p><p class="text-zinc-600 text-[13px] leading-relaxed">Herramienta de implementación; esta página es el reporte. Los modelos derivan de sus cohortes originales (Framingham, QResearch, MESA, ESC/WHO); no se añaden participantes.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Modelos y datos <span class="text-zinc-500 text-[11px]">ítems 6-7, 9</span></p><p class="text-zinc-600 text-[13px] leading-relaxed">Cada modelo documenta su outcome y predictores. Campos opcionales con validación por rango; no se imputan datos clínicos.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Fórmulas y umbrales <span class="text-zinc-500 text-[11px]">ítems 10-11</span></p><p class="text-zinc-600 text-[13px] leading-relaxed">Fórmulas completas y bandas (ESC 2/10/20 · AHA 3/5/10).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Validación y rendimiento <span class="text-zinc-500 text-[11px]">ítems 13, 16-17</span></p><p class="text-zinc-600 text-[13px] leading-relaxed">Vectores de validación, tabla de rendimiento y recalibraciones documentadas (SMART2-LatAm, WHO-CLA reconstruido).</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4 md:col-span-2"><p class="font-bold text-zinc-900 mb-1.5">Interpretación e implicaciones <span class="text-zinc-500 text-[11px]">ítems 18-20</span></p><p class="text-zinc-600 text-[13px] leading-relaxed">Limitaciones, interpretación e implicaciones clínicas documentadas.</p></div>
+        </div>
+
+        <div class="mt-4 rounded-xl border border-accent/20 bg-accent-50/40 p-4 text-sm">
+          <p class="font-bold text-accent-700 mb-2">Plan de evaluación prospectiva (DECIDE-AI)</p>
+          <p class="text-zinc-700 text-[13px] leading-relaxed mb-3">La herramienta está preparada para una <strong>evaluación en etapa temprana</strong> (fase 2 de DECIDE-AI) con el Postgrado de Cardiología:</p>
+          <ul class="space-y-1.5 text-[13px] text-zinc-700">
+            <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0">1</span><strong>Población:</strong> pacientes de la consulta de cardiología (Venezuela), prevención primaria y secundaria.</li>
+            <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0">2</span><strong>Diseño:</strong> validación externa local; comparación de la categoría de riesgo y la meta de LDL vs el juicio del cardiólogo.</li>
+            <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0">3</span><strong>Desenlaces:</strong> exactitud de la categoría, usabilidad, y calibración local (C-index y ratio O:E) del modelo principal.</li>
+            <li class="flex gap-2"><span class="w-5 h-5 rounded-full bg-accent-50 text-accent text-[11px] font-bold inline-flex items-center justify-center shrink-0">4</span><strong>Criterios de adopción:</strong> concordancia ≥80% con el juicio clínico y no inferioridad en la clasificación de riesgo alto.</li>
+          </ul>
+        </div>
+      </div>
+</details>
+
+
+      <!-- Transparencia, independencia y versionado -->
+<details id="transparencia" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4M12 16h.01"/></svg></span><span class="pr-2">Transparencia, independencia y versionado</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm mb-4">
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Autoría</p><p class="text-zinc-600 text-[13px] leading-relaxed">Ing. Alexander Matson: diseño, matemática, implementación y documentación. Validación institucional: Postgrado de Cardiología — Hospital Ruiz y Páez.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Financiación y conflictos</p><p class="text-zinc-600 text-[13px] leading-relaxed">Sin financiación externa ni de la industria farmacéutica. Ningún conflicto de interés que declarar.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Código y auditabilidad</p><p class="text-zinc-600 text-[13px] leading-relaxed">El motor es auditable por vectores reproducibles (Validación técnica) y el código fuente está disponible para auditoría académica bajo solicitud.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Cómo citar</p><p class="text-zinc-600 text-[13px] leading-relaxed"><span class="font-mono text-[12px]">Matson A. CardioScore: herramienta de estratificación de riesgo cardiovascular. Versión 3.3; 2026. Disponible en: https://cardioscore.matsonsoft.com/metodologia.html</span></p></div>
+        </div>
+        <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4 text-sm">
+          <p class="font-bold text-zinc-900 mb-2">Changelog</p>
+          <ul class="space-y-2 text-[13px] text-zinc-700">
+            <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.3 · ago 2026</span><span>SCORE2-HF (ESC 2026); marco AHA/ACC 2026 con PREVENT a 10 y 30 años; 21 calculadoras; modo automático por escenarios; este documento de metodología.</span></li>
+            <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.2</span><span>Comparativa de modelos; reclasificación por risk modifiers; validación técnica ampliada.</span></li>
+            <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.1</span><span>Notación TRIPOD 2025 / PROBAST; glosario y poblaciones especiales.</span></li>
+            <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.0</span><span>Motor SCORE2, PREVENT y WHO-Central L.A.; marco ESC/EAS 2025.</span></li>
+          </ul>
+        </div>
+      </div>
+</details>
+
+
+      <!-- Privacidad y seguridad de los datos -->
+<details id="privacidad" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg></span><span class="pr-2">Privacidad y seguridad de los datos</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5 flex items-center gap-1.5"><svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>Cálculo 100% local</p><p class="text-zinc-600 text-[13px] leading-relaxed">Todo el cálculo ocurre en tu navegador. No se envían datos clínicos a ningún servidor ni se almacenan en línea.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5 flex items-center gap-1.5"><svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>Sin cuentas ni cookies de seguimiento</p><p class="text-zinc-600 text-[13px] leading-relaxed">No requiere registro y no usa cookies de rastreo ni analítica de terceros.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">Datos de pacientes guardados</p><p class="text-zinc-600 text-[13px] leading-relaxed">Si guardas un paciente, queda solo en el <strong>almacenamiento local de tu dispositivo</strong> (localStorage) y puede borrarse en cualquier momento. No sale de tu navegador.</p></div>
+          <div class="rounded-xl border border-amber-200 bg-amber-50/40 p-4"><p class="font-bold text-amber-800 mb-1.5">Recomendación</p><p class="text-zinc-700 text-[13px] leading-relaxed">No introduzcas identificadores reales del paciente (nombre, cédula, historia clínica). Usa iniciales o un código interno.</p></div>
+        </div>
+      </div>
+</details>
+
+      <!-- REFERENCIAS -->
+      <details id="referencias" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span><span class="pr-2">Fundamentos y referencias</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        
+        <ul class="text-sm text-zinc-700 space-y-1.5 list-disc pl-5 sm:columns-2 sm:space-y-1.5 [&amp;&gt;li]:break-inside-avoid lg:gap-8">
+          <li>SCORE2. <em>Eur Heart J</em> 2021;42(25):2439-2454.</li>
+          <li>SCORE2-OP. <em>Eur Heart J</em> 2021;42(25):2455-2467.</li>
+          <li>SCORE2-Diabetes. <em>Eur Heart J</em> 2023;44(28):2544-2556.</li>
+          <li>SCORE2-CKD. <em>Eur J Prev Cardiol</em> 2023;30(1):8-16.</li>
+          <li>PREVENT. <em>Circulation</em> 2024;149:430-449.</li>
+          <li>SMART2. <em>Eur Heart J</em> 2022;43(18):1715-1727.</li>
+          <li>CKM Syndrome. <em>Circulation</em> 2023;148:1606-1635.</li>
+          <li>WHO CVD Risk Chart Working Group. <em>Lancet Global Health</em> 2019;7(10):e1332-e1345.</li>
+          <li>CKD-EPI 2021. <em>N Engl J Med</em> 2021;385(19):1737-1749.</li>
+          <li>2021 ESC Guidelines on CVD prevention. <em>Eur Heart J</em> 2021;42(34):3227-3337.</li>
+          <li>SCORE2-HF. <em>Eur Heart J</em> 2026 (DOI 10.1093/eurheartj/ehag154).</li>
+          <li>2025 ESC/EAS Guidelines on dyslipidaemias. <em>Eur Heart J</em> 2025 (DOI 10.1093/eurheartj/ehaf190).</li>
+          <li>QRISK3. Hippisley-Cox J, et al. <em>BMJ Open</em> 2017;7(1):e017875.</li>
+          <li>MESA 10-year CHD risk. McClelland RL, et al. <em>J Am Coll Cardiol</em> 2015;66(15):1643-1653.</li>
+          <li>PRECISE-DAPT. Costa F, et al. <em>Lancet</em> 2017;389(10073):1025-1034.</li>
+          <li>FINDRISC. Lindström J, Tuomilehto J. <em>Diabetes Care</em> 2003;26(3):725-731.</li>
+          <li>CHA2DS2-VASc. Lip GYH, et al. <em>Chest</em> 2010;137(2):263-272.</li>
+          <li>HAS-BLED. Pisters R, et al. <em>Chest</em> 2010;138(5):1093-1100.</li>
+          <li>GRACE 2.0. Fox KAA, et al. <em>BMJ</em> 2014;349:g4938.</li>
+          <li>SPI-II. Kerr GD, et al. <em>Stroke</em> 2001;32(12):2735-2740.</li>
+          <li>2026 ACC/AHA Guideline on the Management of Dyslipidemia. <em>J Am Coll Cardiol</em> 2026.</li>
+          <li>Lifetime CVD risk. Lloyd-Jones DM, et al. <em>JAMA</em> 2006;296(2):185-194.</li>
+        </ul>
+      </div>
+
+      <!-- Reportar un error o auditar -->
+
+</details>
+
+<details id="feedback" class="bg-white border border-zinc-200 rounded-2xl overflow-hidden scroll-mt-24">
+<summary class="cursor-pointer select-none font-display font-bold text-lg text-zinc-900 px-6 md:px-8 py-4 flex items-center justify-between gap-2"><span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v12H7l-3 4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 9h8M8 13h5"/></svg></span><span class="pr-2">Reportar un error o auditar</span></span> <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></summary>
+<div class="px-6 md:px-8 pb-6 pt-4 border-t border-zinc-100">
+        <div class="rounded-xl border border-zinc-200 p-4 text-sm">
+          <p class="font-bold text-zinc-900 mb-2">Discrepancia de un vector, bug o sugerencia</p>
+          <p class="text-zinc-600 text-[13px] leading-relaxed mb-3">Para una auditoría útil, incluye: modelo, valores de entrada, resultado esperado (con la fuente oficial) y resultado obtenido en CardioScore.</p>
+          <a href="mailto:matson@matsonsoft.com" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-5 py-3 min-h-[44px] text-sm transition active:scale-[0.98]">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v12H7l-3 4z"/></svg>
+            matson@matsonsoft.com
+          </a>
+          <p class="text-zinc-500 text-[12px] mt-3">Cada corrección se documenta en el changelog y se re-verifica con los vectores antes de publicarse.</p>
+        </div>
+      </div>
+</details>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="mt-10 bg-white border border-zinc-200 rounded-2xl p-8 text-center">
+    <h2 class="font-display font-bold text-2xl tracking-tight text-zinc-900">Verifica los números tú mismo</h2>
+    <p class="text-zinc-500 mt-2 max-w-xl mx-auto">Usa la herramienta con un caso real y reproduce los resultados con estos vectores. Todo es auditable.</p>
+    <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+      <a href="index.html" class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-8 py-3.5 min-h-[52px] text-base transition active:scale-[0.98]">Empezar una evaluación</a>
+      <a href="tools/index.html" class="inline-flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-200 rounded-lg px-6 py-3.5 min-h-[52px] hover:bg-zinc-50 transition active:scale-[0.98]">Ver calculadoras por escala</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t border-zinc-200 bg-white mt-10">
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 items-start">
+      <div>
+        <div class="flex items-center gap-2.5 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+          </div>
+          <p class="font-display font-bold text-sm text-zinc-900">CardioScore</p>
+          <span class="text-[11px] font-semibold text-zinc-500 border border-zinc-200 rounded px-1.5 py-0.5">v3.3</span>
+        </div>
+        <p class="text-[13px] text-zinc-600 leading-relaxed max-w-md">Estratificación del riesgo cardiovascular con los modelos más actualizados (ESC, AHA, OMS), metodología abierta y validación institucional. Todo el cálculo ocurre en tu navegador.</p>
+        <div class="mt-4">
+          <p class="text-[13px] font-semibold text-zinc-600 mb-2.5">Construida por <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="footer-link underline underline-offset-2">Ing. Alexander Matson</a> y validada por:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+              Postgrado de Cardiología — Hospital Ruiz y Páez
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="md:justify-self-end">
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Enlaces</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="index.html" class="text-zinc-600 hover:text-accent transition-colors">Inicio</a></li>
+          <li><a href="tools/index.html" class="text-zinc-600 hover:text-accent transition-colors">Calculadoras</a></li>
+          <li><a href="metodologia.html" class="text-zinc-600 hover:text-accent transition-colors">Metodología</a></li>
+          <li><a href="metodologia.html#feedback" class="text-zinc-600 hover:text-accent transition-colors">Reportar un error</a></li>
+          <li><a href="terminos.html" class="text-zinc-600 hover:text-accent transition-colors">Términos de uso</a></li>
+        </ul>
+        <div class="mt-5 space-y-2 text-sm">
+          <a href="mailto:matson@matsonsoft.com" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v12H7l-3 4z"/></svg>matson@matsonsoft.com</a>
+          <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>matsonsoft.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 pt-6 border-t border-zinc-200">
+      <p class="text-xs text-zinc-500 leading-relaxed max-w-5xl mx-auto text-center">Los resultados son estimaciones probabilísticas basadas en modelos de población y guías internacionales (ESC/EAS, AHA, OMS);<br>deben interpretarse en el contexto clínico de cada paciente y no sustituyen el juicio profesional, el diagnóstico ni la consejería médica personalizada.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var el = document.getElementById('pac_count');
+  if (!el) return;
+  try {
+    var perfil = (localStorage.getItem('cs_perfil') || 'general');
+    var lista = JSON.parse(localStorage.getItem('cs_pacientes_' + perfil) || '[]');
+    el.textContent = lista.length;
+    el.classList.toggle('hidden', lista.length === 0);
+  } catch (e) {}
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_menu'), menu = document.getElementById('menu_movil');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); }
+  });
+})();
+</script>
+<button id="btn_arriba" class="hidden fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-accent text-white shadow-lg items-center justify-center transition hover:bg-accent-700 active:scale-95" aria-label="Volver arriba">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<script>
+(function () {
+  var input = document.getElementById('buscar_indice'), btn = document.getElementById('btn_arriba');
+  if (input) {
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      document.querySelectorAll('main mark').forEach(function (m) { m.replaceWith(document.createTextNode(m.textContent)); });
+      document.querySelectorAll('aside nav a[href^="#"]').forEach(function (a) {
+        var d = document.querySelector(a.getAttribute('href'));
+        var hit = d && d.textContent.toLowerCase().indexOf(q) !== -1;
+        a.classList.toggle('hidden', q !== '' && !hit);
+      });
+      if (q === '') return;
+      document.querySelectorAll('main details[id]').forEach(function (d) {
+        if (d.textContent.toLowerCase().indexOf(q) === -1) return;
+        d.setAttribute('open', '');
+        var walker = document.createTreeWalker(d, NodeFilter.SHOW_TEXT);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(function (node) {
+          var txt = node.textContent.toLowerCase();
+          var idx = txt.indexOf(q);
+          if (idx === -1 || !node.parentElement || node.parentElement.closest('summary')) return;
+          var span = document.createElement('mark');
+          span.className = 'bg-amber-200 rounded-sm px-0.5';
+          var frag = document.createDocumentFragment();
+          frag.appendChild(document.createTextNode(node.textContent.slice(0, idx)));
+          span.appendChild(document.createTextNode(node.textContent.slice(idx, idx + q.length)));
+          frag.appendChild(span);
+          frag.appendChild(document.createTextNode(node.textContent.slice(idx + q.length)));
+          node.parentNode.replaceChild(frag, node);
+        });
+      });
+    });
+  }
+  if (btn) {
+    window.addEventListener('scroll', function () {
+      var show = window.scrollY > 600;
+      btn.classList.toggle('hidden', !show);
+      btn.classList.toggle('inline-flex', show);
+    });
+    btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  }
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_met_todo');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      var abrir = btn.textContent.trim().indexOf('Expandir') === 0;
+      document.querySelectorAll('main details[id]:not(#indice_det)').forEach(function (d) {
+        if (abrir) d.setAttribute('open', '');
+        else d.removeAttribute('open');
+      });
+      btn.textContent = abrir ? 'Colapsar todo' : 'Expandir todo';
+    });
+  }
+  document.querySelectorAll('main a[href^="#"], aside nav a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var d = document.querySelector(a.getAttribute('href'));
+      if (d && d.tagName === 'DETAILS') d.setAttribute('open', '');
+      if (window.innerWidth < 768 && det) det.removeAttribute('open');
+    });
+  });
+  if (btn && window.innerWidth < 1024) {
+    var abiertas = document.querySelectorAll('main details[id]:not(#indice_det)[open]').length;
+    var total = document.querySelectorAll('main details[id]:not(#indice_det)').length;
+    if (abiertas < total / 2) btn.textContent = 'Expandir todo';
+  }
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var secciones = Array.from(document.querySelectorAll('main details[id]'));
+  var links = Array.from(document.querySelectorAll('aside nav a[href^="#"]'));
+  function spy() {
+    var pos = window.scrollY + 160;
+    var actual = null;
+    for (var i = 0; i < secciones.length; i++) { if (secciones[i].offsetTop <= pos) actual = secciones[i].id; }
+    links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + actual); });
+  }
+  var det = document.getElementById('indice_det');
+  if (det && window.innerWidth < 768) det.removeAttribute('open');
+  var prog = document.getElementById('barra_progreso');
+  function upd() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0) + '%';
+  }
+  window.addEventListener('scroll', function () { spy(); upd(); }, { passive: true });
+  window.addEventListener('resize', upd, { passive: true });
+  spy(); upd();
+  var h = window.location.hash;
+  if (h) {
+    var hd = document.querySelector(h);
+    if (hd && hd.tagName === 'DETAILS') {
+      hd.setAttribute('open', '');
+      setTimeout(function () { hd.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    }
+  }
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_tema');
+  if (!btn) return;
+  function aplicar() {
+    var dark = document.documentElement.classList.contains('dark');
+    var s = document.getElementById('ico_sol'), l = document.getElementById('ico_luna');
+    if (s) s.classList.toggle('hidden', !dark);
+    if (l) l.classList.toggle('hidden', dark);
+    var mt = document.querySelector('meta[name="theme-color"]');
+    if (mt) mt.setAttribute('content', dark ? '#0C111A' : '#0054A6');
+  }
+  aplicar();
+  btn.addEventListener('click', function () {
+    document.documentElement.classList.add('theme-transition');
+    document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('cs_tema', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+    aplicar();
+    clearTimeout(window._ttm);
+    window._ttm = setTimeout(function () { document.documentElement.classList.remove('theme-transition'); }, 220);
+  });
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  document.querySelectorAll('input[type="number"]').forEach(function (inp) {
+    var min = inp.min !== '' ? parseFloat(inp.min) : -Infinity;
+    var max = inp.max !== '' ? parseFloat(inp.max) : Infinity;
+    inp.addEventListener('keydown', function (e) {
+      if (['e', 'E', '+'].indexOf(e.key) !== -1 || (e.key === '-' && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('paste', function (e) {
+      var txt = (e.clipboardData || window.clipboardData).getData('text');
+      if (!txt || /[^0-9.,-]/.test(txt) || (txt.indexOf('-') !== -1 && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('blur', function () {
+      var v = parseFloat(inp.value);
+      if (isNaN(v)) return;
+      if (v < min) inp.value = min;
+      else if (v > max) inp.value = max;
+    });
+  });
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); }); }
+</script>
+</body>
+</html>

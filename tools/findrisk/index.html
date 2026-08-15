@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try { if (localStorage.getItem('cs_tema') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}</script>
+<title>Calculadora FINDRISC — riesgo de diabetes tipo 2 a 10 años | CardioScore</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="manifest" href="../../manifest.json">
+<link rel="apple-touch-icon" href="../../icons/icon-192.png">
+<meta name="theme-color" content="#0054A6">
+<meta name="description" content="Calculadora FINDRISC (Finnish Diabetes Risk Score): riesgo de desarrollar diabetes tipo 2 en 10 años mediante puntuación de 0 a 26. Con interpretación por categorías y guía de prevención.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cardioscore.matsonsoft.com/tools/findrisk/">
+<meta property="og:title" content="Calculadora FINDRISC de riesgo de diabetes tipo 2 — CardioScore">
+<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:description" content="Riesgo de diabetes tipo 2 a 10 años según la escala FINDRISC (0-26 puntos). Con interpretación y guía de prevención.">
+<meta property="og:type" content="website">
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DmjHF4fQ8Rkfu3Jz2fUQgXWMbTrbFwRAkpoLiAmpJjSb', { api_host: 'https://app.posthog.com', persistence: 'localStorage+cookie', autocapture: true, disable_session_recording: true, property_blacklist: ['$current_url'] });
+  posthog.register({ app: 'cardioscore', app_version: '3.3' });
+</script>
+<script>
+  function trackCS(n, p) {
+    try {
+      var id = localStorage.getItem('cs_anon_id');
+      if (!id) { id = 'anon-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10); localStorage.setItem('cs_anon_id', id); }
+      if (id && window.posthog) { posthog.identify(id); posthog.capture(n, p || {}); }
+    } catch (e) {}
+  }
+  trackCS('cs_visita', {});
+  try {
+    var _p = location.pathname.split('/').filter(Boolean);
+    var _slug = _p[_p.length - 2] === 'tools' ? 'hub' : (_p[_p.length - 2] || 'index');
+    trackCS('cs_visita_calculadora', { slug: _slug });
+    document.addEventListener('click', function (ev) {
+      var _t = ev.target && ev.target.closest ? ev.target.closest('#calcular, #btn_calcular, [data-calcular]') : null;
+      if (_t) { try { trackCS('cs_calcular', { slug: _slug }); } catch (e) {} }
+    });
+  } catch (e) {}
+</script>
+
+</script>
+<link rel="stylesheet" href="../../tailwind.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid #0054A6; outline-offset: 2px; border-radius: 4px; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: background-color .18s ease, color .18s ease, border-color .18s ease !important; }
+  .dark .bg-white { background-color: #141A24 !important; }
+  .dark .bg-zinc-50 { background-color: #0C111A !important; }
+  .dark .bg-zinc-100 { background-color: #1A212D !important; }
+  .dark .bg-accent-50 { background-color: #0F2233 !important; }
+  .dark .text-zinc-900 { color: #E8E8EC !important; }
+  .dark .text-zinc-700 { color: #D4D4D8 !important; }
+  .dark .text-zinc-600, .dark .text-zinc-500 { color: #A1A1AA !important; }
+  .dark .text-zinc-500 { color: #8E8E96 !important; }
+  .dark .border-zinc-200, .dark .border-zinc-300, .dark .border-slate-200 { border-color: #262E3C !important; }
+  .dark header { background-color: #11161F !important; border-color: #262E3C !important; }
+  .dark input, .dark select, .dark textarea { background-color: #141A24 !important; border-color: #333C4D !important; color: #E8E8EC !important; }
+  .dark .bg-red-50 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-50 { background-color: #33271A !important; }
+  .dark .bg-emerald-50 { background-color: #14301F !important; }
+  .dark .bg-blue-50 { background-color: #14283A !important; }
+  .dark .text-red-700, .dark .text-red-800, .dark .text-red-600 { color: #F2A6A6 !important; }
+  .dark .text-amber-800, .dark .text-amber-700 { color: #F0C987 !important; }
+  .dark .text-emerald-700, .dark .text-emerald-800 { color: #A7E3C0 !important; }
+  .dark .text-blue-700, .dark .text-blue-800 { color: #A9CFF2 !important; }
+  .dark .border-red-200 { border-color: #5A2A30 !important; }
+  .dark .border-amber-200 { border-color: #5A4630 !important; }
+  .dark .border-emerald-200 { border-color: #2A5A40 !important; }
+  .dark .border-blue-200 { border-color: #2A4A6A !important; }
+  .dark .text-accent { color: #8AB4F8 !important; }
+  .dark .text-accent-700 { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent:hover { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent-700:hover { color: #8AB4F8 !important; }
+  .dark .text-zinc-800 { color: #D4D4D8 !important; }
+  .dark .text-ink { color: #E8E8EC !important; }
+  .dark .bg-accent { background-color: #1E6BB8 !important; }
+  .dark .bg-accent-700 { background-color: #1E6BB8 !important; }
+  .dark .border-accent { border-color: #4A7FC0 !important; }
+  .dark .border-accent\/20 { border-color: rgba(74, 127, 192, .32) !important; }
+  .dark .border-accent\/30 { border-color: rgba(74, 127, 192, .4) !important; }
+  .dark .bg-zinc-200 { background-color: #333C4D !important; }
+  .dark .bg-zinc-300 { background-color: #3A4455 !important; }
+  .dark .bg-zinc-50\/95 { background-color: rgba(12, 17, 26, 0.95) !important; }
+  .dark .peer:checked ~ .peer-checked\:bg-white { background-color: #2A3442 !important; }
+  .dark .shadow-sm, .dark .shadow { box-shadow: 0 1px 3px rgba(0,0,0,.5) !important; }
+  .dark .shadow-xl { box-shadow: 0 20px 40px rgba(0,0,0,.6) !important; }
+  .dark .shadow-2xl { box-shadow: 0 25px 50px rgba(0,0,0,.6) !important; }
+  .dark .req-tag { background: #1A212D !important; color: #D4D4D8 !important; }
+  .dark .req-tag-acc { background: #0F2233 !important; border-color: rgba(74,127,192,.3) !important; color: #8AB4F8 !important; }
+  .dark .bg-red-100 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-100 { background-color: #33271A !important; }
+  .dark .bg-emerald-100 { background-color: #14301F !important; }
+  .dark .bg-blue-100 { background-color: #14283A !important; }
+  .dark .bg-red-50\/40 { background-color: rgba(58, 26, 31, 0.55) !important; }
+  .dark .bg-amber-50\/40 { background-color: rgba(51, 39, 26, 0.55) !important; }
+  .dark .bg-emerald-50\/40 { background-color: rgba(20, 48, 31, 0.55) !important; }
+  .dark .bg-accent-50\/40 { background-color: rgba(15, 34, 51, 0.6) !important; }
+  .dark .odd\:bg-zinc-50\/60:nth-child(odd) { background-color: rgba(12, 17, 26, 0.5) !important; }
+  .dark .border-zinc-100 { border-color: #1A212D !important; }
+  .dark .hover\:shadow-\[0_10px_30px_rgba\(0\,84\,166\,0\.08\)\]:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, .45) !important; }
+  .dark .footer-link { color: #8AB4F8; }
+  .dark .bg-white.border.border-zinc-200 { box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  .dark input.sr-only:focus-visible + span { outline-color: #8AB4F8; }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; accent-color: #8AB4F8; }
+  html.dark ::selection { background: rgba(138, 180, 248, .35); color: #E8E8EC; }
+  html.dark input::placeholder, html.dark textarea::placeholder { color: #71717A !important; }
+  html.dark .tip::after { background: #E8E8EC !important; color: #0E1420 !important; }
+  html.dark .tip::before { border-top-color: #E8E8EC !important; }
+  @media (prefers-reduced-motion: reduce) { html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    .skel, .paso-in, #toast, .fade-in { animation: none !important; }
+    .ante-chip, .qrisk-chip, .sccard, .sc-inner { transition: none !important; }
+    #gauge_aguja, #gauge_punto { transition: none !important; }
+  }
+  #menu_movil:not(.hidden) { animation: fadein .22s ease; }
+  #onboarding:not(.hidden) { animation: fadein .25s ease; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Calculadora FINDRISC de riesgo de diabetes tipo 2 — CardioScore",
+  "url": "https://cardioscore.matsonsoft.com/tools/findrisk/",
+  "description": "Riesgo de desarrollar diabetes tipo 2 en 10 años según la escala FINDRISC (Finnish Diabetes Risk Score) de 0 a 26 puntos.",
+  "applicationCategory": "HealthApplication",
+  "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "¿Qué es el FINDRISC?", "acceptedAnswer": { "@type": "Answer", "text": "FINDRISC (Finnish Diabetes Risk Score) es una escala de puntuación publicada por Lindström y Tuomilehto en 2003 que estima el riesgo de desarrollar diabetes tipo 2 en los próximos 10 años. Consta de 8 preguntas sencillas (edad, índice de masa corporal, perímetro de cintura, actividad física, consumo de vegetales, hipertensión, glucosa previa e historia familiar) que suman entre 0 y 26 puntos." } },
+    { "@type": "Question", "name": "¿Cómo se interpreta la puntuación FINDRISC?", "acceptedAnswer": { "@type": "Answer", "text": "Menos de 7 puntos indica riesgo bajo, de 7 a 11 leve, de 12 a 14 moderado, de 15 a 20 alto y más de 20 muy alto de diabetes tipo 2 a 10 años. El riesgo estimado de desarrollar diabetes va de aproximadamente 1% con puntuación baja hasta 50% en la categoría muy alta." } },
+    { "@type": "Question", "name": "¿FINDRISC sirve también para evaluar el riesgo cardiovascular?", "acceptedAnswer": { "@type": "Answer", "text": "Indirectamente, sí. La diabetes tipo 2 y la prediabetes se asocian con mayor riesgo cardiovascular, y la puntuación FINDRISC se correlaciona con marcadores de riesgo metabólico. Sin embargo, para el riesgo cardiovascular específico se usan modelos como PREVENT, SCORE2 o WHO-Central L.A., que CardioScore también incluye." } },
+    { "@type": "Question", "name": "¿Qué se debe hacer si el FINDRISC es alto?", "acceptedAnswer": { "@type": "Answer", "text": "Con puntuaciones de 12 o más se recomienda confirmar el estado glucémico con una glucemia en ayunas y/o una HbA1c. Con riesgo alto o muy alto se indica el programa de prevención de diabetes: pérdida de peso del 5-7%, actividad física de al menos 150 minutos semanales y reevaluación periódica. También se evalúa el riesgo cardiovascular por separado." } },
+    { "@type": "Question", "name": "¿Para quién es la calculadora FINDRISC?", "acceptedAnswer": { "@type": "Answer", "text": "Sirve para adultos de 18 a 64 años sin diabetes conocida, como herramienta de cribado de prediabetes y diabetes en atención primaria. No se usa para diagnosticar diabetes ni para pacientes con diabetes ya establecida." } },
+    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye FINDRISC, SCORE2, PREVENT, WHO-Central L.A., MESA y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com." } }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardioscore.matsonsoft.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardioscore.matsonsoft.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Calculadora FINDRISC", "item": "https://cardioscore.matsonsoft.com/tools/findrisk/" }
+  ]
+}
+</script>
+<style>html, body { overflow-x: hidden; }
+  main p, main li, main td { line-height: 1.75; }</style>
+</head>
+<body class="bg-zinc-50 text-ink font-sans text-[15px] leading-relaxed">
+
+<!-- ===================== HEADER ===================== -->
+<header class="bg-white border-b border-zinc-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+          <a href="../../index.html" class="flex items-center gap-3 no-underline shrink-0 h-full">
+      <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+      </div>
+      <div>
+        <p class="font-display font-bold text-sm leading-tight">CardioScore</p>
+        <p class="hidden sm:block text-[11px] text-zinc-500 -mt-0.5">Riesgo cardiovascular · herramientas clínicas</p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-1" aria-label="Navegación principal">
+      <a href="../../index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Inicio</a>
+      <a href="../../metodologia.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Metodología</a>
+      <a href="../index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition bg-accent-50 text-accent">Calculadoras</a>
+      <a href="../../index.html#panel_pac" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Pacientes guardados">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM4 21v-1a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v1"/></svg>
+        <span class="hidden sm:inline">Pacientes</span>
+        <span id="pac_count" class="hidden text-[10px] font-bold bg-accent text-white rounded-full min-w-[18px] h-[18px] px-1 inline-flex items-center justify-center">0</span>
+      </a>
+      <button id="btn_tema" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Cambiar entre tema claro y oscuro">
+        <svg id="ico_sol" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="ico_luna" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    
+    </nav>
+      <button id="btn_menu" class="sm:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+  </div>
+  <div id="menu_movil" class="sm:hidden hidden bg-white border-t border-zinc-200 px-4 py-3 space-y-1">
+    <a href="../../index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Inicio</a>
+    <a href="../../metodologia.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Metodología</a>
+    <a href="../index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Calculadoras</a>
+  </div>
+</header>
+
+<main id="main" class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+
+  <!-- ===================== HERO ===================== -->
+  <section aria-labelledby="h1" class="text-left max-w-3xl">
+        <nav aria-label="Ruta de navegación" class="flex flex-wrap items-center gap-1.5 text-[13px] text-zinc-500 mb-4"><a href="../../index.html" class="transition-colors hover:text-accent hover:underline underline-offset-2">Inicio</a><svg class="w-3.5 h-3.5 text-zinc-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg><a href="../index.html" class="transition-colors hover:text-accent hover:underline underline-offset-2">Calculadoras</a><svg class="w-3.5 h-3.5 text-zinc-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg><span class="font-semibold text-zinc-700">FINDRISC</span></nav>
+    <p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Cribado de diabetes tipo 2 · Escala de puntos 0–26</p>
+    <h1 id="h1" class="font-display font-bold text-3xl sm:text-4xl tracking-tight text-zinc-900">Calculadora de riesgo de diabetes tipo 2 <span class="text-accent">FINDRISC</span></h1>
+    <p class="text-zinc-500 mt-3 text-[17px]">Estimación del riesgo de desarrollar <strong class="text-zinc-700">diabetes tipo 2 en los próximos 10 años</strong> mediante la escala <strong class="text-zinc-700">FINDRISC</strong> (0–26 puntos), basada en 8 preguntas sencillas que se contestan en consulta sin necesidad de laboratorio.</p>
+    <div class="mt-4 flex flex-wrap items-center gap-2">
+      
+      <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-accent bg-accent-50 border border-accent/20 rounded-full px-3 py-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        Puntuación oficial · Diabetologia 2003
+      </span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-white border border-zinc-200 rounded-full px-3 py-1.5">
+        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>
+        10 años · riesgo de DM2
+      </span></div>
+  </section>
+
+  <!-- ===================== CALCULADORA + INFO ===================== -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <!-- Calculadora -->
+    <section aria-label="Calculadora FINDRISC" class="bg-white border border-zinc-200 rounded-2xl p-6 sm:p-7 self-start lg:sticky lg:top-24">
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-5">Calcular la puntuación</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="edad" class="block text-[13px] font-semibold text-zinc-700 mb-1">Edad</label>
+          <input id="edad" type="number" inputmode="numeric" value="50" min="18" max="90" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Edad en años">
+        </div>
+        <div>
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">Sexo</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="sexo" value="m" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Hombre</span></label>
+            <label class="relative"><input type="radio" name="sexo" value="f" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Mujer</span></label>
+          </div>
+        </div>
+        <div>
+          <label for="peso" class="block text-[13px] font-semibold text-zinc-700 mb-1">Peso <span class="text-zinc-500 font-normal">kg</span></label>
+          <input id="peso" type="number" inputmode="decimal" value="80" min="30" max="250" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Peso en kilogramos">
+        </div>
+        <div>
+          <label for="talla" class="block text-[13px] font-semibold text-zinc-700 mb-1">Talla <span class="text-zinc-500 font-normal">cm</span></label>
+          <input id="talla" type="number" inputmode="decimal" value="170" min="120" max="230" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Talla en centímetros">
+        </div>
+        <div class="col-span-2">
+          <label for="cintura" class="block text-[13px] font-semibold text-zinc-700 mb-1">Perímetro de cintura <span class="text-zinc-500 font-normal">cm · H &lt;94 · M &lt;80</span></label>
+          <input id="cintura" type="number" inputmode="decimal" value="92" min="40" max="200" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Perímetro de cintura">
+        </div>
+        <div class="col-span-2">
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">¿Realiza actividad física ≥ 30 min al día?</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="act" value="si" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Sí</span></label>
+            <label class="relative"><input type="radio" name="act" value="no" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">No</span></label>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">¿Consume vegetales o frutas todos los días?</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="veg" value="si" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Sí</span></label>
+            <label class="relative"><input type="radio" name="veg" value="no" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">No</span></label>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">¿Toma medicación para la hipertensión o tiene PAS &gt; 140 mmHg?</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="hta" value="no" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">No</span></label>
+            <label class="relative"><input type="radio" name="hta" value="si" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Sí</span></label>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">¿Le han detectado glucosa elevada alguna vez?</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="glu" value="no" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">No</span></label>
+            <label class="relative"><input type="radio" name="glu" value="si" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Sí</span></label>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <label for="fh" class="block text-[13px] font-semibold text-zinc-700 mb-1">Historia familiar de diabetes</label>
+          <select id="fh" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20">
+            <option value="none" selected>No</option>
+            <option value="second">Sí, en familiares de 2.º grado (abuelos, tíos)</option>
+            <option value="first">Sí, en familiares de 1.er grado (padres, hermanos, hijos)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="error" class="hidden mt-3 text-[13px] text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2" role="alert"></div>
+
+      <!-- Resultado -->
+      <div id="resultado" class="hidden mt-5 border-t border-zinc-200 pt-5">
+        <div class="flex items-center gap-5">
+          <div class="text-center">
+            <p class="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-1">Puntuación</p>
+            <p class="font-display font-bold text-5xl tnum text-zinc-900"><span id="puntos">—</span><span class="text-2xl text-zinc-500">/26</span></p>
+          </div>
+          <div class="flex-1 bg-zinc-50 border border-zinc-200 rounded-xl p-3">
+            <p id="categoria" class="inline-flex items-center gap-2 text-sm font-bold px-3 py-1.5 rounded-full border"></p>
+            <p class="text-[13px] text-zinc-600 mt-2 leading-snug"><strong id="riesgo">—</strong> de desarrollar diabetes tipo 2 en 10 años.</p>
+            <p id="interpretacion" class="text-[13px] text-zinc-600 mt-2 leading-snug"></p>
+          </div>
+        </div>
+        <div class="mt-4 h-2 rounded-full bg-zinc-100 overflow-hidden"><div id="barra_resultado" class="h-full rounded-full transition-all duration-500" style="width:0%"></div></div>
+        <div class="relative mt-1 h-3 text-[11px] font-semibold text-zinc-600 tnum" aria-hidden="true">
+          <span class="absolute -translate-x-1/2" style="left:26.9%">7</span>
+          <span class="absolute -translate-x-1/2" style="left:46.2%">12</span>
+          <span class="absolute -translate-x-1/2" style="left:57.7%">15</span>
+          <span class="absolute -translate-x-1/2" style="left:80.8%">21</span>
+        </div>
+        <p class="mt-3 text-[13px] text-zinc-600 bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2.5" id="nota"></p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <button id="btn_copiar" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-700 border border-zinc-200 bg-white rounded-lg px-4 py-2.5 min-h-[44px] hover:border-accent hover:text-accent transition">Copiar</button>
+          <button id="btn_whatsapp" class="inline-flex items-center gap-1.5 text-sm font-semibold text-white bg-[#25D366] hover:bg-[#1DA851] rounded-lg px-4 py-2.5 min-h-[44px] transition active:scale-[0.98]">WhatsApp</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenido informativo -->
+    <div class="space-y-6">
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">¿Qué es el FINDRISC?</h2>
+        <p class="text-zinc-600 leading-relaxed">FINDRISC (Finnish Diabetes Risk Score) es una escala publicada en 2003 que estima el riesgo de desarrollar <strong>diabetes tipo 2 en 10 años</strong> a partir de <strong>8 preguntas</strong>: edad, índice de masa corporal, perímetro de cintura, actividad física, consumo diario de vegetales y frutas, hipertensión o medicación, glucosa elevada previa e historia familiar de diabetes.</p>
+        <p class="text-zinc-600 leading-relaxed mt-3">La puntuación total va de <strong>0 a 26 puntos</strong> y se estratifica en cinco categorías de riesgo. Es la herramienta de cribado recomendada en atención primaria por la EASD y la ADA para detectar prediabetes y candidatos a programas de prevención.</p>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Interpretación de la puntuación</h2>
+        <table class="w-full text-sm border-collapse">
+          <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Puntos</th><th class="py-2 pr-2 font-bold">Categoría</th><th class="py-2 font-bold">Riesgo de DM2 a 10 años</th></tr></thead>
+          <tbody class="text-zinc-700">
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">&lt; 7</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">Bajo</span></td><td class="py-2.5 font-mono tnum">≈ 1%</td></tr>
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">7 – 11</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">Levemente elevado</span></td><td class="py-2.5 font-mono tnum">≈ 4%</td></tr>
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">12 – 14</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-0.5">Moderado</span></td><td class="py-2.5 font-mono tnum">≈ 17%</td></tr>
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">15 – 20</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-red-700 bg-red-50 border border-red-200 rounded-full px-2.5 py-0.5">Alto</span></td><td class="py-2.5 font-mono tnum">≈ 33%</td></tr>
+            <tr><td class="py-2.5 pr-2 font-mono tnum">&gt; 20</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-red-800 bg-red-100 border border-red-300 rounded-full px-2.5 py-0.5">Muy alto</span></td><td class="py-2.5 font-mono tnum">≈ 50%</td></tr>
+          </tbody>
+        </table>
+        <p class="text-[12px] text-zinc-500 mt-2">Con 12 puntos o más, se recomienda confirmar el estado glucémico (glucemia en ayunas y/o HbA1c).</p>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Para quién es y sus límites</h2>
+        <ul class="space-y-2 text-zinc-600 text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-emerald-600 font-bold mt-0.5">✓</span>Adultos de 18–64 años sin diabetes conocida, cribado en consulta.</li>
+          <li class="flex gap-2"><span class="text-emerald-600 font-bold mt-0.5">✓</span>No requiere laboratorio; se contesta en minutos.</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No diagnostica diabetes ni prediabetes (requiere glucemia/HbA1c).</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No aplica en pacientes con diabetes establecida.</li>
+        </ul>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Validación</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Caso de referencia</th><th class="py-2 pr-2 font-bold">Fuente</th><th class="py-2 font-bold">Resultado</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Mujer 50a, IMC 27, cintura 88, inactiva, HTA, sin historia</td><td class="py-2.5 pr-2">Diabetologia 2003</td><td class="py-2.5 font-mono tnum">12 · moderado</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Hombre 60a, IMC 32, cintura 108, glucosa elevada, padre diabético</td><td class="py-2.5 pr-2">Diabetologia 2003</td><td class="py-2.5 font-mono tnum">21 · muy alto</td></tr>
+              <tr><td class="py-2.5 pr-2">Puntuación determinista (suma de puntos)</td><td class="py-2.5 pr-2">FINDRISC original</td><td class="py-2.5 font-mono tnum">reproducible al punto</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[12px] text-zinc-500 mt-2">Escala determinista — cada pregunta suma puntos de forma reproducible. Ver la <a href="../../metodologia.html#validacion" class="transition-colors text-accent underline hover:text-accent-700">metodología completa</a>.</p>
+      </section>
+
+      <section class="rounded-2xl p-5 border border-accent/20 bg-accent-50">
+        <h2 class="font-display font-bold text-base text-accent-700 mb-2">Fuentes y revisión</h2>
+        <ul class="text-[13px] text-zinc-700 space-y-1.5">
+          <li><strong>FINDRISC</strong> — Lindström J, Tuomilehto J. <em>Diabetologia</em> 2003;46(6):806–812.</li>
+          <li><strong>Recomendada por</strong> — ADA y EASD en el cribado de diabetes tipo 2.</li>
+          <li><strong>Última revisión:</strong> agosto de 2026.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===================== FAQ ===================== -->
+  <section aria-labelledby="faq-t" class="max-w-3xl mx-auto">
+    <h2 id="faq-t" class="font-display font-bold text-2xl tracking-tight text-zinc-900 mb-6 text-center">Preguntas frecuentes</h2>
+    <div class="space-y-4">
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué es el FINDRISC?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">FINDRISC (Finnish Diabetes Risk Score) es una escala de puntuación publicada por Lindström y Tuomilehto en 2003 que estima el riesgo de desarrollar diabetes tipo 2 en los próximos 10 años. Consta de 8 preguntas sencillas (edad, índice de masa corporal, perímetro de cintura, actividad física, consumo de vegetales, hipertensión, glucosa previa e historia familiar) que suman entre 0 y 26 puntos.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Cómo se interpreta la puntuación FINDRISC?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Menos de 7 puntos indica riesgo bajo, de 7 a 11 leve, de 12 a 14 moderado, de 15 a 20 alto y más de 20 muy alto de diabetes tipo 2 a 10 años. El riesgo estimado de desarrollar diabetes va de aproximadamente 1% con puntuación baja hasta 50% en la categoría muy alta.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿FINDRISC sirve también para evaluar el riesgo cardiovascular?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Indirectamente, sí. La diabetes tipo 2 y la prediabetes se asocian con mayor riesgo cardiovascular, y la puntuación FINDRISC se correlaciona con marcadores de riesgo metabólico. Sin embargo, para el riesgo cardiovascular específico se usan modelos como PREVENT, SCORE2 o WHO-Central L.A., que CardioScore también incluye.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué se debe hacer si el FINDRISC es alto?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Con puntuaciones de 12 o más se recomienda confirmar el estado glucémico con una glucemia en ayunas y/o una HbA1c. Con riesgo alto o muy alto se indica el programa de prevención de diabetes: pérdida de peso del 5-7%, actividad física de al menos 150 minutos semanales y reevaluación periódica. También se evalúa el riesgo cardiovascular por separado.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Para quién es la calculadora FINDRISC?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Sirve para adultos de 18 a 64 años sin diabetes conocida, como herramienta de cribado de prediabetes y diabetes en atención primaria. No se usa para diagnosticar diabetes ni para pacientes con diabetes ya establecida.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye FINDRISC, SCORE2, PREVENT, WHO-Central L.A., MESA y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="bg-white border border-zinc-200 rounded-2xl p-8 text-center">
+    <h2 class="font-display font-bold text-2xl tracking-tight text-zinc-900">Lleva esta calculadora a tu consulta</h2>
+    <p class="text-zinc-500 mt-2 max-w-xl mx-auto">CardioScore calcula <strong>20+ modelos</strong>: FINDRISC, SCORE2, PREVENT, WHO-Central L.A., MESA y más, con storytelling, metas de LDL y guía para explicar al paciente.</p>
+    <a href="../../index.html" class="inline-flex items-center justify-center gap-2 mt-5 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-8 py-3.5 min-h-[52px] text-base transition active:scale-[0.98]">
+      Abrir CardioScore gratis
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="border-t border-zinc-200 bg-white mt-10">
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 items-start">
+      <div>
+        <div class="flex items-center gap-2.5 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+          </div>
+          <p class="font-display font-bold text-sm text-zinc-900">CardioScore</p>
+          <span class="text-[11px] font-semibold text-zinc-500 border border-zinc-200 rounded px-1.5 py-0.5">v3.3</span>
+        </div>
+        <p class="text-[13px] text-zinc-600 leading-relaxed max-w-md">Estratificación del riesgo cardiovascular con los modelos más actualizados (ESC, AHA, OMS), metodología abierta y validación institucional. Todo el cálculo ocurre en tu navegador.</p>
+        <div class="mt-4">
+          <p class="text-[13px] font-semibold text-zinc-600 mb-2.5">Construida por <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="footer-link underline underline-offset-2">Ing. Alexander Matson</a> y validada por:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+              Postgrado de Cardiología — Hospital Ruiz y Páez
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="md:justify-self-end">
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Enlaces</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="../../index.html" class="text-zinc-600 hover:text-accent transition-colors">Inicio</a></li>
+          <li><a href="../index.html" class="text-zinc-600 hover:text-accent transition-colors">Calculadoras</a></li>
+          <li><a href="../../metodologia.html" class="text-zinc-600 hover:text-accent transition-colors">Metodología</a></li>
+          <li><a href="../../metodologia.html#feedback" class="text-zinc-600 hover:text-accent transition-colors">Reportar un error</a></li>
+          <li><a href="../../terminos.html" class="text-zinc-600 hover:text-accent transition-colors">Términos de uso</a></li>
+        </ul>
+        <div class="mt-5 space-y-2 text-sm">
+          <a href="mailto:matson@matsonsoft.com" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v12H7l-3 4z"/></svg>matson@matsonsoft.com</a>
+          <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>matsonsoft.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 pt-6 border-t border-zinc-200">
+      <p class="text-xs text-zinc-500 leading-relaxed max-w-5xl mx-auto text-center">Los resultados son estimaciones probabilísticas basadas en modelos de población y guías internacionales (ESC/EAS, AHA, OMS);<br>deben interpretarse en el contexto clínico de cada paciente y no sustituyen el juicio profesional, el diagnóstico ni la consejería médica personalizada.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s);
+
+  // FINDRISC (Lindström & Tuomilehto, Diabetologia 2003;46:806-812). Suma de puntos 0-26.
+  function findrisk(age, sex, peso, talla, cintura, act, veg, hta, glu, fh) {
+    let p = 0;
+    if (age < 45) p += 0; else if (age < 55) p += 2; else if (age < 65) p += 3; else p += 4;
+    const imc = peso / Math.pow(talla / 100, 2);
+    if (imc < 25) p += 0; else if (imc <= 30) p += 1; else p += 3;
+    if (sex === 'm') { if (cintura < 94) p += 0; else if (cintura <= 102) p += 3; else p += 4; }
+    else            { if (cintura < 80) p += 0; else if (cintura <= 88) p += 3; else p += 4; }
+    if (act !== 'si') p += 2;
+    if (veg !== 'si') p += 1;
+    if (hta === 'si') p += 2;
+    if (glu === 'si') p += 5;
+    if (fh === 'first') p += 5; else if (fh === 'second') p += 3;
+    return { p, imc };
+  }
+
+  function categorizar(p) {
+    if (p < 7)    return { txt: 'Bajo',                  r: 1,  cls: 'text-emerald-700 bg-emerald-50 border-emerald-200',  color: '#047857', msg: 'El riesgo de diabetes tipo 2 a 10 años es bajo (≈1%). Mantener el estilo de vida actual y reevaluar periódicamente.' };
+    if (p < 12)   return { txt: 'Levemente elevado',     r: 4,  cls: 'text-emerald-600 bg-emerald-50 border-emerald-200',  color: '#059669', msg: 'El riesgo es levemente elevado (≈4%). Reforzar la actividad física y una alimentación saludable.' };
+    if (p < 15)   return { txt: 'Moderado',              r: 17, cls: 'text-amber-700 bg-amber-50 border-amber-200',         color: '#B45309', msg: 'Riesgo moderado (≈17%): confirmar con glucemia en ayunas y/o HbA1c, y considerar un programa de prevención.' };
+    if (p < 21)   return { txt: 'Alto',                  r: 33, cls: 'text-red-700 bg-red-50 border-red-200',                color: '#B91C1C', msg: 'Riesgo alto (≈33%): confirmar el estado glucémico y referir a prevención de diabetes con pérdida de peso y ejercicio.' };
+    return           { txt: 'Muy alto',                 r: 50, cls: 'text-red-800 bg-red-100 border-red-300',                color: '#991B1B', msg: 'Riesgo muy alto (≈50%): confirmar el estado glucémico de inmediato y evaluar el riesgo cardiovascular por separado.' };
+  }
+
+  function calcular() {
+    const edad = parseInt($('#edad').value, 10);
+    const peso = parseFloat($('#peso').value);
+    const talla = parseFloat($('#talla').value);
+    const cintura = parseFloat($('#cintura').value);
+    const sexo = document.querySelector('input[name="sexo"]:checked').value;
+    const act = document.querySelector('input[name="act"]:checked').value;
+    const veg = document.querySelector('input[name="veg"]:checked').value;
+    const hta = document.querySelector('input[name="hta"]:checked').value;
+    const glu = document.querySelector('input[name="glu"]:checked').value;
+    const fh = $('#fh').value;
+    const error = $('#error');
+    error.classList.add('hidden');
+    if (!edad || isNaN(edad) || !peso || !talla || !cintura || isNaN(peso) || isNaN(talla) || isNaN(cintura)) {
+      error.textContent = 'Completa la edad, el peso, la talla y el perímetro de cintura para calcular la puntuación.';
+      error.classList.remove('hidden');
+      $('#resultado').classList.add('hidden');
+      return;
+    }
+    const r = findrisk(edad, sexo, peso, talla, cintura, act, veg, hta, glu, fh);
+    const c = categorizar(r.p);
+    $('#puntos').textContent = r.p;
+    $('#categoria').textContent = c.txt;
+    $('#categoria').className = 'inline-flex items-center gap-2 text-sm font-bold px-3 py-1.5 rounded-full border ' + c.cls;
+    $('#riesgo').textContent = c.r + '%';
+    $('#interpretacion').textContent = c.msg;
+    $('#barra_resultado').style.width = Math.min(100, (r.p / 26) * 100) + '%';
+    $('#barra_resultado').style.backgroundColor = c.color;
+    $('#nota').innerHTML = '<strong>IMC ' + r.imc.toFixed(1) + ':</strong> ' + (r.imc < 25 ? 'normal' : r.imc <= 30 ? 'sobrepeso' : 'obesidad') + '. FINDRISC es cribado: no diagnostica diabetes.';
+    $('#resultado').classList.remove('hidden');
+  }
+
+  ['edad', 'peso', 'talla', 'cintura', 'fh'].forEach(function (id) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', calcular);
+    el.addEventListener('change', calcular);
+  });
+  document.querySelectorAll('input[name="sexo"], input[name="act"], input[name="veg"], input[name="hta"], input[name="glu"]').forEach(function (el) {
+    el.addEventListener('change', calcular);
+  });
+  function textoResultado() {
+    return 'CardioScore · FINDRISC: ' + $('#puntos').textContent + ' puntos (' + $('#categoria').textContent + ') · ' + $('#riesgo').textContent + ' de riesgo de diabetes tipo 2 a 10 años. ' + $('#nota').textContent;
+  }
+  function copiarTexto(txt) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(txt);
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    return Promise.resolve();
+  }
+  $('#btn_copiar').addEventListener('click', function () {
+    copiarTexto(textoResultado()).then(function () {
+      var b = $('#btn_copiar');
+      b.textContent = 'Copiado';
+      setTimeout(function () { b.textContent = 'Copiar'; }, 2000);
+    });
+  });
+  $('#btn_whatsapp').addEventListener('click', function () {
+    window.open('https://wa.me/?text=' + encodeURIComponent(textoResultado()), '_blank');
+  });
+  // deep-link: compartir/recargar un caso por URL
+  try {
+    const q = new URLSearchParams(location.search);
+    const set = function (id, v) { if (v) document.getElementById(id).value = v; };
+    set('edad', q.get('edad')); set('peso', q.get('peso')); set('talla', q.get('talla')); set('cintura', q.get('cintura'));
+    if (q.get('fh')) $('#fh').value = q.get('fh');
+    ['sexo', 'act', 'veg', 'hta', 'glu'].forEach(function (n) {
+      if (q.get(n)) { const el = document.querySelector('input[name="' + n + '"][value="' + q.get(n) + '"]'); if (el) el.checked = true; }
+    });
+  } catch (e) {}
+  calcular();
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var el = document.getElementById('pac_count');
+  if (!el) return;
+  try {
+    var perfil = (localStorage.getItem('cs_perfil') || 'general');
+    var lista = JSON.parse(localStorage.getItem('cs_pacientes_' + perfil) || '[]');
+    el.textContent = lista.length;
+    el.classList.toggle('hidden', lista.length === 0);
+  } catch (e) {}
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_menu'), menu = document.getElementById('menu_movil');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_tema');
+  if (!btn) return;
+  function aplicar() {
+    var dark = document.documentElement.classList.contains('dark');
+    var s = document.getElementById('ico_sol'), l = document.getElementById('ico_luna');
+    if (s) s.classList.toggle('hidden', !dark);
+    if (l) l.classList.toggle('hidden', dark);
+    var mt = document.querySelector('meta[name="theme-color"]');
+    if (mt) mt.setAttribute('content', dark ? '#0C111A' : '#0054A6');
+  }
+  aplicar();
+  btn.addEventListener('click', function () {
+    document.documentElement.classList.add('theme-transition');
+    document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('cs_tema', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+    aplicar();
+    clearTimeout(window._ttm);
+    window._ttm = setTimeout(function () { document.documentElement.classList.remove('theme-transition'); }, 220);
+  });
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  document.querySelectorAll('input[type="number"]').forEach(function (inp) {
+    var min = inp.min !== '' ? parseFloat(inp.min) : -Infinity;
+    var max = inp.max !== '' ? parseFloat(inp.max) : Infinity;
+    inp.addEventListener('keydown', function (e) {
+      if (['e', 'E', '+'].indexOf(e.key) !== -1 || (e.key === '-' && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('paste', function (e) {
+      var txt = (e.clipboardData || window.clipboardData).getData('text');
+      if (!txt || /[^0-9.,-]/.test(txt) || (txt.indexOf('-') !== -1 && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('blur', function () {
+      var v = parseFloat(inp.value);
+      if (isNaN(v)) return;
+      if (v < min) inp.value = min;
+      else if (v > max) inp.value = max;
+    });
+  });
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("../../sw.js").catch(function () {}); }); }
+</script>
+</body>
+</html>

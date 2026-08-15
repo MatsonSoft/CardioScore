@@ -1,2 +1,15 @@
 @import "tailwindcss";
-@source "../cardioscore.html";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  --color-accent: #0054A6;
+  --color-accent-700: #003A73;
+  --color-accent-50: #EAF3FB;
+  --color-ink: #0E1420;
+  --font-sans: 'Noto Sans', system-ui, sans-serif;
+  --font-display: 'Figtree', 'Noto Sans', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+}
+@source "../index.html";
+@source "../metodologia.html";
+@source "../terminos.html";
+@source "../tools/**/*.html";

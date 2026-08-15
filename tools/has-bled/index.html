@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try { if (localStorage.getItem('cs_tema') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}</script>
+<title>Calculadora HAS-BLED — riesgo de sangrado en fibrilación auricular | CardioScore</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="manifest" href="../../manifest.json">
+<link rel="apple-touch-icon" href="../../icons/icon-192.png">
+<meta name="theme-color" content="#0054A6">
+<meta name="description" content="Calculadora HAS-BLED (ESC 2019) de riesgo de sangrado mayor en pacientes anticoagulados por fibrilación auricular. Puntuación oficial, interpretación y relación con CHA2DS2-VA.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cardioscore.matsonsoft.com/tools/has-bled/">
+<meta property="og:title" content="Calculadora HAS-BLED de riesgo de sangrado — CardioScore">
+<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:description" content="Riesgo de sangrado mayor en anticoagulación por FA según HAS-BLED (ESC). Con relación a CHA2DS2-VA.">
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DmjHF4fQ8Rkfu3Jz2fUQgXWMbTrbFwRAkpoLiAmpJjSb', { api_host: 'https://app.posthog.com', persistence: 'localStorage+cookie', autocapture: true, disable_session_recording: true, property_blacklist: ['$current_url'] });
+  posthog.register({ app: 'cardioscore', app_version: '3.3' });
+</script>
+<script>
+  function trackCS(n, p) {
+    try {
+      var id = localStorage.getItem('cs_anon_id');
+      if (!id) { id = 'anon-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10); localStorage.setItem('cs_anon_id', id); }
+      if (id && window.posthog) { posthog.identify(id); posthog.capture(n, p || {}); }
+    } catch (e) {}
+  }
+  trackCS('cs_visita', {});
+  try {
+    var _p = location.pathname.split('/').filter(Boolean);
+    var _slug = _p[_p.length - 2] === 'tools' ? 'hub' : (_p[_p.length - 2] || 'index');
+    trackCS('cs_visita_calculadora', { slug: _slug });
+    document.addEventListener('click', function (ev) {
+      var _t = ev.target && ev.target.closest ? ev.target.closest('#calcular, #btn_calcular, [data-calcular]') : null;
+      if (_t) { try { trackCS('cs_calcular', { slug: _slug }); } catch (e) {} }
+    });
+  } catch (e) {}
+</script>
+
+</script>
+<link rel="stylesheet" href="../../tailwind.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid #0054A6; outline-offset: 2px; border-radius: 4px; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+  .criterio input { accent-color: #0054A6; width: 18px; height: 18px; }
+  html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: background-color .18s ease, color .18s ease, border-color .18s ease !important; }
+  .dark .bg-white { background-color: #141A24 !important; }
+  .dark .bg-zinc-50 { background-color: #0C111A !important; }
+  .dark .bg-zinc-100 { background-color: #1A212D !important; }
+  .dark .bg-accent-50 { background-color: #0F2233 !important; }
+  .dark .text-zinc-900 { color: #E8E8EC !important; }
+  .dark .text-zinc-700 { color: #D4D4D8 !important; }
+  .dark .text-zinc-600, .dark .text-zinc-500 { color: #A1A1AA !important; }
+  .dark .text-zinc-500 { color: #8E8E96 !important; }
+  .dark .border-zinc-200, .dark .border-zinc-300, .dark .border-slate-200 { border-color: #262E3C !important; }
+  .dark header { background-color: #11161F !important; border-color: #262E3C !important; }
+  .dark input, .dark select, .dark textarea { background-color: #141A24 !important; border-color: #333C4D !important; color: #E8E8EC !important; }
+  .dark .bg-red-50 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-50 { background-color: #33271A !important; }
+  .dark .bg-emerald-50 { background-color: #14301F !important; }
+  .dark .bg-blue-50 { background-color: #14283A !important; }
+  .dark .text-red-700, .dark .text-red-800, .dark .text-red-600 { color: #F2A6A6 !important; }
+  .dark .text-amber-800, .dark .text-amber-700 { color: #F0C987 !important; }
+  .dark .text-emerald-700, .dark .text-emerald-800 { color: #A7E3C0 !important; }
+  .dark .text-blue-700, .dark .text-blue-800 { color: #A9CFF2 !important; }
+  .dark .border-red-200 { border-color: #5A2A30 !important; }
+  .dark .border-amber-200 { border-color: #5A4630 !important; }
+  .dark .border-emerald-200 { border-color: #2A5A40 !important; }
+  .dark .border-blue-200 { border-color: #2A4A6A !important; }
+  .dark .text-accent { color: #8AB4F8 !important; }
+  .dark .text-accent-700 { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent:hover { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent-700:hover { color: #8AB4F8 !important; }
+  .dark .text-zinc-800 { color: #D4D4D8 !important; }
+  .dark .text-ink { color: #E8E8EC !important; }
+  .dark .bg-accent { background-color: #1E6BB8 !important; }
+  .dark .bg-accent-700 { background-color: #1E6BB8 !important; }
+  .dark .border-accent { border-color: #4A7FC0 !important; }
+  .dark .border-accent\/20 { border-color: rgba(74, 127, 192, .32) !important; }
+  .dark .border-accent\/30 { border-color: rgba(74, 127, 192, .4) !important; }
+  .dark .bg-zinc-200 { background-color: #333C4D !important; }
+  .dark .bg-zinc-300 { background-color: #3A4455 !important; }
+  .dark .bg-zinc-50\/95 { background-color: rgba(12, 17, 26, 0.95) !important; }
+  .dark .peer:checked ~ .peer-checked\:bg-white { background-color: #2A3442 !important; }
+  .dark .shadow-sm, .dark .shadow { box-shadow: 0 1px 3px rgba(0,0,0,.5) !important; }
+  .dark .shadow-xl { box-shadow: 0 20px 40px rgba(0,0,0,.6) !important; }
+  .dark .shadow-2xl { box-shadow: 0 25px 50px rgba(0,0,0,.6) !important; }
+  .dark .req-tag { background: #1A212D !important; color: #D4D4D8 !important; }
+  .dark .req-tag-acc { background: #0F2233 !important; border-color: rgba(74,127,192,.3) !important; color: #8AB4F8 !important; }
+  .dark .bg-red-100 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-100 { background-color: #33271A !important; }
+  .dark .bg-emerald-100 { background-color: #14301F !important; }
+  .dark .bg-blue-100 { background-color: #14283A !important; }
+  .dark .bg-red-50\/40 { background-color: rgba(58, 26, 31, 0.55) !important; }
+  .dark .bg-amber-50\/40 { background-color: rgba(51, 39, 26, 0.55) !important; }
+  .dark .bg-emerald-50\/40 { background-color: rgba(20, 48, 31, 0.55) !important; }
+  .dark .bg-accent-50\/40 { background-color: rgba(15, 34, 51, 0.6) !important; }
+  .dark .odd\:bg-zinc-50\/60:nth-child(odd) { background-color: rgba(12, 17, 26, 0.5) !important; }
+  .dark .border-zinc-100 { border-color: #1A212D !important; }
+  .dark .hover\:shadow-\[0_10px_30px_rgba\(0\,84\,166\,0\.08\)\]:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, .45) !important; }
+  .dark .footer-link { color: #8AB4F8; }
+  .dark .bg-white.border.border-zinc-200 { box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  .dark input.sr-only:focus-visible + span { outline-color: #8AB4F8; }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; accent-color: #8AB4F8; }
+  html.dark ::selection { background: rgba(138, 180, 248, .35); color: #E8E8EC; }
+  html.dark input::placeholder, html.dark textarea::placeholder { color: #71717A !important; }
+  html.dark .tip::after { background: #E8E8EC !important; color: #0E1420 !important; }
+  html.dark .tip::before { border-top-color: #E8E8EC !important; }
+  @media (prefers-reduced-motion: reduce) { html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    .skel, .paso-in, #toast, .fade-in { animation: none !important; }
+    .ante-chip, .qrisk-chip, .sccard, .sc-inner { transition: none !important; }
+    #gauge_aguja, #gauge_punto { transition: none !important; }
+  }
+  #menu_movil:not(.hidden) { animation: fadein .22s ease; }
+  #onboarding:not(.hidden) { animation: fadein .25s ease; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Calculadora HAS-BLED de riesgo de sangrado",
+  "url": "https://cardioscore.matsonsoft.com/tools/has-bled/",
+  "description": "Riesgo de sangrado mayor en pacientes anticoagulados por fibrilación auricular según la escala HAS-BLED de la ESC.",
+  "applicationCategory": "HealthApplication",
+  "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "¿Qué es la escala HAS-BLED?",
+      "acceptedAnswer": { "@type": "Answer", "text": "HAS-BLED es una escala de la Sociedad Europea de Cardiología que estima el riesgo de sangrado mayor (1 año) en pacientes con fibrilación auricular que reciben anticoagulación. Incluye: hipertensión, función renal o hepática anormal, ictus previo, sangrado previo, INR lábil, edad >65 años y alcohol o drogas." } },
+    { "@type": "Question", "name": "¿Qué puntuación indica alto riesgo de sangrado?",
+      "acceptedAnswer": { "@type": "Answer", "text": "0-1 puntos indica riesgo bajo, 2 puntos riesgo moderado y 3 o más puntos riesgo alto. Un HAS-BLED elevado no contraindica la anticoagulación por sí solo, sino que invita a corregir los factores de riesgo modificables y a un seguimiento más estrecho." } },
+    { "@type": "Question", "name": "¿HAS-BLED se usa sola para decidir anticoagular?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. La decisión de anticoagular en FA se toma con el riesgo trombótico (CHA2DS2-VA) y se contrasta con el riesgo de sangrado (HAS-BLED). Un riesgo de ictus alto justifica anticoagular aunque el HAS-BLED sea elevado, corrigiendo los factores de sangrado." } },
+    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?",
+      "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye HAS-BLED junto a CHA2DS2-VA, ORBIT y más de 20 modelos. Se usa gratis en cardioscore.matsonsoft.com." } }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardioscore.matsonsoft.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardioscore.matsonsoft.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Calculadora HAS-BLED", "item": "https://cardioscore.matsonsoft.com/tools/has-bled/" }
+  ]
+}
+</script>
+<style>html, body { overflow-x: hidden; }
+  main p, main li, main td { line-height: 1.75; }</style>
+</head>
+<body class="bg-zinc-50 text-ink font-sans text-[15px] leading-relaxed">
+
+<header class="bg-white border-b border-zinc-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+          <a href="../../index.html" class="flex items-center gap-3 no-underline shrink-0 h-full">
+      <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+      </div>
+      <div>
+        <p class="font-display font-bold text-sm leading-tight">CardioScore</p>
+        <p class="hidden sm:block text-[11px] text-zinc-500 -mt-0.5">Riesgo cardiovascular · herramientas clínicas</p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-1" aria-label="Navegación principal">
+      <a href="../../index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Inicio</a>
+      <a href="../../metodologia.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Metodología</a>
+      <a href="../index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition bg-accent-50 text-accent">Calculadoras</a>
+      <a href="../../index.html#panel_pac" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Pacientes guardados">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM4 21v-1a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v1"/></svg>
+        <span class="hidden sm:inline">Pacientes</span>
+        <span id="pac_count" class="hidden text-[10px] font-bold bg-accent text-white rounded-full min-w-[18px] h-[18px] px-1 inline-flex items-center justify-center">0</span>
+      </a>
+      <button id="btn_tema" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Cambiar entre tema claro y oscuro">
+        <svg id="ico_sol" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="ico_luna" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    
+    </nav>
+      <button id="btn_menu" class="sm:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+  </div>
+  <div id="menu_movil" class="sm:hidden hidden bg-white border-t border-zinc-200 px-4 py-3 space-y-1">
+    <a href="../../index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Inicio</a>
+    <a href="../../metodologia.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Metodología</a>
+    <a href="../index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Calculadoras</a>
+  </div>
+</header>
+
+<main id="main" class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+
+  <section class="text-left max-w-3xl" aria-labelledby="h1">
+        <nav aria-label="Ruta de navegación" class="flex flex-wrap items-center gap-1.5 text-[13px] text-zinc-500 mb-4"><a href="../../index.html" class="transition-colors hover:text-accent hover:underline underline-offset-2">Inicio</a><svg class="w-3.5 h-3.5 text-zinc-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg><a href="../index.html" class="transition-colors hover:text-accent hover:underline underline-offset-2">Calculadoras</a><svg class="w-3.5 h-3.5 text-zinc-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg><span class="font-semibold text-zinc-700">HAS-BLED</span></nav>
+<p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Anticoagulación · FA · ESC 2019/2024</p>
+    <h1 id="h1" class="font-display font-bold text-3xl sm:text-4xl tracking-tight text-zinc-900">Calculadora de riesgo de sangrado <span class="text-accent">HAS-BLED</span></h1>
+    <p class="text-zinc-500 mt-3 text-[17px]">Estimación del riesgo de <strong class="text-zinc-700">sangrado mayor a 1 año</strong> en pacientes con <strong class="text-zinc-700">fibrilación auricular</strong> que reciben anticoagulación oral, según la escala HAS-BLED de la Sociedad Europea de Cardiología.</p>
+    <div class="mt-4 flex flex-wrap items-center gap-2">
+      
+      <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-accent bg-accent-50 border border-accent/20 rounded-full px-3 py-1.5">Puntuación oficial · revisión agosto 2026</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-white border border-zinc-200 rounded-full px-3 py-1.5">
+        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>
+        1 año · FA anticoagulada
+      </span></div>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <section aria-label="Calculadora HAS-BLED" class="bg-white border border-zinc-200 rounded-2xl p-6 sm:p-7 self-start lg:sticky lg:top-24">
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-1">Calcular el riesgo de sangrado</h2>
+      <p class="text-sm text-zinc-500 mb-5">Marca los criterios presentes. El punto se suma automáticamente.</p>
+      <div id="criterios" class="space-y-2.5">
+        <label class="criterio flex items-center justify-between gap-3 rounded-xl border border-zinc-200 p-3 cursor-pointer hover:border-accent transition">
+          <span class="text-sm text-zinc-700"><strong>H</strong> — Hipertensión (PAS &gt;160 mmHg)</span>
+          <input type="checkbox" data-p="1">
+        </label>
+        <label class="criterio flex items-center justify-between gap-3 rounded-xl border border-zinc-200 p-3 cursor-pointer hover:border-accent transition">
+          <span class="text-sm text-zinc-700"><strong>A</strong> — Función renal anormal (diálisis, trasplante, Cr ≥2.26 mg/dL)</span>
+          <input type="checkbox" data-p="1">
+        </label>
+        <label class="criterio flex items-center justify-between gap-3 rounded-xl border border-zinc-200 p-3 cursor-pointer hover:border-accent transition">
+          <span class="text-sm text-zinc-700"><strong>A</strong> — Función hepática anormal (cirrosis, bilirrubina &gt;2×N con transaminasas &gt;3×N)</span>
+          <input type="checkbox" data-p="1">
+        </label>
+        <label class="criterio flex items-center justify-between gap-3 rounded-xl border border-zinc-200 p-3 cursor-pointer hover:border-accent transition">
+          <span class="text-sm text-zinc-700"><strong>S</strong> — Ictus previo</span>
+          <input type="checkbox" data-p="1">
+        </label>
+        <label class="criterio flex items-center justify-between gap-3 rounded-xl border border-zinc-200 p-3 cursor-pointer hover:border-accent transition">
+          <span class="text-sm text-zinc-700"><strong>B</strong> — Sangrado previo o predisposición (anemia, diátesis)</span>
+          <input type="checkbox" data-p="1">
+        </label>
+        <label class="criterio flex items-center justify-between gap-3 rounded-xl border border-zinc-200 p-3 cursor-pointer hover:border-accent transition">
+          <span class="text-sm text-zinc-700"><strong>L</strong> — INR lábil (TTR &lt;60%)</span>
+          <input type="checkbox" data-p="1">
+        </label>
+        <label class="criterio flex items-center justify-between gap-3 rounded-xl border border-zinc-200 p-3 cursor-pointer hover:border-accent transition">
+          <span class="text-sm text-zinc-700"><strong>E</strong> — Edad &gt;65 años</span>
+          <input type="checkbox" data-p="1">
+        </label>
+        <label class="criterio flex items-center justify-between gap-3 rounded-xl border border-zinc-200 p-3 cursor-pointer hover:border-accent transition">
+          <span class="text-sm text-zinc-700"><strong>D</strong> — Alcohol/drogas (≥8 bebidas/semana)</span>
+          <input type="checkbox" data-p="1">
+        </label>
+      </div>
+
+      <div id="resultado" class="hidden mt-6 border-t border-zinc-200 pt-5">
+        <div class="flex items-center gap-5">
+          <div class="text-center">
+            <p class="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-1">Puntuación</p>
+            <p class="font-display font-bold text-5xl tnum text-zinc-900" id="puntaje">0<span class="text-2xl text-zinc-500">/9</span></p>
+          </div>
+          <div class="flex-1">
+            <p id="categoria" class="inline-flex items-center text-sm font-bold px-3 py-1.5 rounded-full border"></p>
+            <p id="interpretacion" class="mt-2 text-[13px] text-zinc-700 bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2.5 leading-snug"></p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="relative">
+            <div class="h-2 rounded-full bg-zinc-100 overflow-hidden"><div id="barra_resultado" class="h-full rounded-full transition-all duration-500" style="width:0%"></div></div>
+            <div class="absolute inset-0 pointer-events-none">
+              <span class="absolute top-0 h-2 w-px bg-zinc-400" style="left:22%"></span>
+              <span class="absolute top-0 h-2 w-px bg-zinc-400" style="left:33%"></span>
+            </div>
+          </div>
+          <div class="relative mt-1 h-4 text-[11px] font-semibold text-zinc-600">
+            <span class="absolute -translate-x-1/2" style="left:22%">2</span>
+            <span class="absolute -translate-x-1/2" style="left:33%">3</span>
+          </div>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <button id="btn_copiar" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-700 border border-zinc-200 bg-white rounded-lg px-4 py-2.5 min-h-[44px] hover:border-accent hover:text-accent transition">Copiar</button>
+          <button id="btn_whatsapp" class="inline-flex items-center gap-1.5 text-sm font-semibold text-white bg-[#25D366] hover:bg-[#1DA851] rounded-lg px-4 py-2.5 min-h-[44px] transition active:scale-[0.98]">WhatsApp</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="space-y-6">
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Interpretación</h2>
+        <table class="w-full text-sm border-collapse">
+          <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Puntos</th><th class="py-2 pr-2 font-bold">Riesgo de sangrado</th><th class="py-2 font-bold">Actitud</th></tr></thead>
+          <tbody class="text-zinc-700">
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">0–1</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">Bajo</span></td><td class="py-2.5">Anticoagular según CHA2DS2-VA</td></tr>
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">2</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-0.5">Moderado</span></td><td class="py-2.5">Anticoagular + corregir factores</td></tr>
+            <tr><td class="py-2.5 pr-2 font-mono tnum">≥3</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-red-700 bg-red-50 border border-red-200 rounded-full px-2.5 py-0.5">Alto</span></td><td class="py-2.5">Precaución, corregir factores y seguimiento estrecho</td></tr>
+          </tbody>
+        </table>
+        <p class="text-[12px] text-zinc-500 mt-2">El HAS-BLED <strong>no contraindicó</strong> la anticoagulación por sí solo: un riesgo de ictus alto (CHA2DS2-VA) justifica anticoagular, corrigiendo los factores de sangrado modificables.</p>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Para quién es</h2>
+        <ul class="space-y-2 text-zinc-600 text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-emerald-600 font-bold mt-0.5">✓</span>Pacientes con FA que van a iniciar o ya reciben anticoagulación oral.</li>
+          <li class="flex gap-2"><span class="text-emerald-600 font-bold mt-0.5">✓</span>Se complementa con <strong>CHA2DS2-VA</strong> (riesgo de ictus) en la misma consulta.</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No es una escala de cribado de sangrado en pacientes sin FA.</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No sustituye la evaluación individualizada del riesgo.</li>
+        </ul>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Validación</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Caso</th><th class="py-2 pr-2 font-bold">Fuente</th><th class="py-2 font-bold">Resultado</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Edad &gt;65 + ACV + HTA no controlada</td><td class="py-2.5 pr-2">ESC 2019</td><td class="py-2.5 font-mono tnum">3 · alto</td></tr>
+              <tr><td class="py-2.5 pr-2">Edad &gt;65 + INR lábil</td><td class="py-2.5 pr-2">ESC 2019</td><td class="py-2.5 font-mono tnum">2 · moderado</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[12px] text-zinc-500 mt-2">Puntuación determinista (suma de criterios) — reproducible al punto contra la fuente. Ver la <a href="../../metodologia.html#validacion" class="transition-colors text-accent underline hover:text-accent-700">metodología completa</a>.</p>
+      </section>
+
+      <section class="rounded-2xl p-5 border border-accent/20 bg-accent-50">
+        <h2 class="font-display font-bold text-base text-accent-700 mb-2">Fuentes y revisión</h2>
+        <ul class="text-[13px] text-zinc-700 space-y-1.5">
+          <li><strong>HAS-BLED</strong> — Pisters et al. <em>Chest</em> 2010;138(5):1093–1100. Adoptada por guías ESC 2019 y 2024.</li>
+          <li><strong>Última revisión:</strong> agosto de 2026.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <section class="max-w-3xl mx-auto">
+    <h2 class="font-display font-bold text-2xl tracking-tight text-zinc-900 mb-6 text-center">Preguntas frecuentes</h2>
+    <div class="space-y-4">
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué es la escala HAS-BLED?<span class="text-accent shrink-0 transition group-open:rotate-45">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">HAS-BLED es una escala de la Sociedad Europea de Cardiología que estima el riesgo de sangrado mayor (1 año) en pacientes con fibrilación auricular que reciben anticoagulación. Incluye: hipertensión, función renal o hepática anormal, ictus previo, sangrado previo, INR lábil, edad >65 años y alcohol o drogas.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué puntuación indica alto riesgo de sangrado?<span class="text-accent shrink-0 transition group-open:rotate-45">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">0-1 puntos indica riesgo bajo, 2 puntos riesgo moderado y 3 o más puntos riesgo alto. Un HAS-BLED elevado no contraindica la anticoagulación por sí solo, sino que invita a corregir los factores de riesgo modificables y a un seguimiento más estrecho.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿HAS-BLED se usa sola para decidir anticoagular?<span class="text-accent shrink-0 transition group-open:rotate-45">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">No. La decisión de anticoagular en FA se toma con el riesgo trombótico (CHA2DS2-VA) y se contrasta con el riesgo de sangrado (HAS-BLED). Un riesgo de ictus alto justifica anticoagular aunque el HAS-BLED sea elevado, corrigiendo los factores de sangrado.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye HAS-BLED junto a CHA2DS2-VA, ORBIT y más de 20 modelos. Se usa gratis en cardioscore.matsonsoft.com.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="bg-white border border-zinc-200 rounded-2xl p-8 text-center">
+    <h2 class="font-display font-bold text-2xl tracking-tight text-zinc-900">¿Y el riesgo de ictus en la misma consulta?</h2>
+    <p class="text-zinc-500 mt-2 max-w-xl mx-auto">CardioScore calcula <strong>CHA2DS2-VA + HAS-BLED + ORBIT</strong> juntos y te dice si anticoagular, con storytelling para el paciente.</p>
+    <a href="../../index.html" class="inline-flex items-center justify-center gap-2 mt-5 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-8 py-3.5 min-h-[52px] text-base transition active:scale-[0.98]"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>Abrir CardioScore gratis</a>
+  </section>
+
+</main>
+
+<footer class="border-t border-zinc-200 bg-white mt-10">
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 items-start">
+      <div>
+        <div class="flex items-center gap-2.5 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+          </div>
+          <p class="font-display font-bold text-sm text-zinc-900">CardioScore</p>
+          <span class="text-[11px] font-semibold text-zinc-500 border border-zinc-200 rounded px-1.5 py-0.5">v3.3</span>
+        </div>
+        <p class="text-[13px] text-zinc-600 leading-relaxed max-w-md">Estratificación del riesgo cardiovascular con los modelos más actualizados (ESC, AHA, OMS), metodología abierta y validación institucional. Todo el cálculo ocurre en tu navegador.</p>
+        <div class="mt-4">
+          <p class="text-[13px] font-semibold text-zinc-600 mb-2.5">Construida por <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="footer-link underline underline-offset-2">Ing. Alexander Matson</a> y validada por:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+              Postgrado de Cardiología — Hospital Ruiz y Páez
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="md:justify-self-end">
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Enlaces</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="../../index.html" class="text-zinc-600 hover:text-accent transition-colors">Inicio</a></li>
+          <li><a href="../index.html" class="text-zinc-600 hover:text-accent transition-colors">Calculadoras</a></li>
+          <li><a href="../../metodologia.html" class="text-zinc-600 hover:text-accent transition-colors">Metodología</a></li>
+          <li><a href="../../metodologia.html#feedback" class="text-zinc-600 hover:text-accent transition-colors">Reportar un error</a></li>
+          <li><a href="../../terminos.html" class="text-zinc-600 hover:text-accent transition-colors">Términos de uso</a></li>
+        </ul>
+        <div class="mt-5 space-y-2 text-sm">
+          <a href="mailto:matson@matsonsoft.com" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v12H7l-3 4z"/></svg>matson@matsonsoft.com</a>
+          <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>matsonsoft.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 pt-6 border-t border-zinc-200">
+      <p class="text-xs text-zinc-500 leading-relaxed max-w-5xl mx-auto text-center">Los resultados son estimaciones probabilísticas basadas en modelos de población y guías internacionales (ESC/EAS, AHA, OMS);<br>deben interpretarse en el contexto clínico de cada paciente y no sustituyen el juicio profesional, el diagnóstico ni la consejería médica personalizada.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  function recalcular() {
+    let p = 0;
+    document.querySelectorAll('#criterios input:checked').forEach(function (el) { p += parseInt(el.dataset.p, 10); });
+    $('#puntaje').textContent = p;
+    const cat = $('#categoria');
+    const int = $('#interpretacion');
+    let color = '#047857';
+    if (p >= 3) {
+      cat.textContent = 'Riesgo alto de sangrado';
+      cat.className = 'inline-flex items-center text-sm font-bold px-3 py-1.5 rounded-full border text-red-700 bg-red-50 border-red-200';
+      int.innerHTML = '<strong>Recomendación:</strong> corregir factores de riesgo modificables (HTA, alcohol, INR) y seguimiento estrecho. Evaluar con CHA2DS2-VA antes de decidir.';
+      color = '#B91C1C';
+    } else if (p === 2) {
+      cat.textContent = 'Riesgo moderado';
+      cat.className = 'inline-flex items-center text-sm font-bold px-3 py-1.5 rounded-full border text-amber-700 bg-amber-50 border-amber-200';
+      int.innerHTML = '<strong>Recomendación:</strong> anticoagular si lo justifica el CHA2DS2-VA, corrigiendo los factores de sangrado presentes.';
+      color = '#B45309';
+    } else {
+      cat.textContent = 'Riesgo bajo';
+      cat.className = 'inline-flex items-center text-sm font-bold px-3 py-1.5 rounded-full border text-emerald-700 bg-emerald-50 border-emerald-200';
+      int.innerHTML = '<strong>Recomendación:</strong> anticoagular según el riesgo trombótico (CHA2DS2-VA).';
+      color = '#047857';
+    }
+    $('#barra_resultado').style.width = Math.min(100, p / 9 * 100) + '%';
+    $('#barra_resultado').style.backgroundColor = color;
+    $('#resultado').classList.remove('hidden');
+  }
+  document.querySelectorAll('#criterios input').forEach(function (el) {
+    el.addEventListener('change', recalcular);
+  });
+  function textoResultado() {
+    var p = document.getElementById('puntaje').textContent;
+    var cat = document.getElementById('categoria').textContent;
+    return 'Puntuación HAS-BLED: ' + p + ' (' + cat + '). CardioScore — cardioscore.matsonsoft.com';
+  }
+  function fallbackCopiar(txt) {
+    var ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  function copiarTexto(txt) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).catch(function () { fallbackCopiar(txt); });
+    } else { fallbackCopiar(txt); }
+  }
+  var btnCopiar = document.getElementById('btn_copiar');
+  var btnWa = document.getElementById('btn_whatsapp');
+  if (btnCopiar) btnCopiar.addEventListener('click', function () {
+    copiarTexto(textoResultado());
+    btnCopiar.textContent = 'Copiado';
+    setTimeout(function () { btnCopiar.textContent = 'Copiar'; }, 1800);
+  });
+  if (btnWa) btnWa.addEventListener('click', function () {
+    window.open('https://wa.me/?text=' + encodeURIComponent(textoResultado()), '_blank');
+  });
+  // deep-link: compartir/recargar un caso por URL (c1..c8 = 0/1)
+  try {
+    const q = new URLSearchParams(location.search);
+    document.querySelectorAll('#criterios input').forEach(function (b, i) {
+      if (q.get('c' + (i + 1)) === '1') b.checked = true;
+    });
+    if (q.toString()) recalcular();
+  } catch (e) {}
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var el = document.getElementById('pac_count');
+  if (!el) return;
+  try {
+    var perfil = (localStorage.getItem('cs_perfil') || 'general');
+    var lista = JSON.parse(localStorage.getItem('cs_pacientes_' + perfil) || '[]');
+    el.textContent = lista.length;
+    el.classList.toggle('hidden', lista.length === 0);
+  } catch (e) {}
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_menu'), menu = document.getElementById('menu_movil');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_tema');
+  if (!btn) return;
+  function aplicar() {
+    var dark = document.documentElement.classList.contains('dark');
+    var s = document.getElementById('ico_sol'), l = document.getElementById('ico_luna');
+    if (s) s.classList.toggle('hidden', !dark);
+    if (l) l.classList.toggle('hidden', dark);
+    var mt = document.querySelector('meta[name="theme-color"]');
+    if (mt) mt.setAttribute('content', dark ? '#0C111A' : '#0054A6');
+  }
+  aplicar();
+  btn.addEventListener('click', function () {
+    document.documentElement.classList.add('theme-transition');
+    document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('cs_tema', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+    aplicar();
+    clearTimeout(window._ttm);
+    window._ttm = setTimeout(function () { document.documentElement.classList.remove('theme-transition'); }, 220);
+  });
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  document.querySelectorAll('input[type="number"]').forEach(function (inp) {
+    var min = inp.min !== '' ? parseFloat(inp.min) : -Infinity;
+    var max = inp.max !== '' ? parseFloat(inp.max) : Infinity;
+    inp.addEventListener('keydown', function (e) {
+      if (['e', 'E', '+'].indexOf(e.key) !== -1 || (e.key === '-' && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('paste', function (e) {
+      var txt = (e.clipboardData || window.clipboardData).getData('text');
+      if (!txt || /[^0-9.,-]/.test(txt) || (txt.indexOf('-') !== -1 && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('blur', function () {
+      var v = parseFloat(inp.value);
+      if (isNaN(v)) return;
+      if (v < min) inp.value = min;
+      else if (v > max) inp.value = max;
+    });
+  });
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("../../sw.js").catch(function () {}); }); }
+</script>
+</body>
+</html>

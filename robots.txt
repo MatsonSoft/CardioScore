@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cardioscore.matsonsoft.com/sitemap.xml

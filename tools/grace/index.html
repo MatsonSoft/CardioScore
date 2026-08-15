@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try { if (localStorage.getItem('cs_tema') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}</script>
+<title>Calculadora GRACE 2.0 de mortalidad en SCA — CardioScore</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="manifest" href="../../manifest.json">
+<link rel="apple-touch-icon" href="../../icons/icon-192.png">
+<meta name="theme-color" content="#0054A6">
+<meta name="description" content="Calculadora GRACE 2.0 de mortalidad intrahospitalaria y a 6 meses en síndrome coronario agudo (SCA). Puntuación por bandas, clasificación de riesgo y vectores de validación reproducibles. Gratis y validada clínicamente.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cardioscore.matsonsoft.com/tools/grace/">
+<meta property="og:title" content="Calculadora GRACE 2.0 de mortalidad en SCA — CardioScore">
+<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:description" content="Mortalidad intrahospitalaria y a 6 meses en síndrome coronario agudo según GRACE 2.0. Puntuación por bandas y validación reproducible.">
+<meta property="og:type" content="website">
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DmjHF4fQ8Rkfu3Jz2fUQgXWMbTrbFwRAkpoLiAmpJjSb', { api_host: 'https://app.posthog.com', persistence: 'localStorage+cookie', autocapture: true, disable_session_recording: true, property_blacklist: ['$current_url'] });
+  posthog.register({ app: 'cardioscore', app_version: '3.3' });
+</script>
+<script>
+  function trackCS(n, p) {
+    try {
+      var id = localStorage.getItem('cs_anon_id');
+      if (!id) { id = 'anon-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10); localStorage.setItem('cs_anon_id', id); }
+      if (id && window.posthog) { posthog.identify(id); posthog.capture(n, p || {}); }
+    } catch (e) {}
+  }
+  trackCS('cs_visita', {});
+  try {
+    var _p = location.pathname.split('/').filter(Boolean);
+    var _slug = _p[_p.length - 2] === 'tools' ? 'hub' : (_p[_p.length - 2] || 'index');
+    trackCS('cs_visita_calculadora', { slug: _slug });
+    document.addEventListener('click', function (ev) {
+      var _t = ev.target && ev.target.closest ? ev.target.closest('#calcular, #btn_calcular, [data-calcular]') : null;
+      if (_t) { try { trackCS('cs_calcular', { slug: _slug }); } catch (e) {} }
+    });
+  } catch (e) {}
+</script>
+
+</script>
+<link rel="stylesheet" href="../../tailwind.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid #0054A6; outline-offset: 2px; border-radius: 4px; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: background-color .18s ease, color .18s ease, border-color .18s ease !important; }
+  .dark .bg-white { background-color: #141A24 !important; }
+  .dark .bg-zinc-50 { background-color: #0C111A !important; }
+  .dark .bg-zinc-100 { background-color: #1A212D !important; }
+  .dark .bg-accent-50 { background-color: #0F2233 !important; }
+  .dark .text-zinc-900 { color: #E8E8EC !important; }
+  .dark .text-zinc-700 { color: #D4D4D8 !important; }
+  .dark .text-zinc-600, .dark .text-zinc-500 { color: #A1A1AA !important; }
+  .dark .text-zinc-500 { color: #8E8E96 !important; }
+  .dark .border-zinc-200, .dark .border-zinc-300, .dark .border-slate-200 { border-color: #262E3C !important; }
+  .dark header { background-color: #11161F !important; border-color: #262E3C !important; }
+  .dark input, .dark select, .dark textarea { background-color: #141A24 !important; border-color: #333C4D !important; color: #E8E8EC !important; }
+  .dark .bg-red-50 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-50 { background-color: #33271A !important; }
+  .dark .bg-emerald-50 { background-color: #14301F !important; }
+  .dark .bg-blue-50 { background-color: #14283A !important; }
+  .dark .text-red-700, .dark .text-red-800, .dark .text-red-600 { color: #F2A6A6 !important; }
+  .dark .text-amber-800, .dark .text-amber-700 { color: #F0C987 !important; }
+  .dark .text-emerald-700, .dark .text-emerald-800 { color: #A7E3C0 !important; }
+  .dark .text-blue-700, .dark .text-blue-800 { color: #A9CFF2 !important; }
+  .dark .border-red-200 { border-color: #5A2A30 !important; }
+  .dark .border-amber-200 { border-color: #5A4630 !important; }
+  .dark .border-emerald-200 { border-color: #2A5A40 !important; }
+  .dark .border-blue-200 { border-color: #2A4A6A !important; }
+  .dark .text-accent { color: #8AB4F8 !important; }
+  .dark .text-accent-700 { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent:hover { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent-700:hover { color: #8AB4F8 !important; }
+  .dark .text-zinc-800 { color: #D4D4D8 !important; }
+  .dark .text-ink { color: #E8E8EC !important; }
+  .dark .bg-accent { background-color: #1E6BB8 !important; }
+  .dark .bg-accent-700 { background-color: #1E6BB8 !important; }
+  .dark .border-accent { border-color: #4A7FC0 !important; }
+  .dark .border-accent\/20 { border-color: rgba(74, 127, 192, .32) !important; }
+  .dark .border-accent\/30 { border-color: rgba(74, 127, 192, .4) !important; }
+  .dark .bg-zinc-200 { background-color: #333C4D !important; }
+  .dark .bg-zinc-300 { background-color: #3A4455 !important; }
+  .dark .bg-zinc-50\/95 { background-color: rgba(12, 17, 26, 0.95) !important; }
+  .dark .peer:checked ~ .peer-checked\:bg-white { background-color: #2A3442 !important; }
+  .dark .shadow-sm, .dark .shadow { box-shadow: 0 1px 3px rgba(0,0,0,.5) !important; }
+  .dark .shadow-xl { box-shadow: 0 20px 40px rgba(0,0,0,.6) !important; }
+  .dark .shadow-2xl { box-shadow: 0 25px 50px rgba(0,0,0,.6) !important; }
+  .dark .req-tag { background: #1A212D !important; color: #D4D4D8 !important; }
+  .dark .req-tag-acc { background: #0F2233 !important; border-color: rgba(74,127,192,.3) !important; color: #8AB4F8 !important; }
+  .dark .bg-red-100 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-100 { background-color: #33271A !important; }
+  .dark .bg-emerald-100 { background-color: #14301F !important; }
+  .dark .bg-blue-100 { background-color: #14283A !important; }
+  .dark .bg-red-50\/40 { background-color: rgba(58, 26, 31, 0.55) !important; }
+  .dark .bg-amber-50\/40 { background-color: rgba(51, 39, 26, 0.55) !important; }
+  .dark .bg-emerald-50\/40 { background-color: rgba(20, 48, 31, 0.55) !important; }
+  .dark .bg-accent-50\/40 { background-color: rgba(15, 34, 51, 0.6) !important; }
+  .dark .odd\:bg-zinc-50\/60:nth-child(odd) { background-color: rgba(12, 17, 26, 0.5) !important; }
+  .dark .border-zinc-100 { border-color: #1A212D !important; }
+  .dark .hover\:shadow-\[0_10px_30px_rgba\(0\,84\,166\,0\.08\)\]:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, .45) !important; }
+  .dark .footer-link { color: #8AB4F8; }
+  .dark .bg-white.border.border-zinc-200 { box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  .dark input.sr-only:focus-visible + span { outline-color: #8AB4F8; }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; accent-color: #8AB4F8; }
+  html.dark ::selection { background: rgba(138, 180, 248, .35); color: #E8E8EC; }
+  html.dark input::placeholder, html.dark textarea::placeholder { color: #71717A !important; }
+  html.dark .tip::after { background: #E8E8EC !important; color: #0E1420 !important; }
+  html.dark .tip::before { border-top-color: #E8E8EC !important; }
+  @media (prefers-reduced-motion: reduce) { html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    .skel, .paso-in, #toast, .fade-in { animation: none !important; }
+    .ante-chip, .qrisk-chip, .sccard, .sc-inner { transition: none !important; }
+    #gauge_aguja, #gauge_punto { transition: none !important; }
+  }
+  #menu_movil:not(.hidden) { animation: fadein .22s ease; }
+  #onboarding:not(.hidden) { animation: fadein .25s ease; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Calculadora GRACE 2.0 de mortalidad en SCA — CardioScore",
+  "url": "https://cardioscore.matsonsoft.com/tools/grace/",
+  "description": "Calculadora de mortalidad intrahospitalaria y a 6 meses en síndrome coronario agudo según el score GRACE 2.0, con puntuación por bandas y clasificación de riesgo.",
+  "applicationCategory": "HealthApplication",
+  "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es el score GRACE 2.0?",
+      "acceptedAnswer": { "@type": "Answer", "text": "GRACE 2.0 es la versión actualizada del score del registro GRACE (Global Registry of Acute Coronary Events) que estima la mortalidad intrahospitalaria y a 6 meses en pacientes con síndrome coronario agudo (SCA), a partir de edad, frecuencia cardíaca, presión arterial sistólica, creatinina, clase Killip, paro cardíaco, desviación del ST y enzimas elevadas." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo se interpreta el puntaje GRACE 2.0?",
+      "acceptedAnswer": { "@type": "Answer", "text": "El puntaje total va de 0 a 263. Un puntaje de 1 a 88 indica riesgo bajo de mortalidad intrahospitalaria, de 89 a 118 riesgo intermedio, y de 119 o más riesgo alto. Se usa junto con las guías ESC para decidir la estrategia invasiva temprana." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Para quién sirve la calculadora GRACE 2.0?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sirve para pacientes adultos con síndrome coronario agudo: infarto con elevación del ST (STEMI), infarto sin elevación del ST (NSTEMI) o angina inestable. Se calcula al ingreso y permite estratificar el riesgo de muerte y planificar la estrategia de revascularización." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿GRACE 2.0 reemplaza a GRACE 1.0?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. GRACE 2.0 actualiza los coeficientes con la cohorte más amplia del registro GRACE e incorpora la mortalidad a 6 meses además de la intrahospitalaria. Las guías ESC de SCA lo recomiendan para la estratificación inicial del riesgo." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué desenlace predice GRACE 2.0?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Predice la mortalidad intrahospitalaria y a 6 meses tras un síndrome coronario agudo. No predice sangrado ni otras complicaciones; para el riesgo de sangrado se usan scores específicos como HAS-BLED o ARC-HBR." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde está disponible la calculadora completa?",
+      "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye GRACE 2.0, ARC-HBR, SPI-II, KFRE, SCORE2, WHO-Central L.A., PREVENT, SMART2 y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com." }
+    }
+  ]
+}
+</script>
+<style>html, body { overflow-x: hidden; }
+  main p, main li, main td { line-height: 1.75; }</style>
+</head>
+<body class="bg-zinc-50 text-ink font-sans text-[15px] leading-relaxed">
+
+<!-- ===================== HEADER ===================== -->
+<header class="bg-white border-b border-zinc-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+          <a href="../../index.html" class="flex items-center gap-3 no-underline shrink-0 h-full">
+      <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+      </div>
+      <div>
+        <p class="font-display font-bold text-sm leading-tight">CardioScore</p>
+        <p class="hidden sm:block text-[11px] text-zinc-500 -mt-0.5">Riesgo cardiovascular · herramientas clínicas</p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-1" aria-label="Navegación principal">
+      <a href="../../index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Inicio</a>
+      <a href="../../metodologia.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Metodología</a>
+      <a href="../index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition bg-accent-50 text-accent">Calculadoras</a>
+      <a href="../../index.html#panel_pac" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Pacientes guardados">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM4 21v-1a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v1"/></svg>
+        <span class="hidden sm:inline">Pacientes</span>
+        <span id="pac_count" class="hidden text-[10px] font-bold bg-accent text-white rounded-full min-w-[18px] h-[18px] px-1 inline-flex items-center justify-center">0</span>
+      </a>
+      <button id="btn_tema" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Cambiar entre tema claro y oscuro">
+        <svg id="ico_sol" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="ico_luna" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    
+    </nav>
+      <button id="btn_menu" class="sm:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+  </div>
+  <div id="menu_movil" class="sm:hidden hidden bg-white border-t border-zinc-200 px-4 py-3 space-y-1">
+    <a href="../../index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Inicio</a>
+    <a href="../../metodologia.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Metodología</a>
+    <a href="../index.html" class="transition-colors block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center">Calculadoras</a>
+  </div>
+</header>
+
+<main id="main" class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+
+  <!-- ===================== HERO ===================== -->
+  <section aria-labelledby="h1" class="text-left max-w-3xl">
+        <nav aria-label="Ruta de navegación" class="flex flex-wrap items-center gap-1.5 text-[13px] text-zinc-500 mb-4"><a href="../../index.html" class="transition-colors hover:text-accent hover:underline underline-offset-2">Inicio</a><svg class="w-3.5 h-3.5 text-zinc-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg><a href="../index.html" class="transition-colors hover:text-accent hover:underline underline-offset-2">Calculadoras</a><svg class="w-3.5 h-3.5 text-zinc-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg><span class="font-semibold text-zinc-700">GRACE 2.0</span></nav>
+<p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Síndrome coronario agudo · Registro GRACE</p>
+    <h1 id="h1" class="font-display font-bold text-3xl sm:text-4xl tracking-tight text-zinc-900">Calculadora de mortalidad en SCA <span class="text-accent">GRACE 2.0</span></h1>
+    <p class="text-zinc-500 mt-3 text-[17px]">Estimación de la <strong class="text-zinc-700">mortalidad intrahospitalaria y a 6 meses</strong> en pacientes con síndrome coronario agudo (STEMI, NSTEMI o angina inestable), según el score GRACE 2.0 del registro internacional GRACE.</p>
+    <div class="mt-4 flex flex-wrap items-center gap-2">
+      
+      <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-accent bg-accent-50 border border-accent/20 rounded-full px-3 py-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        Revisión: agosto de 2026
+      </span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-white border border-zinc-200 rounded-full px-3 py-1.5">
+        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>
+        Intrahosp. y 6 meses · SCA
+      </span></div>
+  </section>
+
+  <!-- ===================== CALCULADORA + INFO ===================== -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <!-- Calculadora -->
+    <section aria-label="Calculadora GRACE 2.0" class="bg-white border border-zinc-200 rounded-2xl p-6 sm:p-7 self-start lg:sticky lg:top-24">
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-5">Puntaje GRACE 2.0</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="edad" class="block text-[13px] font-semibold text-zinc-700 mb-1">Edad <span class="text-zinc-500 font-normal">años</span></label>
+          <input id="edad" type="number" inputmode="numeric" value="62" min="18" max="110" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Edad en años">
+        </div>
+        <div>
+          <label for="fc" class="block text-[13px] font-semibold text-zinc-700 mb-1">Frecuencia cardíaca <span class="text-zinc-500 font-normal">lpm</span></label>
+          <input id="fc" type="number" inputmode="numeric" value="100" min="30" max="230" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Frecuencia cardíaca">
+        </div>
+        <div>
+          <label for="pas" class="block text-[13px] font-semibold text-zinc-700 mb-1">PAS <span class="text-zinc-500 font-normal">mmHg</span></label>
+          <input id="pas" type="number" inputmode="numeric" value="150" min="40" max="260" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Presión arterial sistólica">
+        </div>
+        <div>
+          <label for="creat" class="block text-[13px] font-semibold text-zinc-700 mb-1">Creatinina <span class="text-zinc-500 font-normal">mg/dL</span></label>
+          <input id="creat" type="number" inputmode="decimal" value="1.0" min="0.1" max="10" step="0.1" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Creatinina sérica">
+        </div>
+        <div>
+          <label for="killip" class="block text-[13px] font-semibold text-zinc-700 mb-1">Clase Killip</label>
+          <select id="killip" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20">
+            <option value="1" selected>I — sin insuficiencia</option>
+            <option value="2">II — estertores / S3</option>
+            <option value="3">III — edema agudo de pulmón</option>
+            <option value="4">IV — shock cardiogénico</option>
+          </select>
+        </div>
+        <div>
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">Paro cardíaco al ingreso</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="paro" value="no" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">No</span></label>
+            <label class="relative"><input type="radio" name="paro" value="si" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Sí</span></label>
+          </div>
+        </div>
+        <div>
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">Desviación del ST</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="st" value="no" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">No</span></label>
+            <label class="relative"><input type="radio" name="st" value="si" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Sí</span></label>
+          </div>
+        </div>
+        <div>
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">Enzimas elevadas</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="enz" value="no" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">No</span></label>
+            <label class="relative"><input type="radio" name="enz" value="si" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Sí</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultado en vivo -->
+      <div id="resultado" class="mt-6 border-t border-zinc-200 pt-5">
+        <div class="flex items-center gap-5 flex-wrap">
+          <div class="text-center">
+            <p class="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-1">Puntaje GRACE 2.0</p>
+            <p class="font-display font-bold text-5xl tnum text-zinc-900"><span id="puntos">—</span><span class="text-2xl text-zinc-500">/263</span></p>
+          </div>
+          <div class="flex-1 min-w-[220px] bg-zinc-50 border border-zinc-200 rounded-xl p-3">
+            <p id="categoria" class="inline-flex items-center gap-2 text-sm font-bold px-3 py-1.5 rounded-full border"></p>
+            <p id="interpretacion" class="text-[13px] text-zinc-600 mt-2 leading-snug"></p>
+          </div>
+        </div>
+        <div class="mt-4 h-2 rounded-full bg-zinc-100 overflow-hidden"><div id="barra_resultado" class="h-full rounded-full transition-all duration-500" style="width:0%"></div></div>
+        <div class="relative mt-1 h-3 text-[11px] font-semibold text-zinc-600 tnum" aria-hidden="true">
+          <span class="absolute -translate-x-1/2" style="left:33.5%">88</span>
+          <span class="absolute -translate-x-1/2" style="left:45.3%">119</span>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <button id="btn_copiar" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-700 border border-zinc-200 bg-white rounded-lg px-4 py-2.5 min-h-[44px] hover:border-accent hover:text-accent transition">Copiar</button>
+          <button id="btn_whatsapp" class="inline-flex items-center gap-1.5 text-sm font-semibold text-white bg-[#25D366] hover:bg-[#1DA851] rounded-lg px-4 py-2.5 min-h-[44px] transition active:scale-[0.98]">WhatsApp</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenido informativo -->
+    <div class="space-y-6">
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">¿Qué es GRACE 2.0?</h2>
+        <p class="text-zinc-600 leading-relaxed">GRACE (Global Registry of Acute Coronary Events) es el score con mayor evidencia para estratificar el riesgo en el síndrome coronario agudo. Combina variables clínicas, electrocardiográficas y de laboratorio obtenidas <strong>al ingreso</strong> para estimar la probabilidad de muerte.</p>
+        <p class="text-zinc-600 leading-relaxed mt-3">La versión 2.0 actualiza los coeficientes con la cohorte ampliada del registro e incorpora la mortalidad a <strong>6 meses</strong>. Las guías de SCA de la ESC lo recomiendan para decidir la <strong>estrategia invasiva temprana</strong> y la intensidad del tratamiento.</p>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Interpretación</h2>
+        <table class="w-full text-sm border-collapse">
+          <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Puntaje</th><th class="py-2 pr-2 font-bold">Riesgo</th><th class="py-2 font-bold">Mortalidad intrahospitalaria</th></tr></thead>
+          <tbody class="text-zinc-700">
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">1 – 88</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">Bajo</span></td><td class="py-2.5">&lt; 1%</td></tr>
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">89 – 118</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-0.5">Intermedio</span></td><td class="py-2.5">1 – 3%</td></tr>
+            <tr><td class="py-2.5 pr-2 font-mono tnum">≥ 119</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-red-700 bg-red-50 border border-red-200 rounded-full px-2.5 py-0.5">Alto</span></td><td class="py-2.5">&gt; 3%</td></tr>
+          </tbody>
+        </table>
+        <p class="text-[12px] text-zinc-500 mt-2">Riesgo alto (≥ 119): considerar estrategia invasiva temprana (&lt; 24 h) y soporte intensivo según guías ESC de SCA.</p>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Para quién es y sus límites</h2>
+        <ul class="space-y-2 text-zinc-600 text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-emerald-600 font-bold mt-0.5">✓</span>Pacientes adultos con SCA: STEMI, NSTEMI o angina inestable.</li>
+          <li class="flex gap-2"><span class="text-emerald-600 font-bold mt-0.5">✓</span>Se calcula al ingreso con las variables disponibles en urgencias.</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No predice sangrado, arritmias ni otras complicaciones no fatales.</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No sustituye la valoración clínica; la clase Killip y el estado hemodinámico deben confirmarse.</li>
+        </ul>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Validación</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Caso de referencia</th><th class="py-2 pr-2 font-bold">Fuente</th><th class="py-2 font-bold">Calculado</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Varón 62 a, FC 100, PAS 150, Cr 1.0, Killip I, ST+ y enzimas+</td><td class="py-2.5 pr-2">GRACE 2.0</td><td class="py-2.5 font-mono tnum">141 · alto</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Mujer 55 a, FC 80, PAS 130, Cr 0.8, Killip I, sin ST ni enzimas</td><td class="py-2.5 pr-2">GRACE 2.0</td><td class="py-2.5 font-mono tnum">84 · bajo</td></tr>
+              <tr><td class="py-2.5 pr-2">Varón 70 a, FC 120, PAS 90, Cr 1.8, Killip II, ST+ y enzimas+</td><td class="py-2.5 pr-2">GRACE 2.0</td><td class="py-2.5 font-mono tnum">221 · alto</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[12px] text-zinc-500 mt-2">Cada vector es reproducible con la misma puntuación por bandas de GRACE 2.0. Ver la <a href="../../metodologia.html#validacion" class="transition-colors text-accent underline hover:text-accent-700">metodología completa</a>.</p>
+      </section>
+
+      <section class="rounded-2xl p-5 border border-accent/20 bg-accent-50">
+        <h2 class="font-display font-bold text-base text-accent-700 mb-2">Fuentes y revisión</h2>
+        <ul class="text-[13px] text-zinc-700 space-y-1.5">
+          <li><strong>GRACE 2.0</strong> — Fox KAA, Fitzgerald G, Puymirat E, et al. <em>BMJ Open</em> 2014;4(2):e004425.</li>
+          <li><strong>GRACE</strong> — Granger CB, Goldberg RJ, Dabbous O, et al. <em>Lancet</em> 2003;361:1019–1024.</li>
+          <li><strong>Guías ESC SCA-NSTE</strong> — <em>Eur Heart J</em> 2023 (uso de GRACE para estrategia invasiva).</li>
+          <li><strong>Última revisión:</strong> agosto de 2026.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===================== FAQ ===================== -->
+  <section aria-labelledby="faq-t" class="max-w-3xl mx-auto">
+    <h2 id="faq-t" class="font-display font-bold text-2xl tracking-tight text-zinc-900 mb-6 text-center">Preguntas frecuentes</h2>
+    <div class="space-y-4">
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué es el score GRACE 2.0?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">GRACE 2.0 es la versión actualizada del score del registro GRACE (Global Registry of Acute Coronary Events) que estima la mortalidad intrahospitalaria y a 6 meses en pacientes con síndrome coronario agudo (SCA), a partir de edad, frecuencia cardíaca, presión arterial sistólica, creatinina, clase Killip, paro cardíaco, desviación del ST y enzimas elevadas.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Cómo se interpreta el puntaje GRACE 2.0?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">El puntaje total va de 0 a 263. Un puntaje de 1 a 88 indica riesgo bajo de mortalidad intrahospitalaria, de 89 a 118 riesgo intermedio, y de 119 o más riesgo alto. Se usa junto con las guías ESC para decidir la estrategia invasiva temprana.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Para quién sirve la calculadora GRACE 2.0?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Sirve para pacientes adultos con síndrome coronario agudo: infarto con elevación del ST (STEMI), infarto sin elevación del ST (NSTEMI) o angina inestable. Se calcula al ingreso y permite estratificar el riesgo de muerte y planificar la estrategia de revascularización.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿GRACE 2.0 reemplaza a GRACE 1.0?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Sí. GRACE 2.0 actualiza los coeficientes con la cohorte más amplia del registro GRACE e incorpora la mortalidad a 6 meses además de la intrahospitalaria. Las guías ESC de SCA lo recomiendan para la estratificación inicial del riesgo.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué desenlace predice GRACE 2.0?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Predice la mortalidad intrahospitalaria y a 6 meses tras un síndrome coronario agudo. No predice sangrado ni otras complicaciones; para el riesgo de sangrado se usan scores específicos como HAS-BLED o ARC-HBR.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye GRACE 2.0, ARC-HBR, SPI-II, KFRE, SCORE2, WHO-Central L.A., PREVENT, SMART2 y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="bg-white border border-zinc-200 rounded-2xl p-8 text-center">
+    <h2 class="font-display font-bold text-2xl tracking-tight text-zinc-900">Lleva esta calculadora a tu consulta</h2>
+    <p class="text-zinc-500 mt-2 max-w-xl mx-auto">CardioScore calcula <strong>20+ modelos</strong>: GRACE 2.0, SCORE2, WHO-Central L.A., PREVENT, SMART2, CHA2DS2-VA, HAS-BLED y más, con storytelling, metas de LDL y guía para explicar al paciente.</p>
+    <a href="../../index.html" class="inline-flex items-center justify-center gap-2 mt-5 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-8 py-3.5 min-h-[52px] text-base transition active:scale-[0.98]">
+      Abrir CardioScore gratis
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="border-t border-zinc-200 bg-white mt-10">
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 items-start">
+      <div>
+        <div class="flex items-center gap-2.5 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+          </div>
+          <p class="font-display font-bold text-sm text-zinc-900">CardioScore</p>
+          <span class="text-[11px] font-semibold text-zinc-500 border border-zinc-200 rounded px-1.5 py-0.5">v3.3</span>
+        </div>
+        <p class="text-[13px] text-zinc-600 leading-relaxed max-w-md">Estratificación del riesgo cardiovascular con los modelos más actualizados (ESC, AHA, OMS), metodología abierta y validación institucional. Todo el cálculo ocurre en tu navegador.</p>
+        <div class="mt-4">
+          <p class="text-[13px] font-semibold text-zinc-600 mb-2.5">Construida por <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="footer-link underline underline-offset-2">Ing. Alexander Matson</a> y validada por:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+              Postgrado de Cardiología — Hospital Ruiz y Páez
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="md:justify-self-end">
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Enlaces</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="../../index.html" class="text-zinc-600 hover:text-accent transition-colors">Inicio</a></li>
+          <li><a href="../index.html" class="text-zinc-600 hover:text-accent transition-colors">Calculadoras</a></li>
+          <li><a href="../../metodologia.html" class="text-zinc-600 hover:text-accent transition-colors">Metodología</a></li>
+          <li><a href="../../metodologia.html#feedback" class="text-zinc-600 hover:text-accent transition-colors">Reportar un error</a></li>
+          <li><a href="../../terminos.html" class="text-zinc-600 hover:text-accent transition-colors">Términos de uso</a></li>
+        </ul>
+        <div class="mt-5 space-y-2 text-sm">
+          <a href="mailto:matson@matsonsoft.com" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v12H7l-3 4z"/></svg>matson@matsonsoft.com</a>
+          <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-zinc-600 hover:text-accent transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>matsonsoft.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 pt-6 border-t border-zinc-200">
+      <p class="text-xs text-zinc-500 leading-relaxed max-w-5xl mx-auto text-center">Los resultados son estimaciones probabilísticas basadas en modelos de población y guías internacionales (ESC/EAS, AHA, OMS);<br>deben interpretarse en el contexto clínico de cada paciente y no sustituyen el juicio profesional, el diagnóstico ni la consejería médica personalizada.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s);
+
+  function puntosEdad(a) {
+    if (a < 40) return 0;
+    if (a <= 49) return 18;
+    if (a <= 59) return 36;
+    if (a <= 69) return 55;
+    if (a <= 79) return 73;
+    return 91;
+  }
+  function puntosFC(f) {
+    if (f < 50) return 0;
+    if (f <= 69) return 3;
+    if (f <= 89) return 9;
+    if (f <= 109) return 15;
+    if (f <= 149) return 24;
+    return 38;
+  }
+  function puntosPAS(p) {
+    if (p < 80) return 58;
+    if (p <= 99) return 53;
+    if (p <= 119) return 43;
+    if (p <= 139) return 34;
+    if (p <= 159) return 24;
+    if (p <= 199) return 10;
+    return 0;
+  }
+  function puntosCrea(c) {
+    if (c < 0.4) return 1;
+    if (c < 0.8) return 3;
+    if (c < 1.2) return 5;
+    if (c < 1.6) return 7;
+    if (c < 2.0) return 9;
+    if (c < 4.0) return 15;
+    return 20;
+  }
+  function categorizar(p) {
+    if (p <= 88) return { txt: 'Riesgo bajo', cls: 'text-emerald-700 bg-emerald-50 border-emerald-200', color: '#047857', msg: 'Mortalidad intrahospitalaria estimada < 1%. Seguir las guías de SCA; la estrategia invasiva no es urgente por riesgo bajo.' };
+    if (p <= 118) return { txt: 'Riesgo intermedio', cls: 'text-amber-700 bg-amber-50 border-amber-200', color: '#B45309', msg: 'Mortalidad intrahospitalaria estimada 1–3%. Considerar estrategia invasiva y monitorización según guías ESC.' };
+    return { txt: 'Riesgo alto', cls: 'text-red-700 bg-red-50 border-red-200', color: '#B91C1C', msg: 'Mortalidad intrahospitalaria estimada > 3%. Estrategia invasiva temprana (< 24 h) y manejo en unidad coronaria.' };
+  }
+
+  function calcular() {
+    const edad = parseInt($('#edad').value, 10);
+    const fc = parseInt($('#fc').value, 10);
+    const pas = parseInt($('#pas').value, 10);
+    const creat = parseFloat($('#creat').value);
+    const killip = parseInt($('#killip').value, 10);
+    const paro = document.querySelector('input[name="paro"]:checked').value === 'si' ? 39 : 0;
+    const st = document.querySelector('input[name="st"]:checked').value === 'si' ? 28 : 0;
+    const enz = document.querySelector('input[name="enz"]:checked').value === 'si' ? 14 : 0;
+
+    if (!edad || isNaN(fc) || isNaN(pas) || isNaN(creat)) return;
+
+    const p = puntosEdad(edad) + puntosFC(fc) + puntosPAS(pas) + puntosCrea(creat) +
+              [0, 20, 39, 59][killip - 1] + paro + st + enz;
+    const c = categorizar(p);
+    $('#puntos').textContent = p;
+    $('#categoria').textContent = c.txt;
+    $('#categoria').className = 'inline-flex items-center gap-2 text-sm font-bold px-3 py-1.5 rounded-full border ' + c.cls;
+    $('#barra_resultado').style.width = Math.min(100, (p / 263) * 100) + '%';
+    $('#barra_resultado').style.backgroundColor = c.color;
+    $('#interpretacion').textContent = c.msg;
+  }
+
+  ['edad', 'fc', 'pas', 'creat', 'killip'].forEach(function (id) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', calcular);
+    el.addEventListener('change', calcular);
+  });
+  document.querySelectorAll('input[name="paro"], input[name="st"], input[name="enz"]').forEach(function (el) {
+    el.addEventListener('change', calcular);
+  });
+  function textoResultado() {
+    return 'CardioScore · GRACE 2.0: ' + $('#puntos').textContent + ' puntos (' + $('#categoria').textContent + '). ' + $('#interpretacion').textContent;
+  }
+  function copiarTexto(txt) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(txt);
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    return Promise.resolve();
+  }
+  $('#btn_copiar').addEventListener('click', function () {
+    copiarTexto(textoResultado()).then(function () {
+      var b = $('#btn_copiar');
+      b.textContent = 'Copiado';
+      setTimeout(function () { b.textContent = 'Copiar'; }, 2000);
+    });
+  });
+  $('#btn_whatsapp').addEventListener('click', function () {
+    window.open('https://wa.me/?text=' + encodeURIComponent(textoResultado()), '_blank');
+  });
+  // deep-link: compartir/recargar un caso por URL
+  try {
+    const q = new URLSearchParams(location.search);
+    const set = function (id, v) { if (v) document.getElementById(id).value = v; };
+    set('edad', q.get('edad')); set('fc', q.get('fc')); set('pas', q.get('pas')); set('creat', q.get('creat'));
+    if (q.get('killip')) $('#killip').value = q.get('killip');
+    const setRadio = function (name, v) { if (v) { const el = document.querySelector('input[name="' + name + '"][value="' + v + '"]'); if (el) el.checked = true; } };
+    setRadio('paro', q.get('paro')); setRadio('st', q.get('st')); setRadio('enz', q.get('enz'));
+  } catch (e) {}
+  calcular();
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var el = document.getElementById('pac_count');
+  if (!el) return;
+  try {
+    var perfil = (localStorage.getItem('cs_perfil') || 'general');
+    var lista = JSON.parse(localStorage.getItem('cs_pacientes_' + perfil) || '[]');
+    el.textContent = lista.length;
+    el.classList.toggle('hidden', lista.length === 0);
+  } catch (e) {}
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_menu'), menu = document.getElementById('menu_movil');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_tema');
+  if (!btn) return;
+  function aplicar() {
+    var dark = document.documentElement.classList.contains('dark');
+    var s = document.getElementById('ico_sol'), l = document.getElementById('ico_luna');
+    if (s) s.classList.toggle('hidden', !dark);
+    if (l) l.classList.toggle('hidden', dark);
+    var mt = document.querySelector('meta[name="theme-color"]');
+    if (mt) mt.setAttribute('content', dark ? '#0C111A' : '#0054A6');
+  }
+  aplicar();
+  btn.addEventListener('click', function () {
+    document.documentElement.classList.add('theme-transition');
+    document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('cs_tema', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+    aplicar();
+    clearTimeout(window._ttm);
+    window._ttm = setTimeout(function () { document.documentElement.classList.remove('theme-transition'); }, 220);
+  });
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  document.querySelectorAll('input[type="number"]').forEach(function (inp) {
+    var min = inp.min !== '' ? parseFloat(inp.min) : -Infinity;
+    var max = inp.max !== '' ? parseFloat(inp.max) : Infinity;
+    inp.addEventListener('keydown', function (e) {
+      if (['e', 'E', '+'].indexOf(e.key) !== -1 || (e.key === '-' && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('paste', function (e) {
+      var txt = (e.clipboardData || window.clipboardData).getData('text');
+      if (!txt || /[^0-9.,-]/.test(txt) || (txt.indexOf('-') !== -1 && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('blur', function () {
+      var v = parseFloat(inp.value);
+      if (isNaN(v)) return;
+      if (v < min) inp.value = min;
+      else if (v > max) inp.value = max;
+    });
+  });
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("../../sw.js").catch(function () {}); }); }
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try { if (localStorage.getItem('cs_tema') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}</script>
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DmjHF4fQ8Rkfu3Jz2fUQgXWMbTrbFwRAkpoLiAmpJjSb', { api_host: 'https://app.posthog.com', persistence: 'localStorage+cookie', autocapture: true, disable_session_recording: true, property_blacklist: ['$current_url'] });
+  posthog.register({ app: 'cardioscore', app_version: '3.3' });
+</script>
+<script>
+  function trackCS(n, p) {
+    try {
+      var id = localStorage.getItem('cs_anon_id');
+      if (!id) { id = 'anon-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10); localStorage.setItem('cs_anon_id', id); }
+      if (id && window.posthog) { posthog.identify(id); posthog.capture(n, p || {}); }
+    } catch (e) {}
+  }
+  trackCS('cs_visita', {});
+</script>
+<title>Términos de uso — CardioScore</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#0054A6">
+<meta property="og:title" content="Términos de uso — CardioScore">
+<meta property="og:description" content="Términos y condiciones de uso de la herramienta de riesgo cardiovascular CardioScore.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="tailwind.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: background-color .18s ease, color .18s ease, border-color .18s ease !important; }
+  .dark .bg-white { background-color: #141A24 !important; }
+  .dark .bg-zinc-50 { background-color: #0C111A !important; }
+  .dark .bg-zinc-100 { background-color: #1A212D !important; }
+  .dark .bg-accent-50 { background-color: #0F2233 !important; }
+  .dark .text-zinc-900 { color: #E8E8EC !important; }
+  .dark .text-zinc-700 { color: #D4D4D8 !important; }
+  .dark .text-zinc-600, .dark .text-zinc-500 { color: #A1A1AA !important; }
+  .dark .text-zinc-500 { color: #8E8E96 !important; }
+  .dark .text-zinc-800 { color: #D4D4D8 !important; }
+  .dark .text-ink { color: #E8E8EC !important; }
+  .dark .text-accent { color: #8AB4F8 !important; }
+  .dark .text-accent-700 { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent:hover { color: #8AB4F8 !important; }
+  .dark .border-zinc-200, .dark .border-zinc-300, .dark .border-slate-200 { border-color: #262E3C !important; }
+  .dark .border-zinc-100 { border-color: #1A212D !important; }
+  .dark header { background-color: #11161F !important; border-color: #262E3C !important; }
+  .dark input, .dark select, .dark textarea { background-color: #141A24 !important; border-color: #333C4D !important; color: #E8E8EC !important; }
+  .dark .footer-link { color: #8AB4F8; transition: color .15s ease; }
+  .dark .footer-link:hover { color: #A9CFF2; }
+  .dark .bg-white.border.border-zinc-200 { box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; accent-color: #8AB4F8; }
+  html.dark ::selection { background: rgba(138, 180, 248, .35); color: #E8E8EC; }
+  @media (prefers-reduced-motion: reduce) { html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: none !important; } }
+  #menu_movil:not(.hidden) { animation: fadein .22s ease; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="bg-zinc-50 text-ink font-sans text-[15px] leading-relaxed">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="bg-white border-b border-zinc-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+    <a href="index.html" class="flex items-center gap-3 no-underline shrink-0 h-full">
+      <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+      </div>
+      <div>
+        <p class="font-display font-bold text-sm leading-tight">CardioScore</p>
+        <p class="hidden sm:block text-[11px] text-zinc-500 -mt-0.5">Riesgo cardiovascular · herramientas clínicas</p>
+      </div>
+    </a>
+    <div class="flex items-center gap-1">
+      <nav class="hidden sm:flex items-center gap-1" aria-label="Navegación principal">
+        <a href="index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors">Inicio</a>
+        <a href="metodologia.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors">Metodología</a>
+        <a href="tools/index.html" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors">Calculadoras</a>
+        <a href="index.html#panel_pac" class="hidden sm:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors">Pacientes</a>
+      </nav>
+      <button id="btn_tema" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Cambiar entre tema claro y oscuro">
+        <svg id="ico_sol" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="ico_luna" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button id="btn_menu" class="sm:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="menu_movil" class="sm:hidden hidden bg-white border-t border-zinc-200 px-4 py-3 space-y-1">
+    <a href="index.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center transition-colors">Inicio</a>
+    <a href="metodologia.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center transition-colors">Metodología</a>
+    <a href="tools/index.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-100 flex items-center transition-colors">Calculadoras</a>
+  </div>
+</header>
+
+<main id="main" class="max-w-3xl mx-auto px-4 py-12">
+  <p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Legal</p>
+  <h1 class="font-display font-bold text-3xl sm:text-4xl tracking-tight text-zinc-900 mb-2">Términos de uso</h1>
+  <p class="text-zinc-500 mb-8">Última actualización: agosto de 2026 · Versión 1.0</p>
+
+  <div class="space-y-6 text-zinc-700">
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">1. Información general</h2>
+      <p class="text-sm leading-relaxed">CardioScore es una herramienta clínica de estratificación del riesgo cardiovascular desarrollada por MatsonSoft (Ing. Alexander Matson). Al acceder o usar esta herramienta aceptas estos términos de uso en su totalidad.</p>
+    </section>
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">2. Naturaleza de la herramienta</h2>
+      <p class="text-sm leading-relaxed">CardioScore es un <strong>apoyo a la decisión clínica (CDSS)</strong>. Proporciona estimaciones de riesgo basadas en modelos poblacionales publicados (SCORE2, PREVENT, WHO-Central L.A. y otros). <strong>No reemplaza el juicio clínico, el diagnóstico ni la consejería médica personalizada.</strong> Está destinada a profesionales de la salud.</p>
+    </section>
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">3. Uso previsto</h2>
+      <p class="text-sm leading-relaxed">La herramienta está diseñada para su uso en la consulta de cardiología y medicina interna, principalmente en Venezuela y Latinoamérica. No está indicada para uso por pacientes sin supervisión profesional ni para toma de decisiones de urgencia.</p>
+    </section>
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">4. Exactitud y limitaciones</h2>
+      <p class="text-sm leading-relaxed">Los resultados son estimaciones probabilísticas basadas en cohortes de referencia (europeas, estadounidenses y de la OMS para América Latina). La calibración regional se documenta en la metodología. La implementación se verifica con vectores reproducibles, pero <strong>no se ofrece garantía de exactitud absoluta</strong> y los resultados deben interpretarse en el contexto de cada paciente.</p>
+    </section>
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">5. Responsabilidad</h2>
+      <p class="text-sm leading-relaxed">MatsonSoft y sus colaboradores no serán responsables por decisiones clínicas tomadas a partir del uso de la herramienta. El profesional de la salud es el responsable final de las decisiones y debe verificar los cálculos relevantes antes de usarlos clínicamente.</p>
+    </section>
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">6. Datos y privacidad</h2>
+      <p class="text-sm leading-relaxed">Todo el cálculo ocurre localmente en tu navegador. No se envían datos clínicos a ningún servidor. Los datos de pacientes que guardes permanecen en el almacenamiento local de tu dispositivo (localStorage). No utilices identificadores reales de pacientes (nombre, cédula, historia clínica). Consulta la sección de privacidad en la metodología para más detalles.</p>
+    </section>
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">7. Propiedad intelectual</h2>
+      <p class="text-sm leading-relaxed">El diseño, el código, la documentación y el contenido de CardioScore son propiedad de MatsonSoft, salvo los modelos de riesgo, que pertenecen a sus respectivos autores (ESC, AHA, OMS, NICE, etc.). Se permite el uso clínico y académico citando la fuente. No se autoriza la reproducción comercial sin autorización previa.</p>
+    </section>
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">8. Modificaciones</h2>
+      <p class="text-sm leading-relaxed">Estos términos pueden actualizarse. La fecha de la última revisión figura al inicio de esta página. El uso continuado tras una actualización implica la aceptación de los nuevos términos.</p>
+    </section>
+    <section>
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-2">9. Contacto</h2>
+      <p class="text-sm leading-relaxed">Para preguntas, reportar errores o solicitar auditoría de la metodología, escribe a <a href="mailto:matson@matsonsoft.com" class="text-accent font-semibold underline underline-offset-2 transition-colors">matson@matsonsoft.com</a>.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="border-t border-zinc-200 bg-white mt-10">
+  <div class="max-w-6xl mx-auto px-4 py-8 text-center">
+    <p class="text-xs text-zinc-500 leading-relaxed max-w-5xl mx-auto">Los resultados son estimaciones probabilísticas basadas en modelos de población y guías internacionales (ESC/EAS, AHA, OMS);<br>deben interpretarse en el contexto clínico de cada paciente y no sustituyen el juicio profesional, el diagnóstico ni la consejería médica personalizada.</p>
+    <p class="text-[13px] font-semibold text-zinc-600 mt-4">Construida por <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="footer-link underline underline-offset-2">Ing. Alexander Matson</a> · <a href="terminos.html" class="footer-link underline underline-offset-2">Términos de uso</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById('btn_menu'), menu = document.getElementById('menu_movil');
+  if (btn && menu) btn.addEventListener('click', function () { var open = menu.classList.toggle('hidden') === false; btn.setAttribute('aria-expanded', String(open)); });
+  var btnTema = document.getElementById('btn_tema');
+  if (btnTema) {
+    function aplicarTema() {
+      var dark = document.documentElement.classList.contains('dark');
+      var s = document.getElementById('ico_sol'), l = document.getElementById('ico_luna');
+      if (s) s.classList.toggle('hidden', !dark);
+      if (l) l.classList.toggle('hidden', dark);
+      var mt = document.querySelector('meta[name="theme-color"]');
+      if (mt) mt.setAttribute('content', dark ? '#0C111A' : '#0054A6');
+    }
+    aplicarTema();
+    btnTema.addEventListener('click', function () {
+      document.documentElement.classList.add('theme-transition');
+      document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('cs_tema', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+      aplicarTema();
+      clearTimeout(window._ttm);
+      window._ttm = setTimeout(function () { document.documentElement.classList.remove('theme-transition'); }, 220);
+    });
+  }
+  if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); }); }
+})();
+</script>
+</body>
+</html>

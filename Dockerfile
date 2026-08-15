@@ -1,3 +1,7 @@
 FROM nginx:alpine
-COPY cardioscore.html /usr/share/nginx/html/index.html
-COPY cardioscore.css /usr/share/nginx/html/cardioscore.css
+COPY index.html /usr/share/nginx/html/index.html
+COPY tailwind.css cardioscore.css /usr/share/nginx/html/
+COPY metodologia.html terminos.html robots.txt sitemap.xml manifest.json sw.js favicon.svg og-image.png /usr/share/nginx/html/
+COPY tools /usr/share/nginx/html/tools
+COPY icons /usr/share/nginx/html/icons
+COPY vendor /usr/share/nginx/html/vendor

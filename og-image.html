@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { display: ['Figtree', 'sans-serif'], sans: ['Noto Sans', 'sans-serif'], mono: ['Geist Mono', 'monospace'] },
+      colors: { accent: { DEFAULT: '#0054A6', 50: '#EAF3FB', 100: '#D4E7F7', 700: '#003A73' } }
+    }
+  }
+};
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;700;800&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-zinc-50 font-sans" style="width:1200px;height:630px;overflow:hidden">
+  <div class="relative w-[1200px] h-[630px] flex items-center justify-center overflow-hidden">
+    <!-- fondo -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0054A6] via-[#0054A6] to-[#003A73]"></div>
+    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/10"></div>
+    <div class="absolute -bottom-32 -left-16 w-96 h-96 rounded-full bg-white/10"></div>
+    <!-- contenido -->
+    <div class="relative text-center px-20">
+      <div class="flex items-center justify-center gap-4 mb-8">
+        <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center">
+          <svg class="w-9 h-9 text-[#0054A6]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+        </div>
+        <span class="text-white font-display font-extrabold text-6xl tracking-tight">CardioScore</span>
+      </div>
+      <p class="text-white/90 text-2xl font-semibold leading-snug">Riesgo cardiovascular, transparente y validado</p>
+      <p class="text-white/75 text-lg mt-6">SCORE2 · PREVENT · WHO-Central L.A. · 21 calculadoras clínicas</p>
+      <div class="inline-flex items-center gap-2 mt-8 px-5 py-2.5 rounded-full bg-white/15 text-white text-base font-semibold">
+        cardioscore.matsonsoft.com
+      </div>
+    </div>
+  </div>
+</body>
+</html>
