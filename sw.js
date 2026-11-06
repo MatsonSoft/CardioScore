@@ -4,7 +4,7 @@ const CALCS = [
   '/tools/charge-af/index.html','/tools/findrisk/index.html','/tools/grace/index.html',
   '/tools/has-bled/index.html','/tools/kfre/index.html','/tools/mesa/index.html',
   '/tools/orbit/index.html','/tools/prevent/index.html','/tools/qrisk3/index.html',
-  '/tools/riesgo-30-anos/index.html','/tools/score2/index.html','/tools/score2-ckd/index.html',
+  '/tools/riesgo-30-anos/index.html','/tools/score2/index.html','/tools/score2-lac/index.html','/tools/score2-ckd/index.html',
   '/tools/score2-diabetes/index.html','/tools/score2-hf/index.html','/tools/score2-op/index.html',
   '/tools/smart2/index.html','/tools/spi2/index.html','/tools/who-cla/index.html'
 ];

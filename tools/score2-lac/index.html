@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try { if (localStorage.getItem('cs_tema') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}</script>
+<title>Calculadora de riesgo cardiovascular SCORE2-LAC (ESC/SIAC) — CardioScore</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="manifest" href="../../manifest.json">
+<link rel="apple-touch-icon" href="../../icons/icon-192.png">
+<meta name="theme-color" content="#0054A6">
+<meta name="description" content="Calculadora SCORE2-LAC (ESC/SIAC 2026) de riesgo de infarto e ictus a 10 años, recalibrada para 32 países de Latinoamérica y el Caribe con datos contemporáneos. Coeficientes y factores de reescalado oficiales del Eur Heart J. Gratis.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cardio-score.vercel.app/tools/score2-lac/">
+<meta property="og:title" content="Calculadora SCORE2-LAC de riesgo cardiovascular — CardioScore">
+<meta property="og:image" content="https://cardio-score.vercel.app/og-image.png">
+<meta property="og:description" content="Riesgo de infarto e ictus a 10 años recalibrado para Latinoamérica y el Caribé (SCORE2-LAC, ESC/SIAC). Constantes oficiales del suplemento EHJ 2026.">
+<meta property="og:type" content="website">
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DmjHF4fQ8Rkfu3Jz2fUQgXWMbTrbFwRAkpoLiAmpJjSb', { api_host: 'https://app.posthog.com', persistence: 'localStorage+cookie', autocapture: true, disable_session_recording: true, property_blacklist: ['$current_url'] });
+  posthog.register({ app: 'cardioscore', app_version: '3.3' });
+</script>
+<script>
+  function trackCS(n, p) {
+    try {
+      var id = localStorage.getItem('cs_anon_id');
+      if (!id) { id = 'anon-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10); localStorage.setItem('cs_anon_id', id); }
+      if (id && window.posthog) { posthog.identify(id); posthog.capture(n, p || {}); }
+    } catch (e) {}
+  }
+  trackCS('cs_visita', {});
+  try {
+    var _p = location.pathname.split('/').filter(Boolean);
+    var _slug = _p[_p.length - 2] === 'tools' ? 'hub' : (_p[_p.length - 2] || 'index');
+    trackCS('cs_visita_calculadora', { slug: _slug });
+    document.addEventListener('click', function (ev) {
+      var _t = ev.target && ev.target.closest ? ev.target.closest('#calcular, #btn_calcular, [data-calcular]') : null;
+      if (_t) { try { trackCS('cs_calcular', { slug: _slug }); } catch (e) {} }
+    });
+  } catch (e) {}
+</script>
+
+</script>
+<link rel="stylesheet" href="../../tailwind.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid #0054A6; outline-offset: 2px; border-radius: 4px; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: background-color .18s ease, color .18s ease, border-color .18s ease !important; }
+  .dark .bg-white { background-color: #141A24 !important; }
+  .dark .bg-zinc-50 { background-color: #0C111A !important; }
+  .dark .bg-zinc-100 { background-color: #1A212D !important; }
+  .dark .bg-accent-50 { background-color: #0F2233 !important; }
+  .dark .text-zinc-900 { color: #E8E8EC !important; }
+  .dark .text-zinc-700 { color: #D4D4D8 !important; }
+  .dark .text-zinc-600, .dark .text-zinc-500 { color: #A1A1AA !important; }
+  .dark .text-zinc-500 { color: #8E8E96 !important; }
+  .dark .border-zinc-200, .dark .border-zinc-300, .dark .border-slate-200 { border-color: #262E3C !important; }
+  .dark header { background-color: #11161F !important; border-color: #262E3C !important; }
+  .dark input, .dark select, .dark textarea { background-color: #141A24 !important; border-color: #333C4D !important; color: #E8E8EC !important; }
+  .dark .bg-red-50 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-50 { background-color: #33271A !important; }
+  .dark .bg-emerald-50 { background-color: #14301F !important; }
+  .dark .bg-blue-50 { background-color: #14283A !important; }
+  .dark .text-red-700, .dark .text-red-800, .dark .text-red-600 { color: #F2A6A6 !important; }
+  .dark .text-amber-800, .dark .text-amber-700 { color: #F0C987 !important; }
+  .dark .text-emerald-700, .dark .text-emerald-800 { color: #A7E3C0 !important; }
+  .dark .text-blue-700, .dark .text-blue-800 { color: #A9CFF2 !important; }
+  .dark .border-red-200 { border-color: #5A2A30 !important; }
+  .dark .border-amber-200 { border-color: #5A4630 !important; }
+  .dark .border-emerald-200 { border-color: #2A5A40 !important; }
+  .dark .border-blue-200 { border-color: #2A4A6A !important; }
+  .dark .text-accent { color: #8AB4F8 !important; }
+  .dark .text-accent-700 { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent:hover { color: #8AB4F8 !important; }
+  .dark .hover\:text-accent-700:hover { color: #8AB4F8 !important; }
+  .dark .text-zinc-800 { color: #D4D4D8 !important; }
+  .dark .text-ink { color: #E8E8EC !important; }
+  .dark .bg-accent { background-color: #1E6BB8 !important; }
+  .dark .bg-accent-700 { background-color: #1E6BB8 !important; }
+  .dark .border-accent { border-color: #4A7FC0 !important; }
+  .dark .border-accent\/20 { border-color: rgba(74, 127, 192, .32) !important; }
+  .dark .border-accent\/30 { border-color: rgba(74, 127, 192, .4) !important; }
+  .dark .bg-zinc-200 { background-color: #333C4D !important; }
+  .dark .bg-zinc-300 { background-color: #3A4455 !important; }
+  .dark .bg-zinc-50\/95 { background-color: rgba(12, 17, 26, 0.95) !important; }
+  .dark .peer:checked ~ .peer-checked\:bg-white { background-color: #2A3442 !important; }
+  .dark .shadow-sm, .dark .shadow { box-shadow: 0 1px 3px rgba(0,0,0,.5) !important; }
+  .dark .shadow-xl { box-shadow: 0 20px 40px rgba(0,0,0,.6) !important; }
+  .dark .shadow-2xl { box-shadow: 0 25px 50px rgba(0,0,0,.6) !important; }
+  .dark .req-tag { background: #1A212D !important; color: #D4D4D8 !important; }
+  .dark .req-tag-acc { background: #0F2233 !important; border-color: rgba(74,127,192,.3) !important; color: #8AB4F8 !important; }
+  .dark .bg-red-100 { background-color: #3A1A1F !important; }
+  .dark .bg-amber-100 { background-color: #33271A !important; }
+  .dark .bg-emerald-100 { background-color: #14301F !important; }
+  .dark .bg-blue-100 { background-color: #14283A !important; }
+  .dark .bg-red-50\/40 { background-color: rgba(58, 26, 31, 0.55) !important; }
+  .dark .bg-amber-50\/40 { background-color: rgba(51, 39, 26, 0.55) !important; }
+  .dark .bg-emerald-50\/40 { background-color: rgba(20, 48, 31, 0.55) !important; }
+  .dark .bg-accent-50\/40 { background-color: rgba(15, 34, 51, 0.6) !important; }
+  .dark .odd\:bg-zinc-50\/60:nth-child(odd) { background-color: rgba(12, 17, 26, 0.5) !important; }
+  .dark .border-zinc-100 { border-color: #1A212D !important; }
+  .dark .hover\:shadow-\[0_10px_30px_rgba\(0\,84\,166\,0\.08\)\]:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, .45) !important; }
+  .dark .footer-link { color: #8AB4F8; }
+  .dark .bg-white.border.border-zinc-200 { box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  .dark input.sr-only:focus-visible + span { outline-color: #8AB4F8; }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; accent-color: #8AB4F8; }
+  html.dark ::selection { background: rgba(138, 180, 248, .35); color: #E8E8EC; }
+  html.dark input::placeholder, html.dark textarea::placeholder { color: #71717A !important; }
+  html.dark .tip::after { background: #E8E8EC !important; color: #0E1420 !important; }
+  html.dark .tip::before { border-top-color: #E8E8EC !important; }
+  @media (prefers-reduced-motion: reduce) { html.theme-transition *, html.theme-transition *::before, html.theme-transition *::after { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    .skel, .paso-in, #toast, .fade-in { animation: none !important; }
+    .ante-chip, .qrisk-chip, .sccard, .sc-inner { transition: none !important; }
+    #gauge_aguja, #gauge_punto { transition: none !important; }
+  }
+  #menu_movil:not(.hidden) { animation: fadein .22s ease; }
+  #onboarding:not(.hidden) { animation: fadein .25s ease; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Calculadora SCORE2-LAC de riesgo cardiovascular — CardioScore",
+  "url": "https://cardio-score.vercel.app/tools/score2-lac/",
+  "description": "Calculadora de riesgo de infarto de miocardio e ictus a 10 años según SCORE2-LAC: el modelo SCORE2 recalibrado por ESC y SIAC para 32 países de Latinoamérica y el Caribe.",
+  "applicationCategory": "HealthApplication",
+  "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es SCORE2-LAC?",
+      "acceptedAnswer": { "@type": "Answer", "text": "SCORE2-LAC es el modelo SCORE2 de la Sociedad Europea de Cardiología recalibrado por la ESC y la Sociedad Interamericana de Cardiología (SIAC) para usar en 32 países de Latinoamérica y el Caribe. Estima el riesgo de un primer evento cardiovascular fatal o no fatal a 10 años en personas de 40 a 69 años sin enfermedad cardiovascular previa ni diabetes. Se publicó en el European Heart Journal en 2026." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Para quién sirve la calculadora SCORE2-LAC?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sirve para adultos de 40 a 69 años que viven (o se criaron) en un país de Latinoamérica o el Caribe, en prevención primaria y sin diabetes. No aplica en prevención secundaria, en menores de 40 años, ni en personas con diabetes; en estos casos el riesgo se considera alto o muy alto de forma directa." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿SCORE2-LAC reemplaza a SCORE2 europeo y a WHO-Central L.A.?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Para adultos de 40 a 69 años sin diabetes en Latinoamérica y el Caribe, sí: SCORE2-LAC es la herramienta recomendada porque refleja la mortalidad y los factores de riesgo de cada país con datos contemporáneos. El SCORE2 europeo queda para comparar poblaciones con origen europeo, y WHO-Central L.A. (40 a 79 años) sigue útil en mayores de 69 y como comparación histórica de la OMS." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué el país cambia tanto el resultado?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Porque SCORE2-LAC asigna cada país a una de cuatro regiones de riesgo según su mortalidad cardiovascular estandarizada: baja (como Chile o Costa Rica), moderada (como Colombia o Uruguay), alta (como Argentina, Brasil, México o Venezuela) y muy alta (Guyana y Haití). Con el mismo perfil de factores de riesgo, el riesgo estimado puede ser 3 veces más alto en un país de región muy alta que en uno de región baja." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué datos usa la recalibración?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Mortalidad cardiovascular estandarizada por edad y sexo del WHO Global Health Estimates 2019 y distribuciones de factores de riesgo representativas de la región. Los factores de conversión a incidencia se derivaron de datos de 40.237.152 personas con 1.261.329 eventos cardiovasculares. La validación externa incluyó 11 cohortes de 7 países con 132.512 participantes y 3.938 eventos, con un C-index agrupado de 0,740." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde está disponible la calculadora completa?",
+      "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye SCORE2-LAC, SCORE2, SCORE2-OP (mayores de 70), SCORE2-Diabetes, SCORE2-CKD, SCORE2-HF, PREVENT, WHO-Central L.A., SMART2 y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app." }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardio-score.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardio-score.vercel.app/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Calculadora SCORE2-LAC", "item": "https://cardio-score.vercel.app/tools/score2-lac/" }
+  ]
+}
+</script>
+<style>html, body { overflow-x: clip; }
+  main p, main li, main td { line-height: 1.75; }</style>
+</head>
+<body class="bg-zinc-50 text-ink font-sans text-[15px] leading-relaxed">
+
+<!-- ===================== HEADER ===================== -->
+<header class="bg-white/95 backdrop-blur border-b border-zinc-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3 relative">
+    <div class="flex-1 flex items-center gap-1 min-w-0">
+      <a href="../index.html" class="inline-flex items-center justify-center w-10 h-10 -ml-2 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Volver">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </a>
+      <a href="../../metodologia.html" class="hidden md:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Metodología</a>
+      <a href="../index.html" class="hidden md:inline-flex items-center text-sm font-semibold rounded-lg px-3 py-2 min-h-[44px] transition text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">Calculadoras</a>
+    </div>
+          <a href="../../index.html" class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+        </div>
+        <span class="font-display font-bold text-base text-zinc-900">CardioScore</span>
+      </a>
+    <div class="flex items-center gap-1 shrink-0">
+      <button id="btn_tema" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg px-3 py-2 min-h-[44px] min-w-[44px] transition" aria-label="Cambiar entre tema claro y oscuro">
+        <svg id="ico_sol" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1M4.2 4.2l.7.7m14.2 14.2l.7.7M3 12h1m16 0h1M4.2 19.8l.7-.7M19.8 4.2l.7.7M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>
+        <svg id="ico_luna" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button id="btn_menu" class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-zinc-600 hover:bg-zinc-100 transition shrink-0" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="menu_movil" class="md:hidden hidden bg-white border-t border-zinc-200 px-4 py-3 space-y-1">
+    <a href="../../index.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-50">Inicio</a>
+    <a href="../../metodologia.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-50">Metodología</a>
+    <a href="../index.html" class="block px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-zinc-700 hover:bg-zinc-50">Calculadoras</a>
+  </div>
+</header>
+
+<main id="main" class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+
+  <!-- ===================== HERO ===================== -->
+  <section aria-labelledby="h1" class="text-left max-w-3xl">
+        <nav aria-label="Ruta de navegación" class="flex flex-wrap items-center gap-1.5 text-[13px] text-zinc-500 mb-4"><a href="../../index.html" class="transition-colors hover:text-accent hover:underline underline-offset-2">Inicio</a><svg class="w-3.5 h-3.5 text-zinc-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg><a href="../index.html" class="transition-colors hover:text-accent hover:underline underline-offset-2">Calculadoras</a><svg class="w-3.5 h-3.5 text-zinc-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg><span class="font-semibold text-zinc-700">SCORE2-LAC</span></nav>
+<p class="text-[11px] font-bold uppercase tracking-widest text-accent mb-2">Prevención primaria · ESC + SIAC 2026</p>
+    <h1 id="h1" class="font-display font-bold text-3xl sm:text-4xl tracking-tight text-zinc-900">Riesgo cardiovascular <span class="text-accent">SCORE2-LAC</span> · Latinoamérica</h1>
+    <p class="text-zinc-500 mt-3 text-[17px]">Estimación del riesgo de infarto de miocardio e ictus <strong class="text-zinc-700">a 10 años</strong> en adultos de <strong class="text-zinc-700">40–69 años</strong> sin condiciones previas, recalibrado por la ESC y SIAC con datos de <strong class="text-zinc-700">32 países</strong> de Latinoamérica y el Caribe.</p>
+    <div class="mt-4 flex flex-wrap items-center gap-2">
+      
+      <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-accent bg-accent-50 border border-accent/20 rounded-full px-3 py-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        Constantes oficiales · Eur Heart J 2026
+      </span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-600 bg-white border border-zinc-200 rounded-full px-3 py-1.5">
+        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>
+        10 años · 40–69 años
+      </span></div>
+  </section>
+
+  <!-- ===================== CALCULADORA + INFO ===================== -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <!-- Calculadora -->
+    <section aria-label="Calculadora SCORE2" class="bg-white border border-zinc-200 rounded-2xl p-6 sm:p-7 self-start lg:sticky lg:top-24">
+      <h2 class="font-display font-bold text-lg text-zinc-900 mb-5">Calcular el riesgo a 10 años</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="edad" class="block text-[13px] font-semibold text-zinc-700 mb-1">Edad <span class="text-zinc-500 font-normal">(40–69)</span></label>
+          <input id="edad" type="number" inputmode="numeric" value="55" min="40" max="69" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Edad en años">
+        </div>
+        <div>
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">Sexo</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="sexo" value="male" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Hombre</span></label>
+            <label class="relative"><input type="radio" name="sexo" value="female" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Mujer</span></label>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <span class="block text-[13px] font-semibold text-zinc-700 mb-1">Fumador</span>
+          <div class="grid grid-cols-2 gap-1 p-1 bg-zinc-100 rounded-lg">
+            <label class="relative"><input type="radio" name="tabaco" value="no" class="sr-only peer"><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">No</span></label>
+            <label class="relative"><input type="radio" name="tabaco" value="si" class="sr-only peer" checked><span class="block text-center text-[13px] font-semibold py-2.5 rounded-md text-zinc-500 peer-checked:bg-white peer-checked:text-accent peer-checked:shadow-sm transition cursor-pointer">Sí</span></label>
+          </div>
+        </div>
+        <div>
+          <label for="pas" class="block text-[13px] font-semibold text-zinc-700 mb-1">PAS <span class="text-zinc-500 font-normal">mmHg</span></label>
+          <input id="pas" type="number" inputmode="numeric" value="140" min="60" max="260" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Presión arterial sistólica">
+        </div>
+        <div>
+          <label for="ct" class="block text-[13px] font-semibold text-zinc-700 mb-1">Colesterol total <span class="text-zinc-500 font-normal">mg/dL</span></label>
+          <input id="ct" type="number" inputmode="decimal" value="210" min="50" max="600" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Colesterol total">
+        </div>
+        <div class="col-span-2">
+          <label for="hdl" class="block text-[13px] font-semibold text-zinc-700 mb-1">HDL <span class="text-zinc-500 font-normal">mg/dL</span></label>
+          <input id="hdl" type="number" inputmode="decimal" value="44" min="5" max="200" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" aria-label="Colesterol HDL">
+        </div>
+        <div id="bloque_pais" class="col-span-2">
+          <label for="pais" class="block text-[13px] font-semibold text-zinc-700 mb-1">País de origen / residencia</label>
+          <select id="pais" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20">
+            <option value="">Elegir país…</option>
+            <optgroup label="Región baja">
+              <option value="cr">Costa Rica</option>
+              <option value="cl">Chile</option>
+              <option value="pe">Perú</option>
+              <option value="pr">Puerto Rico</option>
+            </optgroup>
+            <optgroup label="Región moderada">
+              <option value="co">Colombia</option>
+              <option value="ec">Ecuador</option>
+              <option value="gt">Guatemala</option>
+              <option value="uy">Uruguay</option>
+              <option value="sv">El Salvador</option>
+              <option value="pa">Panamá</option>
+              <option value="bm">Bermudas</option>
+            </optgroup>
+            <optgroup label="Región alta">
+              <option value="ve" selected>Venezuela</option>
+              <option value="ar">Argentina</option>
+              <option value="br">Brasil</option>
+              <option value="mx">México</option>
+              <option value="py">Paraguay</option>
+              <option value="bo">Bolivia</option>
+              <option value="cu">Cuba</option>
+              <option value="ni">Nicaragua</option>
+              <option value="hn">Honduras</option>
+              <option value="do">Rep. Dominicana</option>
+              <option value="tt">Trinidad y Tobago</option>
+              <option value="jm">Jamaica</option>
+              <option value="bb">Barbados</option>
+              <option value="bz">Belice</option>
+              <option value="ag">Antigua y Barbuda</option>
+              <option value="lc">Santa Lucía</option>
+              <option value="vc">San Vicente y las Granadinas</option>
+              <option value="bs">Bahamas</option>
+              <option value="gd">Granada</option>
+              <option value="dm">Dominica</option>
+              <option value="kn">San Cristóbal y Nieves</option>
+              <option value="sr">Surinam</option>
+              <option value="vi">Islas Vírgenes EE.UU.</option>
+            </optgroup>
+            <optgroup label="Región muy alta">
+              <option value="gy">Guyana</option>
+              <option value="ht">Haití</option>
+            </optgroup>
+            <option value="xx">Otro / prefiero elegir región manualmente</option>
+          </select>
+          <p class="text-[12px] text-zinc-500 mt-1.5">El país define la <strong>región de riesgo</strong> según la mortalidad cardiovascular estandarizada (WHO GHE): baja &lt;100, moderada 100–149, alta 150–299 y muy alta ≥300 muertes CVD por 100.000.</p>
+        </div>
+        <div id="bloque_region" class="col-span-2">
+          <label for="region" class="block text-[13px] font-semibold text-zinc-700 mb-1">Región de riesgo SCORE2-LAC</label>
+          <select id="region" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20">
+            <option value="low">Baja</option>
+            <option value="moderate">Moderada</option>
+            <option value="high" selected>Alta</option>
+            <option value="very_high">Muy alta</option>
+          </select>
+          <p id="region_origen" class="text-[12px] text-zinc-500 mt-1.5">Venezuela pertenece a la región <strong>alta</strong> (mortalidad CVD estandarizada: 174 por 100.000).</p>
+        </div>
+      </div>
+
+      <button id="calcular" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-6 py-3.5 min-h-[52px] text-base transition active:scale-[0.98] shadow-sm" aria-label="Calcular riesgo SCORE2">
+        Calcular riesgo
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+      </button>
+
+      <div id="error" class="hidden mt-3 text-[13px] text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2" role="alert"></div>
+
+      <!-- Resultado -->
+      <div id="resultado" class="hidden mt-5 border-t border-zinc-200 pt-5">
+        <div class="flex items-center gap-5">
+          <div class="text-center">
+            <p class="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-1">Riesgo a 10 años</p>
+            <p class="font-display font-bold text-5xl tnum text-zinc-900"><span id="riesgo">—</span><span class="text-2xl text-zinc-500">%</span></p>
+          </div>
+          <div class="flex-1">
+            <p id="categoria" class="inline-flex items-center gap-2 text-sm font-bold px-3 py-1.5 rounded-full border"></p>
+            <p id="interpretacion" class="mt-2 text-[13px] text-zinc-700 bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2.5 leading-snug"></p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="relative">
+            <div class="h-2 rounded-full bg-zinc-100 overflow-hidden"><div id="barra_resultado" class="h-full rounded-full transition-all duration-500" style="width:0%"></div></div>
+            <div class="absolute inset-0 pointer-events-none">
+              <span class="absolute top-0 h-2 w-px bg-zinc-400" style="left:10%"></span>
+              <span class="absolute top-0 h-2 w-px bg-zinc-400" style="left:50%"></span>
+              <span class="absolute top-0 h-2 w-px bg-zinc-400" style="left:calc(100% - 1px)"></span>
+            </div>
+          </div>
+          <div class="relative mt-1 h-4 text-[11px] font-semibold text-zinc-600">
+            <span class="absolute -translate-x-1/2" style="left:10%">2%</span>
+            <span class="absolute -translate-x-1/2" style="left:50%">10%</span>
+            <span class="absolute -translate-x-1/2" style="left:100%">20%</span>
+          </div>
+        </div>
+        <p class="mt-2 text-[13px] text-zinc-600 bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2.5" id="meta_ldl"></p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <button id="btn_copiar" class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-700 border border-zinc-200 bg-white rounded-lg px-4 py-2.5 min-h-[44px] hover:border-accent hover:text-accent transition">Copiar</button>
+          <button id="btn_whatsapp" class="inline-flex items-center gap-1.5 text-sm font-semibold text-white bg-[#25D366] hover:bg-[#1DA851] rounded-lg px-4 py-2.5 min-h-[44px] transition active:scale-[0.98]">WhatsApp</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenido informativo -->
+    <div class="space-y-6">
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">¿Qué es SCORE2-LAC?</h2>
+        <p class="text-zinc-600 leading-relaxed">SCORE2-LAC es el sistema <strong>SCORE2</strong> de la ESC <strong>recalibrado para 32 países de Latinoamérica y el Caribe</strong> por la ESC (Cardiovascular Risk Collaboration) junto con la <strong>Sociedad Interamericana de Cardiología (SIAC)</strong>. No deriva un modelo nuevo: conserva los coeficientes originales de SCORE2 y reescala el riesgo absoluto para que refleje la incidencia cardiovascular real de cada región, que varía varias veces entre países.</p>
+        <p class="text-zinc-600 leading-relaxed mt-3">La recalibración usa mortalidad cardiovascular estandarizada (WHO GHE) y distribuciones de factores de riesgo representativas. Los factores de conversión a incidencia se derivaron de <strong>40,2 millones de personas</strong> (1,26 millones de eventos). La validación externa abarcó <strong>11 cohortes de 7 países</strong> (132.512 personas, 3.938 eventos) con C-index agrupado de <strong>0,740</strong>. Se publicó en el <em>European Heart Journal</em> (2026, ehag698) y se presentó en el Congreso ESC 2026.</p>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Qué reemplaza o complementa</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Herramienta</th><th class="py-2 pr-2 font-bold">Alcance</th><th class="py-2 font-bold">Rol con SCORE2-LAC</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-semibold">SCORE2 europeo</td><td class="py-2.5 pr-2">40–69 años, regiones europeas</td><td class="py-2.5"><span class="text-amber-700 font-semibold">Complemento</span>: útil para comparar con pacientes de origen europeo. En LAC tiende a subestimar la incidencia en hombres y a sobreestimarla en mujeres mayores de las regiones alta y muy alta.</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-semibold">WHO-Central L.A.</td><td class="py-2.5 pr-2">40–79 años, chart OMS 2019</td><td class="py-2.5"><span class="text-amber-700 font-semibold">Complemento</span>: sigue cubriendo los 70–79 años, franja que SCORE2-LAC no alcanza. En 40–69 pasa a segundo plano: agrupa países por geografía y en la validación del paper subestimó más la incidencia observada.</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-semibold">Globorisk-LAC</td><td class="py-2.5 pr-2">Modelo país por país</td><td class="py-2.5"><span class="text-zinc-500 font-semibold">Alternativa histórica</span>: discriminación comparable, pero con calibración más débil que SCORE2-LAC en los análisis del paper.</td></tr>
+              <tr><td class="py-2.5 pr-2 font-semibold">SCORE2-LAC</td><td class="py-2.5 pr-2">40–69 años, sin diabetes</td><td class="py-2.5"><span class="text-emerald-700 font-semibold">Recomendada</span> para prevención primaria en LAC: calibración por región de riesgo país a país, datos contemporáneos (hasta 2022) y validada en 7 países de la región.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[12px] text-zinc-500 mt-2">Nota del paper: Chile queda en región <strong>baja</strong> y Argentina en <strong>alta</strong>; los gráficos de la OMS los agrupaban en una misma región geográfica. SCORE2-LAC revela ese contraste.</p>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Interpretación de umbrales (ESC 2025)</h2>        <table class="w-full text-sm border-collapse">
+          <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Riesgo a 10 años</th><th class="py-2 pr-2 font-bold">Categoría</th><th class="py-2 font-bold">Meta de C-LDL</th></tr></thead>
+          <tbody class="text-zinc-700">
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">&lt; 2%</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">Bajo</span></td><td class="py-2.5 font-mono tnum">&lt; 116 mg/dL</td></tr>
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">2 – 10%</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-0.5">Moderado</span></td><td class="py-2.5 font-mono tnum">&lt; 100 mg/dL</td></tr>
+            <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2 font-mono tnum">10 – 20%</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-red-700 bg-red-50 border border-red-200 rounded-full px-2.5 py-0.5">Alto</span></td><td class="py-2.5 font-mono tnum">&lt; 70 mg/dL</td></tr>
+            <tr><td class="py-2.5 pr-2 font-mono tnum">≥ 20%</td><td class="py-2.5 pr-2"><span class="inline-flex text-[12px] font-bold text-red-800 bg-red-100 border border-red-300 rounded-full px-2.5 py-0.5">Muy alto</span></td><td class="py-2.5 font-mono tnum">&lt; 55 mg/dL</td></tr>
+          </tbody>
+        </table>
+        <p class="text-[12px] text-zinc-500 mt-2">Los cortes son los de las guías ESC 2025 (elaboradas para Europa); SIAC aún no publica cortes LAC específicos. Modificadores (Lp(a), calcio coronario, historia familiar, hsCRP) pueden reclasificar hacia arriba.</p>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Para quién es y sus límites</h2>
+        <ul class="space-y-2 text-zinc-600 text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-emerald-600 font-bold mt-0.5">✓</span>Adultos de 40–69 años en prevención primaria, sin diabetes ni enfermedad CV, en un país de LAC.</li>
+          <li class="flex gap-2"><span class="text-emerald-600 font-bold mt-0.5">✓</span>Al elegir el país, la región de riesgo se asigna automáticamente (WHO GHE).</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No aplica en prevención secundaria: riesgo muy alto directo (usa SMART2).</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No aplica en personas con diabetes: usa SCORE2-Diabetes (europeo) o la herramienta completa.</li>
+          <li class="flex gap-2"><span class="text-red-500 font-bold mt-0.5">✗</span>No cubre menores de 40 (usa riesgo a 30 años) ni 70+ (usa WHO-Central L.A. o SCORE2-OP).</li>
+        </ul>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-2xl p-6">
+        <h2 class="font-display font-bold text-lg text-zinc-900 mb-3">Validación</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Caso de referencia</th><th class="py-2 pr-2 font-bold">Paper</th><th class="py-2 font-bold">Calculado</th></tr></thead>
+            <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Mujer 50a, no fum., PAS 140, CT 213, HDL 50 — región baja</td><td class="py-2.5 pr-2">3%</td><td class="py-2.5 font-mono tnum">2.7%</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Mujer 50a, ídem — región muy alta</td><td class="py-2.5 pr-2">10%</td><td class="py-2.5 font-mono tnum">9.9%</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Hombre 50a, no fum., PAS 140, CT 213, HDL 50 — región baja</td><td class="py-2.5 pr-2">4%</td><td class="py-2.5 font-mono tnum">4.0%</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Hombre 50a, ídem — región muy alta</td><td class="py-2.5 pr-2">10%</td><td class="py-2.5 font-mono tnum">10.3%</td></tr>
+              <tr><td class="py-2.5 pr-2">C-index agrupado en validación externa</td><td class="py-2.5 pr-2">0.740</td><td class="py-2.5 font-mono tnum">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[12px] text-zinc-500 mt-2">Cada vector de validación es reproducible al 0.01% contra la fuente original. Ver la <a href="../../metodologia.html#validacion" class="transition-colors text-accent underline hover:text-accent-700">metodología completa</a>.</p>
+      </section>
+
+      <section class="rounded-2xl p-5 border border-accent/20 bg-accent-50">
+        <h2 class="font-display font-bold text-base text-accent-700 mb-2">Fuentes y revisión</h2>
+        <ul class="text-[13px] text-zinc-700 space-y-1.5">
+          <li><strong>SCORE2-LAC</strong> — Bijkerk S, Ponte-Negretti CI, et al. <em>Eur Heart J</em> 2026 (DOI 10.1093/eurheartj/ehag698). ESC CRC + SIAC.</li>
+          <li><strong>Constantes</strong> — Suplemento oficial: Tabla S8 (factores de reescalado por región) y Tabla S1 (regiones por mortalidad WHO GHE).</li>
+          <li><strong>Última revisión:</strong> noviembre de 2026.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===================== FAQ ===================== -->
+  <section aria-labelledby="faq-t" class="max-w-3xl mx-auto">
+    <h2 id="faq-t" class="font-display font-bold text-2xl tracking-tight text-zinc-900 mb-6 text-center">Preguntas frecuentes</h2>
+    <div class="space-y-4">
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué es SCORE2-LAC?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Es el modelo SCORE2 de la ESC recalibrado por la ESC (Cardiovascular Risk Collaboration) y la Sociedad Interamericana de Cardiología (SIAC) para 32 países de Latinoamérica y el Caribe. Estima el riesgo de un primer evento cardiovascular fatal o no fatal a 10 años en personas de 40 a 69 años sin enfermedad CV previa ni diabetes. Se publicó en el European Heart Journal en 2026.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Para quién sirve la calculadora SCORE2-LAC?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Para adultos de 40 a 69 años que viven (o se criaron) en un país de LAC, en prevención primaria y sin diabetes. No aplica en prevención secundaria, en menores de 40 años ni en personas con diabetes; en estos casos el riesgo se considera alto o muy alto de forma directa.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿SCORE2-LAC reemplaza a SCORE2 europeo y a WHO-Central L.A.?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Para 40 a 69 años sin diabetes en LAC, sí: es la herramienta recomendada porque refleja la mortalidad y los factores de riesgo de cada país con datos contemporáneos. El SCORE2 europeo queda para comparar con población de origen europeo, y WHO-Central L.A. (40 a 79 años) sigue útil a partir de los 70 y como comparación histórica.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Por qué el país cambia tanto el resultado?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">SCORE2-LAC asigna cada país a una de cuatro regiones según su mortalidad cardiovascular estandarizada: baja (Chile, Costa Rica, Perú), moderada (Colombia, Uruguay, Ecuador), alta (Argentina, Brasil, México, Venezuela) y muy alta (Guyana, Haití). Con el mismo perfil de factores de riesgo, el riesgo estimado puede ser 3 veces más alto en la región muy alta que en la baja.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué datos usa la recalibración?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Mortalidad cardiovascular estandarizada (WHO GHE) y distribuciones de factores de riesgo por región. Los factores de conversión a incidencia se derivaron de 40,2 millones de personas con 1,26 millones de eventos; la validación externa incluyó 11 cohortes de 7 países (132.512 personas, 3.938 eventos) con C-index agrupado de 0,740.</p>
+      </details>
+      <details class="group bg-white border border-zinc-200 rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye SCORE2-LAC, SCORE2, SCORE2-OP (mayores de 70), SCORE2-Diabetes, SCORE2-CKD, SCORE2-HF, PREVENT, WHO-Central L.A., SMART2 y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app.</p>
+      </details>
+</div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="bg-white border border-zinc-200 rounded-2xl p-8 text-center">
+    <h2 class="font-display font-bold text-2xl tracking-tight text-zinc-900">Lleva esta calculadora a tu consulta</h2>
+    <p class="text-zinc-500 mt-2 max-w-xl mx-auto">CardioScore calcula <strong>20+ modelos</strong>: SCORE2-LAC, SCORE2, WHO-Central L.A., PREVENT, SMART2, CHA2DS2-VA, HAS-BLED, GRACE y más, con storytelling, metas de LDL y guía para explicar al paciente.</p>
+    <a href="../../index.html" class="inline-flex items-center justify-center gap-2 mt-5 bg-accent hover:bg-accent-700 text-white font-semibold rounded-lg px-8 py-3.5 min-h-[52px] text-base transition active:scale-[0.98]">
+      Abrir CardioScore gratis
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="border-t border-zinc-200 bg-white mt-10">
+  <div class="max-w-6xl mx-auto px-4 pt-10 pb-28 lg:pb-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr] gap-8 items-start">
+      <div class="max-w-sm">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-7 h-7 rounded-lg bg-accent flex items-center justify-center" aria-hidden="true">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg>
+          </div>
+          <p class="font-display font-bold text-sm text-zinc-900">CardioScore</p>
+        </div>
+        <p class="text-[12px] text-zinc-500 leading-relaxed">Estratificación del riesgo cardiovascular con modelos ESC, AHA y OMS.</p>
+        <div class="mt-3 space-y-2 text-[12px] text-zinc-600">
+          <p><strong class="block text-zinc-800 mb-0.5">Desarrollada por</strong> Ing. Alexander Matson · <a href="https://matsonsoft.com" target="_blank" rel="noopener" class="footer-link underline underline-offset-2">MatsonSoft</a></p>
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-wide text-zinc-500 mb-1.5">Colaboradores</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" aria-hidden="true"></span>Monitor · Postgrado de Cardiología — Hospital Ruiz y Páez</span>
+              <!-- Validadores y monitores se añaden aquí -->
+            </div>
+          </div>
+          <p class="text-zinc-500 pt-1">¿Quieres monitorizar o validar esta herramienta? <a href="mailto:matson@matsonsoft.com" class="footer-link underline underline-offset-2">Escríbenos</a></p>
+        </div>
+      </div>
+      <div class="hidden md:block">
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Para quién</p>
+        <ul class="space-y-2 text-[13px] text-zinc-600">
+          <li>Profesionales de la salud</li>
+          <li>Pacientes y personas interesadas</li>
+          <li>Instituciones y postgrados</li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3">Recursos</p>
+        <ul class="space-y-2 text-sm">
+          <li class="hidden md:block"><a href="../../metodologia.html" class="text-zinc-600 hover:text-accent transition-colors">Metodología</a></li>
+          <li class="hidden md:block"><a href="../index.html" class="text-zinc-600 hover:text-accent transition-colors">Calculadoras</a></li>
+          <li><a href="../../terminos.html" class="text-zinc-600 hover:text-accent transition-colors">Términos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s);
+
+  // Coeficientes oficiales SCORE2 (Eur Heart J 2021;42(25):2439-2454, suplemento)
+  const MGDL_TO_MMOL = 38.67;
+  const S2_COEF = {
+    male:   [0.3742, 0.6012, 0.2777, 0.6457, 0.1458, -0.2698, -0.0755, -0.0255, -0.0281, 0.0426, -0.0983],
+    female: [0.4648, 0.7744, 0.3131, 0.8096, 0.1002, -0.2606, -0.1088, -0.0277, -0.0226, 0.0613, -0.1272]
+  };
+  const S2_S0 = { male: 0.9605, female: 0.9776 };
+  // SCORE2-LAC: coeficientes originales SCORE2 + factores de reescalado regionales
+  // (Bijkerk et al., Eur Heart J 2026, ehag698 — Suplemento, Tabla S8)
+  const S2L_PARAMS = {
+    male:   { low: [-0.124790568, 0.828096449], moderate: [0.238823871, 0.890550372], high: [0.301272602, 0.825019434],  very_high: [0.223031762, 0.655657363] },
+    female: { low: [-0.923656716, 0.604566444], moderate: [-0.549083177, 0.655753545], high: [-0.360726291, 0.620297489], very_high: [-0.264237736, 0.45124002] }
+  };
+  // País → región de riesgo SCORE2-LAC (Suplemento, Tabla S1: mortalidad CVD estandarizada WHO GHE)
+  const PAIS_REGION = {
+    pe: 'low', cr: 'low', cl: 'low', pr: 'low',
+    ec: 'moderate', sv: 'moderate', pa: 'moderate', co: 'moderate', uy: 'moderate', bm: 'moderate', gt: 'moderate',
+    mx: 'high', ar: 'high', tt: 'high', jm: 'high', br: 'high', bb: 'high', bz: 'high', py: 'high', ve: 'high',
+    cu: 'high', ag: 'high', lc: 'high', bo: 'high', ni: 'high', vi: 'high', vc: 'high', bs: 'high', gd: 'high',
+    hn: 'high', do: 'high', dm: 'high', kn: 'high', sr: 'high',
+    gy: 'very_high', ht: 'very_high'
+  };
+  const PAIS_NOMBRE = {
+    pe: 'Perú', cr: 'Costa Rica', cl: 'Chile', pr: 'Puerto Rico',
+    ec: 'Ecuador', sv: 'El Salvador', pa: 'Panamá', co: 'Colombia', uy: 'Uruguay', bm: 'Bermudas', gt: 'Guatemala',
+    mx: 'México', ar: 'Argentina', tt: 'Trinidad y Tobago', jm: 'Jamaica', br: 'Brasil', bb: 'Barbados', bz: 'Belice',
+    py: 'Paraguay', ve: 'Venezuela', cu: 'Cuba', ag: 'Antigua y Barbuda', lc: 'Santa Lucía', bo: 'Bolivia',
+    ni: 'Nicaragua', vi: 'Islas Vírgenes de EE. UU.', vc: 'San Vicente y las Granadinas', bs: 'Bahamas', gd: 'Granada',
+    hn: 'Honduras', do: 'República Dominicana', dm: 'Dominica', kn: 'San Cristóbal y Nieves', sr: 'Surinam',
+    gy: 'Guyana', ht: 'Haití'
+  };
+  const REGION_NOMBRE = { low: 'baja', moderate: 'moderada', high: 'alta', very_high: 'muy alta' };
+
+  function calcScore2(age, sex, smoker, sbp, tc, hdl, region) {
+    const tcM = tc / MGDL_TO_MMOL, hdlM = hdl / MGDL_TO_MMOL;
+    const smk = smoker === 'si' ? 1 : 0;
+    const sexK = sex;
+    if (age < 40 || age > 69) return null;
+    const R = S2_COEF[sexK];
+    const a5 = (age - 60) / 5, sbp20 = (sbp - 120) / 20, tc1 = (tcM - 6) / 1, hdl05 = (hdlM - 1.3) / 0.5;
+    const lp = R[0]*a5 + R[1]*smk + R[2]*sbp20 + R[3]*0 + R[4]*tc1 + R[5]*hdl05 +
+               R[6]*a5*smk + R[7]*a5*sbp20 + R[8]*a5*tc1 + R[9]*a5*hdl05 + R[10]*a5*0;
+    const s0 = S2_S0[sexK];
+    const uncal = 1 - Math.pow(s0, Math.exp(lp));
+    const [s1, s2] = S2L_PARAMS[sexK][region] || [0, 1];
+    const risk = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - Math.max(0.001, Math.min(0.999, uncal))))));
+    return Math.min(99.9, Math.max(0.1, risk * 100));
+  }
+
+  function categorizar(r) {
+    if (r < 2)   return { txt: 'Riesgo bajo',      cls: 'text-emerald-700 bg-emerald-50 border-emerald-200', color: '#047857', ldl: '< 116 mg/dL', meta: 'No se indica tratamiento farmacológico de forma rutinaria. Reforzar estilo de vida y reevaluar en 3–5 años.' };
+    if (r < 10)  return { txt: 'Riesgo moderado',  cls: 'text-amber-700 bg-amber-50 border-amber-200',        color: '#B45309', ldl: '< 100 mg/dL', meta: 'Meta de C-LDL < 100 mg/dL. Estatina moderada si se confirma el riesgo, junto con cambios de estilo de vida.' };
+    if (r < 20)  return { txt: 'Riesgo alto',      cls: 'text-red-700 bg-red-50 border-red-200',               color: '#B91C1C', ldl: '< 70 mg/dL',  meta: 'Meta de C-LDL < 70 mg/dL. Estatina de alta intensidad; considerar tratamiento combinado si no se alcanza la meta.' };
+    return         { txt: 'Riesgo muy alto',      cls: 'text-red-800 bg-red-100 border-red-300',               color: '#991B1B', ldl: '< 55 mg/dL',  meta: 'Meta de C-LDL < 55 mg/dL. Estatina de alta intensidad con tratamiento combinado y seguimiento estrecho.' };
+  }
+
+  function calcular() {
+    const edad = parseInt($('#edad').value, 10);
+    const pas = parseFloat($('#pas').value);
+    const tc = parseFloat($('#ct').value);
+    const hdl = parseFloat($('#hdl').value);
+    const sexo = document.querySelector('input[name="sexo"]:checked').value;
+    const tabaco = document.querySelector('input[name="tabaco"]:checked').value;
+    const pais = $('#pais').value;
+    if (pais && PAIS_REGION[pais]) {
+      $('#region').value = PAIS_REGION[pais];
+      $('#region_origen').innerHTML = '<strong>' + (PAIS_NOMBRE[pais] || 'País') + '</strong> pertenece a la región <strong>' + REGION_NOMBRE[PAIS_REGION[pais]] + '</strong> según su mortalidad cardiovascular (WHO GHE).';
+    } else if (pais === 'xx') {
+      $('#region_origen').textContent = 'Selección manual de región.';
+    }
+    const region = $('#region').value;
+    const error = $('#error');
+    error.classList.add('hidden');
+    if (!edad || isNaN(edad) || edad < 40 || edad > 69) {
+      error.textContent = 'SCORE2-LAC aplica a edades de 40 a 69 años, sin diabetes ni enfermedad CV previa. Para 70–79 años usa WHO-Central L.A. o SCORE2-OP; para diabetes, la herramienta completa.';
+      error.classList.remove('hidden');
+      return;
+    }
+    if (pais === '') {
+      error.textContent = 'Elige el país para asignar la región de riesgo SCORE2-LAC (o selecciona "Otro" para fijarla manualmente).';
+      error.classList.remove('hidden');
+      return;
+    }
+    const r = calcScore2(edad, sexo, tabaco, pas, tc, hdl, region);
+    if (r == null) return;
+    const c = categorizar(r);
+    $('#riesgo').textContent = r.toFixed(1);
+    $('#categoria').textContent = c.txt;
+    $('#categoria').className = 'inline-flex items-center gap-2 text-sm font-bold px-3 py-1.5 rounded-full border ' + c.cls;
+    $('#barra_resultado').style.width = Math.min(100, r / 20 * 100) + '%';
+    $('#barra_resultado').style.backgroundColor = c.color;
+    $('#meta_ldl').innerHTML = '<strong>Meta de C-LDL:</strong> ' + c.ldl + '.';
+    $('#interpretacion').innerHTML = '<strong>Recomendación:</strong> ' + c.meta;
+    $('#resultado').classList.remove('hidden');
+    $('#resultado').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  $('#calcular').addEventListener('click', calcular);
+  ['edad', 'pas', 'ct', 'hdl', 'pais', 'region'].forEach(function (id) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', calcular);
+    el.addEventListener('change', calcular);
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter') calcular(); });
+  });
+  document.querySelectorAll('input[name="sexo"], input[name="tabaco"]').forEach(function (el) {
+    el.addEventListener('change', calcular);
+  });
+  function textoResultado() {
+    var r = document.getElementById('riesgo').textContent;
+    var cat = document.getElementById('categoria').textContent;
+    return 'Riesgo a 10 años: ' + r + '% (' + cat + '). CardioScore — cardio-score.vercel.app';
+  }
+  function fallbackCopiar(txt) {
+    var ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  function copiarTexto(txt) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).catch(function () { fallbackCopiar(txt); });
+    } else { fallbackCopiar(txt); }
+  }
+  var btnCopiar = document.getElementById('btn_copiar');
+  var btnWa = document.getElementById('btn_whatsapp');
+  if (btnCopiar) btnCopiar.addEventListener('click', function () {
+    copiarTexto(textoResultado());
+    btnCopiar.textContent = 'Copiado';
+    setTimeout(function () { btnCopiar.textContent = 'Copiar'; }, 1800);
+  });
+  if (btnWa) btnWa.addEventListener('click', function () {
+    window.open('https://wa.me/?text=' + encodeURIComponent(textoResultado()), '_blank');
+  });
+  // deep-link: compartir/recargar un caso por URL
+  try {
+    const q = new URLSearchParams(location.search);
+    const set = function (id, v) { if (v) document.getElementById(id).value = v; };
+    set('edad', q.get('edad')); set('pas', q.get('pas')); set('ct', q.get('ct')); set('hdl', q.get('hdl'));
+    if (q.get('pais')) $('#pais').value = q.get('pais');
+    if (q.get('region')) $('#region').value = q.get('region');
+    if (q.get('sexo')) { const el = document.querySelector('input[name="sexo"][value="' + q.get('sexo') + '"]'); if (el) el.checked = true; }
+    if (q.get('tabaco')) { const el = document.querySelector('input[name="tabaco"][value="' + q.get('tabaco') + '"]'); if (el) el.checked = true; }
+  } catch (e) {}
+  calcular();
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var el = document.getElementById('pac_count');
+  if (!el) return;
+  try {
+    var perfil = (localStorage.getItem('cs_perfil') || 'general');
+    var lista = JSON.parse(localStorage.getItem('cs_pacientes_' + perfil) || '[]');
+    el.textContent = lista.length;
+    el.classList.toggle('hidden', lista.length === 0);
+  } catch (e) {}
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_menu'), menu = document.getElementById('menu_movil');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('btn_tema');
+  if (!btn) return;
+  function aplicar() {
+    var dark = document.documentElement.classList.contains('dark');
+    var s = document.getElementById('ico_sol'), l = document.getElementById('ico_luna');
+    if (s) s.classList.toggle('hidden', !dark);
+    if (l) l.classList.toggle('hidden', dark);
+    var mt = document.querySelector('meta[name="theme-color"]');
+    if (mt) mt.setAttribute('content', dark ? '#0C111A' : '#0054A6');
+  }
+  aplicar();
+  btn.addEventListener('click', function () {
+    document.documentElement.classList.add('theme-transition');
+    document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('cs_tema', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+    aplicar();
+    clearTimeout(window._ttm);
+    window._ttm = setTimeout(function () { document.documentElement.classList.remove('theme-transition'); }, 220);
+  });
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  document.querySelectorAll('input[type="number"]').forEach(function (inp) {
+    var min = inp.min !== '' ? parseFloat(inp.min) : -Infinity;
+    var max = inp.max !== '' ? parseFloat(inp.max) : Infinity;
+    inp.addEventListener('keydown', function (e) {
+      if (['e', 'E', '+'].indexOf(e.key) !== -1 || (e.key === '-' && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('paste', function (e) {
+      var txt = (e.clipboardData || window.clipboardData).getData('text');
+      if (!txt || /[^0-9.,-]/.test(txt) || (txt.indexOf('-') !== -1 && min >= 0)) e.preventDefault();
+    });
+    inp.addEventListener('blur', function () {
+      var v = parseFloat(inp.value);
+      if (isNaN(v)) return;
+      if (v < min) inp.value = min;
+      else if (v > max) inp.value = max;
+    });
+  });
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("../../sw.js").catch(function () {}); }); }
+</script>
+  <nav class="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-zinc-200 lg:hidden safe-area-bottom" aria-label="Navegación inferior"><div class="grid grid-cols-3 max-w-md mx-auto"><a href="../index.html" class="flex flex-col items-center justify-center gap-0.5 min-h-[60px] text-accent" aria-label="Calculadoras"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7zM8 3v3M16 3v3M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="text-[10px] font-semibold">Calculadoras</span></a><a href="../../index.html" class="flex flex-col items-center justify-center gap-0.5 min-h-[60px] text-zinc-500" aria-label="Calcular"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2 5 4-14 2 9h6"/></svg><span class="text-[10px] font-semibold">Calcular</span></a><a href="../../metodologia.html" class="flex flex-col items-center justify-center gap-0.5 min-h-[60px] text-zinc-500" aria-label="Metodología"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4zM8 8h8M8 12h5"/></svg><span class="text-[10px] font-semibold">Metodología</span></a></div></nav>
+<script>
+(function () {
+  var btn = document.getElementById('btn_subir');
+  if (!btn) return;
+  var onScroll = function () {
+    var show = window.scrollY > 300;
+    btn.classList.toggle('opacity-0', !show);
+    btn.classList.toggle('pointer-events-none', !show);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+window.subirArriba = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+</script>
+
+  <button id="btn_arriba" class="hidden fixed bottom-20 lg:bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-accent text-white shadow-lg items-center justify-center transition hover:bg-accent-700 active:scale-95 inline-flex" aria-label="Volver arriba">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('btn_arriba');
+  if (!btn) return;
+  var onScroll = function () { btn.classList.toggle('hidden', window.scrollY <= 300); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
