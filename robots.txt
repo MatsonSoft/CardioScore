@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cardioscore.matsonsoft.com/sitemap.xml
+Sitemap: https://cardio-score.vercel.app/sitemap.xml

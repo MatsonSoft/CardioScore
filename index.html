@@ -9,13 +9,13 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="theme-color" content="#0054A6">
-<link rel="canonical" href="https://cardioscore.matsonsoft.com/">
+<link rel="canonical" href="https://cardio-score.vercel.app/">
 <meta property="og:title" content="CardioScore — Riesgo cardiovascular, transparente y validado">
 <meta property="og:description" content="Calcula el riesgo a 10 años con SCORE2, PREVENT y WHO-Central L.A., con metas de LDL y guía para explicar al paciente.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:image" content="https://cardio-score.vercel.app/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta name="twitter:image" content="https://cardio-score.vercel.app/og-image.png">
 <meta name="description" content="Estratificación del riesgo cardiovascular con modelos ESC/AHA/OMS (SCORE2, PREVENT, WHO-Central L.A.), campos por escenario clínico, historial local y metodología auditable.">
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -1547,7 +1547,7 @@
     <div style="text-align:right;font-size:7pt;color:#475569;line-height:1.4;">
       <div><span id="pb_fecha">—</span></div>
       <div>Folio: CS-<span id="pb_folio">0000</span></div>
-      <div style="color:#94a3b8;">cardioscore.matsonsoft.com</div>
+      <div style="color:#94a3b8;">cardio-score.vercel.app</div>
     </div>
   </div>
 
@@ -3017,7 +3017,7 @@ function actualizarMetas(rM) {
       'Meta de C-LDL: < ' + rM.metaLdl + ' mg/dL' + (rM.ldl ? ' (actual: ' + rM.ldl + ' mg/dL · reducir ~' + rM.reduccion + '%)' : '') + '\n' +
       'Plan: ' + plan + '\n' +
       'Reevaluar en: ' + reevalTxt + '\n' +
-      '\nGenerado por CardioScore · cardioscore.matsonsoft.com';
+      '\nGenerado por CardioScore · cardio-score.vercel.app';
     window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank');
   }
   $('#btn_whatsapp').addEventListener('click', function () { try { trackCS('cs_exportar', { canal: 'whatsapp' }); } catch (e) {} whatsappResumen(); });
@@ -3718,7 +3718,7 @@ function exportarPDF_A() {
   doc.setDrawColor(BORDE[0], BORDE[1], BORDE[2]); doc.setLineWidth(0.3);
   doc.line(M, 270.5, 216 - M, 270.5);
   setTxt(GRISC, 5.5, false);
-  doc.text('www.cardioscore.matsonsoft.com', 108, 274, { align: 'center' });
+  doc.text('www.cardio-score.vercel.app', 108, 274, { align: 'center' });
 
   var blob = doc.output('blob');
   var url = URL.createObjectURL(blob);

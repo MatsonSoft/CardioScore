@@ -11,9 +11,9 @@
 <meta name="theme-color" content="#0054A6">
 <meta name="description" content="Calculadora SCORE2-OP (ESC 2021): riesgo de infarto e ictus a 10 años en adultos de 70 años o más en prevención primaria. Coeficientes oficiales del Eur Heart J, con WHO-Central L.A. como referencia local.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://cardioscore.matsonsoft.com/tools/score2-op/">
+<link rel="canonical" href="https://cardio-score.vercel.app/tools/score2-op/">
 <meta property="og:title" content="Calculadora SCORE2-OP de riesgo cardiovascular — CardioScore">
-<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:image" content="https://cardio-score.vercel.app/og-image.png">
 <meta property="og:description" content="Riesgo de infarto e ictus a 10 años en mayores de 70 años según SCORE2-OP (ESC 2021). Coeficientes oficiales.">
 <meta property="og:type" content="website">
 <script>
@@ -130,7 +130,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Calculadora SCORE2-OP de riesgo cardiovascular — CardioScore",
-  "url": "https://cardioscore.matsonsoft.com/tools/score2-op/",
+  "url": "https://cardio-score.vercel.app/tools/score2-op/",
   "description": "Riesgo de infarto de miocardio e ictus a 10 años en adultos de 70 años o más en prevención primaria, según el modelo SCORE2-OP de la Sociedad Europea de Cardiología.",
   "applicationCategory": "HealthApplication",
   "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
@@ -147,7 +147,7 @@
     { "@type": "Question", "name": "¿Cómo se interpretan los resultados de SCORE2-OP?", "acceptedAnswer": { "@type": "Answer", "text": "Se usan los mismos umbrales de SCORE2: riesgo menor de 2% bajo, de 2 a 9.9% moderado, de 10 a 19.9% alto y del 20% o más muy alto. Dado que la edad eleva el riesgo de forma natural, en mayores de 70 es frecuente encontrar categorías altas y muy altas, y la decisión de tratamiento debe considerar la expectativa de vida y la fragilidad." } },
     { "@type": "Question", "name": "¿Qué diferencia hay entre SCORE2 y SCORE2-OP?", "acceptedAnswer": { "@type": "Answer", "text": "SCORE2 se validó para adultos de 40 a 69 años y SCORE2-OP para mayores de 70. El modelo de mayores usa otros coeficientes de regresión, otra supervivencia basal y una recalibración regional distinta, porque la relación entre los factores de riesgo y el evento cambia con la edad avanzada." } },
     { "@type": "Question", "name": "¿Se debe tratar igual a un mayor de 70 con riesgo muy alto?", "acceptedAnswer": { "@type": "Answer", "text": "No necesariamente. En adultos mayores la evidencia para estatinas y antihipertensivos es sólida, pero la decisión debe considerar la expectativa de vida, la fragilidad y las comorbilidades. La calculadora estima el riesgo; la indicación requiere juicio clínico y preferencias del paciente." } },
-    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye SCORE2, SCORE2-OP, PREVENT, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com." } }
+    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye SCORE2, SCORE2-OP, PREVENT, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app." } }
   ]
 }
 </script>
@@ -156,9 +156,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardioscore.matsonsoft.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardioscore.matsonsoft.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Calculadora SCORE2-OP", "item": "https://cardioscore.matsonsoft.com/tools/score2-op/" }
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardio-score.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardio-score.vercel.app/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Calculadora SCORE2-OP", "item": "https://cardio-score.vercel.app/tools/score2-op/" }
   ]
 }
 </script>
@@ -386,7 +386,7 @@
       </details>
       <details class="group bg-white border border-zinc-200 rounded-xl p-5">
         <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
-        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye SCORE2, SCORE2-OP, PREVENT, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com.</p>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye SCORE2, SCORE2-OP, PREVENT, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app.</p>
       </details>
     </div>
   </section>
@@ -534,7 +534,7 @@
   function textoResultado() {
     var r = document.getElementById('riesgo').textContent;
     var cat = document.getElementById('categoria').textContent;
-    return 'Riesgo a 10 años: ' + r + '% (' + cat + '). CardioScore — cardioscore.matsonsoft.com';
+    return 'Riesgo a 10 años: ' + r + '% (' + cat + '). CardioScore — cardio-score.vercel.app';
   }
   function fallbackCopiar(txt) {
     var ta = document.createElement('textarea');

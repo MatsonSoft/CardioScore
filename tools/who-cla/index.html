@@ -11,9 +11,9 @@
 <meta name="theme-color" content="#0054A6">
 <meta name="description" content="Calculadora WHO/OMS CVD Risk Charts 2019 para América Latina Central: riesgo de infarto e ictus a 10 años en adultos de 40 a 79 años. Referencia local para Venezuela, con coeficientes de Kaptoge et al. (Lancet Glob Health 2019).">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://cardioscore.matsonsoft.com/tools/who-cla/">
+<link rel="canonical" href="https://cardio-score.vercel.app/tools/who-cla/">
 <meta property="og:title" content="Calculadora WHO-Central L.A. de riesgo cardiovascular — CardioScore">
-<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:image" content="https://cardio-score.vercel.app/og-image.png">
 <meta property="og:description" content="Riesgo de infarto e ictus a 10 años según las cartas de riesgo de la OMS para América Latina Central, referencia local de Venezuela.">
 <meta property="og:type" content="website">
 <script>
@@ -130,7 +130,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Calculadora WHO-Central L.A. de riesgo cardiovascular — CardioScore",
-  "url": "https://cardioscore.matsonsoft.com/tools/who-cla/",
+  "url": "https://cardio-score.vercel.app/tools/who-cla/",
   "description": "Riesgo de infarto de miocardio e ictus a 10 años según las cartas de riesgo de la Organización Mundial de la Salud para América Latina Central (WHO CVD Risk Charts 2019). Referencia local para Venezuela.",
   "applicationCategory": "HealthApplication",
   "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
@@ -147,7 +147,7 @@
     { "@type": "Question", "name": "¿Qué diferencia hay entre WHO-Central L.A. y SCORE2?", "acceptedAnswer": { "@type": "Answer", "text": "Ambos estiman el riesgo a 10 años de un primer evento cardiovascular, pero SCORE2 está calibrado para las regiones europeas (con recalibración por país) y WHO-Central L.A. para Latinoamérica. En poblaciones como la venezolana, WHO-Central L.A. suele dar una estimación más acorde al riesgo regional y se usa como referencia." } },
     { "@type": "Question", "name": "¿La calculadora necesita datos de laboratorio?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Esta versión es la laboratorial: usa edad, sexo, tabaquismo, presión sistólica, colesterol total y diabetes. La OMS también publicó una versión no laboratorial con el índice de masa corporal, útil cuando no hay acceso al laboratorio, que CardioScore incluye en la herramienta completa." } },
     { "@type": "Question", "name": "¿Cuáles son los umbrales de riesgo de la OMS?", "acceptedAnswer": { "@type": "Answer", "text": "La OMS propone categorías de riesgo bajo, moderado, alto y muy alto según el porcentaje a 10 años, con umbrales orientativos del 5%, 10% y 20%. Un riesgo mayor o igual al 20% se considera muy alto y suele requerir tratamiento farmacológico combinado." } },
-    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye WHO-Central L.A., SCORE2, PREVENT, SCORE2-OP, MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com." } }
+    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye WHO-Central L.A., SCORE2, PREVENT, SCORE2-OP, MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app." } }
   ]
 }
 </script>
@@ -156,9 +156,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardioscore.matsonsoft.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardioscore.matsonsoft.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Calculadora WHO-Central L.A.", "item": "https://cardioscore.matsonsoft.com/tools/who-cla/" }
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardio-score.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardio-score.vercel.app/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Calculadora WHO-Central L.A.", "item": "https://cardio-score.vercel.app/tools/who-cla/" }
   ]
 }
 </script>
@@ -383,7 +383,7 @@
       </details>
       <details class="group bg-white border border-zinc-200 rounded-xl p-5">
         <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
-        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye WHO-Central L.A., SCORE2, PREVENT, SCORE2-OP, MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com.</p>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye WHO-Central L.A., SCORE2, PREVENT, SCORE2-OP, MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app.</p>
       </details>
     </div>
   </section>
@@ -528,7 +528,7 @@
   function textoResultado() {
     var r = document.getElementById('riesgo').textContent;
     var cat = document.getElementById('categoria').textContent;
-    return 'Riesgo a 10 años: ' + r + '% (' + cat + '). CardioScore — cardioscore.matsonsoft.com';
+    return 'Riesgo a 10 años: ' + r + '% (' + cat + '). CardioScore — cardio-score.vercel.app';
   }
   function fallbackCopiar(txt) {
     var ta = document.createElement('textarea');

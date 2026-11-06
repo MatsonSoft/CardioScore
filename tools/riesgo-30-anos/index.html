@@ -11,9 +11,9 @@
 <meta name="theme-color" content="#0054A6">
 <meta name="description" content="Calculadora de riesgo cardiovascular a 30 años para adultos jóvenes de 20 a 59 años, basada en la ecuación PREVENT 30 (AHA 2024). Clave para prevenir la ECV temprana.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://cardioscore.matsonsoft.com/tools/riesgo-30-anos/">
+<link rel="canonical" href="https://cardio-score.vercel.app/tools/riesgo-30-anos/">
 <meta property="og:title" content="Calculadora de riesgo cardiovascular a 30 años — CardioScore">
-<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:image" content="https://cardio-score.vercel.app/og-image.png">
 <meta property="og:description" content="Riesgo de enfermedad cardiovascular a 30 años en adultos de 20 a 59 años según PREVENT-30 (AHA 2024) y Pencina 2009.">
 <meta property="og:type" content="website">
 <script>
@@ -130,7 +130,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Calculadora de riesgo cardiovascular a 30 años — CardioScore",
-  "url": "https://cardioscore.matsonsoft.com/tools/riesgo-30-anos/",
+  "url": "https://cardio-score.vercel.app/tools/riesgo-30-anos/",
   "description": "Riesgo de enfermedad cardiovascular a 30 años en adultos jóvenes de 20 a 59 años, según la ecuación PREVENT-30 de la AHA 2024 y la cohorte de Pencina.",
   "applicationCategory": "HealthApplication",
   "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
@@ -147,7 +147,7 @@
     { "@type": "Question", "name": "¿Qué modelo usa esta calculadora?", "acceptedAnswer": { "@type": "Answer", "text": "Usa la ecuación PREVENT a 30 años de la AHA 2024 (validada contra preventcalculator.com) y reproduce el enfoque de riesgo a largo plazo de la cohorte de Framingham (Pencina et al. 2009). Ambos proyectan el riesgo acumulado en tres décadas." } },
     { "@type": "Question", "name": "¿Qué diferencia hay entre el riesgo a 10 y a 30 años?", "acceptedAnswer": { "@type": "Answer", "text": "El riesgo a 10 años estima los eventos en la próxima década; el de 30 años acumula el riesgo a lo largo de tres décadas. En un adulto joven con PAS elevada o dislipemia, el riesgo a 10 años puede ser bajo pero el de 30 años alto, lo que justifica intervenir temprano." } },
     { "@type": "Question", "name": "¿Cuáles son los umbrales del riesgo a 30 años?", "acceptedAnswer": { "@type": "Answer", "text": "La AHA/ACC 2026 considera el riesgo a 30 años menor de 5% como bajo, de 5 a 9.9% intermedio y del 10% o más como alto. Un riesgo alto a 30 años en adultos jóvenes apoya el inicio de estatinas junto con el control de los factores de riesgo." } },
-    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye el riesgo a 30 años, SCORE2, PREVENT, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com." } }
+    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye el riesgo a 30 años, SCORE2, PREVENT, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app." } }
   ]
 }
 </script>
@@ -156,9 +156,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardioscore.matsonsoft.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardioscore.matsonsoft.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Riesgo cardiovascular a 30 años", "item": "https://cardioscore.matsonsoft.com/tools/riesgo-30-anos/" }
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardio-score.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardio-score.vercel.app/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Riesgo cardiovascular a 30 años", "item": "https://cardio-score.vercel.app/tools/riesgo-30-anos/" }
   ]
 }
 </script>
@@ -425,7 +425,7 @@
       </details>
       <details class="group bg-white border border-zinc-200 rounded-xl p-5">
         <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
-        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye el riesgo a 30 años, SCORE2, PREVENT, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com.</p>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye el riesgo a 30 años, SCORE2, PREVENT, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app.</p>
       </details>
     </div>
   </section>
@@ -580,7 +580,7 @@
   function textoResultado() {
     var r = document.getElementById('riesgo').textContent;
     var cat = document.getElementById('categoria').textContent;
-    return 'Riesgo a 30 años: ' + r + '% (' + cat + '). CardioScore — cardioscore.matsonsoft.com';
+    return 'Riesgo a 30 años: ' + r + '% (' + cat + '). CardioScore — cardio-score.vercel.app';
   }
   function fallbackCopiar(txt) {
     var ta = document.createElement('textarea');

@@ -11,9 +11,9 @@
 <meta name="theme-color" content="#0054A6">
 <meta name="description" content="Calculadora HAS-BLED (ESC 2019) de riesgo de sangrado mayor en pacientes anticoagulados por fibrilación auricular. Puntuación oficial, interpretación y relación con CHA2DS2-VA.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://cardioscore.matsonsoft.com/tools/has-bled/">
+<link rel="canonical" href="https://cardio-score.vercel.app/tools/has-bled/">
 <meta property="og:title" content="Calculadora HAS-BLED de riesgo de sangrado — CardioScore">
-<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:image" content="https://cardio-score.vercel.app/og-image.png">
 <meta property="og:description" content="Riesgo de sangrado mayor en anticoagulación por FA según HAS-BLED (ESC). Con relación a CHA2DS2-VA.">
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -130,7 +130,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Calculadora HAS-BLED de riesgo de sangrado",
-  "url": "https://cardioscore.matsonsoft.com/tools/has-bled/",
+  "url": "https://cardio-score.vercel.app/tools/has-bled/",
   "description": "Riesgo de sangrado mayor en pacientes anticoagulados por fibrilación auricular según la escala HAS-BLED de la ESC.",
   "applicationCategory": "HealthApplication",
   "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
@@ -149,7 +149,7 @@
     { "@type": "Question", "name": "¿HAS-BLED se usa sola para decidir anticoagular?",
       "acceptedAnswer": { "@type": "Answer", "text": "No. La decisión de anticoagular en FA se toma con el riesgo trombótico (CHA2DS2-VA) y se contrasta con el riesgo de sangrado (HAS-BLED). Un riesgo de ictus alto justifica anticoagular aunque el HAS-BLED sea elevado, corrigiendo los factores de sangrado." } },
     { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?",
-      "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye HAS-BLED junto a CHA2DS2-VA, ORBIT y más de 20 modelos. Se usa gratis en cardioscore.matsonsoft.com." } }
+      "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye HAS-BLED junto a CHA2DS2-VA, ORBIT y más de 20 modelos. Se usa gratis en cardio-score.vercel.app." } }
   ]
 }
 </script>
@@ -158,9 +158,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardioscore.matsonsoft.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardioscore.matsonsoft.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Calculadora HAS-BLED", "item": "https://cardioscore.matsonsoft.com/tools/has-bled/" }
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardio-score.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardio-score.vercel.app/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Calculadora HAS-BLED", "item": "https://cardio-score.vercel.app/tools/has-bled/" }
   ]
 }
 </script>
@@ -353,7 +353,7 @@
       </details>
       <details class="group bg-white border border-zinc-200 rounded-xl p-5">
         <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45">＋</span></summary>
-        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye HAS-BLED junto a CHA2DS2-VA, ORBIT y más de 20 modelos. Se usa gratis en cardioscore.matsonsoft.com.</p>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye HAS-BLED junto a CHA2DS2-VA, ORBIT y más de 20 modelos. Se usa gratis en cardio-score.vercel.app.</p>
       </details>
     </div>
   </section>
@@ -446,7 +446,7 @@
   function textoResultado() {
     var p = document.getElementById('puntaje').textContent;
     var cat = document.getElementById('categoria').textContent;
-    return 'Puntuación HAS-BLED: ' + p + ' (' + cat + '). CardioScore — cardioscore.matsonsoft.com';
+    return 'Puntuación HAS-BLED: ' + p + ' (' + cat + '). CardioScore — cardio-score.vercel.app';
   }
   function fallbackCopiar(txt) {
     var ta = document.createElement('textarea');

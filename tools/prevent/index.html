@@ -11,9 +11,9 @@
 <meta name="theme-color" content="#0054A6">
 <meta name="description" content="Calculadora PREVENT de la AHA 2024: riesgo de enfermedad cardiovascular total a 10 años en adultos de 30 a 79 años. Coeficientes oficiales del suplemento de Circulation, validada contra preventr (CRAN).">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://cardioscore.matsonsoft.com/tools/prevent/">
+<link rel="canonical" href="https://cardio-score.vercel.app/tools/prevent/">
 <meta property="og:title" content="Calculadora PREVENT de riesgo cardiovascular — CardioScore">
-<meta property="og:image" content="https://cardioscore.matsonsoft.com/og-image.png">
+<meta property="og:image" content="https://cardio-score.vercel.app/og-image.png">
 <meta property="og:description" content="Riesgo de ECV total a 10 años según las ecuaciones PREVENT de la AHA 2024. Incluye IMC, eGFR, ACR y HbA1c.">
 <meta property="og:type" content="website">
 <script>
@@ -130,7 +130,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Calculadora PREVENT de riesgo cardiovascular — CardioScore",
-  "url": "https://cardioscore.matsonsoft.com/tools/prevent/",
+  "url": "https://cardio-score.vercel.app/tools/prevent/",
   "description": "Riesgo de enfermedad cardiovascular total a 10 años según las ecuaciones PREVENT de la American Heart Association (2024), con IMC, eGFR, ACR y HbA1c.",
   "applicationCategory": "HealthApplication",
   "provider": { "@type": "Organization", "name": "MatsonSoft", "url": "https://matsonsoft.com" },
@@ -147,7 +147,7 @@
     { "@type": "Question", "name": "¿Por qué PREVENT pide peso, talla y creatinina?", "acceptedAnswer": { "@type": "Answer", "text": "Porque a diferencia de las antiguas PCE, PREVENT incorpora el índice de masa corporal y la función renal (eGFR por CKD-EPI 2021) como predictores, y permite incluir la albuminuria y la HbA1c para mejorar la precisión. El IMC se calcula automáticamente con el peso y la talla que ingresas." } },
     { "@type": "Question", "name": "¿Qué diferencia hay entre PREVENT y las PCE 2013?", "acceptedAnswer": { "@type": "Answer", "text": "PREVENT (AHA 2024) elimina la raza como variable, separa el riesgo de ECV aterosclerótica del de insuficiencia cardíaca, e incluye la función renal, el IMC, la albuminuria y la HbA1c. Las PCE 2013 sobrestimaban el riesgo en poblaciones más sanas y no consideraban la enfermedad renal." } },
     { "@type": "Question", "name": "¿Cómo se interpretan los umbrales de PREVENT?", "acceptedAnswer": { "@type": "Answer", "text": "Los umbrales de la AHA/ACC 2026 son: riesgo menor de 5% bajo, de 5 a 7.4% fronterizo, de 7.5 a 19.9% intermedio y del 20% o más alto. El cálculo del riesgo debe combinarse con factores de promoción del riesgo (calcio coronario, Lp(a), historia familiar, hsCRP) para reclasificar." } },
-    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye PREVENT, SCORE2, SCORE2-OP, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com." } }
+    { "@type": "Question", "name": "¿Dónde está disponible la calculadora completa?", "acceptedAnswer": { "@type": "Answer", "text": "CardioScore incluye PREVENT, SCORE2, SCORE2-OP, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app." } }
   ]
 }
 </script>
@@ -156,9 +156,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardioscore.matsonsoft.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardioscore.matsonsoft.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Calculadora PREVENT", "item": "https://cardioscore.matsonsoft.com/tools/prevent/" }
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cardio-score.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Calculadoras", "item": "https://cardio-score.vercel.app/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Calculadora PREVENT", "item": "https://cardio-score.vercel.app/tools/prevent/" }
   ]
 }
 </script>
@@ -436,7 +436,7 @@
       </details>
       <details class="group bg-white border border-zinc-200 rounded-xl p-5">
         <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Dónde está disponible la calculadora completa?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
-        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye PREVENT, SCORE2, SCORE2-OP, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardioscore.matsonsoft.com.</p>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">CardioScore incluye PREVENT, SCORE2, SCORE2-OP, WHO-Central L.A., MESA, FINDRISC y más de 20 modelos. Se puede usar gratis en cardio-score.vercel.app.</p>
       </details>
     </div>
   </section>
@@ -645,7 +645,7 @@
   function textoResultado() {
     var r = document.getElementById('riesgo').textContent;
     var cat = document.getElementById('categoria').textContent;
-    return 'Riesgo a 10 años: ' + r + '% (' + cat + '). CardioScore — cardioscore.matsonsoft.com';
+    return 'Riesgo a 10 años: ' + r + '% (' + cat + '). CardioScore — cardio-score.vercel.app';
   }
   function fallbackCopiar(txt) {
     var ta = document.createElement('textarea');
