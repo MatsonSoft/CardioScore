@@ -442,11 +442,52 @@
         <div>
           <label for="cfg_region" class="block text-[13px] font-semibold text-zinc-700 mb-1">Región SCORE2</label>
           <select id="cfg_region" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20">
-            <option value="cla">Central Latin America (referencia)</option>
+            <option value="cla">Central Latin America (SCORE2-LAC)</option>
             <option value="alta" selected>Alta</option>
             <option value="moderada">Moderada</option>
             <option value="baja">Baja</option>
           </select>
+          <div id="wrap_pais" class="hidden mt-3">
+            <label for="cfg_pais" class="block text-[13px] font-semibold text-zinc-700 mb-1">País <span class="text-zinc-500 font-normal">(región SCORE2-LAC)</span></label>
+            <select id="cfg_pais" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20">
+              <option value="ve" selected>Venezuela</option>
+              <option value="pe">Perú</option>
+              <option value="cr">Costa Rica</option>
+              <option value="cl">Chile</option>
+              <option value="pr">Puerto Rico</option>
+              <option value="co">Colombia</option>
+              <option value="ec">Ecuador</option>
+              <option value="sv">El Salvador</option>
+              <option value="pa">Panamá</option>
+              <option value="uy">Uruguay</option>
+              <option value="gt">Guatemala</option>
+              <option value="bm">Bermudas</option>
+              <option value="mx">México</option>
+              <option value="ar">Argentina</option>
+              <option value="br">Brasil</option>
+              <option value="py">Paraguay</option>
+              <option value="bo">Bolivia</option>
+              <option value="cu">Cuba</option>
+              <option value="ni">Nicaragua</option>
+              <option value="hn">Honduras</option>
+              <option value="do">República Dominicana</option>
+              <option value="tt">Trinidad y Tobago</option>
+              <option value="jm">Jamaica</option>
+              <option value="bb">Barbados</option>
+              <option value="bz">Belice</option>
+              <option value="ag">Antigua y Barbuda</option>
+              <option value="lc">Santa Lucía</option>
+              <option value="vc">San Vicente y las Granadinas</option>
+              <option value="bs">Bahamas</option>
+              <option value="gd">Granada</option>
+              <option value="dm">Dominica</option>
+              <option value="kn">San Cristóbal y Nieves</option>
+              <option value="sr">Surinam</option>
+              <option value="vi">Islas Vírgenes EE.UU.</option>
+              <option value="gy">Guyana</option>
+              <option value="ht">Haití</option>
+            </select>
+          </div>
         </div>
         <div>
           <label for="cfg_units" class="block text-[13px] font-semibold text-zinc-700 mb-1">Unidades de lípidos</label>
@@ -1180,7 +1221,7 @@
         </div>
         <p class="text-[11px] text-zinc-500 mt-2.5">La discrepancia entre modelos es esperable (región y ecuación). El veredicto usa el más alto para no subestimar el riesgo.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <div class="rounded-xl border border-zinc-200 p-4">
           <button type="button" data-modelo="score2" data-risk="11.4" aria-expanded="false" class="w-full text-left transition active:scale-[0.99]" aria-label="Detalle del modelo SCORE2">
             <div class="flex items-center justify-between mb-3">
@@ -1228,7 +1269,7 @@
                 <p class="text-[13px] font-bold text-zinc-900">WHO-Central L.A.</p>
                 <p class="text-[11px] text-zinc-500">OMS 2019 · CHD + ACV</p>
               </div>
-              <span class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-2 py-0.5 active:scale-[0.98]">Referencia local</span>
+              <span id="badge_who" class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-2 py-0.5 active:scale-[0.98]">Referencia local</span>
             </div>
             <p class="font-display font-bold text-3xl tnum text-accent-700">7.9<span class="text-lg text-accent/50">%</span></p>
             <div class="mt-3 h-1.5 rounded-full bg-zinc-100 overflow-hidden"><div class="h-full w-[40%] rounded-full bg-emerald-500"></div></div>
@@ -1238,6 +1279,26 @@
             <p><strong class="text-zinc-800">Fuente:</strong> Lancet Glob Health 2019;7(10):e1332–e1345</p>
             <p><strong class="text-zinc-800">Revisado:</strong> agosto 2026</p>
             <p><strong class="text-zinc-800">Vector de validación:</strong> reproducido al 0.01% (caso ejemplo: 7.9%)</p>
+            <a href="metodologia.html#modelos" class="transition-colors text-accent underline hover:text-accent-700 inline-flex items-center gap-1">Notas del modelo →</a>
+          </div>
+        </div>
+        <div class="rounded-xl border border-zinc-200 p-4 ring-2 ring-accent/10" id="card_score2lac" hidden>
+          <button type="button" data-modelo="score2lac" data-risk="14.6" aria-expanded="false" class="w-full text-left transition active:scale-[0.99]" aria-label="Detalle del modelo SCORE2-LAC">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <p class="text-[13px] font-bold text-zinc-900">SCORE2-LAC</p>
+                <p class="text-[11px] text-zinc-500">ESC/SIAC 2026 · IAM + ACV</p>
+              </div>
+              <span id="badge_score2lac" class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-2 py-0.5">Referencia local</span>
+            </div>
+            <p class="font-display font-bold text-3xl tnum text-accent-700">14.6<span class="text-lg text-accent/50">%</span></p>
+            <div class="mt-3 h-1.5 rounded-full bg-zinc-100 overflow-hidden"><div class="h-full w-[57%] rounded-full bg-red-500"></div></div>
+            <p class="text-xs text-zinc-500 mt-2 flex items-center justify-between gap-2">Recalibrado por país <span class="text-accent font-semibold inline-flex items-center gap-1">Detalle <svg class="w-3 h-3 chevron" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></span></p>
+          </button>
+          <div class="modelo-ficha hidden mt-3 pt-3 border-t border-zinc-100 text-[12px] space-y-1.5 text-zinc-600">
+            <p><strong class="text-zinc-800">Fuente:</strong> Eur Heart J 2026 (ehag698), Suplemento Tablas S1/S8</p>
+            <p><strong class="text-zinc-800">Revisado:</strong> noviembre 2026</p>
+            <p><strong class="text-zinc-800">Validación:</strong> C-index 0.740 · 11 cohortes · 7 países LAC</p>
             <a href="metodologia.html#modelos" class="transition-colors text-accent underline hover:text-accent-700 inline-flex items-center gap-1">Notas del modelo →</a>
           </div>
         </div>
@@ -2119,11 +2180,13 @@
   function aplicarRegion() {
     const r = cfgRegion.value;
     const nota = $('#cfg_nota');
+    const wrapPais = $('#wrap_pais');
+    if (wrapPais) wrapPais.classList.toggle('hidden', r !== 'cla');
     if (r === 'cla') {
-      nota.innerHTML = 'Con región <strong>Central L.A.</strong>, el veredicto se basa en <strong>WHO-CLA</strong> (calibrado Venezuela); SCORE2 y PREVENT quedan como comparativos.';
-      $('#nota_modelos').innerHTML = '<svg class="w-4 h-4 shrink-0 mt-0.5 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg><span>El veredicto se basa en <strong>WHO-Central L.A.</strong> (referencia local, calibrada para Venezuela). SCORE2 y PREVENT se muestran como comparativos; la discrepancia entre modelos es esperable.</span>';
+      nota.innerHTML = 'Con región <strong>Central Latin America</strong>, el veredicto en 40–69 años sin diabetes se basa en <strong>SCORE2-LAC</strong> (recalibrado por país, ESC/SIAC 2026); para 70+ o diabetes se usa WHO-CLA. SCORE2 y PREVENT quedan como comparativos.';
+      $('#nota_modelos').innerHTML = '<svg class="w-4 h-4 shrink-0 mt-0.5 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg><span>El veredicto se basa en <strong>SCORE2-LAC</strong> (40–69 años, sin diabetes; recalibrado con datos de 32 países LAC, ESC/SIAC 2026). En 70+ años o diabetes se usa <strong>WHO-Central L.A.</strong> SCORE2 y PREVENT se muestran como comparativos.</span>';
     } else {
-      nota.innerHTML = 'Con región <strong>' + r + '</strong>, el veredicto se basa en <strong>SCORE2</strong> (región ' + r + '); WHO-CLA y PREVENT quedan como comparativos.';
+      nota.innerHTML = 'Con región <strong>' + r + '</strong>, el veredicto se basa en <strong>SCORE2</strong> (región ' + r + '); scores LAC y PREVENT quedan como comparativos.';
       $('#nota_modelos').innerHTML = '<svg class="w-4 h-4 shrink-0 mt-0.5 text-accent" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg><span>El veredicto se basa en <strong>SCORE2</strong> (región ' + r + '). WHO-CLA y PREVENT se muestran como comparativos.</span>';
     }
     try { localStorage.setItem('cs_propuesta_cfg', JSON.stringify({ region: cfgRegion.value, units: cfgUnits.value })); } catch (e) {}
@@ -2303,6 +2366,30 @@ var S2_OP_COEF = {
   female: [0.0789,0.6010,0.4921,0.0102,0.0605,-0.3040, -0.0107,-0.0255,-0.0004,-0.0009,0.0154]
 };
 var S2_S0 = { male: 0.9605, female: 0.9776 };
+// SCORE2-LAC (ESC/SIAC 2026): factores de reescalado oficiales por sexo y región LAC
+// Bijkerk et al., Eur Heart J 2026 (ehag698), Suplemento Tabla S8.
+var S2LAC_PARAMS = {
+  male:   { low: [-0.124790568,0.828096449],  moderate: [0.238823871,0.890550372],  high: [0.301272602,0.825019434],  very_high: [0.223031762,0.655657363] },
+  female: { low: [-0.923656716,0.604566444],  moderate: [-0.549083177,0.655753545], high: [-0.360726291,0.620297489], very_high: [-0.264237736,0.45124002] }
+};
+// País → región de riesgo LAC según mortalidad CVD estandarizada (Suplemento Tabla S1, WHO GHE)
+var PAIS_LAC = { pe:'low', cr:'low', cl:'low', pr:'low', ec:'moderate', sv:'moderate', pa:'moderate', co:'moderate', uy:'moderate', bm:'moderate', gt:'moderate', mx:'high', ar:'high', tt:'high', jm:'high', br:'high', bb:'high', bz:'high', py:'high', ve:'high', cu:'high', ag:'high', lc:'high', bo:'high', ni:'high', vi:'high', vc:'high', bs:'high', gd:'high', hn:'high', do:'high', dm:'high', kn:'high', sr:'high', gy:'very_high', ht:'very_high' };
+var PAIS_LAC_NOMBRE = { ve:'Venezuela', pe:'Perú', cr:'Costa Rica', cl:'Chile', pr:'Puerto Rico', co:'Colombia', ec:'Ecuador', sv:'El Salvador', pa:'Panamá', uy:'Uruguay', gt:'Guatemala', bm:'Bermudas', mx:'México', ar:'Argentina', br:'Brasil', py:'Paraguay', bo:'Bolivia', cu:'Cuba', ni:'Nicaragua', hn:'Honduras', do:'República Dominicana', tt:'Trinidad y Tobago', jm:'Jamaica', bb:'Barbados', bz:'Belice', ag:'Antigua y Barbuda', lc:'Santa Lucía', vc:'San Vicente y las Granadinas', bs:'Bahamas', gd:'Granada', dm:'Dominica', kn:'San Cristóbal y Nieves', sr:'Surinam', vi:'Islas Vírgenes EE.UU.', gy:'Guyana', ht:'Haití' };
+var LAC_REGION_TXT = { low: 'baja', moderate: 'moderada', high: 'alta', very_high: 'muy alta' };
+function calcScore2Lac(age, sex, smoker, sbp, tc, hdl, lacRegion) {
+  if (age < 40 || age > 69) return null;
+  var sexK = sex === 'male' ? 'male' : 'female';
+  var tcM = tc / MGDL_TO_MMOL, hdlM = hdl / MGDL_TO_MMOL;
+  var a5 = (age - 60) / 5, sbp20 = (sbp - 120) / 20, tc1 = (tcM - 6) / 1, hdl05 = (hdlM - 1.3) / 0.5;
+  var R = S2_COEF[sexK];
+  var smk = smoker === 'yes' ? 1 : 0;
+  var lp = R[0]*a5 + R[1]*smk + R[2]*sbp20 + R[4]*tc1 + R[5]*hdl05 +
+           R[6]*a5*smk + R[7]*a5*sbp20 + R[8]*a5*tc1 + R[9]*a5*hdl05;
+  var params = S2LAC_PARAMS[sexK][lacRegion] || [0, 1];
+  var u = Math.max(0.001, Math.min(0.999, 1 - Math.pow(S2_S0[sexK], Math.exp(lp))));
+  var risk = 1 - Math.exp(-Math.exp(params[0] + params[1] * Math.log(-Math.log(1 - u))));
+  return Math.min(99.9, Math.max(0.1, risk * 100));
+}
 var S2_OP_S0 = { male: 0.7576, female: 0.8082 };
 var S2_OP_OFFSET = { male: 0.0929, female: 0.229 };
 var PREV_COEF = {
@@ -2747,7 +2834,10 @@ function leerDatosHome(opts) {
   var graceEnz = (document.querySelector('input[name="grace_enz"]:checked') || {}).value === 'si';
   var egfr = v('d_egfr') || (cr > 0 ? (ckdEpi2021(age, sex, cr) || 0) : 0);
   var estatina = opts.estatina ? 'yes' : 'no';
-  return { age: age, sex: sex, smoker: smoker, sbp: sbp, pad: v('d_pad'), weight: weight, height: height, tc: tc, hdl: hdl, ldl: ldl, trig: v('d_trig'), gluc: v('d_gluc'), hba1c: v('d_hba1c'), imc: imc, cr: cr, egfr: egfr, acr: acr, lpa: lpa, cac: cac, hscrp: hscrp, annos: annos, eap: eap, fa: fa, pci: pci, acv: acv, sangrado: sangrado, fc: fc, hb: hb, plaq: plaq, wbc: wbc, cintura: cintura, graceArrest: graceArrest, graceEnz: graceEnz, dm: dm, erc: erc, ic: ic, sca: sca, eva: eva, htnTx: htnTx, fhx: fhx, autoim: autoim, dmStatus: dmStatus, region: region, reg: reg, cla: region === 'cla', estatina: estatina };
+  var paisLacEl = document.getElementById('cfg_pais');
+  var paisLac = (paisLacEl && paisLacEl.value) ? paisLacEl.value : 've';
+  var lacRegion = PAIS_LAC[paisLac] || 'high';
+  return { age: age, sex: sex, smoker: smoker, sbp: sbp, pad: v('d_pad'), weight: weight, height: height, tc: tc, hdl: hdl, ldl: ldl, trig: v('d_trig'), gluc: v('d_gluc'), hba1c: v('d_hba1c'), imc: imc, cr: cr, egfr: egfr, acr: acr, lpa: lpa, cac: cac, hscrp: hscrp, annos: annos, eap: eap, fa: fa, pci: pci, acv: acv, sangrado: sangrado, fc: fc, hb: hb, plaq: plaq, wbc: wbc, cintura: cintura, graceArrest: graceArrest, graceEnz: graceEnz, dm: dm, erc: erc, ic: ic, sca: sca, eva: eva, htnTx: htnTx, fhx: fhx, autoim: autoim, dmStatus: dmStatus, region: region, reg: reg, cla: region === 'cla', paisLac: paisLac, lacRegion: lacRegion, estatina: estatina };
 }
 
 function bandaNivel(b) { return b === 'band_vhigh' ? 4 : b === 'band_high' ? 3 : b === 'band_mod' ? 2 : 1; }
@@ -2775,11 +2865,14 @@ function calcularRiesgoHome(opts) {
     smart2 = calcSmart2(i.age, i.sex, i.smoker, i.sbp, (i.tc - i.hdl) / MGDL_TO_MMOL, i.hscrp, i.egfr, i.annos, i.sca, i.eva, i.eap, false);
   }
   var prevent30 = i.age < 40 ? calcPrevent30(i.age, i.sex, i.smoker, i.sbp, i.tc, i.hdl, i.dmStatus, i.imc, i.egfr, statin, i.htnTx) : null;
+  var score2lac = (i.cla && !i.dm) ? calcScore2Lac(i.age, i.sex, i.smoker, i.sbp, i.tc, i.hdl, i.lacRegion || 'high') : null;
   var s2 = i.autoim ? score2 * 1.5 : score2;
   var pv = i.autoim ? prevent * 1.5 : prevent;
   var w = i.autoim ? who * 1.5 : who;
+  var lac = score2lac != null && i.autoim ? score2lac * 1.5 : score2lac;
   var modelo, riesgoPrincipal;
   if (i.age < 40 && prevent30) { modelo = 'prevent30'; riesgoPrincipal = prevent30; }
+  else if (i.cla && lac != null) { modelo = 'score2lac'; riesgoPrincipal = lac; }
   else if (i.cla && !isNaN(w)) { modelo = 'who'; riesgoPrincipal = w; }
   else if (!isNaN(w) && w > s2 && w > pv) { modelo = 'who'; riesgoPrincipal = w; }
   else { modelo = s2 >= pv ? 'score2' : 'prevent'; riesgoPrincipal = modelo === 'score2' ? s2 : pv; }
@@ -2818,7 +2911,7 @@ function calcularRiesgoHome(opts) {
     complementarios.precise = calcPreciseDapt(i.age, i.egfr, i.hb, i.wbc, i.sangrado);
   }
   var edadVascular = i.age >= 40 ? calcEdadVascular(riesgoPrincipal, i.sex, i.reg) : null;
-  return { score2: s2, prevent: pv, who: w, whoNl: whoNl, score2hf: score2hf, smart2: smart2, prevent30: prevent30, complementarios: complementarios, edadVascular: edadVascular, riesgoPrincipal: riesgoPrincipal, modelo: modelo, banda: banda, metaLdl: metaLdl, reduccion: reduccion, ldl: i.ldl, cla: i.cla, region: i.region, autoim: i.autoim, i: i };
+  return { score2: s2, score2lac: lac, prevent: pv, who: w, whoNl: whoNl, score2hf: score2hf, smart2: smart2, prevent30: prevent30, complementarios: complementarios, edadVascular: edadVascular, riesgoPrincipal: riesgoPrincipal, modelo: modelo, banda: banda, metaLdl: metaLdl, reduccion: reduccion, ldl: i.ldl, cla: i.cla, region: i.region, paisLac: i.paisLac, lacRegion: i.lacRegion, autoim: i.autoim, i: i };
 }
 
 function actualizarChipBanda(banda) {
@@ -2869,12 +2962,20 @@ function actualizarMetas(rM) {
           riEl.textContent = sexoTxt + ' · ' + rM.i.age + ' años · ' + tabTxt + ' · PAS ' + rM.i.sbp + ' · LDL ' + rM.i.ldl;
         }
         $$('button[data-modelo]').forEach(function (b) {
-          var valor = b.dataset.modelo === 'score2' ? rM.score2 : b.dataset.modelo === 'prevent' ? rM.prevent : rM.who;
-          if (!isFinite(valor)) valor = 0;
+          var valor = b.dataset.modelo === 'score2' ? rM.score2 : b.dataset.modelo === 'score2lac' ? rM.score2lac : b.dataset.modelo === 'prevent' ? rM.prevent : rM.who;
+          if (valor == null || !isFinite(valor)) valor = 0;
           b.dataset.risk = valor.toFixed(1);
           var p = b.querySelector('p.font-display');
           if (p) p.innerHTML = valor.toFixed(1) + '<span class="text-lg text-zinc-500">%</span>';
         });
+        var lacCard = document.getElementById('card_score2lac');
+        if (lacCard) lacCard.hidden = !(rM.score2lac != null);
+        var badgeWho = document.getElementById('badge_who');
+        if (badgeWho) { badgeWho.textContent = rM.score2lac != null ? 'Comparativo OMS' : 'Referencia local'; }
+        var badgeLac = document.getElementById('badge_score2lac');
+        if (badgeLac && rM.score2lac != null) {
+          badgeLac.innerHTML = (PAIS_LAC_NOMBRE[rM.i.paisLac] || rM.i.paisLac) + ' · ' + (LAC_REGION_TXT[rM.i.lacRegion] || '');
+        }
         var sL = document.getElementById('s_ldl'), sP = document.getElementById('s_pas');
         if (sL && rM.ldl) sL.value = Math.min(190, Math.max(80, rM.ldl));
         if (sP && rM.i.sbp) sP.value = Math.min(180, Math.max(110, rM.i.sbp));
@@ -3266,7 +3367,8 @@ function rellenarPDF_B() {
   $p('pb_barra').style.width = Math.min(100, (rM.riesgoPrincipal / 25) * 100) + '%';
   $p('pb_banda').textContent = bandas[rM.banda] || rM.banda;
   var modeloPrincipal;
-  if (rM.cla) modeloPrincipal = 'WHO-CLA';
+  if (rM.modelo === 'score2lac') modeloPrincipal = 'SCORE2-LAC';
+  else if (rM.cla) modeloPrincipal = 'WHO-CLA';
   else if (rM.riesgoPrincipal === rM.prevent) modeloPrincipal = 'PREVENT';
   else if (rM.riesgoPrincipal === rM.who) modeloPrincipal = 'WHO-CLA';
   else if (rM.prevent30) modeloPrincipal = 'Riesgo a 30 años';
@@ -3337,6 +3439,9 @@ function rellenarPDF_A() {
   $p('pa_criterio').textContent = (i.sca || i.eva || i.ic) ? 'Prevención secundaria' : 'Prevención primaria';
   var regionEl = document.getElementById('cfg_region');
   $p('pa_region').textContent = (regionEl && regionEl.selectedIndex >= 0 && regionEl.options[regionEl.selectedIndex]) ? regionEl.options[regionEl.selectedIndex].text : 'Alta';
+  if (rM.cla && rM.score2lac != null) {
+    $p('pa_region').textContent = 'Central L.A. · ' + (PAIS_LAC_NOMBRE[rM.i.paisLac] || rM.i.paisLac) + ' (región ' + (LAC_REGION_TXT[rM.i.lacRegion] || '') + ')';
+  }
   $p('pa_fumador').textContent = i.smoker === 'yes' ? 'Sí' : 'No';
   $p('pa_imc').textContent = i.imc ? i.imc.toFixed(1) : '—';
   $p('pa_pa').textContent = i.sbp ? i.sbp + '/' + (i.pad || '—') + ' mmHg' : '—';
@@ -3344,7 +3449,8 @@ function rellenarPDF_A() {
   $p('pa_riesgo').textContent = rM.riesgoPrincipal.toFixed(1) + '%';
   $p('pa_banda').textContent = bandas[rM.banda] || rM.banda;
   var modeloPrincipal;
-  if (rM.cla) modeloPrincipal = 'WHO-CLA';
+  if (rM.modelo === 'score2lac') modeloPrincipal = 'SCORE2-LAC';
+  else if (rM.cla) modeloPrincipal = 'WHO-CLA';
   else if (rM.riesgoPrincipal === rM.prevent) modeloPrincipal = 'PREVENT';
   else if (rM.riesgoPrincipal === rM.who) modeloPrincipal = 'WHO-CLA';
   else if (rM.prevent30) modeloPrincipal = 'Riesgo a 30 años';
@@ -3391,6 +3497,7 @@ function rellenarPDF_A() {
     { n: 'PREVENT (ECV + IC)', a: rM.prevent },
     { n: 'WHO-CLA (CHD + ACV)', a: isFinite(rM.who) ? rM.who : null }
   ];
+  if (rM.score2lac != null) filas.push({ n: 'SCORE2-LAC (ESC/SIAC, país ' + (PAIS_LAC_NOMBRE[rM.i.paisLac] || '') + ')', a: rM.score2lac });
   if (rM.prevent30) filas.push({ n: 'Riesgo a 30 años', a: rM.prevent30 });
   if (rM.smart2) filas.push({ n: 'SMART2 (riesgo residual)', a: rM.smart2 });
   if (rM.score2hf) filas.push({ n: 'SCORE2-HF (insuf. cardíaca)', a: rM.score2hf });
@@ -3599,6 +3706,7 @@ function exportarPDF_A() {
     ['PREVENT (ECV + IC)', rM.prevent],
     ['WHO-CLA (CHD + ACV)', isFinite(rM.who) ? rM.who : null]
   ];
+  if (rM.score2lac != null) filas.push(['SCORE2-LAC (ESC/SIAC · ' + (PAIS_LAC_NOMBRE[rM.i.paisLac] || '') + ')', rM.score2lac]);
   if (rM.prevent30) filas.push(['Riesgo a 30 años', rM.prevent30]);
   if (rM.smart2) filas.push(['SMART2 (riesgo residual)', rM.smart2]);
   if (rM.score2hf) filas.push(['SCORE2-HF (insuf. cardíaca)', rM.score2hf]);
@@ -3797,6 +3905,7 @@ function abrirInformePestana(autoPrint) {
     ['PREVENT (ECV + IC)', rM.prevent],
     ['WHO-CLA (CHD + ACV)', isFinite(rM.who) ? rM.who : null]
   ];
+  if (rM.score2lac != null) filas.push(['SCORE2-LAC (ESC/SIAC · ' + (PAIS_LAC_NOMBRE[rM.i.paisLac] || '') + ')', rM.score2lac]);
   if (rM.prevent30) filas.push(['Riesgo a 30 años', rM.prevent30]);
   if (rM.smart2) filas.push(['SMART2 (riesgo residual)', rM.smart2]);
   if (rM.score2hf) filas.push(['SCORE2-HF (insuf. cardíaca)', rM.score2hf]);
