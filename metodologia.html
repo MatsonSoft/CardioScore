@@ -253,7 +253,7 @@
           </div>
           <div class="rounded-xl border border-zinc-200 p-4">
             <div class="flex items-center gap-2.5 mb-2"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2M15 3v2M9 19v2M15 19v2M5 7h14M5 17h14M7 12h10"/></svg></span><p class="text-[10px] font-bold text-zinc-600 uppercase tracking-wide">2 · Presione Estratificar</p></div>
-            <p class="text-sm text-zinc-700">Se calculan SCORE2, PREVENT, WHO-Central L.A. y SMART2 (si aplica).</p>
+            <p class="text-sm text-zinc-700">Se calculan SCORE2, PREVENT, WHO-Central L.A. y SMART2 (si aplica). Para LAC, la calculadora dedicada <strong>SCORE2-LAC</strong> recalibra el SCORE2 por país (ESC/SIAC).</p>
           </div>
           <div class="rounded-xl border border-zinc-200 p-4">
             <div class="flex items-center gap-2.5 mb-2"><span class="w-8 h-8 rounded-lg bg-accent-50 text-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4a8 8 0 1 1-6.9 4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 12l3-3"/></svg></span><p class="text-[10px] font-bold text-zinc-600 uppercase tracking-wide">3 · Lea el riesgo</p></div>
@@ -275,7 +275,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
 <div class="rounded-xl border border-zinc-200 p-4">
             <div class="flex items-center justify-between mb-1.5"><p class="font-bold text-zinc-900">Prevención primaria</p><span class="text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-1.5 py-0.5">10 años</span></div>
-            <ul class="text-[13px]">          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SCORE2</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2021</span></li>
+            <ul class="text-[13px]">          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span><span class="text-zinc-900 font-semibold">SCORE2-LAC</span><span class="ml-1.5 text-[10px] font-bold uppercase text-accent bg-accent-50 border border-accent/20 rounded px-1.5 py-0.5 align-middle">Recomendado LAC</span></span><span class="text-[10px] font-semibold text-accent bg-accent-50 border border-accent/20 rounded px-1.5 py-0.5 shrink-0">ESC/SIAC 2026</span></li>
+          <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SCORE2</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2021</span></li>
           <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">PREVENT</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">AHA 2024</span></li>
           <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">WHO-Central L.A.</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">OMS 2019</span></li>
           <li class="flex items-center justify-between gap-2 py-1 border-b border-zinc-100 last:border-0"><span class="text-zinc-800 font-medium">SCORE2-HF</span><span class="text-[10px] font-semibold text-zinc-600 bg-zinc-100 rounded px-1.5 py-0.5 shrink-0">ESC 2026</span></li>
@@ -344,13 +345,14 @@
           <table class="w-full text-sm border-collapse">
             <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-3 font-bold">Modelo</th><th class="py-2 pr-3 font-bold">Predice</th><th class="py-2 pr-3 font-bold">Rol</th></tr></thead>
             <tbody class="text-zinc-700">
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold text-accent">SCORE2-LAC</td><td class="py-2.5 pr-3">IAM + ACV (ESC/SIAC 2026)</td><td class="py-2.5"><strong>Primera opción en LAC</strong> (40–69 años, sin diabetes): calibración por región de riesgo con datos país a país</td></tr>
               <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold">SCORE2</td><td class="py-2.5 pr-3">IAM + ACV (ESC 2021)</td><td class="py-2.5">Estándar europeo para estatina</td></tr>
               <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3 font-semibold">PREVENT</td><td class="py-2.5 pr-3">ECV total + IC (AHA 2024)</td><td class="py-2.5">Útil en IC, ERC u obesidad</td></tr>
-              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-3 font-semibold text-accent">WHO-Central L.A.</td><td class="py-2.5 pr-3">CHD + ACV (OMS 2019)</td><td class="py-2.5"><strong>Referencia para Venezuela</strong> (único calibrado a la región)</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-3 font-semibold text-accent">WHO-Central L.A.</td><td class="py-2.5 pr-3">CHD + ACV (OMS 2019)</td><td class="py-2.5"><strong>Cubre 70–79 años</strong>, franja donde SCORE2-LAC no llega; útil como comparación OMS</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="mt-3 text-sm text-zinc-600 leading-relaxed">La <strong>discrepancia entre modelos es esperable</strong>: miden desenlaces distintos. En prevención secundaria los scores no aplican (riesgo Muy Alto directo) y se usa <strong>SMART2</strong> (recalibrado LatAm). <strong>SCORE2-HF</strong> complementa a SCORE2/OP, que predicen eventos ateroscleróticos pero no IC.</p>
+        <p class="mt-3 text-sm text-zinc-600 leading-relaxed">La <strong>discrepancia entre modelos es esperable</strong>: miden desenlaces distintos. En prevención secundaria los scores no aplican (riesgo Muy Alto directo) y se usa <strong>SMART2</strong> (recalibrado LatAm). <strong>SCORE2-HF</strong> complementa a SCORE2/OP, que predicen eventos ateroscleróticos pero no IC. En adultos de 40–69 años de LAC sin diabetes, <strong>SCORE2-LAC</strong> pasa a ser la primera opción: el SCORE2 europeo subestima la incidencia en hombres y la sobreestima en mujeres mayores de las regiones alta y muy alta.</p>
       </div>
 </details>
 
@@ -542,6 +544,7 @@
             <tbody class="text-zinc-700">
               <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">GRACE 2.0</td><td class="py-2.5 pr-3">Varón 62a, SCA, PAS 150, FC 100…</td><td class="py-2.5 pr-3">BMJ 2014</td><td class="py-2.5 font-mono tnum">126 · alto</td></tr>
               <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">SCORE2</td><td class="py-2.5 pr-3">Varón 55, fumador, región alta</td><td class="py-2.5 pr-3">Eur Heart J 2021</td><td class="py-2.5 font-mono tnum">11.4% · alto</td></tr>
+              <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">SCORE2-LAC</td><td class="py-2.5 pr-3">Varón 50a, PAS 140, CT 213, HDL 50 (baja / muy alta)</td><td class="py-2.5 pr-3">Eur Heart J 2026</td><td class="py-2.5 font-mono tnum">4.0% / 10.3%</td></tr>
               <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">SCORE2-CKD</td><td class="py-2.5 pr-3">Varón 55a, eGFR 45, ACR 150</td><td class="py-2.5 pr-3">Eur J Prev Cardiol 2023</td><td class="py-2.5 font-mono tnum">16.28%</td></tr>
               <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">PREVENT 30 años</td><td class="py-2.5 pr-3">preventcalculator.com</td><td class="py-2.5 pr-3">Circulation 2024</td><td class="py-2.5 font-mono tnum">39.9% · exacto</td></tr>
               <tr class="border-b border-zinc-100 odd:bg-zinc-50/60"><td class="py-2.5 pr-3">WHO-Central L.A.</td><td class="py-2.5 pr-3">Caso ejemplo</td><td class="py-2.5 pr-3">Lancet Glob Health 2019</td><td class="py-2.5 font-mono tnum">7.9%</td></tr>
@@ -566,7 +569,7 @@
           </div>
           <div class="rounded-xl border border-zinc-200 p-4">
             <p class="font-bold text-zinc-900 mb-1.5">Discriminación publicada (C-index)</p>
-            <p class="text-zinc-600 text-[13px] leading-relaxed">Valores reportados en las cohortes originales: SCORE2 ≈0.67 · PREVENT ≈0.70 · QRISK3 ≈0.87 · SMART2 ≈0.67 · GRACE 2.0 ≈0.83 · CHARGE-AF ≈0.76 · KFRE ≈0.90 · WHO-CLA ≈0.72-0.76. No son métricas propias; la calibración local en Venezuela es el siguiente paso (ver Calibración regional).</p>
+            <p class="text-zinc-600 text-[13px] leading-relaxed">Valores reportados en las cohortes originales: SCORE2 ≈0.67 · SCORE2-LAC ≈0.74 (validación externa LAC) · PREVENT ≈0.70 · QRISK3 ≈0.87 · SMART2 ≈0.67 · GRACE 2.0 ≈0.83 · CHARGE-AF ≈0.76 · KFRE ≈0.90 · WHO-CLA ≈0.72-0.76. No son métricas propias; la calibración local en Venezuela es el siguiente paso (ver Calibración regional).</p>
           </div>
         </div>
         <div class="rounded-xl border border-accent/20 bg-accent-50/40 p-4 text-sm">
@@ -790,7 +793,7 @@ Categorías: &lt;7→≈1% · 7-11→≈4% · 12-14→≈17% · 15-20→≈33% �
           <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">QRISK4</p><p class="text-zinc-600 text-[13px] leading-relaxed">Supera a QRISK3 pero sus coeficientes no están publicados; se usa QRISK3 (NICE).</p></div>
           <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">PRECISE-DAPT</p><p class="text-zinc-600 text-[13px] leading-relaxed">Validado en la era clopidogrel; precaución con prasugrel/ticagrelor.</p></div>
           <div class="rounded-xl border border-zinc-200 p-4"><p class="font-bold text-zinc-900 mb-1.5">SMART2</p><p class="text-zinc-600 text-[13px] leading-relaxed">La validación externa sugiere que tiende a subestimar el riesgo recurrente en poblaciones vulnerables.</p></div>
-          <div class="rounded-xl border border-zinc-200 p-4 md:col-span-2"><p class="font-bold text-zinc-900 mb-1.5">Calibración regional</p><p class="text-zinc-600 text-[13px] leading-relaxed">Los coeficientes WHO-Central L.A. y SMART2-LatAm se reconstruyeron de los charts/cohortes publicados.</p></div>
+          <div class="rounded-xl border border-zinc-200 p-4 md:col-span-2"><p class="font-bold text-zinc-900 mb-1.5">Calibración regional</p><p class="text-zinc-600 text-[13px] leading-relaxed">Los coeficientes WHO-Central L.A. y SMART2-LatAm se reconstruyeron de los charts/cohortes publicados. SCORE2-LAC usa las <strong>constantes oficiales de reescalado</strong> del suplemento EHJ 2026 (Tabla S8: 4 regiones LAC × sexo), con asignación de países según mortalidad WHO GHE (Tabla S1).</p></div>
         </div>
       </div>
 </details>
@@ -876,6 +879,7 @@ Categorías: &lt;7→≈1% · 7-11→≈4% · 12-14→≈17% · 15-20→≈33% �
         <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4 text-sm">
           <p class="font-bold text-zinc-900 mb-2">Changelog</p>
           <ul class="space-y-2 text-[13px] text-zinc-700">
+            <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.3.1 · nov 2026</span><span>SCORE2-LAC (ESC/SIAC): SCORE2 recalibrado para 32 países de Latinoamérica y el Caribe; calculadora dedicada con región automática por país y constantes oficiales del suplemento.</span></li>
             <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.3 · ago 2026</span><span>SCORE2-HF (ESC 2026); marco AHA/ACC 2026 con PREVENT a 10 y 30 años; 21 calculadoras; modo automático por escenarios; este documento de metodología.</span></li>
             <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.2</span><span>Comparativa de modelos; reclasificación por risk modifiers; validación técnica ampliada.</span></li>
             <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.1</span><span>Notación TRIPOD 2025 / PROBAST; glosario y poblaciones especiales.</span></li>
@@ -906,6 +910,7 @@ Categorías: &lt;7→≈1% · 7-11→≈4% · 12-14→≈17% · 15-20→≈33% �
         
         <ul class="text-sm text-zinc-700 space-y-1.5 list-disc pl-5 sm:columns-2 sm:space-y-1.5 [&amp;&gt;li]:break-inside-avoid lg:gap-8">
           <li>SCORE2. <em>Eur Heart J</em> 2021;42(25):2439-2454.</li>
+          <li>SCORE2-LAC. Bijkerk S, Ponte-Negretti CI, et al. <em>Eur Heart J</em> 2026 (DOI 10.1093/eurheartj/ehag698); suplemento Tablas S1 y S8.</li>
           <li>SCORE2-OP. <em>Eur Heart J</em> 2021;42(25):2455-2467.</li>
           <li>SCORE2-Diabetes. <em>Eur Heart J</em> 2023;44(28):2544-2556.</li>
           <li>SCORE2-CKD. <em>Eur J Prev Cardiol</em> 2023;30(1):8-16.</li>
