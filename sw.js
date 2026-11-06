@@ -1,4 +1,4 @@
-const CACHE = 'cardioscore-v2';
+const CACHE = 'cardioscore-v3';
 const CALCS = [
   '/tools/apple/index.html','/tools/arc-hbr/index.html','/tools/cha2ds2-va/index.html',
   '/tools/charge-af/index.html','/tools/findrisk/index.html','/tools/grace/index.html',
@@ -30,25 +30,17 @@ self.addEventListener('fetch', function (e) {
   var url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
 
-  // Navegación: cache-first con revalidación (rápida)
-  if (e.request.mode === 'navigate') {
-    e.respondWith(caches.match(e.request).then(function (cached) {
-      var red = fetch(e.request).then(function (res) {
-        var clone = res.clone();
-        caches.open(CACHE).then(function (c) { c.put(e.request, clone); });
-        return res;
-      }).catch(function () { return cached; });
-      return cached || red;
-    }));
-    return;
-  }
-
-  // Assets estáticos: cache-first
-  e.respondWith(caches.match(e.request).then(function (r) {
-    return r || fetch(e.request).then(function (res) {
+  // Network-first: siempre intenta la versión fresca; el caché solo salva offline.
+  var fetchAnyway = function () {
+    return fetch(e.request).then(function (res) {
       var clone = res.clone();
       caches.open(CACHE).then(function (c) { c.put(e.request, clone); });
       return res;
+    });
+  };
+  e.respondWith(fetchAnyway().catch(function () {
+    return caches.match(e.request).then(function (cached) {
+      return cached || new Response('Sin conexión', { status: 503, statusText: 'Sin conexión' });
     });
   }));
 });

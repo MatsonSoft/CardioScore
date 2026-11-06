@@ -2005,7 +2005,6 @@
   try { window.nuevaEvaluacion = nuevaEvaluacion; } catch (e) {}
 
   function irACalcular() {
-    if (window._rM) { nuevaEvaluacion(); return; }
     sugerirPorEdad();
     setPaso(2);
     actualizarProgreso();
@@ -2096,7 +2095,7 @@
   }
   function camposFaltantes() {
     const faltan = [];
-    ['d_edad','d_peso','d_talla','d_pas','d_pad','d_ct','d_hdl','d_ldl','d_trig','d_creat'].forEach(function (id) {
+    ['d_edad','d_pas','d_ct','d_hdl'].forEach(function (id) {
       const el = document.getElementById(id);
       if (!el || el.value === '' || el.value === null) {
         const r = RANGOS[id];
@@ -3039,6 +3038,7 @@ function actualizarMetas(rM) {
       let txt = '<strong>Antes de estratificar:</strong>';
       if (faltan.length) txt += ' campos requeridos vacíos: <em>' + faltan.join(' · ') + '</em>.';
       if (rangos.length) txt += ' revisar: <em>' + rangos.join(' · ') + '</em>.';
+      txt += '<span class="block mt-1.5 text-[12px] text-zinc-500">Peso, talla, triglicéridos, creatinina y PAD son opcionales: si van en blanco, los modelos los estiman con valores clínicos por defecto.</span>';
       aviso.innerHTML = txt +
         '<span class="block mt-2 flex flex-wrap gap-2"><button type="button" id="btn_ok_faltantes" class="text-[13px] font-semibold text-white bg-accent hover:bg-accent-700 rounded-lg px-4 py-2 min-h-[44px] transition active:scale-[0.98]">Calcular igualmente</button>' +
         '<button type="button" id="btn_no_faltantes" class="text-[13px] font-semibold text-zinc-700 border border-zinc-300 rounded-lg px-4 py-2 min-h-[44px] transition">Completar datos</button></span>';
