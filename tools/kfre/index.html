@@ -155,7 +155,7 @@
     {
       "@type": "Question",
       "name": "¿Qué variables usa el KFRE de 4 variables?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Usa cuatro variables: edad (en años), sexo (ser mujer añade 0.367 al predictor lineal), eGFR en mL/min/1.73 m² y el cociente albúmina/creatinina en orina (ACR) en mg/g. Con menos variables disponibles existe la versión de 3 variables (edad, sexo y eGFR)." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Usa las 4 variables canónicas del KFRE (Tangri JAMA 2011): edad, sexo, eGFR en mL/min/1.73 m² y el cociente albúmina/creatinina en orina (ACR) en mg/g. La calibración es la no–North America, adecuada para poblaciones fuera de EE.UU. y Canadá." }
     },
     {
       "@type": "Question",
@@ -242,7 +242,7 @@
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label for="edad" class="block text-[13px] font-semibold text-zinc-700 mb-1">Edad <span class="text-zinc-500 font-normal">años</span></label>
-          <input id="edad" type="number" inputmode="numeric" value="70" min="18" max="100" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Edad en años">
+          <input id="edad" type="number" inputmode="numeric" value="65" min="18" max="100" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Edad en años">
         </div>
         <div>
           <span class="block text-[13px] font-semibold text-zinc-700 mb-1">Sexo</span>
@@ -253,11 +253,11 @@
         </div>
         <div>
           <label for="egfr" class="block text-[13px] font-semibold text-zinc-700 mb-1">eGFR <span class="text-zinc-500 font-normal">mL/min/1.73 m²</span></label>
-          <input id="egfr" type="number" inputmode="numeric" value="45" min="5" max="130" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Filtrado glomerular estimado">
+          <input id="egfr" type="number" inputmode="numeric" value="60" min="5" max="130" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Filtrado glomerular estimado">
         </div>
         <div>
           <label for="acr" class="block text-[13px] font-semibold text-zinc-700 mb-1">ACR <span class="text-zinc-500 font-normal">mg/g</span></label>
-          <input id="acr" type="number" inputmode="numeric" value="300" min="1" max="10000" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Cociente albúmina/creatinina en orina">
+          <input id="acr" type="number" inputmode="numeric" value="30" min="1" max="10000" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20 tnum" aria-label="Cociente albúmina/creatinina en orina">
         </div>
       </div>
 
@@ -323,7 +323,7 @@
           <table class="w-full text-sm border-collapse">
             <thead><tr class="border-b border-zinc-300 text-left text-[12px] uppercase tracking-wide text-zinc-500"><th class="py-2 pr-2 font-bold">Caso de referencia</th><th class="py-2 pr-2 font-bold">Fuente</th><th class="py-2 font-bold">2 años</th><th class="py-2 font-bold">5 años</th></tr></thead>
             <tbody class="text-zinc-700">
-              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Varón 70 a, eGFR 45, ACR 300</td><td class="py-2.5 pr-2">Tangri 2016</td><td class="py-2.5 font-mono tnum">95.1%</td><td class="py-2.5 font-mono tnum">74.7%</td></tr>
+              <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Varón 70 a, eGFR 45, ACR 300</td><td class="py-2.5 pr-2">Tangri 2016 (alfa no–N.A.)</td><td class="py-2.5 font-mono tnum">0.9%</td><td class="py-2.5 font-mono tnum">3.5%</td></tr>
               <tr class="border-b border-zinc-100"><td class="py-2.5 pr-2">Varón 60 a, eGFR 60, ACR 150</td><td class="py-2.5 pr-2">Tangri 2016</td><td class="py-2.5 font-mono tnum">73.8%</td><td class="py-2.5 font-mono tnum">45.6%</td></tr>
               <tr><td class="py-2.5 pr-2">Mujer 65 a, eGFR 40, ACR 500</td><td class="py-2.5 pr-2">Tangri 2016</td><td class="py-2.5 font-mono tnum">97.3%</td><td class="py-2.5 font-mono tnum">80.6%</td></tr>
             </tbody>
@@ -358,7 +358,7 @@
       </details>
       <details class="group bg-white border border-zinc-200 rounded-xl p-5">
         <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Qué variables usa el KFRE de 4 variables?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
-        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Usa cuatro variables: edad (en años), sexo (ser mujer añade 0.367 al predictor lineal), eGFR en mL/min/1.73 m² y el cociente albúmina/creatinina en orina (ACR) en mg/g. Con menos variables disponibles existe la versión de 3 variables (edad, sexo y eGFR).</p>
+        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">Usa las 4 variables canónicas del KFRE (Tangri JAMA 2011): edad, sexo, eGFR en mL/min/1.73 m² y el cociente albúmina/creatinina en orina (ACR) en mg/g. La calibración aplicada es la <strong>no–North America</strong> (riesgo basal menor en cohortes fuera de EE.UU./Canadá), adecuada para población de Latinoamérica.</p>
       </details>
       <details class="group bg-white border border-zinc-200 rounded-xl p-5">
         <summary class="cursor-pointer font-semibold text-zinc-900 flex items-center justify-between gap-2">¿Para quién sirve la calculadora KFRE?<span class="text-accent shrink-0 transition group-open:rotate-45" aria-hidden="true">＋</span></summary>
@@ -437,9 +437,15 @@
   const $ = s => document.querySelector(s);
 
   function kfre(edad, mujer, egfr, acr, anios) {
-    const lp = (anios === 5 ? 0.834 : 2.435) + 0.053 * edad - 0.022 * egfr - 0.068 * Math.log(acr) + (mujer ? 0.367 : 0);
-    const S = anios === 5 ? 0.94376 : 0.97468;
-    return (1 - Math.pow(S, Math.exp(lp))) * 100;
+    // KFRE 4 variables canónico (Tangri et al., JAMA 2011;305(15):1553-9 · validación JAMA 2016;315(2):164-74).
+    // Calibración no–North America (alfa): cohortes fuera de N.A. presentan riesgo basal menor.
+    const sex = mujer ? 0 : 1;
+    const score = -0.2201 * (edad / 10 - 7.036) +
+                  0.2467 * (sex - 0.5642) +
+                  -0.5567 * (egfr / 5 - 7.222) +
+                  0.4510 * (Math.log(acr) - 5.137);
+    const alfa = anios === 5 ? 0.9365 : 0.9832;
+    return (1 - Math.pow(alfa, Math.exp(score))) * 100;
   }
 
   function categorizar(r5) {

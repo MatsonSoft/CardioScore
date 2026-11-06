@@ -709,11 +709,12 @@ risk = 100·(1 - 0.977268^exp(a))   (female survivor 0.988876)</pre>
 risk = 1 - 0.97175^exp(lp)   (clampeado a [0.1, 60]%)</pre>
           </div>
           <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
-            <p class="font-bold text-zinc-800">KFRE — 4 variables</p>
-            <p class="text-zinc-600 mt-1">Versión de 4 variables (edad, sexo, eGFR, ACR); intercepto distinto por horizonte temporal.</p>
-            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">lp5 = 0.834 + 0.053·edad - 0.022·eGFR - 0.068·ln(ACR) + 0.367·mujer
-lp2 = 2.435 + 0.053·edad - 0.022·eGFR - 0.068·ln(ACR) + 0.367·mujer
-risk = (1 - S^exp(lp))·100    S(5a)=0.94376 · S(2a)=0.97468</pre>
+            <p class="font-bold text-zinc-800">KFRE — 4 variables (Tangri JAMA 2011)</p>
+            <p class="text-zinc-600 mt-1">Versión canónica de 4 variables (edad, sexo, eGFR, ACR); riesgo basal (alfa) por horizonte y calibración no–North America.</p>
+            <pre class="mt-2 text-[12px] font-mono bg-white border border-zinc-200 rounded-lg p-3 overflow-x-auto">score = -0.2201·(edad/10 - 7.036) + 0.2467·(sexo - 0.5642)
+      - 0.5567·(eGFR/5 - 7.222) + 0.4510·(ln(ACR) - 5.137)
+risk = (1 - alfa^exp(score))·100
+alfa 5a = 0.9365 · alfa 2a = 0.9832  (no–North America)</pre>
           </div>
           <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4">
             <p class="font-bold text-zinc-800">GRACE 2.0 — score de puntos</p>
@@ -879,7 +880,7 @@ Categorías: &lt;7→≈1% · 7-11→≈4% · 12-14→≈17% · 15-20→≈33% �
         <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-4 text-sm">
           <p class="font-bold text-zinc-900 mb-2">Changelog</p>
           <ul class="space-y-2 text-[13px] text-zinc-700">
-            <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.3.1 · nov 2026</span><span>SCORE2-LAC (ESC/SIAC): SCORE2 recalibrado para 32 países de Latinoamérica y el Caribe; calculadora dedicada con región automática por país y constantes oficiales del suplemento.</span></li>
+            <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.3.1 · nov 2026</span><span>SCORE2-LAC (ESC/SIAC): SCORE2 recalibrado para 32 países de Latinoamérica y el Caribe; calculadora dedicada con región automática por país y constantes oficiales del suplemento; 22 calculadoras.</span></li>
             <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.3 · ago 2026</span><span>SCORE2-HF (ESC 2026); marco AHA/ACC 2026 con PREVENT a 10 y 30 años; 21 calculadoras; modo automático por escenarios; este documento de metodología.</span></li>
             <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.2</span><span>Comparativa de modelos; reclasificación por risk modifiers; validación técnica ampliada.</span></li>
             <li class="flex gap-2"><span class="text-accent font-bold shrink-0">v3.1</span><span>Notación TRIPOD 2025 / PROBAST; glosario y poblaciones especiales.</span></li>

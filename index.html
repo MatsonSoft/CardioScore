@@ -2761,8 +2761,13 @@ function calcSpi2(edad, dm, hta, iam, strokeCarotideo, ic, eap) {
 }
 function calcKfre(edad, sexo, egfr, acr) {
   if (!egfr || !acr) return null;
-  var lp5 = 0.834 + 0.053*edad - 0.022*egfr - 0.068*Math.log(acr) + 0.367*(sexo === 'female' ? 1 : 0);
-  var risk5 = (1 - Math.pow(0.94376, Math.exp(lp5))) * 100;
+  // KFRE 4 variables canónico (Tangri et al., JAMA 2011;305(15):1553-9); calibración no–North America.
+  var sex = sexo === 'female' ? 0 : 1;
+  var score = -0.2201 * (edad / 10 - 7.036) +
+              0.2467 * (sex - 0.5642) +
+              -0.5567 * (egfr / 5 - 7.222) +
+              0.4510 * (Math.log(acr) - 5.137);
+  var risk5 = (1 - Math.pow(0.9365, Math.exp(score))) * 100;
   return { r5: Math.min(99.9, Math.max(0.1, risk5)) };
 }
 function calcMesa(age, sexo, dm, smk, tc, hdl, stat, sbp, htnTx, fhx, cac) {
