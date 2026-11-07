@@ -632,7 +632,7 @@
               <input id="d_gluc" type="number" min="40" max="400" step="1" inputmode="decimal" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" placeholder="—" aria-label="Glucosa mg/dL">
             </div>
             <div>
-              <label for="d_acr" class="block text-[13px] font-semibold text-zinc-700 mb-1"><span class="tip" tabindex="0" data-tip="Índice albúmina/creatinina en orina (mg/g). Detecta daño renal temprano.">ACR</span> <span class="req-tag req-tag-acc">req. ERC</span></label>
+              <label for="d_acr" class="block text-[13px] font-semibold text-zinc-700 mb-1"><span class="tip" tabindex="0" data-tip="Índice albúmina/creatinina en orina (mg/g). Detecta daño renal temprano.">ACR</span> <span class="req-tag req-tag-acc">req. ERC</span> <span class="text-[11px] font-normal text-zinc-500">mg/g</span></label>
               <input id="d_acr" type="number" min="5" max="5000" step="1" inputmode="decimal" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 min-h-[46px] text-[15px] focus:border-accent focus:ring-2 focus:ring-accent/20" placeholder="—" aria-label="Albúmina creatinina en orina mg/g">
             </div>
           </div>
@@ -1006,7 +1006,7 @@
         <div class="p-6 sm:p-8">
           <div class="flex flex-wrap items-start justify-between gap-x-6 gap-y-3 mb-5">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-1">Riesgo a 10 años</p>
+              <p id="hdr_horizonte" class="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-1">Riesgo a 10 años</p>
               <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
                 <p class="font-display font-bold text-5xl sm:text-6xl tracking-tight tnum text-zinc-900" id="riesgo_principal" aria-live="polite">11.4<span class="text-2xl text-zinc-500">%</span></p>
                 <div class="flex flex-col items-start gap-1.5">
@@ -1021,9 +1021,9 @@
           <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 lg:gap-10 items-center">
             <div class="flex flex-col items-center sm:items-start">
               <svg id="gauge" viewBox="0 0 220 150" class="w-52" role="img" aria-label="Escala del riesgo a 10 años con zonas de la guía">
-                <path d="M 30 110 A 80 80 0 0 1 33.9 85.3" fill="none" stroke="#10B981" stroke-width="14"/>
-                <path d="M 33.9 85.3 A 80 80 0 0 1 110 30" fill="none" stroke="#F59E0B" stroke-width="14"/>
-                <path d="M 110 30 A 80 80 0 0 1 190 110" fill="none" stroke="#DC2626" stroke-width="14"/>
+                <path id="gauge_z1" d="M 30 110 A 80 80 0 0 1 33.9 85.3" fill="none" stroke="#10B981" stroke-width="14"/>
+                <path id="gauge_z2" d="M 33.9 85.3 A 80 80 0 0 1 110 30" fill="none" stroke="#F59E0B" stroke-width="14"/>
+                <path id="gauge_z3" d="M 110 30 A 80 80 0 0 1 190 110" fill="none" stroke="#DC2626" stroke-width="14"/>
                 <line id="gauge_aguja" x1="120.1" y1="65.1" x2="127.5" y2="31.9" stroke="#B91C1C" stroke-width="3" stroke-linecap="round"/>
                 <circle id="gauge_punto" cx="127.5" cy="31.9" r="4.5" fill="#B91C1C" stroke="#fff" stroke-width="2"/>
                 <text x="30" y="138" text-anchor="middle" font-size="11" fill="#71717A" font-family="Geist Mono, monospace" paint-order="stroke" stroke="#fff" stroke-width="3">0</text>
@@ -1436,7 +1436,7 @@
               <span class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center" aria-hidden="true"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-7 9a7 7 0 0 1 14 0"/></svg></span>
               <span class="text-[11px] font-bold uppercase tracking-wide text-white/80">Guion sugerido</span>
             </div>
-            <p class="text-[15px] sm:text-base leading-relaxed">"De cada 100 personas con tu perfil, <strong id="picto_eventos" class="tnum">11</strong> tendrían un evento cardiovascular en 10 años. Con el tratamiento, esa cifra baja a cerca de <strong id="picto_trat" class="tnum">9</strong>."</p>
+            <p class="text-[15px] sm:text-base leading-relaxed">"De cada 100 personas con tu perfil, <strong id="picto_eventos" class="tnum">11</strong> tendrían un evento cardiovascular <span id="picto_horizonte">en 10 años</span>. Con el tratamiento, esa cifra baja a cerca de <strong id="picto_trat" class="tnum">9</strong>."</p>
             <p class="text-[12px] text-white/75 mt-3">Frecuencias naturales (Gigerenzer) · evita el riesgo relativo aislado</p>
           </div>
           <div class="rounded-2xl bg-zinc-50 border border-zinc-200 p-5">
@@ -1454,7 +1454,7 @@
                 </div>
               </div>
             </div>
-            <p class="mt-3 text-[11px] text-zinc-500 border-t border-zinc-200 pt-2">Cada cuadro es una persona con tu perfil; los de color representan un evento cardiovascular en 10 años.</p>
+            <p class="mt-3 text-[11px] text-zinc-500 border-t border-zinc-200 pt-2">Cada cuadro es una persona con tu perfil; los de color representan un evento cardiovascular <span id="picto_pie">en 10 años</span>.</p>
           </div>
         </div>
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1525,7 +1525,7 @@
   <div class="print-section-title" style="margin-bottom:2px;">2 · Estratificación clínica y metas</div>
   <div style="display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;background:#0f172a;color:#fff;border-radius:5px;padding:6px 9px;margin-bottom:5px;">
     <div style="text-align:center;padding-right:8px;border-right:1px solid #334155;min-width:92px;">
-      <div style="font-size:6pt;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;">Riesgo a 10 años</div>
+      <div style="font-size:6pt;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;" id="pa_hz">Riesgo a 10 años</div>
       <div style="font-size:16pt;font-weight:800;line-height:1.05;" id="pa_riesgo">—</div>
     </div>
     <div>
@@ -1553,7 +1553,7 @@
       </table>
     </div>
     <div>
-      <div class="print-section-title" style="margin-bottom:2px;">4 · Pronóstico a 10 años</div>
+      <div class="print-section-title" style="margin-bottom:2px;">4 · Pronóstico <span id="pa_hz_pron">a 10 años</span></div>
       <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:4px 6px;margin-bottom:4px;">
         <div style="font-size:6pt;color:#475569;">Riesgo acumulado <strong style="color:#0f172a;" id="pa_riesgo_bar">—</strong></div>
         <div style="background:#e2e8f0;border-radius:3px;height:6px;margin-top:2px;"><div id="pa_barra" style="background:#0054A6;height:6px;border-radius:3px;width:0%;"></div></div>
@@ -1620,7 +1620,7 @@
   <!-- HERO del riesgo -->
   <div style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-radius:8px;padding:12px 14px;color:#fff;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:8px;">
     <div>
-      <div style="font-size:7pt;text-transform:uppercase;letter-spacing:.12em;color:#94a3b8;">Riesgo de evento cardiovascular a 10 años</div>
+      <div style="font-size:7pt;text-transform:uppercase;letter-spacing:.12em;color:#94a3b8;" id="pb_hz">Riesgo de evento cardiovascular a 10 años</div>
       <div style="display:flex;align-items:baseline;gap:8px;margin-top:2px;">
         <span style="font-size:26pt;font-weight:800;line-height:1;color:#fff;" id="pb_riesgo">—</span>
         <span style="font-size:8pt;color:#cbd5e1;">de cada 100 personas con su perfil</span>
@@ -2249,7 +2249,15 @@
     const p = P[perfil];
     if (!p) return;
     try { trackCS('cs_perfil_prueba', { perfil: perfil }); } catch (e) {}
+    // Reset completo antes de aplicar el perfil: evita que campos estancados (CAC, HbA1c, ACR,
+    // egfr/labs del perfil anterior) se filtren en el cálculo del siguiente.
+    document.querySelectorAll('input[id^="d_"]').forEach(function (el) {
+      if (el.type === 'radio' || el.type === 'checkbox') return;
+      el.value = '';
+    });
     document.querySelectorAll('.ante-chip').forEach(function (b) { if (b.getAttribute('aria-pressed') === 'true') b.click(); });
+    document.querySelectorAll('.qrisk-chip').forEach(function (b) { if (b.getAttribute('aria-pressed') === 'true') b.click(); });
+    document.querySelectorAll('input[name="grace_arrest"], input[name="grace_enz"]').forEach(function (r) { r.checked = false; });
     Object.keys(p).forEach(function (k) {
       if (k === 'sexo' || k === 'tabaco' || k === 'esc' || k === 'ante' || k === 'nombre' || k === 'etiqueta') return;
       const el = document.getElementById(k); if (el) el.value = p[k];
@@ -2309,6 +2317,7 @@
     const vals = {};
     $$('button[data-modelo]').forEach(function (b) { vals[b.dataset.modelo] = parseFloat(b.dataset.risk); });
     if (vals.score2 == null || vals.prevent == null) return;
+    if (isNaN(vals.score2) || isNaN(vals.prevent)) { nota.textContent = ''; return; } // algún modelo no aplicable (<40): sin comparativa
     const d = Math.abs(vals.score2 - vals.prevent);
     if (d > 5) {
       const quien = vals.score2 > vals.prevent ? 'SCORE2' : 'PREVENT';
@@ -2535,6 +2544,14 @@ function bandaScore2(r) {
   if (r < 2) return 'band_low';
   if (r < 10) return 'band_mod';
   if (r < 20) return 'band_high';
+  return 'band_vhigh';
+}
+// Bandas para horizonte de 30 años (PREVENT <40): categorías AHA/Rikhi 2025
+// <11% bajo · 11–<19% moderado · 19–<24% alto · ≥24% muy alto
+function bandaPrevent30(r) {
+  if (r < 11) return 'band_low';
+  if (r < 19) return 'band_mod';
+  if (r < 24) return 'band_high';
   return 'band_vhigh';
 }
 function bandaPrevent(r) {
@@ -2803,7 +2820,8 @@ function leerDatosHome(opts) {
   var smoker = tabEl && tabEl.value === 'si' ? 'yes' : 'no';
   var regionEl = document.getElementById('cfg_region');
   var region = (regionEl && regionEl.value) ? regionEl.value : 'alta';
-  var reg = region === 'cla' ? 'high' : region;
+  var REGION_MAP = { alta: 'high', moderada: 'moderate', baja: 'low' };
+  var reg = region === 'cla' ? 'high' : (REGION_MAP[region] || region);
   var age = v('d_edad');
   var hdl = v('d_hdl');
   var ldl = opts.ldl != null ? opts.ldl : v('d_ldl');
@@ -2841,7 +2859,7 @@ function leerDatosHome(opts) {
   var paisLacEl = document.getElementById('cfg_pais');
   var paisLac = (paisLacEl && paisLacEl.value) ? paisLacEl.value : 've';
   var lacRegion = PAIS_LAC[paisLac] || 'high';
-  return { age: age, sex: sex, smoker: smoker, sbp: sbp, pad: v('d_pad'), weight: weight, height: height, tc: tc, hdl: hdl, ldl: ldl, trig: v('d_trig'), gluc: v('d_gluc'), hba1c: v('d_hba1c'), imc: imc, cr: cr, egfr: egfr, acr: acr, lpa: lpa, cac: cac, hscrp: hscrp, annos: annos, eap: eap, fa: fa, pci: pci, acv: acv, sangrado: sangrado, fc: fc, hb: hb, plaq: plaq, wbc: wbc, cintura: cintura, graceArrest: graceArrest, graceEnz: graceEnz, dm: dm, erc: erc, ic: ic, sca: sca, eva: eva, htnTx: htnTx, fhx: fhx, autoim: autoim, dmStatus: dmStatus, region: region, reg: reg, cla: region === 'cla', paisLac: paisLac, lacRegion: lacRegion, estatina: estatina };
+  return { age: age, sex: sex, smoker: smoker, sbp: sbp, pad: v('d_pad'), weight: weight, height: height, tc: tc, hdl: hdl, ldl: ldl, trig: v('d_trig'), gluc: v('d_gluc'), hba1c: v('d_hba1c'), imc: imc, cr: cr, egfr: egfr, acr: acr, lpa: lpa, cac: cac, hscrp: hscrp, annos: annos, eap: eap, fa: fa, pci: pci, acv: acv, sangrado: sangrado, fc: fc, hb: hb, plaq: plaq, wbc: wbc, cintura: cintura, graceArrest: graceArrest, graceEnz: graceEnz, dm: dm, erc: erc, ic: ic, sca: sca, eva: eva, htnTx: htnTx, hta: ante('hta'), dmage: v('d_dmage'), antiagr: ante('antiagr'), alcohol: ante('alcohol'), oac: ante('oac'), fhx: fhx, autoim: autoim, dmStatus: dmStatus, region: region, reg: reg, cla: region === 'cla', paisLac: paisLac, lacRegion: lacRegion, estatina: estatina };
 }
 
 function bandaNivel(b) { return b === 'band_vhigh' ? 4 : b === 'band_high' ? 3 : b === 'band_mod' ? 2 : 1; }
@@ -2880,12 +2898,14 @@ function calcularRiesgoHome(opts) {
   else if (i.cla && !isNaN(w)) { modelo = 'who'; riesgoPrincipal = w; }
   else if (!isNaN(w) && w > s2 && w > pv) { modelo = 'who'; riesgoPrincipal = w; }
   else { modelo = s2 >= pv ? 'score2' : 'prevent'; riesgoPrincipal = modelo === 'score2' ? s2 : pv; }
-  var banda = (i.sca || i.eva || i.ic) ? 'band_vhigh' : bandaScore2(riesgoPrincipal);
+  var banda = (i.sca || i.eva || i.ic) ? 'band_vhigh' : (modelo === 'prevent30' ? bandaPrevent30(riesgoPrincipal) : bandaScore2(riesgoPrincipal));
   var nivel = bandaNivel(banda);
-  if (i.ldl >= 190 || i.tc >= 310 || i.sbp >= 180) nivel = Math.max(nivel, 3);
-  if (i.lpa >= 50 && nivel < 4) nivel++;
-  if (i.fhx && nivel <= 2) nivel++;
-  if (i.hscrp >= 2 && nivel <= 2) nivel++;
+  var nivelBruto = nivel;
+  var escalas = [];
+  if (i.ldl >= 190 || i.tc >= 310 || i.sbp >= 180) { var nvLdl = Math.max(nivel, 3); if (nvLdl > nivel) escalas.push('LDL ≥190, TC ≥310 o PAS ≥180 mg/dL'); nivel = nvLdl; }
+  if (i.lpa >= 50 && nivel < 4) { nivel++; escalas.push('Lp(a) ≥50 mg/dL'); }
+  if (i.fhx && nivel <= 2) { nivel++; escalas.push('antecedente familiar precoz'); }
+  if (i.hscrp >= 2 && nivel <= 2) { nivel++; escalas.push('hsCRP ≥2 mg/L'); }
   banda = nivel === 4 ? 'band_vhigh' : nivel === 3 ? 'band_high' : nivel === 2 ? 'band_mod' : 'band_low';
   var metaLdl;
   if (banda === 'band_vhigh') metaLdl = 55;
@@ -2901,8 +2921,8 @@ function calcularRiesgoHome(opts) {
   if (i.cintura > 0) complementarios.findrisk = calcFindrisk(i.age, i.imc, i.cintura, i.sex, true, false, i.hta, false, 'none');
   if (i.fa) {
     complementarios.cha2ds2 = calcCha2ds2Va(i.age, i.ic, i.hta, i.dm, i.acv || i.eva, i.eap);
-    complementarios.hasbled = calcHasBled(i.sbp >= 160, i.erc, false, i.acv, i.sangrado, false, i.age > 65, false);
-    complementarios.orbit = calcOrbit(i.age, i.egfr, i.sangrado, false, i.hb);
+    complementarios.hasbled = calcHasBled(i.sbp >= 160, i.erc, false, i.acv, i.sangrado, false, i.age > 65, i.antiagr || i.alcohol);
+    complementarios.orbit = calcOrbit(i.age, i.egfr, i.sangrado, i.antiagr, i.hb);
     complementarios.apple = calcApple(i.age, true, i.egfr, 45, 55);
     complementarios.chargeaf = calcChargeAf(i.age, false, i.height, i.weight, i.sbp, i.pad, i.smoker === 'yes', i.hta, i.dm, i.ic, i.sca);
   }
@@ -2911,23 +2931,45 @@ function calcularRiesgoHome(opts) {
   if (i.erc) complementarios.kfre = calcKfre(i.age, i.sex, i.egfr, i.acr);
   if (i.cac > 0) complementarios.mesa = calcMesa(i.age, i.sex, i.dm, i.smoker === 'yes', i.tc, i.hdl, false, i.sbp, i.hta, i.fhx, i.cac);
   if (i.pci) {
-    complementarios.arcHbr = calcArcHbr(0, 0);
+    // ARC-HBR con los datos disponibles del formulario (aproximación documentada en Metodología)
+    var hbrMaj = 0, hbrMin = 0;
+    if (i.sangrado) hbrMaj++;
+    if (i.hb > 0 && i.hb < (i.sex === 'male' ? 13 : 12)) hbrMaj++;
+    if (i.plaq > 0 && i.plaq < 100) hbrMaj++;
+    if (i.egfr > 0 && i.egfr < 30) hbrMin++;
+    if (i.age >= 75) hbrMin++;
+    if (i.egfr > 0 && i.egfr >= 30 && i.egfr < 60) hbrMin++;
+    if (i.dm) hbrMin++;
+    if (i.eap) hbrMin++;
+    if (i.weight > 0 && i.weight < 60) hbrMin++;
+    if (i.antiagr || i.oac) hbrMin++;
+    complementarios.arcHbr = calcArcHbr(hbrMaj, hbrMin);
     complementarios.precise = calcPreciseDapt(i.age, i.egfr, i.hb, i.wbc, i.sangrado);
   }
   var edadVascular = i.age >= 40 ? calcEdadVascular(riesgoPrincipal, i.sex, i.reg) : null;
-  return { score2: s2, score2lac: lac, prevent: pv, who: w, whoNl: whoNl, score2hf: score2hf, smart2: smart2, prevent30: prevent30, complementarios: complementarios, edadVascular: edadVascular, riesgoPrincipal: riesgoPrincipal, modelo: modelo, banda: banda, metaLdl: metaLdl, reduccion: reduccion, ldl: i.ldl, cla: i.cla, region: i.region, paisLac: i.paisLac, lacRegion: i.lacRegion, autoim: i.autoim, i: i };
+  return { score2: s2, score2lac: lac, prevent: pv, who: w, whoNl: whoNl, score2hf: score2hf, smart2: smart2, prevent30: prevent30, complementarios: complementarios, edadVascular: edadVascular, riesgoPrincipal: riesgoPrincipal, modelo: modelo, banda: banda, nivelBruto: nivelBruto, escalas: escalas, horizonte: modelo === 'prevent30' ? 30 : 10, metaLdl: metaLdl, reduccion: reduccion, ldl: i.ldl, cla: i.cla, region: i.region, paisLac: i.paisLac, lacRegion: i.lacRegion, autoim: i.autoim, i: i };
 }
 
-function actualizarChipBanda(banda) {
+function actualizarChipBanda(banda, horizonte, escalas) {
+  horizonte = horizonte || 10;
+  escalas = escalas || [];
   var chip = document.getElementById('chip_categoria'), txt = document.getElementById('chip_txt'), rango = document.getElementById('chip_rango');
   if (!chip) return;
-  var map = {
+  var map10 = {
     band_low:  { t: 'Riesgo bajo',     r: '(<2%)',   cls: 'text-emerald-700 bg-emerald-50 border-emerald-200', rcls: 'text-emerald-600' },
     band_mod:  { t: 'Riesgo moderado', r: '(2–10%)', cls: 'text-amber-700 bg-amber-50 border-amber-200',      rcls: 'text-amber-600' },
     band_high: { t: 'Riesgo alto',     r: '(10–20%)', cls: 'text-red-700 bg-red-50 border-red-200',          rcls: 'text-red-600' },
     band_vhigh:{ t: 'Riesgo muy alto', r: '(>20%)',   cls: 'text-red-800 bg-red-100 border-red-200',              rcls: 'text-red-700' }
   };
-  var m = map[banda] || map.band_high;
+  // Bandas a 30 años (PREVENT <40): AHA/Rikhi 2025
+  var map30 = {
+    band_low:  { t: 'Riesgo bajo',     r: '(<11%)',  cls: 'text-emerald-700 bg-emerald-50 border-emerald-200', rcls: 'text-emerald-600' },
+    band_mod:  { t: 'Riesgo moderado', r: '(11–19%)', cls: 'text-amber-700 bg-amber-50 border-amber-200',       rcls: 'text-amber-600' },
+    band_high: { t: 'Riesgo alto',     r: '(19–24%)', cls: 'text-red-700 bg-red-50 border-red-200',            rcls: 'text-red-600' },
+    band_vhigh:{ t: 'Riesgo muy alto', r: '(≥24%)',   cls: 'text-red-800 bg-red-100 border-red-200',          rcls: 'text-red-700' }
+  };
+  var m = (horizonte === 30 ? map30 : map10)[banda] || map10.band_high;
+  if (escalas && escalas.length) m.r += ' · escalado por ' + escalas.join(', ');
   if (txt) txt.textContent = m.t;
   if (rango) { rango.textContent = m.r; rango.className = 'font-normal ' + m.rcls; }
   chip.className = 'inline-flex items-center gap-2 text-[13px] font-bold rounded-full px-3 py-1 border ' + m.cls;
@@ -2955,7 +2997,15 @@ function actualizarMetas(rM) {
       if (rM) {
         const rpEl = $('#riesgo_principal');
         rpEl.firstChild.textContent = rM.riesgoPrincipal.toFixed(1);
-        actualizarChipBanda(rM.banda);
+        actualizarChipBanda(rM.banda, rM.horizonte, rM.escalas);
+        var hdrHz = document.getElementById('hdr_horizonte');
+        if (hdrHz) hdrHz.textContent = 'Riesgo a ' + rM.horizonte + ' años';
+        var pHz = document.getElementById('picto_horizonte');
+        if (pHz) pHz.textContent = 'en ' + rM.horizonte + ' años';
+        var pPie = document.getElementById('picto_pie');
+        if (pPie) pPie.textContent = 'en ' + rM.horizonte + ' años';
+        var gLabel = document.getElementById('gauge');
+        if (gLabel) gLabel.setAttribute('aria-label', 'Escala del riesgo a ' + rM.horizonte + ' años con zonas de la guía');
         actualizarMetas(rM);
         window._rM = rM;
         try { trackCS('cs_calcular', { escenarios: activos().map(function (a) { return a.value; }).join(','), edad: rM.i.age, sexo: rM.i.sex, region: rM.region, banda: rM.banda, riesgo: Math.round(rM.riesgoPrincipal * 10) / 10 }); } catch (e) {}
@@ -2967,10 +3017,12 @@ function actualizarMetas(rM) {
         }
         $$('button[data-modelo]').forEach(function (b) {
           var valor = b.dataset.modelo === 'score2' ? rM.score2 : b.dataset.modelo === 'score2lac' ? rM.score2lac : b.dataset.modelo === 'prevent' ? rM.prevent : rM.who;
-          if (valor == null || !isFinite(valor)) valor = 0;
-          b.dataset.risk = valor.toFixed(1);
+          var valido = valor != null && isFinite(valor);
+          // <40: cada modelo que no aplica al horizonte/límite de edad se muestra como "—" (evita fabricar 0.0%)
+          if (rM.modelo === 'prevent30' && !(b.dataset.modelo === 'prevent' && rM.i.age >= 30)) valido = false;
+          b.dataset.risk = valido ? valor.toFixed(1) : '';
           var p = b.querySelector('p.font-display');
-          if (p) p.innerHTML = valor.toFixed(1) + '<span class="text-lg text-zinc-500">%</span>';
+          if (p) p.innerHTML = valido ? valor.toFixed(1) + '<span class="text-lg text-zinc-500">%</span>' : '<span class="text-2xl text-zinc-400">—</span>';
         });
         var lacCard = document.getElementById('card_score2lac');
         if (lacCard) lacCard.hidden = !(rM.score2lac != null);
@@ -3092,8 +3144,18 @@ function actualizarMetas(rM) {
   function actualizarGauge(riesgo) {
     const aguja = $('#gauge_aguja'), punto = $('#gauge_punto');
     if (!aguja || !punto) return;
-    const v = Math.min(20, Math.max(0, parseFloat(riesgo) || BASE_RIESGO));
-    const theta = (v / 20) * Math.PI;
+    // Escala adaptada al horizonte: 10 años (0–20, zonas 2/10/20 ESC) o 30 años (0–25, zonas 11/19/24)
+    var horizonte = (window._rM && window._rM.horizonte) || 10;
+    var max = horizonte === 30 ? 25 : 20, t1 = horizonte === 30 ? 11 : 2, t2 = horizonte === 30 ? 19 : 10;
+    var puntoArco = function (v) { var th = (v / max) * Math.PI; return [110 - 80 * Math.cos(th), 110 - 80 * Math.sin(th)]; };
+    var zonas = [{ id: 'gauge_z1', a: 0, b: t1 }, { id: 'gauge_z2', a: t1, b: t2 }, { id: 'gauge_z3', a: t2, b: max }];
+    zonas.forEach(function (z) {
+      var el = document.getElementById(z.id); if (!el) return;
+      var pa = puntoArco(z.a), pb = puntoArco(z.b);
+      el.setAttribute('d', 'M ' + pa[0].toFixed(1) + ' ' + pa[1].toFixed(1) + ' A 80 80 0 0 1 ' + pb[0].toFixed(1) + ' ' + pb[1].toFixed(1));
+    });
+    const v = Math.min(max, Math.max(0, parseFloat(riesgo) || BASE_RIESGO));
+    const theta = (v / max) * Math.PI;
     const cx = 110, cy = 110, rExt = 80, rInt = 46;
     const xExt = cx - rExt * Math.cos(theta), yExt = cy - rExt * Math.sin(theta);
     const xInt = cx - rInt * Math.cos(theta), yInt = cy - rInt * Math.sin(theta);
@@ -3118,7 +3180,7 @@ function actualizarMetas(rM) {
     const reevalTxt = (reeval && reeval.textContent.trim() && reeval.textContent.trim() !== '—') ? reeval.textContent.trim() : '12 meses';
     let texto = 'CardioScore — Resumen de riesgo cardiovascular\n' +
       'Paciente: ' + nombre + '\n' +
-      'Riesgo a 10 años: ' + rM.riesgoPrincipal.toFixed(1) + '% (' + (bandas[rM.banda] || '') + ')\n' +
+      'Riesgo a ' + rM.horizonte + ' años: ' + rM.riesgoPrincipal.toFixed(1) + '% (' + (bandas[rM.banda] || '') + ')\n' +
       'Modelo: ' + modeloN + (rM.edadVascular ? ' · Edad cardiovascular: ' + rM.edadVascular + ' años' : '') + '\n' +
       'Meta de C-LDL: < ' + rM.metaLdl + ' mg/dL' + (rM.ldl ? ' (actual: ' + rM.ldl + ' mg/dL · reducir ~' + rM.reduccion + '%)' : '') + '\n' +
       'Plan: ' + plan + '\n' +
@@ -3369,6 +3431,7 @@ function rellenarPDF_B() {
   $p('pb_filiacion').textContent = fili;
   $p('pb_fumador').textContent = i.smoker === 'yes' ? 'sí' : 'no';
   $p('pb_riesgo').textContent = rM.riesgoPrincipal.toFixed(1) + '%';
+  $p('pb_hz').textContent = 'Riesgo de evento cardiovascular a ' + rM.horizonte + ' años';
   $p('pb_barra').style.width = Math.min(100, (rM.riesgoPrincipal / 25) * 100) + '%';
   $p('pb_banda').textContent = bandas[rM.banda] || rM.banda;
   var modeloPrincipal;
@@ -3452,6 +3515,8 @@ function rellenarPDF_A() {
   $p('pa_pa').textContent = i.sbp ? i.sbp + '/' + (i.pad || '—') + ' mmHg' : '—';
   $p('pa_ante').textContent = antes.length ? antes.join(' · ') : 'Sin antecedentes';
   $p('pa_riesgo').textContent = rM.riesgoPrincipal.toFixed(1) + '%';
+  $p('pa_hz').textContent = 'Riesgo a ' + rM.horizonte + ' años';
+  $p('pa_hz_pron').textContent = 'a ' + rM.horizonte + ' años';
   $p('pa_banda').textContent = bandas[rM.banda] || rM.banda;
   var modeloPrincipal;
   if (rM.modelo === 'score2lac') modeloPrincipal = 'SCORE2-LAC';
@@ -3635,7 +3700,7 @@ function exportarPDF_A() {
   doc.text('RESUMEN CLÍNICO', M + 4, y + 3);
   setTxt(OSCURO, 6, false);
   var sexoTxt = i.sex === 'male' ? 'Varón' : 'Mujer';
-  var resumen = sexoTxt + ' de ' + (i.age || '—') + ' años. Riesgo cardiovascular ' + bandaCorta.toUpperCase() + ' a 10 años: ' + rM.riesgoPrincipal.toFixed(1) + '% (1 de cada ' + en1de + '). Con tratamiento óptimo se proyecta ~' + conTx.toFixed(1) + '% (1 de cada ' + en1deTx + '). Meta de C-LDL: < ' + rM.metaLdl + ' mg/dL (' + criterio + ').';
+  var resumen = sexoTxt + ' de ' + (i.age || '—') + ' años. Riesgo cardiovascular ' + bandaCorta.toUpperCase() + ' a ' + rM.horizonte + ' años: ' + rM.riesgoPrincipal.toFixed(1) + '% (1 de cada ' + en1de + '). Con tratamiento óptimo se proyecta ~' + conTx.toFixed(1) + '% (1 de cada ' + en1deTx + '). Meta de C-LDL: < ' + rM.metaLdl + ' mg/dL (' + criterio + ').';
   doc.text(ascii(resumen), M + 4, y + 5.5, { maxWidth: W - 8 });
   doc.text(ascii('Lp(a) ' + (i.lpa || '—') + ' mg/dL' + ((i.lpa || 0) >= 50 ? ': modulador presente (×1.5).' : ': en rango.') + '  Edad cardiovascular: ' + (rM.edadVascular ? rM.edadVascular + ' años.' : '—.')), M + 4, y + 8, { maxWidth: W - 8 });
   y += 12;
@@ -3665,7 +3730,7 @@ function exportarPDF_A() {
   y = ly + 2;
 
   // ===== 4 · PRONÓSTICO (doble barra: actual vs tratamiento) =====
-  y = sectionTitle(4, 'Pronóstico a 10 años', y);
+  y = sectionTitle(4, 'Pronóstico a ' + rM.horizonte + ' años', y);
   var maxR = 25;
   card(M, y, W, 13, FONDO);
   setTxt(GRIS, 6, false);
@@ -3974,13 +4039,13 @@ function abrirInformePestana(autoPrint) {
     '<div class="box"><b style="font-size:14px;">' + nombre + '</b> <span style="color:#475569;font-size:11px;">' + fili + '</span><br>' +
     '<span style="font-size:11px;color:#475569;">' + criterio + ' · ' + region + '<br>' + filum + '<br>Antecedentes: ' + (antes.length ? antes.join(' · ') : 'Sin antecedentes') + '</span></div>' +
     '<div class="st">2 · Estratificación clínica y metas</div>' +
-    '<div class="hero"><div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;">Riesgo a 10 años</div>' +
+    '<div class="hero"><div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;">Riesgo a ' + rM.horizonte + ' años</div>' +
     '<div class="num">' + rM.riesgoPrincipal.toFixed(1) + '%</div></div>' +
     '<div style="font-size:13px;"><b>' + (bandas[rM.banda] || rM.banda) + '</b><br><span style="color:#94a3b8;font-size:10px;">Modelo: ' + modeloPrincipal + ' · Edad cardiovascular: ' + (rM.edadVascular ? rM.edadVascular + ' años' : '—') + '</span></div>' +
     '<div class="meta">Meta C-LDL<b>&lt; ' + rM.metaLdl + ' mg/dL</b><span style="font-size:10px;">Reducción ' + (rM.reduccion > 0 ? '≈' + rM.reduccion + '%' : 'en meta') + '</span></div></div>' +
     '<div class="st">3 · Perfil bioquímico</div>' +
     '<table>' + labHtml + '</table>' +
-    '<div class="st">4 · Pronóstico a 10 años</div>' +
+    '<div class="st">4 · Pronóstico a ' + rM.horizonte + ' años</div>' +
     '<div class="box"><span style="font-size:11px;">Riesgo acumulado: <b>' + rM.riesgoPrincipal.toFixed(1) + '%</b></span>' +
     '<div class="bar"><i style="width:' + Math.min(100, (rM.riesgoPrincipal / 25) * 100) + '%;"></i></div>' +
     '<span style="font-size:11px;color:#047857;font-weight:700;">Con tratamiento: ≈' + (rM.riesgoPrincipal * 0.4).toFixed(1) + '%</span></div>' +

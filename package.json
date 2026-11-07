@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:css": "tailwindcss -i src/tailwind.css -o cardioscore.css --minify"
+    "build:css": "tailwindcss -i src/tailwind.css -o cardioscore.css --minify",
+    "test": "node tests/auditoria-motor.js"
   },
   "repository": {
     "type": "git",
